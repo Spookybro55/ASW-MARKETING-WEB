@@ -1,4 +1,5 @@
 import { homepageData } from "@/data/homepage";
+import ContactForm from "./ContactForm";
 
 export default function ContactCtaSection() {
   const { contactCta, contactInfo } = homepageData;
@@ -43,6 +44,10 @@ export default function ContactCtaSection() {
 
             <div className="mt-4 text-sm text-gray-400">
               Ozveme se vám do 24 hodin.
+            </div>
+
+            <div className="mx-auto mt-10 max-w-md text-left">
+              <ContactForm />
             </div>
           </div>
 
