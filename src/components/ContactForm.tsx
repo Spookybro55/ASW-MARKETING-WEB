@@ -142,6 +142,17 @@ export default function ContactForm() {
       >
         {status === "loading" ? "Odesílám..." : "Odeslat zprávu"}
       </button>
+
+      <p className="text-xs text-gray-500 text-center">
+        Vaše údaje zpracujeme za účelem vyřízení vaší poptávky. Více v{" "}
+        <a
+          href="/zasady-ochrany-osobnich-udaju"
+          className="text-gray-400 underline underline-offset-2 transition hover:text-[var(--brand)]"
+        >
+          zásadách ochrany osobních údajů
+        </a>
+        .
+      </p>
     </form>
   );
 }
