@@ -38,6 +38,10 @@ export const metadata: Metadata = {
       },
     ],
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   twitter: {
     card: "summary_large_image",
     title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
