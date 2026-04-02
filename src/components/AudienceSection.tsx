@@ -14,9 +14,8 @@ export default function AudienceSection() {
             Pro koho je naše řešení
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-gray-300">
-            Pomáháme dvěma typům klientů: těm, kteří potřebují kvalitní web,
-            a těm, kteří už podnikají, ale chtějí ušetřit čas pomocí
-            automatizace a AI.
+            Nemusíte být technický typ. Stačí vědět, co děláte — o web
+            a automatizace se postaráme my.
           </p>
         </div>
 
@@ -27,19 +26,18 @@ export default function AudienceSection() {
             </div>
 
             <h3 className="text-2xl font-semibold leading-tight text-white md:text-3xl">
-              Živnostníci a malé firmy bez webu
+              Potřebujete web, ale nechcete to řešit
             </h3>
 
             <p className="mt-4 text-base leading-7 text-gray-300 md:text-lg md:leading-8">
-              Postavíme vám jednoduchý, profesionální a rychlý web, který
-              vysvětlí vaše služby, bude fungovat na mobilu a pomůže získávat
-              nové zákazníky.
+              Dodáme vám hotový web na klíč — strukturu, texty, design i SEO.
+              Vy se jen podíváte, schválíte a spustíme.
             </p>
 
             <div className="mt-6 space-y-3 text-sm text-gray-300">
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Profesionální prezentace služby</span></div>
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Funkční web bez zbytečné složitosti</span></div>
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Rychlé spuštění a jednoduchý proces</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Web hotový za 3–5 dní</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Funguje na mobilu i počítači</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Přivádí poptávky, ne jen vypadá hezky</span></div>
             </div>
           </div>
 
@@ -49,18 +47,18 @@ export default function AudienceSection() {
             </div>
 
             <h3 className="text-2xl font-semibold leading-tight text-white md:text-3xl">
-              Firmy, které chtějí šetřit čas a růst
+              Děláte věci ručně, které by šly automaticky
             </h3>
 
             <p className="mt-4 text-base leading-7 text-gray-300 md:text-lg md:leading-8">
-              Nastavíme automatizace, propojíme nástroje a nasadíme AI řešení
-              tam, kde vám ušetří čas, sníží rutinu a zlepší práci s poptávkami.
+              Propojíme vaše nástroje, zautomatizujeme rutinu a nasadíme AI
+              tam, kde vám ušetří reálný čas každý den.
             </p>
 
             <div className="mt-6 space-y-3 text-sm text-gray-300">
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Méně ruční práce a opakovaných úkolů</span></div>
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Lepší práce s leady a zákazníky</span></div>
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Praktické AI a automatizace pro reálný provoz</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Automatické odpovědi a e-maily</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Propojení fakturace, CRM a tabulek</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>AI chatbot, který sbírá poptávky 24/7</span></div>
             </div>
           </div>
         </div>

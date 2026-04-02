@@ -25,9 +25,9 @@ export default function ServicesSection() {
             </p>
 
             <div className="mt-8 space-y-4 text-base text-gray-300">
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Web, který vysvětlí službu a přivede poptávky</span></div>
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>Automatizace, které šetří čas a omezují rutinu</span></div>
-              <div className="flex items-start gap-2.5"><CheckIcon /><span>AI nástroje, které pomáhají s komunikací a leady</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Web hotový za dny, ne měsíce</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>Automatizace, která ušetří hodiny týdně</span></div>
+              <div className="flex items-start gap-2.5"><CheckIcon /><span>AI, které pracuje i když vy ne</span></div>
             </div>
           </div>
 

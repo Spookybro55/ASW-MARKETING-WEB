@@ -8,8 +8,8 @@ export default function PricingSection() {
             Kolik to stojí
           </h2>
           <p className="mt-5 max-w-2xl text-lg text-gray-300">
-            Transparentní ceny bez skrytých poplatků. Přesnou variantu vždy
-            navrhneme podle rozsahu a cíle projektu.
+            Přesnou cenu vždy domluvíme podle rozsahu. Žádné skryté poplatky,
+            žádné překvapení.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function PricingSection() {
 
             <div className="mt-auto pt-6">
               <a href="#contact" className="inline-flex text-sm font-semibold text-gray-400 hover:text-white transition">
-                Domluvit konzultaci &rarr;
+                Chci web — ozvěte se mi &rarr;
               </a>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function PricingSection() {
 
             <div className="mt-auto pt-6">
               <a href="#contact" className="primary-button inline-flex items-center justify-center gap-2 text-sm px-6 py-3">
-                Domluvit konzultaci
+                Chci automatizaci — ozvěte se mi
                 <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
@@ -83,7 +83,7 @@ export default function PricingSection() {
 
             <div className="mt-auto pt-6">
               <a href="#contact" className="inline-flex text-sm font-semibold text-gray-400 hover:text-white transition">
-                Domluvit konzultaci &rarr;
+                Chci chatbota — ozvěte se mi &rarr;
               </a>
             </div>
           </div>

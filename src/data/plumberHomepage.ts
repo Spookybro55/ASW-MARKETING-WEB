@@ -2,25 +2,25 @@ import type { HomepageData } from "@/types/homepage";
 
 export const plumberHomepageData: HomepageData = {
   hero: {
-  badge: "Weby, automatizace a AI pro malé firmy a živnostníky",
-  title: "Pomáháme živnostníkům a  malým firmám\nrůst díky webu, automatizaci a AI",
+  badge: "Pro živnostníky a malé firmy",
+  title: "Váš web a automatizace.\nNa klíč. Za dny. Bez starostí.",
   text:
-    "Tvoříme profesionální weby pro živnostníky a malé firmy a zároveň nastavujeme automatizace a AI řešení, která šetří čas, zjednodušují procesy a pomáhají získávat více zákazníků.",
-  primaryButton: "Nezávazná konzultace",
-  secondaryButton: "Co přesně umíme",
+    "Postavíme vám profesionální web, propojíme nástroje a nastavíme automatizace, které šetří čas a pomáhají získávat nové zákazníky.",
+  primaryButton: "Zavolat teď",
+  secondaryButton: "Napsat e-mail",
 },
 
   audience: {
     title: "Pro koho je naše řešení",
-    text: "Pomáháme dvěma typům klientů: těm, kteří potřebují kvalitní web, a těm, kteří už podnikají, ale chtějí ušetřit čas pomocí automatizace a AI.",
+    text: "Nemusíte být technický typ. Stačí vědět, co děláte — o web a automatizace se postaráme my.",
     items: [
       {
-        title: "Živnostníci a malé firmy bez webu",
-        text: "Postavíme vám jednoduchý, profesionální a rychlý web, který vysvětlí vaše služby, bude fungovat na mobilu a pomůže získávat nové zákazníky.",
+        title: "Potřebujete web, ale nechcete to řešit",
+        text: "Dodáme vám hotový web na klíč — strukturu, texty, design i SEO. Vy se jen podíváte, schválíte a spustíme.",
       },
       {
-        title: "Firmy, které chtějí automatizace a AI",
-        text: "Nastavíme automatizace, propojíme nástroje a nasadíme AI řešení tam, kde vám ušetří čas, sníží rutinu a zlepší práci s poptávkami.",
+        title: "Děláte věci ručně, které by šly automaticky",
+        text: "Propojíme vaše nástroje, zautomatizujeme rutinu a nasadíme AI tam, kde vám ušetří reálný čas každý den.",
       },
     ],
   },
@@ -62,22 +62,22 @@ export const plumberHomepageData: HomepageData = {
   services: {
     title: "Co pro vás dokážeme zajistit",
     text:
-      "Pomáháme malým firmám a živnostníkům růst pomocí moderních webů, automatizací a AI nástrojů, které šetří čas a přináší více zakázek.",
+      "Tři služby, které pokryjí to, co malá firma reálně potřebuje — od prvního dojmu po každodenní provoz.",
     items: [
       {
         title: "Web na míru",
         text:
-          "Jednoduchý a profesionální web, který vysvětlí vaše služby a přivede nové zákazníky.",
+          "Profesionální web, který vysvětlí vaše služby a přivede poptávky. Včetně textů, struktury a SEO.",
       },
       {
         title: "Automatizace procesů",
         text:
-          "Propojíme vaše nástroje a nastavíme procesy tak, aby fungovaly automaticky bez ruční práce.",
+          "Propojíme fakturaci, CRM, e-maily a tabulky. Co děláte ručně 30 minut denně, poběží samo.",
       },
       {
         title: "AI chatbot a nástroje",
         text:
-          "AI, která odpovídá zákazníkům, sbírá poptávky a šetří vám čas každý den.",
+          "Chatbot naučený na vaše služby. Odpovídá zákazníkům, sbírá poptávky a pracuje i v noci.",
       },
     ],
   },
@@ -135,7 +135,7 @@ export const plumberHomepageData: HomepageData = {
 
   pricing: {
     title: "Kolik to stojí",
-    text: "Transparentní ceny bez skrytých poplatků. Přesnou cenu vždy domluvíme podle rozsahu.",
+    text: "Přesnou cenu vždy domluvíme podle rozsahu. Žádné skryté poplatky, žádné překvapení.",
     items: [
       {
         title: "Web na míru",
@@ -153,10 +153,10 @@ export const plumberHomepageData: HomepageData = {
   },
 
   contactCta: {
-    title: "Chcete web nebo automatizaci, která vám ušetří čas a přinese více zakázek?",
+    title: "Řekněte nám, co potřebujete",
     text:
-      "Ozvěte se nám a zdarma navrhneme řešení přesně pro vaše podnikání.",
-    primaryButton: "Domluvit konzultaci",
+      "Zavolejte, napište nebo vyplňte formulář. Ozveme se do 24 hodin s konkrétním návrhem řešení — zdarma a nezávazně.",
+    primaryButton: "Zavolat teď",
     secondaryButton: "Zobrazit služby",
   },
 

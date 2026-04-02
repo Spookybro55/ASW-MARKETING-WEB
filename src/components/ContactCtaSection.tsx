@@ -43,7 +43,7 @@ export default function ContactCtaSection() {
             </div>
 
             <div className="mt-4 text-sm text-gray-400">
-              Ozveme se vám do 24 hodin.
+              Odpovídáme do 24 hodin. Konzultace je zdarma.
             </div>
 
             <div className="mx-auto mt-10 max-w-md text-left">
