@@ -29,6 +29,21 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: `${siteUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
+    description:
+      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
+    images: [`${siteUrl}/og-image.png`],
   },
 };
 
