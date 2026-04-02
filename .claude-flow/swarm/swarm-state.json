@@ -1,0 +1,23 @@
+{
+  "swarms": {
+    "swarm-1775137463775-5jiv2x": {
+      "swarmId": "swarm-1775137463775-5jiv2x",
+      "topology": "hierarchical-mesh",
+      "maxAgents": 15,
+      "status": "running",
+      "agents": [],
+      "tasks": [],
+      "config": {
+        "topology": "hierarchical-mesh",
+        "maxAgents": 15,
+        "strategy": "specialized",
+        "communicationProtocol": "message-bus",
+        "autoScaling": true,
+        "consensusMechanism": "majority"
+      },
+      "createdAt": "2026-04-02T13:44:23.775Z",
+      "updatedAt": "2026-04-02T13:44:23.775Z"
+    }
+  },
+  "version": "3.0.0"
+}

@@ -1,0 +1,1 @@
+export { plumberHomepageData as homepageData } from "./plumberHomepage";
