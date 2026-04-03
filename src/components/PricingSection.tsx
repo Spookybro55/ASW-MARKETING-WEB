@@ -25,8 +25,30 @@ export default function PricingSection() {
             </div>
 
             <p className="mt-4 text-base leading-7 text-gray-300">
-              Kompletní web na klíč včetně struktury, textů a základního SEO.
+              Kompletní profesionální web včetně struktury, textů, designu
+              a základního SEO. Nasadíme ho na vaši doménu a spustíme.
             </p>
+
+            <div className="mt-5 space-y-2 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <svg aria-hidden="true" className="h-3.5 w-3.5 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                Hotovo za 3–5 pracovních dní
+              </div>
+              <div className="flex items-center gap-2">
+                <svg aria-hidden="true" className="h-3.5 w-3.5 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                2 kola úprav v ceně
+              </div>
+              <div className="flex items-center gap-2">
+                <svg aria-hidden="true" className="h-3.5 w-3.5 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                Platíte až po schválení
+              </div>
+            </div>
 
             <div className="mt-auto pt-6">
               <a href="#contact" className="inline-flex text-sm font-semibold text-gray-400 hover:text-white transition">
