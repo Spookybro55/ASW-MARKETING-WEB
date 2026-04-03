@@ -172,6 +172,11 @@ export const plumberHomepageData: HomepageData = {
         phone: "+420 722 525 872",
         email: "tomas@autosmartweb.cz",
       },
+      {
+        name: "Jan Bezemek",
+        phone: "+420 773 466 699",
+        email: "jan.bezemek@autosmartweb.cz",
+      },
     ],
   },
 };

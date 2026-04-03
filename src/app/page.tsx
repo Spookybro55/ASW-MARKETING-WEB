@@ -47,8 +47,16 @@ export default function Home() {
       <ContactCtaSection />
 
       <footer className="border-t border-white/10 px-6 py-8 text-center text-sm text-gray-400">
-        <div className="mx-auto max-w-6xl">
-          © {new Date().getFullYear()} Synkedo s.r.o. Všechna práva vyhrazena.
+        <div className="mx-auto max-w-6xl space-y-2">
+          <div>© {new Date().getFullYear()} Synkedo s.r.o. Všechna práva vyhrazena.</div>
+          <div>
+            <a
+              href="/zasady-ochrany-osobnich-udaju"
+              className="underline underline-offset-2 transition hover:text-white"
+            >
+              Zásady ochrany osobních údajů
+            </a>
+          </div>
         </div>
       </footer>
     </main>
