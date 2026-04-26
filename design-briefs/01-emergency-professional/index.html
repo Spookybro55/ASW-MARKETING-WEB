@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Design prototyp — Emergency Professional. Statický HTML/CSS náhled. Texty jsou placeholder.">
+  <title>Instalatérská pohotovost — Emergency Professional (demo)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="#" class="logo" aria-label="Instalatérská pohotovost — domovská stránka">
+      <span class="logo__primary">INSTALATÉRSKÁ</span>
+      <span class="logo__secondary">POHOTOVOST</span>
+    </a>
+    <div class="site-header__actions">
+      <a href="tel:+420777123456" class="phone-link" aria-label="Zavolat +420 777 123 456">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.05l-2.2 2.17z" fill="currentColor"/></svg>
+        <span>+420 777 123 456</span>
+      </a>
+      <a href="tel:+420777123456" class="btn btn--primary btn--sm">ZAVOLAT HNED</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="hero__badge">
+        <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        NONSTOP POHOTOVOST
+      </span>
+      <h1 class="hero__title">Instalatérská pohotovost<br>pro Prahu</h1>
+      <p class="hero__lead">Pomoc s haváriemi vody, topením nebo ucpaným odpadem. Volejte nonstop pro rychlé řešení problému.</p>
+      <div class="hero__ctas">
+        <a href="tel:+420777123456" class="btn btn--primary btn--lg">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.05l-2.2 2.17z" fill="currentColor"/></svg>
+          +420 777 123 456
+        </a>
+        <a href="#contact" class="btn btn--ghost btn--lg">NAPIŠTE NÁM</a>
+      </div>
+      <ul class="hero__features">
+        <li><span class="check">✓</span><div><strong>Místní služba</strong><span>Praha a okolí</span></div></li>
+        <li><span class="check">✓</span><div><strong>Nonstop kontakt</strong><span>včetně víkendů</span></div></li>
+        <li><span class="check">✓</span><div><strong>Rychlá pomoc</strong><span>voda, topení, odpady</span></div></li>
+      </ul>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__image-frame">
+        <!-- Demo placeholder image — dark with wrench illustration -->
+        <svg class="hero__wrench" viewBox="0 0 400 280" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="280" fill="#0a0e18"/>
+          <g transform="translate(200 140)" fill="none" stroke="#555" stroke-width="3">
+            <path d="M-120 -20 L40 60 L80 40 L100 60 L140 20 L100 -20 L80 0 L40 -20 Z" fill="#2a2f3a" stroke="#4a4f5a"/>
+            <circle cx="-130" cy="-20" r="18" fill="#2a2f3a"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust-strip" aria-label="Důvody proč nás volat">
+  <div class="container trust-strip__inner">
+    <div class="trust-item">
+      <svg class="trust-item__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6L3 9l6-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <h3 class="trust-item__title">Zkušený tým</h3>
+      <p class="trust-item__desc">Profesionální servis</p>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-item__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5M14 20c0-2 1.5-4 4-4s3.5 1.5 3.5 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3 class="trust-item__title">Spokojení zákazníci</h3>
+      <p class="trust-item__desc">Ověřené reference</p>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-item__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3 class="trust-item__title">Rychlá reakce</h3>
+      <p class="trust-item__desc">Nonstop dostupnost</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="container">
+    <header class="section-heading">
+      <h2>Řešíme instalatérské problémy</h2>
+      <p>Havárie i plánované opravy. Nonstop služba pro Prahu a okolí.</p>
+    </header>
+    <div class="services__grid">
+      <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Havárie vody</h3>
+        <p>Řešení prasklého potrubí, netěsností a zatopení. Rychlá pomoc při havárii.</p>
+      </article>
+      <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-3 5-6 7-6 11a6 6 0 0012 0c0-4-3-6-6-11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <h3>Ucpané odpady</h3>
+        <p>Čištění ucpaného WC, umyvadla nebo kanalizace. Profesionální vybavení.</p>
+      </article>
+      <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-3 4-5 6-5 10a5 5 0 0010 0c0-4-2-6-5-10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="14" r="2" fill="currentColor"/></svg>
+        <h3>Opravy topení</h3>
+        <p>Servis radiátorů, vytápění a kotlů. Pomoc při poruchách systému.</p>
+      </article>
+      <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v6H7zM9 9v9a2 2 0 002 2h2a2 2 0 002-2V9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <h3>Sanitární technika</h3>
+        <p>Výměna a oprava baterií, WC a umyvadel. Instalace sprch a van.</p>
+      </article>
+      <article class="service-card service-card--highlight">
+        <svg class="service-card__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 9v6M12 9v6M15 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Bojlery &amp; ohřívače</h3>
+        <p>Oprava a výměna bojlerů a průtokových ohřívačů vody.</p>
+      </article>
+      <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-2-2a1 1 0 010-1.4l8-8a1 1 0 011.4 0zM17 13l4 4-3 3-4-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <h3>Revize &amp; údržba</h3>
+        <p>Kontroly, prevence a údržba instalací a topení.</p>
+      </article>
+    </div>
+    <div class="services__cta">
+      <a href="tel:+420777123456" class="btn btn--primary btn--lg btn--wide">POTŘEBUJETE POMOC? VOLEJTE +420 777 123 456</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <header class="section-heading">
+      <h2>Orientační ceník</h2>
+      <p>Ukázka typických služeb. Konečnou cenu upřesníme po diagnostice.</p>
+    </header>
+    <ul class="price-list" role="list">
+      <li class="price-row"><span>Výjezd a diagnostika</span><strong>od XXX Kč</strong></li>
+      <li class="price-row"><span>Ucpaný odpad – průklep</span><strong>od XXX Kč</strong></li>
+      <li class="price-row"><span>Netěsnost kohoutku/baterie</span><strong>od XXX Kč</strong></li>
+      <li class="price-row"><span>Výměna WC mechanismu</span><strong>od XXX Kč</strong></li>
+      <li class="price-row"><span>Havárie potrubí – oprava</span><strong>od XXX Kč</strong></li>
+      <li class="price-row"><span>Instalace nové baterie</span><strong>od XXX Kč</strong></li>
+    </ul>
+    <ul class="price-features" role="list">
+      <li><span class="check">✓</span><div><strong>Transparentní ceny</strong> – vždy se dozvíte cenu předem</div></li>
+      <li><span class="check">✓</span><div><strong>Včetně materiálu</strong> – běžný spotřební materiál v ceně</div></li>
+      <li><span class="check">✓</span><div><strong>Platba na místě</strong> – hotově nebo kartou</div></li>
+      <li><span class="check">✓</span><div><strong>Záruka na práci</strong> – dle typu zásahu záruku</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ LOCATIONS ============ -->
+<section class="locations" id="locations">
+  <div class="container">
+    <span class="pill pill--red">
+      <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      MÍSTNÍ SLUŽBA
+    </span>
+    <h2 class="section-heading__title">Pokrýváme celou Prahu</h2>
+    <p class="section-heading__lead">Pracujeme ve všech částech Prahy a blízkém okolí.</p>
+    <ul class="locations__grid" role="list">
+      <li>Praha 1</li><li>Praha 2</li><li>Praha 3</li><li>Praha 4</li><li>Praha 5</li><li>Praha 6</li>
+      <li>Praha 7</li><li>Praha 8</li><li>Praha 9</li><li>Praha 10</li><li>Vinohrady</li><li>Žižkov</li>
+      <li>Smíchov</li><li>Karlín</li><li>Holešovice</li><li>Dejvice</li><li>Vršovice</li><li>Nusle</li>
+      <li>Michle</li><li>Pankrác</li><li>Chodov</li><li>Libuš</li><li>Modřany</li><li>Zbraslav</li>
+    </ul>
+    <div class="locations__callout">
+      <p>Nevidíte svou lokalitu? Obsloužíme i okolí Prahy.</p>
+      <a href="tel:+420777123456" class="btn btn--primary">ZAVOLEJTE A OVĚŘTE DOSTUPNOST</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <header class="section-heading">
+      <h2>Časté otázky</h2>
+      <p>Odpovědi na nejčastější dotazy</p>
+    </header>
+    <div class="faq__list">
+      <details class="faq-item">
+        <summary>Za jak dlouho jste u nás?</summary>
+        <div class="faq-item__body"><p>Čas příjezdu závisí na aktuálním vytížení a lokalitě. Přesnou orientaci vám sdělíme po zavolání — ukázkový placeholder text.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Jak probíhá platba?</summary>
+        <div class="faq-item__body"><p>Platba probíhá na místě po provedení zásahu, hotově nebo kartou. Cenu vždy upřesníme po diagnostice — placeholder text.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Pracujete i o víkendu a v noci?</summary>
+        <div class="faq-item__body"><p>Naše pohotovostní linka je dostupná každý den. Konkrétní režim ověříme při telefonátu — placeholder text.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Jakou oblast pokrýváte?</summary>
+        <div class="faq-item__body"><p>Pracujeme primárně v Praze a blízkém okolí. Dojezd do dalších lokalit posoudíme individuálně — placeholder text.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <header class="section-heading">
+      <h2>Kontaktujte nás</h2>
+      <p>Volejte nonstop nebo nám napište</p>
+    </header>
+    <div class="contact__grid">
+      <aside class="contact__info">
+        <div class="contact-card contact-card--red">
+          <h3>Nonstop linka</h3>
+          <a href="tel:+420777123456" class="contact-card__phone">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.05l-2.2 2.17z" fill="currentColor"/></svg>
+            +420 777 123 456
+          </a>
+          <p>Havárie? Volejte ihned. Jsme online 24/7.</p>
+        </div>
+        <div class="contact-card">
+          <svg class="contact-card__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <div><h4>Email</h4><p>info@rychla-instalaterska.cz</p></div>
+        </div>
+        <div class="contact-card">
+          <svg class="contact-card__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><h4>Provozní doba</h4><p>Nonstop linka<br>Dostupní každý den</p></div>
+        </div>
+        <div class="contact-card">
+          <svg class="contact-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <div><h4>Oblast působení</h4><p>Praha a okolí<br>Rychlý příjezd</p></div>
+        </div>
+      </aside>
+      <form class="contact__form" onsubmit="event.preventDefault();" aria-label="Napište nám">
+        <h3>Napište nám</h3>
+        <label class="field"><span>Jméno *</span><input type="text" name="name" required></label>
+        <label class="field"><span>Telefon *</span><input type="tel" name="phone" required></label>
+        <label class="field"><span>Email</span><input type="email" name="email"></label>
+        <label class="field"><span>Zpráva *</span><textarea name="message" rows="5" required></textarea></label>
+        <button type="submit" class="btn btn--primary btn--full">ODESLAT ZPRÁVU</button>
+        <p class="form-note">* Povinná pole. Vaše data budou použita pouze pro odpověď na dotaz.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <a href="#" class="logo logo--light">
+      <span class="logo__primary">INSTALATÉRSKÁ</span>
+      <span class="logo__secondary">POHOTOVOST</span>
+    </a>
+    <nav class="site-footer__nav" aria-label="Patička">
+      <a href="#services">Služby</a>
+      <a href="#pricing">Ceník</a>
+      <a href="#locations">Lokality</a>
+      <a href="#faq">Časté otázky</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+    <div class="site-footer__contact">
+      <a href="tel:+420777123456">+420 777 123 456</a>
+      <span>info@rychla-instalaterska.cz</span>
+    </div>
+  </div>
+  <div class="site-footer__meta">
+    <div class="container">
+      <span>© Demo prototyp — Emergency Professional. Texty jsou placeholdery.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOBILE STICKY CTA ============ -->
+<aside class="sticky-cta" aria-label="Rychlý kontakt">
+  <a href="tel:+420777123456" class="sticky-cta__btn sticky-cta__btn--primary">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.05l-2.2 2.17z" fill="currentColor"/></svg>
+    Zavolat
+  </a>
+  <a href="#contact" class="sticky-cta__btn sticky-cta__btn--ghost">Napsat</a>
+</aside>
+
+</body>
+</html>
