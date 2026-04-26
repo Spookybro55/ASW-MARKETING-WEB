@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { getStockPhoto } from "@/templates/core/stock-photos";
 import type { ClientBrief } from "@/templates/core/types";
 import styles from "../styles.module.css";
 import { getHeroHeadline, getHeroLead, telHref } from "../utils";
@@ -22,13 +24,14 @@ function ClockIcon() {
   );
 }
 
-function HeroVisualPlaceholder() {
+function HeroVisualPlaceholder({ altText }: { altText: string }) {
   return (
     <svg
       viewBox="0 0 400 280"
       preserveAspectRatio="xMidYMid slice"
       style={{ width: "100%", height: "100%" }}
-      aria-hidden="true"
+      role="img"
+      aria-label={altText}
     >
       <rect width="400" height="280" fill="#0a0e18" />
       <g transform="translate(200 140)" fill="none" stroke="#555" strokeWidth="3">
@@ -47,6 +50,7 @@ export default function Hero({ brief }: { brief: ClientBrief }) {
   const tel = telHref(brief.phone);
   const headline = getHeroHeadline(brief);
   const lead = getHeroLead(brief);
+  const photo = getStockPhoto(brief.service_type);
 
   return (
     <section className={styles.hero}>
@@ -91,9 +95,20 @@ export default function Hero({ brief }: { brief: ClientBrief }) {
             </li>
           </ul>
         </div>
-        <div className={styles.heroVisual} aria-hidden="true">
+        <div className={styles.heroVisual}>
           <div className={styles.heroImageFrame}>
-            <HeroVisualPlaceholder />
+            {photo.source === "placeholder" || !photo.src ? (
+              <HeroVisualPlaceholder altText={photo.altText} />
+            ) : (
+              <Image
+                src={photo.src}
+                alt={photo.altText}
+                width={800}
+                height={600}
+                priority
+                className={styles.heroImage}
+              />
+            )}
           </div>
         </div>
       </div>
