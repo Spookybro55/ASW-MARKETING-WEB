@@ -161,21 +161,22 @@ export const plumberHomepageData: HomepageData = {
   },
 
   contactInfo: {
+    centralEmail: "info@autosmartweb.cz",
     people: [
       {
         name: "Sebastián Fridrich",
         phone: "+420 601 557 018",
-        email: "sebastian@autosmartweb.cz",
+        email: "s.fridrich@autosmartweb.cz",
       },
       {
         name: "Tomáš Maixner",
         phone: "+420 722 525 872",
-        email: "tomas@autosmartweb.cz",
+        email: "t.maixner@autosmartweb.cz",
       },
       {
         name: "Jan Bezemek",
         phone: "+420 773 466 699",
-        email: "jan.bezemek@autosmartweb.cz",
+        email: "j.bezemek@autosmartweb.cz",
       },
     ],
   },

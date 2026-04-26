@@ -4,6 +4,7 @@ import ContactForm from "./ContactForm";
 export default function ContactCtaSection() {
   const { contactCta, contactInfo } = homepageData;
   const primaryContact = contactInfo.people[0];
+  const centralEmail = contactInfo.centralEmail;
 
   return (
     <section id="contact" className="section-shell border-t border-white/10">
@@ -32,7 +33,7 @@ export default function ContactCtaSection() {
               </a>
 
               <a
-                href={`mailto:${primaryContact.email}`}
+                href={`mailto:${centralEmail}`}
                 className="secondary-button inline-flex items-center justify-center gap-2"
               >
                 <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

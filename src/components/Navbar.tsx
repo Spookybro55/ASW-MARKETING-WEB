@@ -2,6 +2,7 @@ import { homepageData } from "@/data/homepage";
 
 export default function Navbar() {
   const primaryContact = homepageData.contactInfo.people[0];
+  const centralEmail = homepageData.contactInfo.centralEmail;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-md bg-[#050B1F]/80 border-b border-white/10">
@@ -18,7 +19,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href={`mailto:${primaryContact.email}`}
+            href={`mailto:${centralEmail}`}
             className="hidden md:inline-flex secondary-button text-sm px-5 py-2.5"
           >
             Napsat e-mail

@@ -42,6 +42,7 @@ const CheckIcon = () => (
 
 export default function WebProInstalateraPage() {
   const primaryContact = homepageData.contactInfo.people[0];
+  const centralEmail = homepageData.contactInfo.centralEmail;
 
   return (
     <main className="bg-[#050B1F] text-white relative overflow-hidden">
@@ -364,7 +365,7 @@ export default function WebProInstalateraPage() {
                 </a>
 
                 <a
-                  href={`mailto:${primaryContact.email}`}
+                  href={`mailto:${centralEmail}`}
                   className="secondary-button inline-flex items-center justify-center gap-2"
                 >
                   <svg

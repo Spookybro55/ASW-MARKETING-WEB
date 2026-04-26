@@ -56,5 +56,6 @@ export type ContactPerson = {
 };
 
 export type ContactInfoData = {
+  centralEmail: string;
   people: ContactPerson[];
 };

@@ -79,7 +79,7 @@ export default function RootLayout({
               name: "Autosmartweby (Synkedo s.r.o.)",
               url: "https://autosmartweb.cz",
               telephone: "+420601557018",
-              email: "sebastian@autosmartweb.cz",
+              email: "info@autosmartweb.cz",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Příčná 1892/4",

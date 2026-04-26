@@ -159,6 +159,7 @@ export const electricianHomepageData: HomepageData = {
   },
 
   contactInfo: {
+    centralEmail: "info@elektronovak.cz",
     people: [
       {
         name: "ElektroNovák",
