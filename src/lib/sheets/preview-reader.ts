@@ -31,9 +31,17 @@ export async function getPreviewBySlug(
     const row = response.data.values?.find((r) => r[0] === slug);
     if (!row) return null;
 
+    const rawBrief = JSON.parse(row[1] ?? "{}");
+    const brief = {
+      ...rawBrief,
+      phone: rawBrief.phone ?? rawBrief.contact_phone ?? "",
+      email: rawBrief.email ?? rawBrief.contact_email ?? "",
+      website: rawBrief.website ?? rawBrief.website_url ?? undefined,
+    };
+
     return {
       slug: row[0],
-      brief: JSON.parse(row[1] ?? "{}"),
+      brief,
       template_type: row[2] ?? "unknown",
       family: (row[3] ?? "generic-local") as PreviewRecord["family"],
       lead_id: row[4],
