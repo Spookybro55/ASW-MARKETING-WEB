@@ -646,7 +646,7 @@
 }
 .siteFooterTagline {
   font-size: 14px;
-  color: #8892a8;
+  color: #cbd5e1;
   margin-top: var(--space-2);
   max-width: 320px;
 }
@@ -687,7 +687,7 @@
   border-top: 1px solid #1e2c47;
   padding: var(--space-4) 0;
   font-size: 12px;
-  color: #8892a8;
+  color: #cbd5e1;
 }
 .siteFooterMetaInner {
   display: flex;
@@ -697,7 +697,6 @@
   gap: var(--space-3);
 }
 .siteFooterCredit {
-  opacity: 0.7;
   font-size: 12px;
 }
 .siteFooterCredit a {
