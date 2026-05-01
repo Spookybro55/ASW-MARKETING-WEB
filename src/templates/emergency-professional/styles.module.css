@@ -306,7 +306,7 @@
   color: #fff;
 }
 .trustItemDesc {
-  color: #b8bfcd;
+  color: #e2e8f0;
   font-size: 14px;
 }
 
@@ -422,8 +422,9 @@
   text-transform: uppercase;
 }
 .pillRed {
-  background: var(--color-red);
-  color: #fff;
+  background: transparent;
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
 }
 .locations h2 {
   margin-top: var(--space-5);
@@ -629,7 +630,7 @@
 /* ---------- Footer ---------- */
 .siteFooter {
   background: var(--color-navy-deep);
-  color: #b8bfcd;
+  color: #e2e8f0;
 }
 .siteFooterInner {
   display: grid;
@@ -700,7 +701,7 @@
   font-size: 12px;
 }
 .siteFooterCredit a {
-  color: #b8bfcd;
+  color: #e2e8f0;
 }
 .siteFooterCredit a:hover {
   color: #fff;
