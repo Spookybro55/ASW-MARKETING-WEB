@@ -95,7 +95,7 @@ export default function Services({ phone }: { phone: string }) {
             className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLg} ${styles.btnWide}`}
           >
             <PhoneIcon />
-            POTŘEBUJETE POMOC? VOLEJTE {phone}
+            POTŘEBUJETE POMOC? ZAVOLEJTE NÁM
           </a>
         </div>
       </div>

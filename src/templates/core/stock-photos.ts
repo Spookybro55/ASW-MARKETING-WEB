@@ -6,26 +6,35 @@ export interface StockPhoto {
   source: StockPhotoSource;
 }
 
+// Unsplash URLs use the canonical photo permalink + Unsplash's image-CDN
+// query parameters (`auto=format&fit=crop&w=1200&q=80`) so Next/Image can
+// serve a tightly cropped, optimized variant without re-uploading. License
+// is the standard Unsplash license (free for commercial use, no attribution
+// required, but credit is appreciated — see attribution.md if/when added).
+//
+// To swap to local / re-uploaded photos: change `source` to "local" and
+// `src` to a `/preview/...` path. The hero component dispatches on `source`
+// so no other code change is required.
 const STOCK_PHOTOS: Record<string, StockPhoto> = {
   instalatér: {
-    src: null,
-    altText: "Instalatérské nářadí",
-    source: "placeholder",
+    src: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1200&q=80",
+    altText: "Instalatér při práci s nářadím",
+    source: "unsplash",
   },
   elektrikář: {
-    src: null,
-    altText: "Elektrikářské nářadí",
-    source: "placeholder",
+    src: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
+    altText: "Elektrikář kontroluje rozvod",
+    source: "unsplash",
   },
   topenář: {
-    src: null,
-    altText: "Topenářské nářadí",
-    source: "placeholder",
+    src: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80",
+    altText: "Servis topného systému",
+    source: "unsplash",
   },
   default: {
-    src: null,
-    altText: "Profesionální služby",
-    source: "placeholder",
+    src: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
+    altText: "Profesionální řemeslník při práci",
+    source: "unsplash",
   },
 };
 
