@@ -35,7 +35,6 @@ export default function Pricing({ phone }: { phone: string }) {
             <PhoneIcon />
             ZAVOLAT PRO CENOVOU NABÍDKU
           </a>
-          <p>{phone}</p>
         </div>
         <ul className={styles.priceFeatures}>
           {FEATURES.map((f) => (
