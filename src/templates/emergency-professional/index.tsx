@@ -18,7 +18,7 @@ export default function EmergencyProfessional({ brief }: TemplateProps) {
       <main>
         <Hero brief={brief} />
         <TrustStrip />
-        <Services phone={brief.phone} />
+        <Services brief={brief} />
         <Pricing phone={brief.phone} />
         <Locations brief={brief} />
         <Faq />
