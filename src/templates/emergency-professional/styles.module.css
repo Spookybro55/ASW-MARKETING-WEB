@@ -649,20 +649,31 @@
 /* ---------- Footer ---------- */
 .siteFooter {
   background: var(--color-navy-deep);
-  color: #e2e8f0;
+  color: #cbd5e1;
   margin-top: var(--space-9);
 }
 .siteFooterInner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
-  padding: var(--space-9) 0 var(--space-7);
+  gap: var(--space-7);
+  padding: var(--space-9) 0;
 }
-/* Footer brand variant — stack the two spans vertically.
-   Without this override, .logo's inline-flex puts business_name +
-   service_type side-by-side, which overflows the narrow footer
-   column 1 and visually leaks into column 2 (INSTALATÉR appearing
-   where "RYCHLÉ ODKAZY" should be). */
+.siteFooterBrand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 360px;
+}
+.siteFooterBrandName {
+  display: block;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+/* Footer brand variant — kept for legacy / mobile sticky / other uses;
+   footer itself uses .siteFooterBrand which is cleaner. */
 .logoLight {
   display: inline-flex;
   flex-direction: column;
@@ -680,9 +691,9 @@
 }
 .siteFooterTagline {
   font-size: 14px;
-  color: #cbd5e1;
-  margin-top: var(--space-2);
-  max-width: 320px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.6;
 }
 /* Specificity bump — same reason as .trustStrip .trustItemTitle:
    `.root h4` sets dark color which on dark footer bg = invisible. */
@@ -697,8 +708,12 @@
 .siteFooterNav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
   font-size: 14px;
+}
+.siteFooterNav a {
+  color: #94a3b8;
+  transition: color 0.15s;
 }
 .siteFooterNav a:hover {
   color: #fff;
@@ -706,55 +721,70 @@
 .siteFooterServices {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
   font-size: 14px;
+  color: #94a3b8;
 }
 .siteFooterContact {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
   font-size: 14px;
+  color: #94a3b8;
 }
 .siteFooterContact a {
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+.siteFooterContact a:hover {
+  color: var(--color-red);
 }
 .siteFooterMeta {
   border-top: 1px solid #1e2c47;
-  padding: var(--space-4) 0;
-  font-size: 12px;
-  color: #cbd5e1;
+  padding: var(--space-5) 0;
+  font-size: 13px;
+  color: #94a3b8;
 }
 .siteFooterMetaInner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  row-gap: var(--space-3);
 }
-.siteFooterCredit {
-  font-size: 12px;
-  margin-left: var(--space-3);
-  opacity: 0.7;
-}
-.siteFooterCredit a {
-  color: #e2e8f0;
-}
-.siteFooterCredit a:hover {
-  color: #fff;
+.siteFooterCopyright {
+  font-size: 13px;
+  color: #94a3b8;
 }
 .siteFooterLegal {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-4);
-  font-size: 12px;
+  gap: var(--space-3);
+  font-size: 13px;
 }
 .siteFooterLegal a {
   color: #cbd5e1;
   transition: color 0.15s;
 }
 .siteFooterLegal a:hover {
+  color: #fff;
+}
+.siteFooterDot {
+  color: #475569;
+}
+.siteFooterCredit {
+  font-size: 12px;
+  color: #64748b;
+  letter-spacing: 0.02em;
+}
+.siteFooterCredit a {
+  color: #94a3b8;
+  transition: color 0.15s;
+}
+.siteFooterCredit a:hover {
   color: #fff;
 }
 
