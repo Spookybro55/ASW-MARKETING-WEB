@@ -24,7 +24,7 @@
       "obors": ["řemeslník", "elektrikář", "instalatér", "malíř", "truhlář"],
       "sub_obors": ["scheduled", "non-emergency"],
       "use_cases": ["plánované opravy", "rekonstrukce", "lokální služba"],
-      "demo_slug": null,
+      "demo_slug": "alvito-s-r-o-plynoservis-praha",
       "status": "active",
       "created_at": "2026-05-03",
       "variants": []
