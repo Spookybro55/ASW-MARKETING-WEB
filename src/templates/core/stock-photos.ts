@@ -17,8 +17,8 @@ export interface StockPhoto {
 // so no other code change is required.
 const STOCK_PHOTOS: Record<string, StockPhoto> = {
   instalatér: {
-    src: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1200&q=80",
-    altText: "Instalatér při práci s nářadím",
+    src: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=1200&q=80",
+    altText: "Profesionální chromová baterie a vana — instalatérská práce",
     source: "unsplash",
   },
   elektrikář: {
