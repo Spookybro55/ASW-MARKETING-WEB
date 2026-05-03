@@ -6,11 +6,11 @@
    ======================================================================= */
 
 .root {
-  --color-red: #E1232E;
-  --color-red-dark: #b82020;
-  --color-navy: #0E1A35;
-  --color-navy-deep: #0a1629;
-  --color-text: #0E1A35;
+  --color-red: #E7000B;
+  --color-red-dark: #b30009;
+  --color-navy: #101828;
+  --color-navy-deep: #080d18;
+  --color-text: #101828;
   --color-text-muted: #5b6678;
   --color-bg: #ffffff;
   --color-bg-alt: #f5f6f8;
@@ -32,8 +32,8 @@
   --space-9: 80px;
 
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  --shadow-sm: 0 1px 2px rgba(14, 26, 53, 0.06);
-  --shadow-md: 0 2px 8px rgba(14, 26, 53, 0.08);
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-md: 0 2px 8px rgba(16, 24, 40, 0.08);
 
   font-family: var(--font-sans);
   font-size: 16px;
@@ -571,7 +571,7 @@
   font-size: 18px;
 }
 .contactCardRed p {
-  color: #ffe3e3;
+  color: #fff;
   font-size: 14px;
 }
 .contactCardPhone {
