@@ -641,11 +641,25 @@
   gap: var(--space-5);
   padding: var(--space-7) 0;
 }
+/* Footer brand variant — stack the two spans vertically.
+   Without this override, .logo's inline-flex puts business_name +
+   service_type side-by-side, which overflows the narrow footer
+   column 1 and visually leaks into column 2 (INSTALATÉR appearing
+   where "RYCHLÉ ODKAZY" should be). */
+.logoLight {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1.15;
+}
 .logoLight .logoPrimary {
   color: var(--color-red);
+  font-size: 18px;
 }
 .logoLight .logoSecondary {
   color: #fff;
+  font-size: 18px;
 }
 .siteFooterTagline {
   font-size: 14px;
