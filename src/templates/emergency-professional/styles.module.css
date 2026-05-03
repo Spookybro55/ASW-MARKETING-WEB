@@ -660,7 +660,7 @@
   /* GENEROUS top padding — owner-requested 2026-05-03: significantly
      more navy band above column titles, no compromise on visible
      dark area above headings. */
-  padding: 240px 0 var(--space-9);
+  padding: 400px 0 var(--space-9);
 }
 .siteFooterBrand {
   display: flex;
