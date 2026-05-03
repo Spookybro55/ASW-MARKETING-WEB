@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Spookybro55/ASW-MARKETING-WEB/main/src/templates/core/registry-metadata.schema.json",
+  "title": "Preview Template Registry Metadata",
+  "description": "Library metadata for preview templates rendered at autosmartweb.cz/preview/{slug}. Consumed by Spookybro55/autosmartweby CRM template library page (/templates/library).",
+  "type": "object",
+  "required": ["version", "templates"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version. Bump on breaking changes; consumers must check."
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "Free-form provenance note. Either 'manual seed' + plan ref, or future automation marker."
+    },
+    "templates": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/definitions/Template" }
+    }
+  },
+  "definitions": {
+    "Template": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "registry_keys",
+        "obors",
+        "sub_obors",
+        "use_cases",
+        "status",
+        "variants"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "description": "Stable identifier — should match the template directory name in src/templates/{id}/. Lowercase kebab-case."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-friendly display name shown in CRM library cards."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "1-3 sentence designer's-note describing what makes this template distinctive (visual, copy framing, target lead profile)."
+        },
+        "registry_keys": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$"
+          },
+          "uniqueItems": true,
+          "description": "Family slugs from registry.ts that route to this template directory. Used by CRM to join LEADS.template_family for usage stats. Multiple keys = aliases (e.g. 'emergency' and 'generic-local' both render emergency-professional)."
+        },
+        "obors": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Primary professions this template suits (instalatér, elektrikář, malíř, ...). Flat array. Filter UI = AND across selected chips."
+        },
+        "sub_obors": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Finer-grained profession cuts (emergency, scheduled, specialist, ...). Flat array."
+        },
+        "use_cases": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Lead situation tags (havárie, rekonstrukce, jednorázová instalace, ...). Flat array."
+        },
+        "demo_slug": {
+          "type": ["string", "null"],
+          "description": "Slug for autosmartweb.cz/preview/{slug} canonical demo lead. Null if no canonical demo yet — CRM library renders placeholder thumbnail."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "experimental", "deprecated"],
+          "description": "Lifecycle state. Phase 1 of CRM library: schema reserves the field, UI does not surface filter for it (deferred to Phase 2)."
+        },
+        "created_at": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date the template directory was first scaffolded (YYYY-MM-DD). Null acceptable for legacy entries without git evidence."
+        },
+        "polished_at": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date of most recent visual / copy polish pass."
+        },
+        "variants": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Variant" },
+          "description": "Forward-compat hook for the variation engine (async-anti-generic-template-system-v1 plan, BACKLOG). Phase 1: empty array. Future: each variant entry describes a section-level remix of the base template."
+        }
+      }
+    },
+    "Variant": {
+      "type": "object",
+      "required": ["variant_id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "variant_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+          "description": "Stable identifier within the parent template's variants array."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section_overrides": {
+          "type": "object",
+          "description": "Future shape — placeholder. Section-level remix instructions for the variation engine renderer.",
+          "additionalProperties": true
+        },
+        "hash_seed_hint": {
+          "type": "string",
+          "description": "Optional deterministic-pseudo-random seed hint for matching this variant to leads."
+        }
+      }
+    }
+  }
+}

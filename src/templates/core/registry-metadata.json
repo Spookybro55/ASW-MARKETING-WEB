@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "generated_by": "manual seed (Task 1 of crm-template-library-v1 plan, 2026-05-03)",
+  "templates": [
+    {
+      "id": "emergency-professional",
+      "name": "Emergency Pro (havárie)",
+      "description": "Urgentní telefon-first hero, NONSTOP POHOTOVOST badge, červeno-námořní paleta. Vhodné pro řemeslníky s pohotovostní službou (instalatér s 24/7 havarijní linkou, plynař, elektrikář-pohotovost). Trust-strip + services grid + pricing s CTA na telefon + FAQ accordion + footer.",
+      "registry_keys": ["emergency", "generic-local"],
+      "obors": ["instalatér", "plynař", "elektrikář", "topenář"],
+      "sub_obors": ["emergency", "nonstop"],
+      "use_cases": ["havárie", "24/7 servis", "pohotovost"],
+      "demo_slug": "alvito-s-r-o-plynoservis-praha",
+      "status": "active",
+      "created_at": "2026-04-26",
+      "polished_at": "2026-05-01",
+      "variants": []
+    }
+  ]
+}
