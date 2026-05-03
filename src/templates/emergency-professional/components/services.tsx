@@ -98,7 +98,7 @@ export default function Services({ brief }: { brief: ClientBrief }) {
             className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLg} ${styles.btnWide}`}
           >
             <PhoneIcon />
-            POTŘEBUJETE POMOC? ZAVOLEJTE NÁM
+            POTŘEBUJETE POMOC? VOLEJTE {brief.phone}
           </a>
         </div>
       </div>

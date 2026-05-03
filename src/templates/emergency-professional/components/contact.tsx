@@ -2,7 +2,7 @@
 
 import type { ClientBrief } from "@/templates/core/types";
 import styles from "../styles.module.css";
-import { telHref } from "../utils";
+import { telHref, mailHref } from "../utils";
 
 function PhoneIcon() {
   return (
@@ -18,6 +18,15 @@ function PhoneIcon() {
 function MailIcon() {
   return (
     <svg className={styles.contactCardIcon} viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+      <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function MailIconSmall() {
+  return (
+    <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true">
       <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
       <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
@@ -57,6 +66,10 @@ export default function Contact({ brief }: { brief: ClientBrief }) {
               <a href={telHref(brief.phone)} className={styles.contactCardPhone}>
                 <PhoneIcon />
                 {brief.phone}
+              </a>
+              <a href={mailHref(brief.email)} className={styles.contactCardEmail}>
+                <MailIconSmall />
+                {brief.email}
               </a>
               <p>Havárie? Volejte ihned. Jsme dostupní 24/7.</p>
             </div>

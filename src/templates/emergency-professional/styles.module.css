@@ -588,6 +588,19 @@
   font-size: 28px;
   font-weight: 800;
 }
+.contactCardEmail {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-all;
+  margin-top: calc(-1 * var(--space-1));
+}
+.contactCardEmail:hover {
+  text-decoration: underline;
+}
 .contactForm {
   background: var(--color-bg-alt);
   border-radius: var(--radius-md);
@@ -637,12 +650,13 @@
 .siteFooter {
   background: var(--color-navy-deep);
   color: #e2e8f0;
+  margin-top: var(--space-9);
 }
 .siteFooterInner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-5);
-  padding: var(--space-7) 0;
+  gap: var(--space-6);
+  padding: var(--space-9) 0 var(--space-7);
 }
 /* Footer brand variant — stack the two spans vertically.
    Without this override, .logo's inline-flex puts business_name +
