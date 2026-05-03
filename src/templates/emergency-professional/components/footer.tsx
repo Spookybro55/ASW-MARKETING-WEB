@@ -50,13 +50,20 @@ export default function Footer({ brief }: { brief: ClientBrief }) {
       <div className={styles.siteFooterMeta}>
         <div className={`${styles.container} ${styles.siteFooterMetaInner}`}>
           <span>© 2026 {brief.business_name}. Všechna práva vyhrazena.</span>
-          <span className={styles.siteFooterCredit}>
-            Tento návrh připravila firma{" "}
-            <a href="https://autosmartweb.cz" target="_blank" rel="noopener noreferrer">
-              Autosmartweb
+          <nav className={styles.siteFooterLegal} aria-label="Patička – právní">
+            <a href="/zasady-ochrany-osobnich-udaju" target="_blank" rel="noopener noreferrer">
+              Ochrana osobních údajů
             </a>
-            .
-          </span>
+            <a href="/obchodni-podminky" target="_blank" rel="noopener noreferrer">
+              Obchodní podmínky
+            </a>
+            <span className={styles.siteFooterCredit}>
+              Návrh:{" "}
+              <a href="https://autosmartweb.cz" target="_blank" rel="noopener noreferrer">
+                Autosmartweb
+              </a>
+            </span>
+          </nav>
         </div>
       </div>
     </footer>

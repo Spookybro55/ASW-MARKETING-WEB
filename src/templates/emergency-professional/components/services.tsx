@@ -1,5 +1,7 @@
+import type { ClientBrief } from "@/templates/core/types";
 import { EMERGENCY_SERVICES, type ServiceIcon } from "../data/services";
 import styles from "../styles.module.css";
+import { toAccusative } from "../utils";
 
 function ServiceIconSvg({ icon }: { icon: ServiceIcon }) {
   switch (icon) {
@@ -68,14 +70,15 @@ function PhoneIcon() {
   );
 }
 
-export default function Services({ phone }: { phone: string }) {
-  const tel = `tel:${phone.replace(/\s/g, "")}`;
+export default function Services({ brief }: { brief: ClientBrief }) {
+  const tel = `tel:${brief.phone.replace(/\s/g, "")}`;
+  const cityAcc = toAccusative(brief.city);
   return (
     <section className={styles.services} id="services">
       <div className={styles.container}>
         <header className={styles.sectionHeading}>
-          <h2>Naše služby</h2>
-          <p>Havárie i plánované opravy. Profesionální zásah, jasná komunikace.</p>
+          <h2>Řešíme instalatérské problémy</h2>
+          <p>Havárie i plánované opravy. Nonstop služba pro {cityAcc} a okolí.</p>
         </header>
         <div className={styles.servicesGrid}>
           {EMERGENCY_SERVICES.map((service) => (
