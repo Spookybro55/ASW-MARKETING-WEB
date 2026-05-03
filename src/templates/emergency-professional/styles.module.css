@@ -657,9 +657,10 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-7);
-  /* large top padding so navy strip is generous above the column
-     titles; equal bottom padding for symmetry */
-  padding: calc(var(--space-9) + var(--space-5)) 0 var(--space-9);
+  /* GENEROUS top padding — owner-requested 2026-05-03: significantly
+     more navy band above column titles, no compromise on visible
+     dark area above headings. */
+  padding: 240px 0 var(--space-9);
 }
 .siteFooterBrand {
   display: flex;
