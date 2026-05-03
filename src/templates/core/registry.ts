@@ -1,10 +1,11 @@
 import EmergencyProfessional from "../emergency-professional";
+import CommunityExpert from "../community-expert";
 import type { TemplateComponent } from "./types";
 import { TEMPLATE_METADATA } from "./metadata";
 
 const TEMPLATE_REGISTRY: Record<string, TemplateComponent> = {
   emergency: EmergencyProfessional,
-  // "community-expert": CommunityExpert,    // later
+  "community-expert": CommunityExpert,
   // "technical-authority": TechnicalAuthority, // later
   "generic-local": EmergencyProfessional,
 };

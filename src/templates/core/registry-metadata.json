@@ -15,6 +15,19 @@
       "created_at": "2026-04-26",
       "polished_at": "2026-05-01",
       "variants": []
+    },
+    {
+      "id": "community-expert",
+      "name": "Community Expert (lokální řemeslník)",
+      "description": "Teplá oranžová + krémová paleta, hero text-vlevo / fotka-vpravo, 6 řemeslných služeb (opravy, elektro, voda, malíř, truhlář, montáž), 4-krokový how-it-works proces, recenze s avatary, lokální grid 6 míst per-city. Vhodné pro lokální univerzální řemeslníky bez emergency urgency — kontrastní s emergency-professional směrem ke kalmer, trust-building tone.",
+      "registry_keys": ["community-expert"],
+      "obors": ["řemeslník", "elektrikář", "instalatér", "malíř", "truhlář"],
+      "sub_obors": ["scheduled", "non-emergency"],
+      "use_cases": ["plánované opravy", "rekonstrukce", "lokální služba"],
+      "demo_slug": null,
+      "status": "active",
+      "created_at": "2026-05-03",
+      "variants": []
     }
   ]
 }
