@@ -660,7 +660,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-7);
-  padding: 400px 0 var(--space-9);
+  padding: var(--space-9) 0;
 }
 .siteFooterBrand {
   display: flex;
