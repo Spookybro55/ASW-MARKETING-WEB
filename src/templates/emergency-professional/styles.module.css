@@ -653,13 +653,15 @@
   /* no margin-top — navy bg extends right up to the previous section
      (no white gap above the dark band, owner-requested 2026-05-03) */
 }
-.siteFooterInner {
+/* Specificity bump — `.container` rule (incl. its @media (min-width:768px)
+   override) had equal specificity (0,1,0) and was source-order winning
+   for padding-* properties. The element gets BOTH `container` +
+   `siteFooterInner` classes, so without this prefix the container's
+   `padding: 0 var(--space-5)` was stomping our padding-top to 0. */
+.siteFooter .siteFooterInner {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-7);
-  /* GENEROUS top padding — owner-requested 2026-05-03: significantly
-     more navy band above column titles, no compromise on visible
-     dark area above headings. */
   padding: 400px 0 var(--space-9);
 }
 .siteFooterBrand {
