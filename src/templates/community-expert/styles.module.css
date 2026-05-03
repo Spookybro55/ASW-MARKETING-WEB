@@ -424,14 +424,14 @@
   max-width: 620px;
   margin: var(--space-3) auto 0;
 }
-.localAreaGrid {
+.localArea .localAreaGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-2);
   max-width: 780px;
   margin: 0 auto;
 }
-.localAreaGrid li {
+.localArea .localAreaGrid li {
   background: #fff;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -709,7 +709,7 @@
   .trustStripInner {
     grid-template-columns: repeat(4, 1fr);
   }
-  .localAreaGrid {
+  .localArea .localAreaGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -742,7 +742,7 @@
   .reviewsGrid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .localAreaGrid {
+  .localArea .localAreaGrid {
     grid-template-columns: repeat(3, 1fr);
   }
   .contactGrid {
