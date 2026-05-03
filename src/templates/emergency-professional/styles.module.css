@@ -301,11 +301,14 @@
   height: 44px;
   color: var(--color-red);
 }
-.trustItemTitle {
+/* Specificity bump — `.root h3` rule sets color: var(--color-text)
+   (dark navy) which on the dark trust strip bg = invisible. The
+   compound selector beats `.root h3` and forces white. */
+.trustStrip .trustItemTitle {
   font-size: 20px;
   color: #fff;
 }
-.trustItemDesc {
+.trustStrip .trustItemDesc {
   color: #e2e8f0;
   font-size: 14px;
 }
@@ -650,7 +653,9 @@
   margin-top: var(--space-2);
   max-width: 320px;
 }
-.siteFooterColTitle {
+/* Specificity bump — same reason as .trustStrip .trustItemTitle:
+   `.root h4` sets dark color which on dark footer bg = invisible. */
+.siteFooter .siteFooterColTitle {
   color: #fff;
   font-size: 13px;
   letter-spacing: 0.06em;

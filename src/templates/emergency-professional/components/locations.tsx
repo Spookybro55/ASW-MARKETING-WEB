@@ -1,7 +1,7 @@
 import type { ClientBrief } from "@/templates/core/types";
 import { PRAGUE_LOCATIONS } from "../data/prague-locations";
 import styles from "../styles.module.css";
-import { telHref } from "../utils";
+import { telHref, toAccusative } from "../utils";
 
 function PinIcon() {
   return (
@@ -19,6 +19,7 @@ function PinIcon() {
 
 export default function Locations({ brief }: { brief: ClientBrief }) {
   const isPraha = brief.city.trim().toLowerCase() === "praha";
+  const cityAcc = toAccusative(brief.city);
   return (
     <section className={styles.locations} id="locations">
       <div className={styles.container}>
@@ -27,10 +28,10 @@ export default function Locations({ brief }: { brief: ClientBrief }) {
           MÍSTNÍ SLUŽBA
         </span>
         <h2 className={styles.sectionHeadingTitle}>
-          Pokrýváme {brief.city} a okolí
+          Pokrýváme {cityAcc} a okolí
         </h2>
         <p className={styles.sectionHeadingLead}>
-          Pracujeme v {brief.city} a blízkém okolí. Rychlý dojezd a jasná komunikace.
+          Obsluhujeme {cityAcc} a blízké okolí. Rychlý dojezd a jasná komunikace.
         </p>
 
         {isPraha ? (

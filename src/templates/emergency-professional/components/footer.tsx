@@ -15,7 +15,7 @@ export default function Footer({ brief }: { brief: ClientBrief }) {
             </span>
           </a>
           <p className={styles.siteFooterTagline}>
-            Nonstop {brief.service_type} pohotovost v {brief.city}. Havárie i plánované opravy.
+            Nonstop {brief.service_type} pohotovost — {brief.city}. Havárie i plánované opravy.
           </p>
         </div>
 
