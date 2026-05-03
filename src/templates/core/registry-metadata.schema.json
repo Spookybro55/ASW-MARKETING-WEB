@@ -85,6 +85,11 @@
           "type": ["string", "null"],
           "description": "Slug for autosmartweb.cz/preview/{slug} canonical demo lead. Null if no canonical demo yet — CRM library renders placeholder thumbnail."
         },
+        "preview_route": {
+          "type": "string",
+          "default": "preview",
+          "description": "Marketing-web route base for this template's preview URL. Defaults to 'preview' which respects the lead's _previews.family for template selection. Set to 'preview2' / 'preview3' / etc. when this template needs a parallel route that hardcodes its own template (used so multiple library cards can render the same demo lead under different templates for visual compare). E.g. community-expert sets 'preview2' so its iframe loads /preview2/{slug} which forces CommunityExpert render."
+        },
         "status": {
           "type": "string",
           "enum": ["active", "experimental", "deprecated"],
