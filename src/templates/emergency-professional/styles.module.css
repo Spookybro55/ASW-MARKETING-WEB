@@ -650,13 +650,16 @@
 .siteFooter {
   background: var(--color-navy-deep);
   color: #cbd5e1;
-  margin-top: var(--space-9);
+  /* no margin-top — navy bg extends right up to the previous section
+     (no white gap above the dark band, owner-requested 2026-05-03) */
 }
 .siteFooterInner {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-7);
-  padding: var(--space-9) 0;
+  /* large top padding so navy strip is generous above the column
+     titles; equal bottom padding for symmetry */
+  padding: calc(var(--space-9) + var(--space-5)) 0 var(--space-9);
 }
 .siteFooterBrand {
   display: flex;
