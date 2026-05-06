@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="relative px-6 pt-28 pb-12 md:pt-44 md:pb-20">
+    <section className="relative px-6 pt-16 pb-12 md:pt-28 md:pb-20">
       <div className="pointer-events-none absolute top-[-120px] left-[-80px] h-[500px] w-[500px] rounded-full bg-[#36E2A3]/[0.07] blur-[120px]" />
       <div className="pointer-events-none absolute bottom-[-100px] right-[10%] h-[300px] w-[400px] rounded-full bg-blue-500/[0.05] blur-[100px]" />
 

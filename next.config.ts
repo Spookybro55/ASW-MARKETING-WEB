@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/brand-dotaznik",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
