@@ -32,6 +32,7 @@ export default function OpengraphImage() {
         >
           <div
             style={{
+              display: "flex",
               fontSize: 28,
               fontWeight: 700,
               letterSpacing: "-0.02em",
