@@ -5,6 +5,7 @@ import Link from "next/link";
 import { contactFields, sections } from "../questions";
 import QuestionnaireSection from "./QuestionnaireSection";
 import BottomCTA from "./BottomCTA";
+import { trackEvent } from "@/lib/analytics";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -43,11 +44,23 @@ export default function BrandQuestionnaireForm({ uploadUrl }: Props) {
             "Něco se pokazilo. Zkuste to prosím znovu nebo nám napište přímo na e-mail.",
         );
         setStatus("error");
+        trackEvent({
+          name: "brand_questionnaire_error",
+          params: {
+            form_location: "brand-dotaznik",
+            error_type:
+              res.status >= 400 && res.status < 500 ? "validation" : "api",
+          },
+        });
         return;
       }
 
       setStatus("success");
       form.reset();
+      trackEvent({
+        name: "brand_questionnaire_submit",
+        params: { form_location: "brand-dotaznik" },
+      });
       if (typeof window !== "undefined") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -56,6 +69,10 @@ export default function BrandQuestionnaireForm({ uploadUrl }: Props) {
         "Nepodařilo se odeslat dotazník. Zkontrolujte připojení a zkuste to znovu.",
       );
       setStatus("error");
+      trackEvent({
+        name: "brand_questionnaire_error",
+        params: { form_location: "brand-dotaznik", error_type: "network" },
+      });
     }
   }
 

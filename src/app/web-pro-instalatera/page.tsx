@@ -422,7 +422,7 @@ export default function WebProInstalateraPage() {
                   Napište nám stručně, co děláte a co by měl web obsahovat.
                   Ozveme se vám s dalším postupem.
                 </p>
-                <ContactForm />
+                <ContactForm location="instalater" />
               </div>
             </div>
           </div>
