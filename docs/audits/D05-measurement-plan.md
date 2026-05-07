@@ -31,11 +31,22 @@ Implementation: global click listener in `AnalyticsEvents` mounted in root layou
 - `5xx` HTTP → `"api"` (Resend API failure or unexpected server error)
 - Network exception (no HTTP response) → `"network"`
 
-### 1.3 Future / TODO events (not yet wired)
+### 1.3 CTA events (data-attribute-driven, opt-in per element)
+
+`AnalyticsEvents.tsx` global click listener fires `cta_click` when an `<a>` or `<button>` element has `data-cta-label="..."`. Optional `data-cta-location="..."` overrides the default (nearest `<section id>`).
+
+| `cta_label` | `cta_location` | Element | Purpose |
+|---|---|---|---|
+| `pricing-web` | `pricing` | "Chci web — ozvěte se mi" link | Web tier interest |
+| `pricing-automatizace` | `pricing` | Featured "Chci automatizaci" button | Automation tier interest |
+| `pricing-chatbot` | `pricing` | "Chci chatbota" link | AI chatbot tier interest |
+
+Add more over time by tagging elements with both `data-cta-label` and `data-cta-location` (or rely on auto-derived location from nearest `<section id>`).
+
+### 1.4 Future / TODO events (not yet wired)
 
 | Event | Should fire when | Why deferred |
 |---|---|---|
-| `cta_click` | User clicks pricing tier "Vybrat" CTA | Type defined in `analytics.ts`; need to add tracking calls in `PricingSection`, hero CTA buttons |
 | `scroll_depth` | User scrolls past 25%, 50%, 75%, 100% of page | Engagement signal; needs scroll listener |
 | `outbound_link_click` | User clicks external `<a href="https://...">` | Currently auto-fired by GA4 enhanced measurement (verify in GA4 admin) |
 | `view_pricing` | User reaches pricing section in viewport | IntersectionObserver implementation |

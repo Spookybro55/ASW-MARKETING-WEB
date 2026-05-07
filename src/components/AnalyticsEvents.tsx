@@ -1,28 +1,43 @@
 "use client";
 
 import { useEffect } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export default function AnalyticsEvents() {
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      const anchor = (e.target as HTMLElement).closest("a");
+      const anchor = (e.target as HTMLElement).closest("a, button");
       if (!anchor) return;
 
       const href = anchor.getAttribute("href") ?? "";
       const text = anchor.textContent?.trim() ?? "";
       const section = anchor.closest("section")?.id ?? "unknown";
 
+      // CTA tracking via data attributes — opt-in per element. Fires
+      // alongside any other event (a tel: link inside a CTA gets both
+      // click_phone and cta_click). Add data-cta-label="..." to the
+      // element to enable. data-cta-location optional (defaults to
+      // nearest <section id>).
+      const ctaLabel = anchor.getAttribute("data-cta-label");
+      if (ctaLabel) {
+        trackEvent({
+          name: "cta_click",
+          params: {
+            cta_label: ctaLabel,
+            cta_location: anchor.getAttribute("data-cta-location") ?? section,
+          },
+        });
+      }
+
       if (href.startsWith("tel:")) {
-        window.gtag?.("event", "click_phone", {
-          link_url: href,
-          link_text: text,
-          location: section,
+        trackEvent({
+          name: "click_phone",
+          params: { link_url: href, link_text: text, location: section },
         });
       } else if (href.startsWith("mailto:")) {
-        window.gtag?.("event", "click_email", {
-          link_url: href,
-          link_text: text,
-          location: section,
+        trackEvent({
+          name: "click_email",
+          params: { link_url: href, link_text: text, location: section },
         });
       }
     }
