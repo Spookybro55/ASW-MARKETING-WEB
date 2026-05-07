@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
+import EngagementSignals from "@/components/EngagementSignals";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -120,6 +121,7 @@ export default function RootLayout({
           }}
         />
         <AnalyticsEvents />
+        <EngagementSignals />
         {children}
       </body>
       <GoogleAnalytics gaId="G-E2WG8LP9DV" />

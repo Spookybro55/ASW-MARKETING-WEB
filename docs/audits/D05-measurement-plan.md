@@ -43,13 +43,25 @@ Implementation: global click listener in `AnalyticsEvents` mounted in root layou
 
 Add more over time by tagging elements with both `data-cta-label` and `data-cta-location` (or rely on auto-derived location from nearest `<section id>`).
 
-### 1.4 Future / TODO events (not yet wired)
+### 1.4 Engagement signals (auto-fired by EngagementSignals.tsx)
+
+| Event | Fires when | Parameters |
+|---|---|---|
+| `scroll_depth` | User scrolls past 25%, 50%, 75%, 100% of page (once each per page load) | `percent` (25/50/75/100), `page_path` |
+| `view_section` | Element with `data-track-view="<id>"` enters viewport (50% intersection threshold) | `section_id`, `page_path` |
+
+Wired (this batch):
+- `data-track-view="services"` on ServicesSection
+- `data-track-view="pricing"` on PricingSection
+- `data-track-view="contact"` on ContactCtaSection
+
+Funnel: `view_section[services]` → `view_section[pricing]` → `view_section[contact]` → `cta_click[pricing-*]` → `contact_form_submit`. GA4 Funnel Exploration can chain these.
+
+### 1.5 Future / TODO events (not yet wired)
 
 | Event | Should fire when | Why deferred |
 |---|---|---|
-| `scroll_depth` | User scrolls past 25%, 50%, 75%, 100% of page | Engagement signal; needs scroll listener |
 | `outbound_link_click` | User clicks external `<a href="https://...">` | Currently auto-fired by GA4 enhanced measurement (verify in GA4 admin) |
-| `view_pricing` | User reaches pricing section in viewport | IntersectionObserver implementation |
 
 ---
 

@@ -10,7 +10,11 @@ export default function ServicesSection() {
   const { services } = homepageData;
 
   return (
-    <section id="services" className="section-shell border-t border-white/10">
+    <section
+      id="services"
+      data-track-view="services"
+      className="section-shell border-t border-white/10"
+    >
       <div className="section-container">
         <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           <div>

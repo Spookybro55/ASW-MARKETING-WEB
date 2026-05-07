@@ -47,6 +47,14 @@ type AnalyticsEvent =
   | {
       name: "cta_click";
       params: { cta_label: string; cta_location: string };
+    }
+  | {
+      name: "scroll_depth";
+      params: { percent: 25 | 50 | 75 | 100; page_path: string };
+    }
+  | {
+      name: "view_section";
+      params: { section_id: string; page_path: string };
     };
 
 export function trackEvent<E extends AnalyticsEvent>(event: E): void {

@@ -6,7 +6,11 @@ export default function ContactCtaSection() {
   const primaryContact = contactInfo.people[0];
 
   return (
-    <section id="contact" className="section-shell border-t border-white/10">
+    <section
+      id="contact"
+      data-track-view="contact"
+      className="section-shell border-t border-white/10"
+    >
       <div className="section-container">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-12">
           <div className="mx-auto max-w-3xl text-center">

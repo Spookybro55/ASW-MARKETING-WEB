@@ -1,6 +1,10 @@
 export default function PricingSection() {
   return (
-    <section id="pricing" className="section-shell border-t border-white/10">
+    <section
+      id="pricing"
+      data-track-view="pricing"
+      className="section-shell border-t border-white/10"
+    >
       <div className="section-container">
         <div className="max-w-3xl">
           <div className="mb-4 h-1 w-10 rounded-full bg-[var(--brand)]" />
