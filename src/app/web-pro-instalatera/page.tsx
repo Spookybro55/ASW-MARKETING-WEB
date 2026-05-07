@@ -47,6 +47,10 @@ export const metadata: Metadata = {
   },
 };
 
+// Static landing — content updates rarely (copy/pricing). 1h ISR
+// = good balance between fresh-on-edit and CDN cacheability.
+export const revalidate = 3600;
+
 const CheckIcon = () => (
   <svg
     aria-hidden="true"

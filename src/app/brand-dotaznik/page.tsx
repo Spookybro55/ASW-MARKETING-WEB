@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Questionnaire content updates occasionally (questions, copy). 1h ISR.
+export const revalidate = 3600;
+
 export default function BrandQuestionnairePage() {
   return (
     <main

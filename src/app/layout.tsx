@@ -75,18 +75,47 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              name: "Autosmartweby (Synkedo s.r.o.)",
-              url: "https://autosmartweb.cz",
-              telephone: "+420601557018",
-              email: "sebastian@autosmartweb.cz",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Příčná 1892/4",
-                addressLocality: "Praha 1",
-                postalCode: "110 00",
-                addressCountry: "CZ",
-              },
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://autosmartweb.cz/#organization",
+                  name: "Autosmartweby",
+                  legalName: "Synkedo s.r.o.",
+                  url: "https://autosmartweb.cz",
+                  logo: "https://autosmartweb.cz/og-image.png",
+                  email: "sebastian@autosmartweb.cz",
+                  telephone: "+420601557018",
+                  sameAs: [],
+                },
+                {
+                  "@type": "LocalBusiness",
+                  "@id": "https://autosmartweb.cz/#localbusiness",
+                  name: "Autosmartweby (Synkedo s.r.o.)",
+                  url: "https://autosmartweb.cz",
+                  telephone: "+420601557018",
+                  email: "sebastian@autosmartweb.cz",
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "Příčná 1892/4",
+                    addressLocality: "Praha 1",
+                    postalCode: "110 00",
+                    addressCountry: "CZ",
+                  },
+                  parentOrganization: {
+                    "@id": "https://autosmartweb.cz/#organization",
+                  },
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://autosmartweb.cz/#website",
+                  url: "https://autosmartweb.cz",
+                  name: "Autosmartweby",
+                  inLanguage: "cs-CZ",
+                  publisher: {
+                    "@id": "https://autosmartweb.cz/#organization",
+                  },
+                },
+              ],
             }),
           }}
         />
