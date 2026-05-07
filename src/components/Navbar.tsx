@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { homepageData } from "@/data/homepage";
 
 export default function Navbar() {
@@ -6,9 +7,9 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-md bg-[#050B1F]/80 border-b border-white/10">
       <div className="mx-auto max-w-6xl flex items-center justify-between">
-        <a href="/" className="text-lg font-bold tracking-tight text-white">
+        <Link href="/" className="text-lg font-bold tracking-tight text-white">
           Auto<span style={{ color: "var(--brand)" }}>smart</span>weby
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm text-gray-400">
           <a href="#services" className="hover:text-white transition">Služby</a>
