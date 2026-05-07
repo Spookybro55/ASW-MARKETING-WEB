@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy init — `new Resend(undefined)` throws at module-load time, which
+// breaks `next build` "Collecting page data" step in any clone without
+// RESEND_API_KEY (per `resend-lazy-init-v1` plan in autosmartweby BACKLOG).
+// Defer instantiation to the request handler so module-load stays pure.
+function getResendClient(): Resend {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error("RESEND_API_KEY not configured");
+  return new Resend(key);
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -37,6 +45,8 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
+
+  const resend = getResendClient();
 
   const { error } = await resend.emails.send({
     from: process.env.CONTACT_FROM_EMAIL!,
