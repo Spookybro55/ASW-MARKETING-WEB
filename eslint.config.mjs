@@ -5,13 +5,20 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // .claude/helpers/ contains Claude Code hook helpers which run as
-  // CommonJS modules (.cjs / non-ESM .js) — require() is the canonical
-  // import for that runtime, so the no-require-imports rule does not apply.
+  // .claude/helpers/ contains Claude Code hook helpers — tooling files
+  // outside this repo's primary product code. Disable noisy rules:
+  // - no-require-imports: .cjs/.js use CommonJS require() canonically
+  // - no-unused-vars: catch (e) without usage is defensive (silent failure
+  //   intentional in hook handlers); some imports are loaded for side effects
+  //   or future use; refactoring risks breaking Claude Code hooks
+  // - no-unused-expressions: tooling pattern occasionally uses bare
+  //   expressions for side effects (e.g. logger().log())
   {
-    files: [".claude/helpers/**/*.{cjs,js}"],
+    files: [".claude/helpers/**/*.{cjs,js,mjs}"],
     rules: {
       "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   },
   // Override default ignores of eslint-config-next.
