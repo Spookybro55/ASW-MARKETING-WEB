@@ -1,10 +1,18 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export default function ContactForm() {
+type Props = {
+  // Logical location identifier sent to GA4 (form_location parameter).
+  // Defaults to "homepage" for the contact CTA section; pass an explicit
+  // value when this form is reused on a landing page (e.g. "instalater").
+  location?: string;
+};
+
+export default function ContactForm({ location = "homepage" }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -28,14 +36,29 @@ export default function ContactForm() {
       if (!res.ok) {
         setErrorMsg(json.error ?? "Něco se pokazilo.");
         setStatus("error");
+        trackEvent({
+          name: "contact_form_error",
+          params: {
+            form_location: location,
+            error_type: res.status >= 400 && res.status < 500 ? "validation" : "api",
+          },
+        });
         return;
       }
 
       setStatus("success");
       form.reset();
+      trackEvent({
+        name: "contact_form_submit",
+        params: { form_location: location },
+      });
     } catch {
       setErrorMsg("Nepodařilo se odeslat zprávu. Zkuste to znovu.");
       setStatus("error");
+      trackEvent({
+        name: "contact_form_error",
+        params: { form_location: location, error_type: "network" },
+      });
     }
   }
 
