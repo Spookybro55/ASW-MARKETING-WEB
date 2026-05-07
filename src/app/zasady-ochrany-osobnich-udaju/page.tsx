@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Privacy policy — changes very rarely (legal updates). 24h ISR.
+export const revalidate = 86400;
+
 export default function PrivacyPage() {
   return (
     <main className="bg-[#050B1F] text-white relative overflow-hidden min-h-screen">

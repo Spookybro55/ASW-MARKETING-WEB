@@ -22,30 +22,32 @@ Originally 3 P0 + 4 P1 + 5 P2. **After follow-up PR:** 1 P0 (owner-decision) + 0
 
 ### P0-1 — Root `/` redirects to `/brand-dotaznik` (noindex page)
 
-**Evidence:**
-```
-$ curl -sI https://autosmartweb.cz/
-HTTP/1.1 307 Temporary Redirect
-Location: /brand-dotaznik
-```
-
-`/brand-dotaznik` má v meta:
-```html
-<meta name="robots" content="noindex, nofollow"/>
+**Source confirmed (re-investigation 2026-05-07):** redirect je hardcoded v `next.config.ts`:
+```ts
+async redirects() {
+  return [
+    { source: "/", destination: "/brand-dotaznik", permanent: false },
+  ];
+}
 ```
 
-**Důsledek:** Návštěvník z Google search "autosmartweby" / "weby na klíč" / podobně dostane stránku "Brandový dotazník" místo prodejní landing. Google indexer vidí redirect → noindex page → **nemá co zaindexovat**. Marketing site fakticky nemá public-facing landing.
+Není to mysterious — tactical config decision. `permanent: false` = 307 (ne 301), takže snadno reverze.
 
-**Sitemap effect:** Sitemap odkazuje na `https://autosmartweb.cz` (root), což redirectne na noindex. Crawl loop bez indexable target.
+**Důležité:** `src/app/page.tsx` **už obsahuje plnou homepage** (Navbar + HeroSection + AudienceSection + ServicesSection + ProofStrip + PricingSection + ProcessSection + ContactCtaSection + footer). Sections existují a jsou built — jen jsou `redirects()` schované za 307. Tj. D-02 "Doplnění hlavních sekcí" je už **z většiny hotové v kódu**, jen waiting na config flip.
+
+**Důsledek:**
+- Google search hit → 307 → noindex `/brand-dotaznik`
+- SERP nezná real homepage content (Hero, Services, Pricing) i přesto že existují
+- Lead conversion path = jen ten kdo už zná URL `/web-pro-instalatera` nebo přes brand dotazník
 
 **Owner decision required (Honza / Sebastián):**
-- (a) Disable root redirect, vytvořit homepage `/` s marketing content (hero, services, pricing, contact CTA)
-- (b) Pokud /brand-dotaznik je intentional landing (lead magnet → vyplň dotazník), then odebrat noindex z `/brand-dotaznik` (ale to je internal questionnaire, neindexable je správně)
-- (c) Hybrid: `/` = marketing landing s CTA → "Vyplň brand dotazník" linkem na `/brand-dotaznik`
+- **(a) Remove redirect** — `next.config.ts` smaže 4 řádky. Homepage se okamžitě zobrazí na `/`. Audit homepage content (Hero copy, services list, pricing, CTAs) před aktivací.
+- **(b) Keep current** — pokud Sebastián záměrně skrývá homepage (např. nedokončené copy, A/B test, lead funnel decision).
+- **(c) Hybrid** — homepage with prominent "Vyplň brand dotazník" CTA → `/brand-dotaznik`.
 
-**Recommendation:** (c). Per D-stream master plán D-02 = "Doplnění hlavních sekcí marketing webu" — implementace bude přesně tento landing.
+**Recommendation:** (a) nebo (c) podle copy maturity. Quick audit homepage content + flip config + verify deploy = ~15 min owner work.
 
-**Cross-ref:** D-02 (sections), D-03 (ceník), D-04 (standard webu) — všechny závisí na řešení P0-1.
+**Cross-ref:** D-02/D-03/D-04 master plán items reálně **už pokryté kódem** — jen ten redirect je blokuje.
 
 ---
 
