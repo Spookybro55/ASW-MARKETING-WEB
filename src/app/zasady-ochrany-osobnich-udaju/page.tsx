@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 
+// Per D-01 audit: page in sitemap, missing canonical + page-specific
+// social tags. Keep simple — informational page, no rich social preview
+// needed; layout fallback OG image is sufficient.
+const siteUrl = "https://autosmartweb.cz";
+
 export const metadata: Metadata = {
   title: "Zásady ochrany osobních údajů – Autosmartweby",
   description:
     "Informace o zpracování osobních údajů na webu autosmartweb.cz.",
+  alternates: {
+    canonical: `${siteUrl}/zasady-ochrany-osobnich-udaju`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPage() {

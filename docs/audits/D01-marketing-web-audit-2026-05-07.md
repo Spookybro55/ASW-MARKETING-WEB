@@ -10,10 +10,11 @@
 
 ## 1. TL;DR
 
-3 P0 blockers + 4 P1 should-fix + ~5 P2 nice-to-have. **Nejvážnější:** root `/` redirect na noindex stránku → de facto **žádná indexovatelná marketing landing**. Sitemap obsahuje 1 URL, server-rendered `<title>` je prázdný.
+Originally 3 P0 + 4 P1 + 5 P2. **After follow-up PR:** 1 P0 (owner-decision) + 0 P1 (all fixed) + 4 P2.
 
-**V této PR opraveno:** sitemap (1 → 3 URLs).
-**Owner-decision pending:** root redirect strategy, server `<title>` rendering.
+**V této PR (D01 audit):** sitemap (1 → 3 URLs) + audit doc.
+**V follow-up PR (d01-p1-metadata-fixes):** P0-2 marked false positive; P1-1, P1-2, P1-3, P1-4 all fixed (per-page twitter, og:image, explicit robots, og:image existence verified); P2 html lang `cs` → `cs-CZ`.
+**Owner-decision pending:** P0-1 (root `/` redirect strategy — D-02 marketing landing vs. keep questionnaire-first).
 
 ---
 
@@ -48,27 +49,21 @@ Location: /brand-dotaznik
 
 ---
 
-### P0-2 — Server-rendered `<title>` is empty
+### ~~P0-2 — Server-rendered `<title>` is empty~~ — **FALSE POSITIVE (resolved 2026-05-07)**
 
-**Evidence:**
+**Re-investigation:** Title is correctly populated. Original audit used `grep -A0 '<title>'` which printed only the next line, but title text is on the **same line** as the opening tag without a newline:
+
 ```
-$ curl -s https://autosmartweb.cz/web-pro-instalatera | grep -A0 '<title>'
-<title>
+$ curl -s https://autosmartweb.cz/web-pro-instalatera | grep -oE '<title>[^<]*</title>'
+<title>Web pro instalatéra na klíč – od 8 900 Kč | Autosmartweby</title>
 
-$ curl -s https://autosmartweb.cz/brand-dotaznik | grep -A0 '<title>'
-<title>
+$ curl -s https://autosmartweb.cz/brand-dotaznik | grep -oE '<title>[^<]*</title>'
+<title>Brandový dotazník | Autosmartweby</title>
 ```
 
-`<title>` element existuje ale obsah je prázdný v server response. Browser klient pravděpodobně populuje přes Next.js metadata API (přes JS) — ALE Google indexer čte server HTML a může ignorovat client-side hydration.
+Page-specific titles render correctly in server HTML (Next App Router metadata API working as expected). No fix needed.
 
-**Důsledek:** Google může index page s emply title → SERP shows URL nebo "(no title)" — kritický CTR loss.
-
-**Investigation needed:**
-1. Zkontrolovat Next App Router `metadata.title` v page.tsx pro každou route
-2. Pokud metadata defined ale title není v server response → Next bug nebo App Router race condition
-3. Možný workaround: explicit `<title>` element v Layout přes `metadata: { title: { default: '...', template: '%s | Autosmartweby' } }`
-
-**Owner-fixable:** ne, agent může opravit. Pickup pro separate PR (nutno verify-first kontextu — možná je to artefact mého curl HTML buffering, browser vidí title správně).
+**Lesson:** Use `grep -oE '<title>[^<]*</title>'` for tag-with-content extraction; not `grep -A0 '<title>'` which is line-context based.
 
 ---
 

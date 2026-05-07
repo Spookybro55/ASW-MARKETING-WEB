@@ -5,12 +5,21 @@ import { homepageData } from "@/data/homepage";
 
 const siteUrl = "https://autosmartweb.cz";
 
+// Per-page metadata. Next App Router replaces (not deep-merges) the
+// `openGraph` and `twitter` objects from layout when a page exports them,
+// so page-specific overrides must include images explicitly. Per D-01 audit
+// finding P1-2 (og:image was missing) + P1-1 (twitter:title was generic
+// fallback from layout) + P1-3 (robots was implicit).
 export const metadata: Metadata = {
   title: "Web pro instalatéra na klíč – od 8 900 Kč | Autosmartweby",
   description:
     "Profesionální web pro instalatéra na klíč. Texty, design, SEO i spuštění na doméně. Hotovo za 3–5 dní, platíte až po schválení.",
   alternates: {
     canonical: `${siteUrl}/web-pro-instalatera`,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   openGraph: {
     title: "Web pro instalatéra na klíč – od 8 900 Kč | Autosmartweby",
@@ -20,6 +29,21 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: `${siteUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Web pro instalatéra na klíč — Autosmartweby",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Web pro instalatéra na klíč – od 8 900 Kč | Autosmartweby",
+    description:
+      "Profesionální web pro instalatéra na klíč. Texty, design, SEO i spuštění na doméně. Hotovo za 3–5 dní, platíte až po schválení.",
+    images: [`${siteUrl}/og-image.png`],
   },
 };
 

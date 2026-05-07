@@ -7,6 +7,11 @@ const siteUrl = "https://autosmartweb.cz";
 const uploadUrl =
   "https://drive.google.com/drive/folders/1d1pttb6dwJ7e1hV-WbTFcMxBTsWQ3R5y?usp=drive_link";
 
+// Per-page metadata. Twitter block added per D-01 audit finding P1-1
+// (was inheriting generic title from layout — overrides og but kept
+// twitter generic). Page-level openGraph.images intentionally omitted —
+// `opengraph-image.tsx` + `twitter-image.tsx` siblings in this route
+// segment generate dynamic OG/Twitter images via Next App Router convention.
 export const metadata: Metadata = {
   title: "Brandový dotazník | Autosmartweby",
   description:
@@ -26,6 +31,12 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brandový dotazník | Autosmartweby",
+    description:
+      "Brand discovery dotazník pro tvorbu loga, barevné palety, typografie a vizuálního stylu webu.",
   },
 };
 
