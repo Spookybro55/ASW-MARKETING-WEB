@@ -2,7 +2,13 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { sections } from "@/app/brand-dotaznik/questions";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy init — see /api/contact/route.ts for the same pattern + rationale
+// (per `resend-lazy-init-v1` plan in autosmartweby BACKLOG).
+function getResendClient(): Resend {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error("RESEND_API_KEY not configured");
+  return new Resend(key);
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -116,6 +122,8 @@ export async function POST(request: Request) {
   const emailBody = lines.join("\n");
 
   const subject = `Brand dotazník – ${companyName}`;
+
+  const resend = getResendClient();
 
   const { error } = await resend.emails.send({
     from: process.env.CONTACT_FROM_EMAIL!,
