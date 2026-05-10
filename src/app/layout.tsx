@@ -85,7 +85,7 @@ export default function RootLayout({
                   url: "https://autosmartweb.cz",
                   logo: "https://autosmartweb.cz/og-image.png",
                   email: "sebastian@autosmartweb.cz",
-                  telephone: "+420601557018",
+                  telephone: "+420722525872",
                   sameAs: [],
                 },
                 {
@@ -93,7 +93,7 @@ export default function RootLayout({
                   "@id": "https://autosmartweb.cz/#localbusiness",
                   name: "Autosmartweby (Synkedo s.r.o.)",
                   url: "https://autosmartweb.cz",
-                  telephone: "+420601557018",
+                  telephone: "+420722525872",
                   email: "sebastian@autosmartweb.cz",
                   address: {
                     "@type": "PostalAddress",
