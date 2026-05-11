@@ -15,18 +15,19 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = "https://autosmartweb.cz";
+const title = "Autosmartweby — profesionální web pro malé firmy bez starostí";
+const description =
+  "Dostupné weby pro živnostníky, řemeslníky a malé firmy. Pomoc s texty, jasná cena od 10 000 Kč, ověřený proces a spuštění bez technických starostí.";
 
 export const metadata: Metadata = {
-  title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-  description:
-    "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
+  title,
+  description,
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-    description:
-      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
+    title,
+    description,
     url: siteUrl,
     siteName: "Autosmartweby",
     locale: "cs_CZ",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
+        alt: "Autosmartweby — profesionální web pro malé firmy bez starostí",
       },
     ],
   },
@@ -46,9 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-    description:
-      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
+    title,
+    description,
     images: [`${siteUrl}/og-image.png`],
   },
 };
