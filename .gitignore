@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# interni reference dokumenty (studie, brand, logo) - nikdy do gitu
+/Analysis/
+
+# Claude Code lokalni nastaveni session
+/.claude/settings.local.json
