@@ -5,6 +5,11 @@ import Audience from "@/components/v2/Audience";
 import ProblemSolution from "@/components/v2/ProblemSolution";
 import Process from "@/components/v2/Process";
 import Deliverables from "@/components/v2/Deliverables";
+import Pricing from "@/components/v2/Pricing";
+import Portfolio from "@/components/v2/Portfolio";
+import References from "@/components/v2/References";
+import Comparison from "@/components/v2/Comparison";
+import Faq from "@/components/v2/Faq";
 import Footer from "@/components/v2/Footer";
 
 // Homepage metadata overrides the v1 layout.tsx defaults (which still
@@ -61,6 +66,11 @@ export default function Home() {
         <ProblemSolution />
         <Process />
         <Deliverables />
+        <Pricing />
+        <Portfolio />
+        <References />
+        <Comparison />
+        <Faq />
       </main>
       <Footer />
     </>
