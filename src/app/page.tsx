@@ -10,6 +10,7 @@ import Portfolio from "@/components/v2/Portfolio";
 import References from "@/components/v2/References";
 import Comparison from "@/components/v2/Comparison";
 import Faq from "@/components/v2/Faq";
+import FinalCta from "@/components/v2/FinalCta";
 import Footer from "@/components/v2/Footer";
 
 // Homepage metadata overrides the v1 layout.tsx defaults (which still
@@ -71,6 +72,7 @@ export default function Home() {
         <References />
         <Comparison />
         <Faq />
+        <FinalCta />
       </main>
       <Footer />
     </>
