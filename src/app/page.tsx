@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/v2/Navbar";
 import Hero from "@/components/v2/Hero";
+import Audience from "@/components/v2/Audience";
+import ProblemSolution from "@/components/v2/ProblemSolution";
+import Process from "@/components/v2/Process";
+import Deliverables from "@/components/v2/Deliverables";
 import Footer from "@/components/v2/Footer";
 
 // Homepage metadata overrides the v1 layout.tsx defaults (which still
@@ -53,6 +57,10 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        <Audience />
+        <ProblemSolution />
+        <Process />
+        <Deliverables />
       </main>
       <Footer />
     </>
