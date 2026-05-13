@@ -11,12 +11,16 @@ export default function Pricing() {
           <p className="lead mt-4">{pricing.lead}</p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:gap-7 md:grid-cols-3 items-stretch">
           {pricing.packages.map((pkg) => (
             <article
               key={pkg.id}
-              className={pkg.featured ? "card card-accent" : "card card-interactive"}
-              style={{ display: "flex", flexDirection: "column" }}
+              className={
+                pkg.featured
+                  ? "card card-accent card-accent-featured"
+                  : "card card-interactive"
+              }
+              style={{ display: "flex", flexDirection: "column", position: "relative" }}
             >
               {pkg.featured && pkg.badge && (
                 <div

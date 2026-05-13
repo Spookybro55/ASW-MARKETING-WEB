@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 import { CheckIcon, PhoneIcon } from "./icons";
 
-// Hero copy is owned by Hero in Commit 4. The historical hero/trustStrip
-// exports in siteContent.ts stay unused for now and will be reconciled
-// in a later cleanup commit.
+// Hero copy is owned by Hero. The historical hero/trustStrip exports in
+// siteContent.ts stay unused for now and will be reconciled in a later
+// cleanup commit.
 const HERO = {
   eyebrow: "Pro živnostníky, řemeslníky a malé firmy",
   h1: "Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.",
@@ -15,18 +15,26 @@ const HERO = {
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-probiha" },
 } as const;
 
-const TRUST_CHIPS = [
-  { label: "Pomůžeme s texty", hint: "Nemusíte mít připravené zadání" },
-  { label: "Jasná cena předem", hint: "Žádné skryté poplatky" },
-  { label: "Web připravený na mobil", hint: "Včetně základního SEO" },
-  { label: "Bez technických řečí", hint: "Spuštění až po odsouhlasení" },
+// Process-/promise-based trust points only. No invented metrics, no
+// unverifiable counts. Each value is a commitment we can deliver on
+// without external proof.
+const TRUST_STRIP = [
+  { label: "Pomoc s texty", hint: "Nemusíte mít připravené zadání" },
+  { label: "Jasná cena předem", hint: "0 skrytých poplatků" },
+  { label: "Web pro mobil", hint: "Včetně rychlosti načítání" },
+  { label: "Základní SEO", hint: "Struktura, meta, sitemap" },
+  { label: "Spuštění po odsouhlasení", hint: "Bez tlaku, bez závazku" },
 ] as const;
 
 export default function Hero() {
   return (
-    <section id="hero" className="section" style={{ paddingTop: "3.5rem" }}>
+    <section
+      id="hero"
+      className="section section-soft-gradient"
+      style={{ paddingTop: "3rem" }}
+    >
       <div className="container-wide px-5">
-        <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr] items-center">
+        <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1.08fr_0.92fr] items-center">
           <div>
             <span className="eyebrow">{HERO.eyebrow}</span>
             <h1 className="h1 mt-2">{HERO.h1}</h1>
@@ -58,32 +66,17 @@ export default function Hero() {
         </div>
       </div>
 
-      <div
-        className="container-wide px-5 mt-12 md:mt-16"
-        aria-label="Důvěryhodnostní body"
-      >
-        <ul className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {TRUST_CHIPS.map((item) => (
-            <li
-              key={item.label}
-              className="card"
-              style={{ padding: "1rem 1.1rem" }}
-            >
-              <div className="flex items-start gap-2">
-                <CheckIcon
-                  style={{
-                    color: "var(--brand)",
-                    width: "18px",
-                    height: "18px",
-                    flexShrink: 0,
-                    marginTop: "2px",
-                  }}
-                />
-                <div>
-                  <div className="font-semibold text-sm">{item.label}</div>
-                  <div className="text-xs soft mt-0.5">{item.hint}</div>
-                </div>
-              </div>
+      <div className="container-wide px-5 mt-14 md:mt-20" aria-label="Co vám slíbíme">
+        <ul className="trust-strip">
+          {TRUST_STRIP.map((item) => (
+            <li key={item.label} className="trust-strip-item">
+              <span className="trust-strip-icon" aria-hidden="true">
+                <CheckIcon style={{ width: "18px", height: "18px" }} />
+              </span>
+              <span>
+                <span className="trust-strip-label">{item.label}</span>
+                <span className="trust-strip-hint">{item.hint}</span>
+              </span>
             </li>
           ))}
         </ul>
@@ -93,11 +86,15 @@ export default function Hero() {
 }
 
 function HeroVisual() {
-  // Simple, on-brand visual: a stylized "browser window" mockup that hints
-  // at a clean SMB website — no agency showreel, no stock photo of a
-  // person with a laptop. The strategy explicitly bans both.
+  // On-brand CSS browser-mockup hint at a clean SMB website — no agency
+  // showreel, no stock photo of a person with a laptop. The strategy
+  // explicitly bans both. Sized up versus the previous compact version.
   return (
-    <div className="relative" aria-hidden="true" style={{ minHeight: "320px" }}>
+    <div
+      className="relative"
+      aria-hidden="true"
+      style={{ minHeight: "380px" }}
+    >
       <div
         className="card"
         style={{
@@ -112,7 +109,7 @@ function HeroVisual() {
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            padding: "10px 14px",
+            padding: "12px 18px",
             background: "var(--bg-muted)",
             borderBottom: "1px solid var(--border)",
           }}
@@ -123,17 +120,17 @@ function HeroVisual() {
           <span
             style={{
               marginLeft: "10px",
-              fontSize: "0.78rem",
+              fontSize: "0.82rem",
               color: "var(--fg-soft)",
             }}
           >
             elektro-novak.cz
           </span>
         </div>
-        <div style={{ padding: "1.4rem 1.4rem 1.8rem" }}>
+        <div style={{ padding: "1.75rem 1.75rem 2rem" }}>
           <div
             style={{
-              fontSize: "0.7rem",
+              fontSize: "0.72rem",
               fontWeight: 600,
               color: "var(--brand)",
               letterSpacing: "0.08em",
@@ -144,11 +141,11 @@ function HeroVisual() {
           </div>
           <div
             style={{
-              fontSize: "1.35rem",
+              fontSize: "1.55rem",
               fontWeight: 700,
               lineHeight: 1.2,
               color: "var(--fg)",
-              marginTop: "0.4rem",
+              marginTop: "0.45rem",
               maxWidth: "20ch",
             }}
           >
@@ -156,23 +153,23 @@ function HeroVisual() {
           </div>
           <div
             style={{
-              fontSize: "0.85rem",
+              fontSize: "0.92rem",
               color: "var(--fg-muted)",
-              marginTop: "0.6rem",
-              maxWidth: "32ch",
+              marginTop: "0.7rem",
+              maxWidth: "34ch",
             }}
           >
             Revize, rekonstrukce, nové rozvody. Reagujeme do 24 hodin.
           </div>
-          <div style={{ marginTop: "1rem", display: "flex", gap: "8px" }}>
+          <div style={{ marginTop: "1.1rem", display: "flex", gap: "8px" }}>
             <span
               style={{
                 background: "var(--brand)",
                 color: "#ffffff",
-                fontSize: "0.75rem",
+                fontSize: "0.78rem",
                 fontWeight: 600,
-                padding: "0.5rem 0.8rem",
-                borderRadius: "8px",
+                padding: "0.55rem 0.95rem",
+                borderRadius: "10px",
               }}
             >
               Zavolat
@@ -181,10 +178,10 @@ function HeroVisual() {
               style={{
                 background: "#ffffff",
                 color: "var(--fg)",
-                fontSize: "0.75rem",
+                fontSize: "0.78rem",
                 fontWeight: 600,
-                padding: "0.5rem 0.8rem",
-                borderRadius: "8px",
+                padding: "0.55rem 0.95rem",
+                borderRadius: "10px",
                 border: "1px solid var(--border-strong)",
               }}
             >
@@ -193,20 +190,20 @@ function HeroVisual() {
           </div>
           <div
             style={{
-              marginTop: "1.2rem",
+              marginTop: "1.4rem",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "0.5rem",
+              gap: "0.55rem",
             }}
           >
             {["Revize", "Rekonstrukce", "Rozvody", "Smart home"].map((s) => (
               <div
                 key={s}
                 style={{
-                  fontSize: "0.72rem",
-                  padding: "0.4rem 0.6rem",
+                  fontSize: "0.78rem",
+                  padding: "0.5rem 0.7rem",
                   background: "var(--bg-muted)",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   color: "var(--fg-muted)",
                 }}
               >
@@ -221,17 +218,17 @@ function HeroVisual() {
         className="card"
         style={{
           position: "absolute",
-          bottom: "-14px",
-          right: "-8px",
-          width: "150px",
-          padding: "0.8rem",
+          bottom: "-18px",
+          right: "-10px",
+          width: "172px",
+          padding: "0.95rem",
           transform: "rotate(4deg)",
-          boxShadow: "var(--shadow-md)",
+          boxShadow: "var(--shadow-lg)",
         }}
       >
         <div
           style={{
-            fontSize: "0.7rem",
+            fontSize: "0.72rem",
             color: "var(--fg-soft)",
             display: "inline-flex",
             alignItems: "center",
@@ -245,10 +242,10 @@ function HeroVisual() {
         </div>
         <div
           style={{
-            fontSize: "0.8rem",
+            fontSize: "0.85rem",
             fontWeight: 700,
             color: "var(--fg)",
-            marginTop: "0.2rem",
+            marginTop: "0.25rem",
             lineHeight: 1.2,
           }}
         >
@@ -258,20 +255,34 @@ function HeroVisual() {
           style={{
             background: "var(--brand)",
             color: "#fff",
-            fontSize: "0.65rem",
+            fontSize: "0.7rem",
             fontWeight: 600,
-            padding: "0.3rem 0.5rem",
-            borderRadius: "6px",
-            marginTop: "0.5rem",
+            padding: "0.4rem 0.6rem",
+            borderRadius: "7px",
+            marginTop: "0.55rem",
             display: "inline-flex",
             alignItems: "center",
             gap: "4px",
           }}
         >
-          <PhoneIcon style={{ width: "10px", height: "10px" }} />
+          <PhoneIcon style={{ width: "11px", height: "11px" }} />
           <span>777 123 456</span>
         </div>
       </div>
+
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "-30px",
+          left: "-30px",
+          width: "180px",
+          height: "180px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
+          zIndex: -1,
+        }}
+      />
     </div>
   );
 }

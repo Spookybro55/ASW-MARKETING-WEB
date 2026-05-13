@@ -17,12 +17,12 @@ export default function References() {
           <p className="lead mt-4">{references.lead}</p>
         </div>
 
-        <ul className="mt-10 grid gap-5 md:grid-cols-2">
+        <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:gap-7">
           {references.items.map((item) => (
             <li
               key={item.title}
-              className="card"
-              style={{ padding: "1.75rem" }}
+              className="card card-interactive"
+              style={{ padding: "2rem" }}
             >
               <div
                 aria-hidden="true"
@@ -30,22 +30,23 @@ export default function References() {
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: "2rem",
-                  height: "2rem",
-                  borderRadius: "var(--radius-pill)",
+                  width: "3rem",
+                  height: "3rem",
+                  borderRadius: "14px",
                   background: "var(--brand-soft)",
                   color: "var(--brand)",
+                  boxShadow: "0 0 0 6px rgba(10, 102, 255, 0.06)",
                 }}
               >
-                <CheckIcon width={16} height={16} />
+                <CheckIcon width={22} height={22} />
               </div>
               <h3
-                className="mt-3"
                 style={{
-                  fontSize: "1.05rem",
-                  fontWeight: 600,
+                  fontSize: "1.2rem",
+                  fontWeight: 700,
                   color: "var(--fg)",
-                  margin: "0.75rem 0 0.5rem",
+                  margin: "1.1rem 0 0.55rem",
+                  letterSpacing: "-0.01em",
                 }}
               >
                 {item.title}
@@ -54,8 +55,8 @@ export default function References() {
                 style={{
                   margin: 0,
                   color: "var(--fg-muted)",
-                  fontSize: "0.97rem",
-                  lineHeight: 1.6,
+                  fontSize: "1rem",
+                  lineHeight: 1.65,
                 }}
               >
                 {item.text}
