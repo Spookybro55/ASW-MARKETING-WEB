@@ -57,7 +57,9 @@ export default function ContactForm() {
         body: JSON.stringify({
           name,
           email,
-          message: assembleMessage({ phone, sector, message }),
+          phone,
+          sector,
+          message,
           _honey: honey,
         }),
       });
@@ -243,13 +245,4 @@ export default function ContactForm() {
       </div>
     </form>
   );
-}
-
-function assembleMessage(parts: { phone: string; sector: string; message: string }): string {
-  const lines: string[] = [];
-  if (parts.sector) lines.push(`Obor: ${parts.sector}`);
-  if (parts.phone) lines.push(`Telefon: ${parts.phone}`);
-  if (lines.length) lines.push("");
-  lines.push(parts.message);
-  return lines.join("\n");
 }
