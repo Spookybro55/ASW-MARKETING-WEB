@@ -20,7 +20,7 @@ const NAV_LINKS = [
 ] as const;
 
 const PRIMARY_CTA = {
-  label: "Chci nezávazně zjistit cenu",
+  label: "Nezávazně probrat web",
   href: "#kontakt",
 } as const;
 

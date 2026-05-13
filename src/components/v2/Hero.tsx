@@ -8,36 +8,36 @@ const HERO = {
   eyebrow: "Pro živnostníky, řemeslníky a malé firmy",
   h1: "Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.",
   lead:
-    "Pomůžeme vám s texty, strukturou i spuštěním webu, který působí důvěryhodně a zákazníkům usnadní ozvat se. Nejčastěji kolem 10 000 Kč podle rozsahu.",
+    "Řeknete nám, co děláte. My vám pomůžeme s texty, strukturou a spuštěním webu, který dobře vypadá, funguje na mobilu a zákazníkům usnadní ozvat se. Nejčastěji kolem 10 000 Kč podle rozsahu.",
   microcopy:
     "Nemusíte mít připravené texty ani přesné zadání. Stačí pár informací o vaší službě.",
-  primaryCta: { label: "Chci nezávazně zjistit cenu", href: "#kontakt" },
-  secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-probiha" },
+  primaryCta: { label: "Nezávazně probrat web", href: "#kontakt" },
+  secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
 } as const;
 
-// Process-/promise-based trust points only. No invented metrics, no
-// unverifiable counts.
+// Friendlier process/promise points — same launch-safe principle, no
+// invented metrics, just plain-language commitments.
 const TRUST_STRIP = [
-  { label: "Pomoc s texty", hint: "Nemusíte mít připravené zadání" },
-  { label: "Jasná cena předem", hint: "0 skrytých poplatků" },
-  { label: "Web pro mobil", hint: "Včetně rychlosti načítání" },
-  { label: "Základní SEO", hint: "Struktura, meta, sitemap" },
-  { label: "Spuštění po odsouhlasení", hint: "Bez tlaku, bez závazku" },
+  { label: "Nemusíte mít texty", hint: "Pomůžeme je sepsat s vámi" },
+  { label: "Cena bez překvapení", hint: "Vše domluvené předem" },
+  { label: "Funguje i na mobilu", hint: "Vyladěné pro telefon i počítač" },
+  { label: "Základ pro Google", hint: "Struktura, popisky, sitemap" },
+  { label: "Spouštíme až po schválení", hint: "Žádné překvapení živě" },
 ] as const;
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="section hero-dark"
-      style={{ paddingTop: "4rem", paddingBottom: "5rem" }}
+      className="section section-soft-gradient"
+      style={{ paddingTop: "3.5rem" }}
     >
       <div className="container-wide px-5">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1.08fr_0.92fr] items-center">
           <div>
             <span className="eyebrow">{HERO.eyebrow}</span>
             <h1 className="h1 mt-2">{HERO.h1}</h1>
-            <p className="lead mt-5 max-w-[58ch]">{HERO.lead}</p>
+            <p className="lead mt-5 max-w-[60ch]">{HERO.lead}</p>
 
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
               <a
@@ -50,7 +50,7 @@ export default function Hero() {
               </a>
               <a
                 href={HERO.secondaryCta.href}
-                className="btn btn-glass btn-lg"
+                className="btn btn-secondary btn-lg"
                 data-cta-label="hero_secondary"
                 data-cta-location="hero"
               >
@@ -58,12 +58,7 @@ export default function Hero() {
               </a>
             </div>
 
-            <p
-              className="mt-4 text-sm max-w-[52ch]"
-              style={{ color: "rgba(245,248,255,0.55)" }}
-            >
-              {HERO.microcopy}
-            </p>
+            <p className="mt-4 text-sm soft max-w-[52ch]">{HERO.microcopy}</p>
           </div>
 
           <HeroVisual />
@@ -90,33 +85,21 @@ export default function Hero() {
 }
 
 function HeroVisual() {
-  // Brand-safe browser mockup. White card pops against the dark navy hero
-  // and reinforces "your website" without resorting to stock photos.
+  // Concrete trade example so the hero reads as "your future website"
+  // rather than an abstract SaaS dashboard. Desktop card + floating
+  // mobile preview, both clearly an "elektrikář v Praze" mockup.
   return (
     <div
       className="relative"
       aria-hidden="true"
-      style={{ minHeight: "420px" }}
+      style={{ minHeight: "400px" }}
     >
-      {/* Soft cyan glow behind the card */}
       <div
+        className="card"
         style={{
-          position: "absolute",
-          inset: "-40px",
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(34,184,255,0.22) 0%, rgba(34,184,255,0) 65%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          position: "relative",
-          background: "#FFFFFF",
-          borderRadius: "var(--radius-lg)",
+          padding: 0,
           overflow: "hidden",
-          boxShadow:
-            "0 30px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(245, 248, 255, 0.06)",
+          boxShadow: "var(--shadow-lg)",
           transform: "rotate(-1deg)",
         }}
       >
@@ -230,23 +213,23 @@ function HeroVisual() {
         </div>
       </div>
 
-      {/* Floating mobile preview chip — glass on dark bg */}
+      {/* Floating mobile preview — white card on light hero, no glass */}
       <div
-        className="glass-strong"
+        className="card"
         style={{
           position: "absolute",
-          bottom: "-20px",
-          right: "-12px",
-          width: "180px",
+          bottom: "-18px",
+          right: "-10px",
+          width: "172px",
           padding: "0.95rem",
           transform: "rotate(4deg)",
-          borderRadius: "var(--radius-lg)",
+          boxShadow: "var(--shadow-lg)",
         }}
       >
         <div
           style={{
             fontSize: "0.72rem",
-            color: "rgba(245, 248, 255, 0.6)",
+            color: "var(--fg-soft)",
             display: "inline-flex",
             alignItems: "center",
             gap: "4px",
@@ -254,18 +237,14 @@ function HeroVisual() {
         >
           Mobil
           <CheckIcon
-            style={{
-              width: "12px",
-              height: "12px",
-              color: "var(--brand-sky)",
-            }}
+            style={{ width: "12px", height: "12px", color: "var(--success)" }}
           />
         </div>
         <div
           style={{
-            fontSize: "0.88rem",
+            fontSize: "0.85rem",
             fontWeight: 700,
-            color: "var(--fg-inverse)",
+            color: "var(--fg)",
             marginTop: "0.25rem",
             lineHeight: 1.2,
           }}
@@ -290,6 +269,21 @@ function HeroVisual() {
           <span>777 123 456</span>
         </div>
       </div>
+
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "-30px",
+          left: "-30px",
+          width: "200px",
+          height: "200px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
+          zIndex: -1,
+        }}
+      />
     </div>
   );
 }

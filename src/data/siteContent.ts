@@ -65,9 +65,9 @@ export const trustStrip = {
 
 export const audience = {
   eyebrow: "Pro koho to je",
-  title: "Web pro malé firmy, které chtějí vypadat seriózně.",
+  title: "Poznáváte se?",
   lead:
-    "Nemusíte být marketér ani technický typ. Stačí, že děláte svoji práci dobře — o web se postaráme my.",
+    "Tohle je pro lidi, kteří dělají svoji práci dobře, ale nemají čas řešit texty, techniku ani složitý marketingový projekt. Stačí, že umíte, co děláte — o web se postaráme my.",
   items: [
     {
       title: "Řemeslníci a živnostníci",
