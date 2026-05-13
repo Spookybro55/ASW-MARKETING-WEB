@@ -265,30 +265,40 @@ export const portfolio = {
     "Vlastní web na klíč připravíme i pro obor, který tady není — strukturu a copy přizpůsobíme po krátkém hovoru.",
 } as const;
 
+// Launch-safe replacement for the original placeholder testimonials.
+// Per the 2026-05 strategy review: do not publish invented quotes, even
+// pseudonymous ones — they read as real client voices and that's not OK.
+// Real client references will be added later, one at a time, only after
+// written consent.
 export const references = {
-  eyebrow: "Co říkají klienti",
-  title: "Reference z reálné spolupráce.",
+  eyebrow: "Spolupráce",
+  title: "Na čem si při spolupráci zakládáme.",
   lead:
-    "Krátké citace od lidí, kteří si u nás web nechali postavit. Doplňujeme je průběžně po souhlasu klienta.",
-  // NOTE: All references below are placeholders awaiting written consent.
-  // Per strategy: better empty than invented. Tagged data-status="placeholder"
-  // so they're visually clear during owner review.
+    "Místo smyšlených citací raději popíšeme, co u nás můžete při spolupráci čekat.",
   items: [
     {
-      quote:
-        "Web jsem řešil dlouho. Tady mě hlavně oceňuji, že se mi nikdo nesnažil prodat věci, které nepotřebuju. Cena seděla a do týdne jsme měli základ.",
-      author: "Klient — instalatér",
-      city: "Praha",
-      status: "placeholder" as const,
+      title: "Jasně víte, co se bude dít",
+      text:
+        "Na začátku si ujasníme rozsah, cenu a další krok. Žádné složité zadání ani dlouhé technické schůzky.",
     },
     {
-      quote:
-        "Líbila se mi jednoduchost. Stačilo, že jsem řekl, co dělám, a oni z toho dali dohromady text. Žádný marketingový workshop.",
-      author: "Klient — autoservis",
-      city: "Plzeň",
-      status: "placeholder" as const,
+      title: "Pomůžeme s texty a strukturou",
+      text:
+        "Nemusíte mít hotové texty. Zeptáme se na vaši službu, zákazníky a lokalitu a pomůžeme obsah poskládat.",
+    },
+    {
+      title: "Cena a rozsah jsou domluvené předem",
+      text:
+        "Dopředu víte, co je v ceně, co by bylo navíc a jak se řeší provoz nebo úpravy po spuštění.",
+    },
+    {
+      title: "Web má působit důvěryhodně",
+      text:
+        "Cílem není efektní showreel, ale přehledný web, který zákazníkům rychle vysvětlí, co děláte a jak se ozvat.",
     },
   ],
+  microcopy:
+    "Reálné reference doplníme postupně u klientů, kteří nám dají souhlas se zveřejněním.",
 } as const;
 
 export const comparison = {

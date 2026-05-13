@@ -1,5 +1,12 @@
 import { references } from "@/data/siteContent";
+import { CheckIcon } from "./icons";
 
+/**
+ * Launch-safe references section (Commit 9d).
+ * Renders principles of the collaboration instead of invented testimonials.
+ * Real client references will replace this content one card at a time as
+ * we collect written consent from each client.
+ */
 export default function References() {
   return (
     <section id="reference" className="section section-muted">
@@ -11,55 +18,48 @@ export default function References() {
         </div>
 
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
-          {references.items.map((ref, i) => (
+          {references.items.map((item) => (
             <li
-              key={i}
+              key={item.title}
               className="card"
-              data-status={ref.status}
-              style={{ padding: "2rem" }}
+              style={{ padding: "1.75rem" }}
             >
               <div
-                aria-hidden
+                aria-hidden="true"
                 style={{
-                  fontSize: "2rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "2rem",
+                  height: "2rem",
+                  borderRadius: "var(--radius-pill)",
+                  background: "var(--brand-soft)",
                   color: "var(--brand)",
-                  lineHeight: 1,
-                  fontFamily: "Georgia, serif",
                 }}
               >
-                &ldquo;
+                <CheckIcon width={16} height={16} />
               </div>
+              <h3
+                className="mt-3"
+                style={{
+                  fontSize: "1.05rem",
+                  fontWeight: 600,
+                  color: "var(--fg)",
+                  margin: "0.75rem 0 0.5rem",
+                }}
+              >
+                {item.title}
+              </h3>
               <p
-                className="mt-2 text-[1.02rem]"
-                style={{ color: "var(--fg)", lineHeight: 1.55 }}
+                style={{
+                  margin: 0,
+                  color: "var(--fg-muted)",
+                  fontSize: "0.97rem",
+                  lineHeight: 1.6,
+                }}
               >
-                {ref.quote}
+                {item.text}
               </p>
-              <div
-                className="mt-4 pt-4 flex items-center justify-between"
-                style={{ borderTop: "1px solid var(--border)" }}
-              >
-                <div className="text-sm">
-                  <div className="font-semibold" style={{ color: "var(--fg)" }}>
-                    {ref.author}
-                  </div>
-                  <div className="soft text-xs">{ref.city}</div>
-                </div>
-                {ref.status === "placeholder" && (
-                  <span
-                    className="chip"
-                    style={{
-                      fontSize: "0.7rem",
-                      background: "#fff4d6",
-                      borderColor: "#f0d97c",
-                      color: "#8b6500",
-                    }}
-                    title="Placeholder — čeká na souhlas reálného klienta"
-                  >
-                    Placeholder
-                  </span>
-                )}
-              </div>
             </li>
           ))}
         </ul>
@@ -68,8 +68,7 @@ export default function References() {
           className="mt-6 text-xs soft max-w-[60ch]"
           style={{ fontStyle: "italic" }}
         >
-          Reference doplňujeme až po písemném souhlasu klienta. Nevymýšlíme
-          citace ani jména.
+          {references.microcopy}
         </p>
       </div>
     </section>
