@@ -16,8 +16,7 @@ const HERO = {
 } as const;
 
 // Process-/promise-based trust points only. No invented metrics, no
-// unverifiable counts. Each value is a commitment we can deliver on
-// without external proof.
+// unverifiable counts.
 const TRUST_STRIP = [
   { label: "Pomoc s texty", hint: "Nemusíte mít připravené zadání" },
   { label: "Jasná cena předem", hint: "0 skrytých poplatků" },
@@ -30,8 +29,8 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="section section-soft-gradient"
-      style={{ paddingTop: "3rem" }}
+      className="section hero-dark"
+      style={{ paddingTop: "4rem", paddingBottom: "5rem" }}
     >
       <div className="container-wide px-5">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1.08fr_0.92fr] items-center">
@@ -51,7 +50,7 @@ export default function Hero() {
               </a>
               <a
                 href={HERO.secondaryCta.href}
-                className="btn btn-secondary btn-lg"
+                className="btn btn-glass btn-lg"
                 data-cta-label="hero_secondary"
                 data-cta-location="hero"
               >
@@ -59,48 +58,65 @@ export default function Hero() {
               </a>
             </div>
 
-            <p className="mt-4 text-sm soft max-w-[52ch]">{HERO.microcopy}</p>
+            <p
+              className="mt-4 text-sm max-w-[52ch]"
+              style={{ color: "rgba(245,248,255,0.55)" }}
+            >
+              {HERO.microcopy}
+            </p>
           </div>
 
           <HeroVisual />
         </div>
-      </div>
 
-      <div className="container-wide px-5 mt-14 md:mt-20" aria-label="Co vám slíbíme">
-        <ul className="trust-strip">
-          {TRUST_STRIP.map((item) => (
-            <li key={item.label} className="trust-strip-item">
-              <span className="trust-strip-icon" aria-hidden="true">
-                <CheckIcon style={{ width: "18px", height: "18px" }} />
-              </span>
-              <span>
-                <span className="trust-strip-label">{item.label}</span>
-                <span className="trust-strip-hint">{item.hint}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-14 md:mt-20" aria-label="Co vám slíbíme">
+          <ul className="trust-strip">
+            {TRUST_STRIP.map((item) => (
+              <li key={item.label} className="trust-strip-item">
+                <span className="trust-strip-icon" aria-hidden="true">
+                  <CheckIcon style={{ width: "18px", height: "18px" }} />
+                </span>
+                <span>
+                  <span className="trust-strip-label">{item.label}</span>
+                  <span className="trust-strip-hint">{item.hint}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
 }
 
 function HeroVisual() {
-  // On-brand CSS browser-mockup hint at a clean SMB website — no agency
-  // showreel, no stock photo of a person with a laptop. The strategy
-  // explicitly bans both. Sized up versus the previous compact version.
+  // Brand-safe browser mockup. White card pops against the dark navy hero
+  // and reinforces "your website" without resorting to stock photos.
   return (
     <div
       className="relative"
       aria-hidden="true"
-      style={{ minHeight: "380px" }}
+      style={{ minHeight: "420px" }}
     >
+      {/* Soft cyan glow behind the card */}
       <div
-        className="card"
         style={{
-          padding: 0,
+          position: "absolute",
+          inset: "-40px",
+          background:
+            "radial-gradient(circle at 50% 50%, rgba(34,184,255,0.22) 0%, rgba(34,184,255,0) 65%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          background: "#FFFFFF",
+          borderRadius: "var(--radius-lg)",
           overflow: "hidden",
-          boxShadow: "var(--shadow-lg)",
+          boxShadow:
+            "0 30px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(245, 248, 255, 0.06)",
           transform: "rotate(-1deg)",
         }}
       >
@@ -214,22 +230,23 @@ function HeroVisual() {
         </div>
       </div>
 
+      {/* Floating mobile preview chip — glass on dark bg */}
       <div
-        className="card"
+        className="glass-strong"
         style={{
           position: "absolute",
-          bottom: "-18px",
-          right: "-10px",
-          width: "172px",
+          bottom: "-20px",
+          right: "-12px",
+          width: "180px",
           padding: "0.95rem",
           transform: "rotate(4deg)",
-          boxShadow: "var(--shadow-lg)",
+          borderRadius: "var(--radius-lg)",
         }}
       >
         <div
           style={{
             fontSize: "0.72rem",
-            color: "var(--fg-soft)",
+            color: "rgba(245, 248, 255, 0.6)",
             display: "inline-flex",
             alignItems: "center",
             gap: "4px",
@@ -237,14 +254,18 @@ function HeroVisual() {
         >
           Mobil
           <CheckIcon
-            style={{ width: "12px", height: "12px", color: "var(--success)" }}
+            style={{
+              width: "12px",
+              height: "12px",
+              color: "var(--brand-sky)",
+            }}
           />
         </div>
         <div
           style={{
-            fontSize: "0.85rem",
+            fontSize: "0.88rem",
             fontWeight: 700,
-            color: "var(--fg)",
+            color: "var(--fg-inverse)",
             marginTop: "0.25rem",
             lineHeight: 1.2,
           }}
@@ -269,20 +290,6 @@ function HeroVisual() {
           <span>777 123 456</span>
         </div>
       </div>
-
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "-30px",
-          left: "-30px",
-          width: "180px",
-          height: "180px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
-          zIndex: -1,
-        }}
-      />
     </div>
   );
 }

@@ -10,7 +10,7 @@ export default function Comparison() {
           <p className="lead mt-4">{comparison.lead}</p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:gap-0 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 md:gap-0 md:grid-cols-3 items-stretch">
           {comparison.columns.map((col) => {
             // Type-safe narrowing: `featured` is present only on the ASW
             // column in siteContent.ts (TypeScript const-asserts it).
@@ -18,9 +18,12 @@ export default function Comparison() {
             return (
               <div
                 key={col.id}
-                className={isFeatured ? "card card-accent" : "card"}
+                className={
+                  isFeatured ? "card card-accent card-accent-featured" : "card"
+                }
                 style={{
-                  padding: "1.75rem 1.5rem",
+                  padding: "1.85rem 1.6rem",
+                  position: "relative",
                   ...(isFeatured
                     ? {}
                     : {

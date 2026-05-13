@@ -132,9 +132,15 @@ body {
 }
 
 .section-inverse {
-  background: var(--bg-inverse);
+  position: relative;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(34, 184, 255, 0.14) 0%, rgba(34, 184, 255, 0) 45%),
+    radial-gradient(circle at 12% 92%, rgba(10, 102, 255, 0.18) 0%, rgba(10, 102, 255, 0) 50%),
+    var(--bg-inverse);
   color: var(--fg-inverse);
+  overflow: hidden;
 }
+.section-inverse > * { position: relative; z-index: 1; }
 .section-inverse .muted,
 .section-inverse .soft {
   color: rgba(245, 248, 255, 0.72);
@@ -424,6 +430,64 @@ body {
   font-weight: 600;
 }
 
+/* ── Hero (dark tech-premium) ──────────────────────────────────────────── */
+.hero-dark {
+  position: relative;
+  background:
+    radial-gradient(circle at 85% 12%, rgba(34, 184, 255, 0.18) 0%, rgba(34, 184, 255, 0) 45%),
+    radial-gradient(circle at 8% 85%, rgba(10, 102, 255, 0.22) 0%, rgba(10, 102, 255, 0) 50%),
+    linear-gradient(180deg, #061029 0%, #07111F 60%, #08152C 100%);
+  color: var(--fg-inverse);
+  overflow: hidden;
+}
+.hero-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245, 248, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 248, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+  mask-image: radial-gradient(ellipse at 50% 35%, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-dark > * { position: relative; z-index: 1; }
+.hero-dark .eyebrow { color: var(--brand-sky); }
+.hero-dark .h1,
+.hero-dark .h2,
+.hero-dark .h3 { color: var(--fg-inverse); }
+.hero-dark .lead { color: rgba(245, 248, 255, 0.78); }
+.hero-dark .soft { color: rgba(245, 248, 255, 0.55); }
+
+/* ── Glass cards (for dark sections) ───────────────────────────────────── */
+.glass {
+  background: rgba(15, 28, 50, 0.55);
+  border: 1px solid rgba(245, 248, 255, 0.12);
+  border-radius: var(--radius-lg);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  color: var(--fg-inverse);
+}
+.glass-strong {
+  background: rgba(20, 36, 64, 0.68);
+  border: 1px solid rgba(245, 248, 255, 0.16);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* On-dark CTA buttons — glass outline */
+.btn-glass {
+  background: rgba(245, 248, 255, 0.06);
+  color: var(--fg-inverse);
+  border-color: rgba(245, 248, 255, 0.22);
+}
+.btn-glass:hover {
+  background: rgba(245, 248, 255, 0.10);
+  border-color: rgba(245, 248, 255, 0.34);
+}
+
 /* ── Trust strip (under hero) ───────────────────────────────────────────── */
 .trust-strip {
   display: grid;
@@ -434,6 +498,27 @@ body {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
+}
+/* Dark variant — used when trust strip sits inside .hero-dark */
+.hero-dark .trust-strip {
+  background: rgba(15, 28, 50, 0.6);
+  border: 1px solid rgba(245, 248, 255, 0.12);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+}
+.hero-dark .trust-strip-item {
+  border-color: rgba(245, 248, 255, 0.10);
+}
+.hero-dark .trust-strip-icon {
+  background: rgba(34, 184, 255, 0.12);
+  color: var(--brand-sky);
+}
+.hero-dark .trust-strip-label {
+  color: var(--fg-inverse);
+}
+.hero-dark .trust-strip-hint {
+  color: rgba(245, 248, 255, 0.55);
 }
 @media (min-width: 640px) {
   .trust-strip { grid-template-columns: repeat(2, 1fr); }

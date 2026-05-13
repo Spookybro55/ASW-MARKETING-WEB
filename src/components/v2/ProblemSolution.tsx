@@ -10,30 +10,50 @@ export default function ProblemSolution() {
           <p className="lead mt-4">{problemSolution.lead}</p>
         </div>
 
-        <ul className="mt-10 grid gap-5 md:grid-cols-2">
+        <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {problemSolution.items.map((item) => (
-            <li key={item.problem} className="card">
+            <li
+              key={item.problem}
+              className="card card-interactive"
+              style={{ padding: "1.85rem" }}
+            >
               <div
-                className="text-[0.95rem] font-semibold"
-                style={{ color: "var(--fg-muted)" }}
+                className="text-[0.85rem] font-semibold uppercase"
+                style={{
+                  color: "var(--fg-soft)",
+                  letterSpacing: "0.07em",
+                }}
+              >
+                Co lidi řeší
+              </div>
+              <p
+                className="mt-2 font-semibold"
+                style={{ color: "var(--fg)", fontSize: "1.05rem", lineHeight: 1.5 }}
               >
                 {item.problem}
-              </div>
+              </p>
               <div
-                className="mt-3 flex items-start gap-2"
-                style={{ color: "var(--fg)" }}
+                style={{
+                  marginTop: "1.1rem",
+                  paddingTop: "1.1rem",
+                  borderTop: "1px solid var(--border)",
+                }}
               >
-                <span
-                  aria-hidden
+                <div
+                  className="text-[0.85rem] font-semibold uppercase"
                   style={{
                     color: "var(--brand)",
-                    fontWeight: 700,
-                    marginTop: "1px",
+                    letterSpacing: "0.07em",
+                    marginBottom: "0.55rem",
                   }}
                 >
-                  →
-                </span>
-                <p>{item.solution}</p>
+                  Jak to řešíme
+                </div>
+                <p
+                  style={{ color: "var(--fg)", fontSize: "1rem", lineHeight: 1.6 }}
+                >
+                  {item.solution}
+                </p>
               </div>
             </li>
           ))}
