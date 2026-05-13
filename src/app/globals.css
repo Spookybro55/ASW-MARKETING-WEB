@@ -131,6 +131,24 @@ body {
     var(--bg);
 }
 
+/* Subtle brand-tinted section background — used to break the page out
+   of a long all-white run. Reads as a designed pause, not as a tech
+   accent. */
+.section-brand-soft {
+  background:
+    linear-gradient(180deg, var(--bg) 0%, #F4F8FF 35%, #F4F8FF 65%, var(--bg) 100%);
+  position: relative;
+}
+
+/* Portfolio-specific accent: a soft brand-blue panel that frames the
+   showroom rows. */
+.section-showroom {
+  background:
+    radial-gradient(circle at 50% 0%, var(--brand-soft) 0%, rgba(230,239,255,0) 50%),
+    var(--bg);
+  position: relative;
+}
+
 .section-inverse {
   position: relative;
   background:

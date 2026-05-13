@@ -1,9 +1,6 @@
 import type { CSSProperties } from "react";
 import { CheckIcon, PhoneIcon } from "./icons";
 
-// Hero copy is owned by Hero. The historical hero/trustStrip exports in
-// siteContent.ts stay unused for now and will be reconciled in a later
-// cleanup commit.
 const HERO = {
   eyebrow: "Pro živnostníky, řemeslníky a malé firmy",
   h1: "Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.",
@@ -14,6 +11,16 @@ const HERO = {
   primaryCta: { label: "Nezávazně probrat web", href: "#kontakt" },
   secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
 } as const;
+
+// Page-architecture sidebar items — each one corresponds to a real
+// chunk of the rendered mockup on the right, so the showcase reads as
+// a thoughtful website plan, not a SaaS feature callout.
+const STRUCTURE = [
+  { code: "01", label: "Hlavička", hint: "logo · kontakt" },
+  { code: "02", label: "Hero", hint: "claim + CTA" },
+  { code: "03", label: "Služby", hint: "co děláte" },
+  { code: "04", label: "Kontakt", hint: "telefon · e-mail" },
+] as const;
 
 export default function Hero() {
   return (
@@ -33,7 +40,7 @@ export default function Hero() {
         className="container-wide px-5"
         style={{ position: "relative", zIndex: 1 }}
       >
-        <div className="grid gap-6 lg:gap-8 lg:grid-cols-[1fr_1.15fr] items-stretch">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-[1fr_1.25fr] items-stretch">
           <LeftPanel />
           <ShowcasePanel />
         </div>
@@ -81,8 +88,6 @@ function LeftPanel() {
 
       <p className="mt-4 text-sm soft max-w-[48ch]">{HERO.microcopy}</p>
 
-      {/* Small footer row: numeric process anchor instead of generic chip
-          strip. Integrated into the left panel composition. */}
       <div
         className="mt-6 pt-5"
         style={{
@@ -150,13 +155,12 @@ function ShowcasePanel() {
         borderRadius: "var(--radius-lg)",
         boxShadow:
           "0 24px 60px rgba(7, 17, 31, 0.10), 0 4px 14px rgba(7, 17, 31, 0.04)",
-        minHeight: "640px",
+        minHeight: "720px",
         overflow: "hidden",
       }}
     >
       <ShowcaseGrid />
 
-      {/* Panel label — like an architectural drawing caption */}
       <div
         style={{
           position: "relative",
@@ -201,40 +205,119 @@ function ShowcasePanel() {
         style={{
           position: "relative",
           zIndex: 1,
-          height: "calc(640px - 5.5rem)",
+          display: "grid",
+          gap: "1.25rem",
         }}
+        className="lg:grid-cols-[180px_1fr]"
       >
-        <Mockup />
-
-        {/* Annotations — each one points at a specific feature of the
-            mockup so the showcase reads as a real "build of a website",
-            not a SaaS feature callout. Hidden on small screens to keep
-            mobile uncluttered. */}
-        <Annotation
-          label="SEO základ"
-          hint="meta, sitemap, popisky"
-          position={{ top: "2%", right: "0" }}
-          line={{ width: "60px", left: "-72px", top: "14px" }}
-        />
-        <Annotation
-          label="Služby"
-          hint="přehled toho, co děláte"
-          position={{ top: "44%", right: "0" }}
-          line={{ width: "44px", left: "-56px", top: "14px" }}
-        />
-        <Annotation
-          label="Kontaktní CTA"
-          hint="telefon, e-mail, formulář"
-          position={{ bottom: "20%", left: "0" }}
-          line={{ width: "44px", right: "-56px", top: "14px" }}
-        />
-        <Annotation
-          label="Mobil"
-          hint="vyladěné pro telefon"
-          position={{ bottom: "0", right: "0" }}
-          line={{ width: "40px", left: "-52px", top: "14px" }}
-        />
+        <StructureStack />
+        <MockupColumn />
       </div>
+    </div>
+  );
+}
+
+function StructureStack() {
+  // Vertical stack of labelled page-section blocks — reads as the
+  // architectural plan of the website rendered to the right. Hidden on
+  // smaller breakpoints to keep the mockup uncluttered.
+  return (
+    <ol
+      role="list"
+      className="hidden lg:flex"
+      style={{
+        flexDirection: "column",
+        gap: "0.7rem",
+        padding: "0.25rem 0",
+      }}
+    >
+      {STRUCTURE.map((s, i) => (
+        <li
+          key={s.code}
+          style={{
+            position: "relative",
+            padding: "0.85rem 0.95rem",
+            background: "rgba(244, 248, 255, 0.85)",
+            border: "1px solid var(--brand-soft)",
+            borderRadius: "10px",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              color: "var(--brand)",
+              fontSize: "0.66rem",
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              fontFamily:
+                "var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace",
+            }}
+          >
+            <span>{s.code}</span>
+            <span
+              aria-hidden="true"
+              style={{
+                flex: 1,
+                height: "1px",
+                background:
+                  "repeating-linear-gradient(to right, var(--brand-soft) 0 4px, transparent 4px 7px)",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              fontSize: "0.92rem",
+              fontWeight: 700,
+              color: "var(--fg)",
+              marginTop: "0.3rem",
+              letterSpacing: "-0.005em",
+            }}
+          >
+            {s.label}
+          </div>
+          <div
+            style={{
+              fontSize: "0.72rem",
+              color: "var(--fg-muted)",
+              marginTop: "0.15rem",
+            }}
+          >
+            {s.hint}
+          </div>
+
+          {/* Connector line emerging to the right, points toward the
+              corresponding section of the rendered mockup */}
+          {i < STRUCTURE.length && (
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: "50%",
+                right: "-22px",
+                width: "20px",
+                height: "1px",
+                background:
+                  "repeating-linear-gradient(to right, var(--brand) 0 4px, transparent 4px 7px)",
+              }}
+            />
+          )}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function MockupColumn() {
+  return (
+    <div style={{ position: "relative", minHeight: "560px" }}>
+      <Mockup />
+      <MobilePreview />
     </div>
   );
 }
@@ -244,27 +327,25 @@ function Mockup() {
     <div
       aria-hidden="true"
       style={{
-        position: "absolute",
-        top: "0.5rem",
-        left: "50%",
-        transform: "translateX(-50%) rotate(-0.6deg)",
-        width: "min(100%, 480px)",
+        position: "relative",
+        width: "min(100%, 560px)",
+        margin: "0 auto",
         borderRadius: "var(--radius-lg)",
         overflow: "hidden",
         background: "#FFFFFF",
         border: "1px solid var(--border)",
         boxShadow:
           "0 30px 70px rgba(7, 17, 31, 0.16), 0 8px 24px rgba(7, 17, 31, 0.06)",
+        transform: "rotate(-0.5deg)",
         zIndex: 1,
       }}
     >
-      {/* Browser chrome */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: "6px",
-          padding: "13px 20px",
+          padding: "14px 22px",
           background: "var(--bg-muted)",
           borderBottom: "1px solid var(--border)",
         }}
@@ -275,7 +356,7 @@ function Mockup() {
         <span
           style={{
             marginLeft: "12px",
-            fontSize: "0.84rem",
+            fontSize: "0.86rem",
             color: "var(--fg-soft)",
           }}
         >
@@ -283,7 +364,6 @@ function Mockup() {
         </span>
       </div>
 
-      {/* Mockup body — bigger than before */}
       <div style={{ padding: "2rem 2rem 2.25rem" }}>
         <div
           style={{
@@ -298,13 +378,13 @@ function Mockup() {
         </div>
         <div
           style={{
-            fontSize: "2rem",
+            fontSize: "2.1rem",
             fontWeight: 700,
-            lineHeight: 1.15,
+            lineHeight: 1.12,
             color: "var(--fg)",
             marginTop: "0.55rem",
             maxWidth: "16ch",
-            letterSpacing: "-0.018em",
+            letterSpacing: "-0.02em",
           }}
         >
           Elektroinstalace bez zbytečných starostí.
@@ -319,14 +399,14 @@ function Mockup() {
         >
           Revize, rekonstrukce, nové rozvody. Reagujeme do 24 hodin.
         </div>
-        <div style={{ marginTop: "1.35rem", display: "flex", gap: "10px" }}>
+        <div style={{ marginTop: "1.4rem", display: "flex", gap: "10px" }}>
           <span
             style={{
               background: "var(--brand)",
               color: "#ffffff",
               fontSize: "0.85rem",
               fontWeight: 600,
-              padding: "0.65rem 1.1rem",
+              padding: "0.65rem 1.15rem",
               borderRadius: "10px",
             }}
           >
@@ -338,7 +418,7 @@ function Mockup() {
               color: "var(--fg)",
               fontSize: "0.85rem",
               fontWeight: 600,
-              padding: "0.65rem 1.1rem",
+              padding: "0.65rem 1.15rem",
               borderRadius: "10px",
               border: "1px solid var(--border-strong)",
             }}
@@ -377,194 +457,168 @@ function Mockup() {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Floating mobile preview anchored to mockup */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "-26px",
-          right: "-22px",
-          width: "152px",
-          padding: "0.85rem",
-          background: "#FFFFFF",
-          borderRadius: "var(--radius)",
-          border: "1px solid var(--border)",
-          boxShadow:
-            "0 18px 36px rgba(7, 17, 31, 0.18), 0 4px 10px rgba(7, 17, 31, 0.06)",
-          transform: "rotate(5deg)",
-          zIndex: 2,
-        }}
-      >
+        {/* Contact strip at the bottom — mirrors the "Kontakt" structure
+            block on the left */}
         <div
           style={{
-            fontSize: "0.7rem",
-            color: "var(--fg-soft)",
-            display: "inline-flex",
+            marginTop: "1.6rem",
+            paddingTop: "1.2rem",
+            borderTop: "1px dashed var(--border-strong)",
+            display: "flex",
             alignItems: "center",
-            gap: "5px",
+            gap: "0.6rem",
+            fontSize: "0.78rem",
+            color: "var(--fg-muted)",
           }}
         >
-          Mobil
-          <CheckIcon
-            style={{ width: "12px", height: "12px", color: "var(--success)" }}
+          <PhoneIcon
+            style={{
+              width: "14px",
+              height: "14px",
+              color: "var(--brand)",
+            }}
           />
-        </div>
-        <div
-          style={{
-            fontSize: "0.85rem",
-            fontWeight: 700,
-            color: "var(--fg)",
-            marginTop: "0.3rem",
-            lineHeight: 1.2,
-          }}
-        >
-          Elektrikář Praha
-        </div>
-        <div
-          style={{
-            background: "var(--brand)",
-            color: "#fff",
-            fontSize: "0.7rem",
-            fontWeight: 600,
-            padding: "0.4rem 0.6rem",
-            borderRadius: "7px",
-            marginTop: "0.55rem",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "5px",
-          }}
-        >
-          <PhoneIcon style={{ width: "11px", height: "11px" }} />
-          <span>777 123 456</span>
+          <span style={{ fontWeight: 600, color: "var(--fg)" }}>
+            +420 777 123 456
+          </span>
+          <span style={{ marginLeft: "auto" }}>Po–Pá 8:00–18:00</span>
         </div>
       </div>
     </div>
   );
 }
 
-function Annotation({
-  label,
-  hint,
-  position,
-  line,
-}: {
-  label: string;
-  hint: string;
-  position: CSSProperties;
-  line: { width: string; left?: string; right?: string; top: string };
-}) {
+function MobilePreview() {
   return (
     <div
-      className="hidden md:flex"
+      aria-hidden="true"
       style={{
         position: "absolute",
-        ...position,
-        alignItems: "center",
-        gap: "0.5rem",
-        zIndex: 3,
+        bottom: "-26px",
+        right: "-12px",
+        width: "164px",
+        padding: "0.95rem",
+        background: "#FFFFFF",
+        borderRadius: "var(--radius)",
+        border: "1px solid var(--border)",
+        boxShadow:
+          "0 18px 36px rgba(7, 17, 31, 0.18), 0 4px 10px rgba(7, 17, 31, 0.06)",
+        transform: "rotate(5deg)",
+        zIndex: 2,
       }}
     >
-      <span
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: line.top,
-          left: line.left,
-          right: line.right,
-          width: line.width,
-          height: "1px",
-          background:
-            "repeating-linear-gradient(to right, var(--brand) 0 4px, transparent 4px 8px)",
-        }}
-      />
-      <span
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: `calc(${line.top} - 3px)`,
-          ...(line.left
-            ? { left: `calc(${line.left} - 4px)` }
-            : { right: `calc(${line.right} - 4px)` }),
-          width: "8px",
-          height: "8px",
-          borderRadius: "50%",
-          background: "var(--brand)",
-        }}
-      />
       <div
         style={{
-          background: "#FFFFFF",
-          border: "1px solid var(--brand-soft)",
-          borderRadius: "10px",
-          padding: "0.5rem 0.75rem",
-          boxShadow: "var(--shadow-sm)",
-          maxWidth: "180px",
+          fontSize: "0.7rem",
+          color: "var(--fg-soft)",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "5px",
+        }}
+      >
+        Mobil
+        <CheckIcon
+          style={{ width: "12px", height: "12px", color: "var(--success)" }}
+        />
+      </div>
+      <div
+        style={{
+          fontSize: "0.88rem",
+          fontWeight: 700,
+          color: "var(--fg)",
+          marginTop: "0.3rem",
+          lineHeight: 1.2,
+        }}
+      >
+        Elektrikář Praha
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+          marginTop: "0.55rem",
         }}
       >
         <div
           style={{
-            fontSize: "0.66rem",
-            fontWeight: 700,
-            color: "var(--brand)",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
+            height: "5px",
+            borderRadius: "2px",
+            background: "var(--brand-soft)",
           }}
-        >
-          {label}
-        </div>
+        />
         <div
           style={{
-            fontSize: "0.72rem",
-            color: "var(--fg-muted)",
-            marginTop: "0.15rem",
-            lineHeight: 1.35,
+            height: "5px",
+            borderRadius: "2px",
+            background: "rgba(7,17,31,0.06)",
           }}
-        >
-          {hint}
-        </div>
+        />
+        <div
+          style={{
+            height: "5px",
+            borderRadius: "2px",
+            background: "rgba(7,17,31,0.06)",
+            width: "70%",
+          }}
+        />
+      </div>
+      <div
+        style={{
+          background: "var(--brand)",
+          color: "#fff",
+          fontSize: "0.7rem",
+          fontWeight: 600,
+          padding: "0.4rem 0.6rem",
+          borderRadius: "7px",
+          marginTop: "0.55rem",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "5px",
+        }}
+      >
+        <PhoneIcon style={{ width: "11px", height: "11px" }} />
+        <span>Zavolat</span>
       </div>
     </div>
   );
 }
 
 function ShowcaseGrid() {
-  // Faint structural layout grid inside the showcase panel. Reads as
-  // architectural blueprint, not a tech grid — solid faint brand-soft
-  // lines, masked by the panel rounded corners + low opacity.
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 0 600 640"
+      viewBox="0 0 700 720"
       preserveAspectRatio="none"
       style={{
         position: "absolute",
         inset: 0,
         width: "100%",
         height: "100%",
-        opacity: 0.55,
+        opacity: 0.5,
         pointerEvents: "none",
         zIndex: 0,
       }}
     >
-      {[1, 2, 3, 4, 5].map((i) => (
+      {Array.from({ length: 7 }, (_, i) => i + 1).map((i) => (
         <line
           key={`v-${i}`}
-          x1={(600 / 6) * i}
-          x2={(600 / 6) * i}
+          x1={(700 / 8) * i}
+          x2={(700 / 8) * i}
           y1={0}
-          y2={640}
+          y2={720}
           stroke="var(--brand-soft)"
           strokeWidth="1"
         />
       ))}
-      {[1, 2, 3, 4, 5, 6].map((i) => (
+      {Array.from({ length: 7 }, (_, i) => i + 1).map((i) => (
         <line
           key={`h-${i}`}
           x1={0}
-          x2={600}
-          y1={(640 / 7) * i}
-          y2={(640 / 7) * i}
+          x2={700}
+          y1={(720 / 8) * i}
+          y2={(720 / 8) * i}
           stroke="var(--brand-soft)"
           strokeWidth="1"
         />
