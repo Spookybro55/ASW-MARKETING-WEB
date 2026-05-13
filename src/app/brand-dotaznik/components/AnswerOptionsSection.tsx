@@ -117,7 +117,7 @@ export default function AnswerOptionsSection({ uploadUrl }: Props) {
               href={uploadUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="secondary-button mt-6 inline-flex items-center justify-center gap-2 text-sm"
+              className="btn btn-secondary mt-6 inline-flex items-center justify-center gap-2 text-sm"
             >
               <svg
                 aria-hidden="true"

@@ -20,8 +20,7 @@ export const siteContact = {
   emailFallback: "sebastian@autosmartweb.cz",
   legalName: "Synkedo s.r.o.",
   brandName: "Autosmartweby",
-  // IČO převzato ze současné stránky /zasady-ochrany-osobnich-udaju.
-  // TODO(owner): před produkčním nasazením v2 ověřit v ARES (Synkedo s.r.o.).
+  // IČO ověřeno před v2 launch QA (Synkedo s.r.o.).
   ico: "24571831",
   address: {
     street: "Příčná 1892/4",

@@ -50,7 +50,7 @@ export default function BottomCTA({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="primary-button inline-flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn btn-primary inline-flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? "Odesílám…" : "Odeslat vyplněný dotazník"}
               {!isSubmitting && (
@@ -75,7 +75,7 @@ export default function BottomCTA({
               href={uploadUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="secondary-button inline-flex items-center justify-center gap-2"
+              className="btn btn-secondary inline-flex items-center justify-center gap-2"
             >
               <svg
                 aria-hidden="true"
