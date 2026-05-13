@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/v2/Navbar";
 import Hero from "@/components/v2/Hero";
 import Audience from "@/components/v2/Audience";
+import BuildQuality from "@/components/v2/BuildQuality";
 import ProblemSolution from "@/components/v2/ProblemSolution";
 import Process from "@/components/v2/Process";
 import Deliverables from "@/components/v2/Deliverables";
@@ -57,6 +58,7 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Audience />
+        <BuildQuality />
         <ProblemSolution />
         <Process />
         <Deliverables />

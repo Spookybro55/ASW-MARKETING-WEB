@@ -15,14 +15,25 @@ const HERO = {
   secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
 } as const;
 
-// Compact trust chips — sit directly under the hero copy as a tight set
-// rather than the previous full-width strip. Four points; "Základ pro
-// Google" lives in the Deliverables section, not the hero.
-const TRUST_CHIPS = [
-  "Pomůžeme s texty",
-  "Cena předem",
-  "Web pro mobil",
-  "Spuštění po schválení",
+// Labels that wear AROUND the mockup — they explain WHY this is a real
+// website mockup (not a startup dashboard).
+const MOCKUP_LABELS = [
+  "Mobilní verze",
+  "Rychlé načtení",
+  "Kontaktní CTA",
+  "SEO základ",
+] as const;
+
+// Build-quality promise list — sits below the hero grid as a small
+// "Co hlídáme u každého webu" sub-block. Replaces the previous wide
+// trust strip with something that frames our craft, not a generic list
+// of benefits.
+const BUILD_QUALITY = [
+  "Srozumitelná struktura",
+  "Mobilní zobrazení",
+  "Rychlé načtení",
+  "Kontaktní cesta",
+  "Základ pro Google",
 ] as const;
 
 export default function Hero() {
@@ -31,8 +42,6 @@ export default function Hero() {
       id="hero"
       className="section section-soft-gradient"
       style={{
-        // Tighter than the section defaults — hero must not feel sparse,
-        // and Audience needs to sit closer underneath.
         paddingTop: "2.5rem",
         paddingBottom: "3.5rem",
         position: "relative",
@@ -41,7 +50,10 @@ export default function Hero() {
     >
       <BrandDecoration />
 
-      <div className="container-wide px-5" style={{ position: "relative", zIndex: 1 }}>
+      <div
+        className="container-wide px-5"
+        style={{ position: "relative", zIndex: 1 }}
+      >
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.05fr_0.95fr] items-center">
           <div>
             <span className="eyebrow">{HERO.eyebrow}</span>
@@ -68,12 +80,49 @@ export default function Hero() {
             </div>
 
             <p className="mt-4 text-sm soft max-w-[52ch]">{HERO.microcopy}</p>
+          </div>
 
-            <ul
-              className="mt-6 flex flex-wrap gap-2"
-              aria-label="Co vám slíbíme"
+          <HeroVisual />
+        </div>
+
+        {/* Build-quality promise block. Replaces the old wide trust strip
+            with a tighter, framed "this is what we watch on every site"
+            statement — small heading + 5 chip-style points. */}
+        <div className="mt-12 md:mt-16">
+          <div
+            className="flex flex-wrap items-center gap-x-5 gap-y-3"
+            style={{
+              borderTop: "1px solid var(--border)",
+              paddingTop: "1.4rem",
+            }}
+          >
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+                fontWeight: 600,
+                color: "var(--fg)",
+                fontSize: "0.97rem",
+              }}
             >
-              {TRUST_CHIPS.map((label) => (
+              <span
+                aria-hidden="true"
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "999px",
+                  background: "var(--brand)",
+                  display: "inline-block",
+                }}
+              />
+              Co hlídáme u každého webu
+            </span>
+            <ul
+              className="flex flex-wrap gap-2"
+              aria-label="Co hlídáme u každého webu"
+            >
+              {BUILD_QUALITY.map((label) => (
                 <li key={label}>
                   <span className="chip chip-brand">
                     <CheckIcon style={{ width: "14px", height: "14px" }} />
@@ -83,8 +132,6 @@ export default function Hero() {
               ))}
             </ul>
           </div>
-
-          <HeroVisual />
         </div>
       </div>
     </section>
@@ -92,10 +139,8 @@ export default function Hero() {
 }
 
 function BrandDecoration() {
-  // Subtle workflow motif — three soft brand-blue dots connected by a
-  // faint line, anchored top-left of the hero. Reads as "krok 1 → 2 → 3"
-  // without resorting to a SaaS grid or AI sparkles. Hidden behind the
-  // content via zIndex: 0.
+  // Subtle workflow motif — three brand dots connected by a faint dashed
+  // line. Reads as "krok 1 -> 2 -> 3" without resorting to a tech grid.
   return (
     <svg
       aria-hidden="true"
@@ -130,24 +175,19 @@ function BrandDecoration() {
 }
 
 function HeroVisual() {
-  // Scaled-up browser mockup — concrete "Elektrikář Praha" example so the
-  // hero shows a real-looking small-business website, not an abstract
-  // dashboard. Stronger shadow + brand background panel for visual weight,
-  // no glass / SaaS chrome.
+  // Browser mockup of a real-looking small-business site. Below the card
+  // we render 4 small quality labels that explain WHAT makes the mockup
+  // a proper site (not a startup dashboard).
   return (
-    <div
-      className="relative"
-      aria-hidden="true"
-      style={{ minHeight: "460px" }}
-    >
-      {/* Subtle brand panel behind the mockup — gives the card weight
-          without a tech grid or glow halo */}
+    <div className="relative" style={{ minHeight: "460px" }}>
+      {/* Soft brand panel behind the card */}
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
           top: "10%",
           right: "-2%",
-          bottom: "-2%",
+          bottom: "10%",
           left: "6%",
           background:
             "linear-gradient(135deg, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
@@ -158,6 +198,7 @@ function HeroVisual() {
 
       <div
         className="card"
+        aria-hidden="true"
         style={{
           position: "relative",
           zIndex: 1,
@@ -279,12 +320,13 @@ function HeroVisual() {
         </div>
       </div>
 
-      {/* Floating mobile preview — proper card, slightly larger */}
+      {/* Floating mobile preview */}
       <div
         className="card"
+        aria-hidden="true"
         style={{
           position: "absolute",
-          bottom: "-22px",
+          bottom: "20px",
           right: "-14px",
           width: "200px",
           padding: "1.1rem",
@@ -336,6 +378,36 @@ function HeroVisual() {
           <span>777 123 456</span>
         </div>
       </div>
+
+      {/* Quality labels under the mockup. Explain WHY the mockup looks
+          like a proper website — not a startup dashboard. */}
+      <ul
+        className="mt-6 hidden md:flex flex-wrap gap-2 justify-start"
+        aria-label="Vlastnosti, které u mockupu vidíte"
+      >
+        {MOCKUP_LABELS.map((label) => (
+          <li key={label}>
+            <span
+              className="chip"
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid var(--border)",
+                color: "var(--fg-muted)",
+                boxShadow: "var(--shadow-sm)",
+              }}
+            >
+              <CheckIcon
+                style={{
+                  width: "13px",
+                  height: "13px",
+                  color: "var(--brand)",
+                }}
+              />
+              {label}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
