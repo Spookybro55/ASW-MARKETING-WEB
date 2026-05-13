@@ -5,6 +5,8 @@ const BASE = "https://autosmartweb.cz";
 // Indexable public routes only. Excluded:
 //   - /brand-dotaznik (noindex,nofollow per page metadata — internal questionnaire)
 //   - /preview/[slug], /preview2/[slug] (per-lead noindex previews)
+//   - /web-pro-instalatera (temporarily disabled — redirects to /#kontakt;
+//     re-add once the v2 vertical landing rewrite ships)
 //   - /api/* (server endpoints)
 // When adding a new public marketing page, add it here.
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -15,12 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
-    },
-    {
-      url: `${BASE}/web-pro-instalatera`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
     },
     {
       url: `${BASE}/zasady-ochrany-osobnich-udaju`,
