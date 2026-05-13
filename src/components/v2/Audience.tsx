@@ -2,7 +2,11 @@ import { audience } from "@/data/siteContent";
 
 export default function Audience() {
   return (
-    <section id="pro-koho" className="section section-muted">
+    <section
+      id="pro-koho"
+      className="section section-muted"
+      style={{ paddingTop: "3.5rem" }}
+    >
       <div className="container-wide px-5">
         <div className="max-w-[60ch]">
           <span className="eyebrow">{audience.eyebrow}</span>

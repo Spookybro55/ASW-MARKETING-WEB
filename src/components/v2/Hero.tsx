@@ -15,14 +15,14 @@ const HERO = {
   secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
 } as const;
 
-// Friendlier process/promise points — same launch-safe principle, no
-// invented metrics, just plain-language commitments.
-const TRUST_STRIP = [
-  { label: "Nemusíte mít texty", hint: "Pomůžeme je sepsat s vámi" },
-  { label: "Cena bez překvapení", hint: "Vše domluvené předem" },
-  { label: "Funguje i na mobilu", hint: "Vyladěné pro telefon i počítač" },
-  { label: "Základ pro Google", hint: "Struktura, popisky, sitemap" },
-  { label: "Spouštíme až po schválení", hint: "Žádné překvapení živě" },
+// Compact trust chips — sit directly under the hero copy as a tight set
+// rather than the previous full-width strip. Four points; "Základ pro
+// Google" lives in the Deliverables section, not the hero.
+const TRUST_CHIPS = [
+  "Pomůžeme s texty",
+  "Cena předem",
+  "Web pro mobil",
+  "Spuštění po schválení",
 ] as const;
 
 export default function Hero() {
@@ -30,14 +30,23 @@ export default function Hero() {
     <section
       id="hero"
       className="section section-soft-gradient"
-      style={{ paddingTop: "3.5rem" }}
+      style={{
+        // Tighter than the section defaults — hero must not feel sparse,
+        // and Audience needs to sit closer underneath.
+        paddingTop: "2.5rem",
+        paddingBottom: "3.5rem",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      <div className="container-wide px-5">
-        <div className="grid gap-10 lg:gap-14 lg:grid-cols-[1.08fr_0.92fr] items-center">
+      <BrandDecoration />
+
+      <div className="container-wide px-5" style={{ position: "relative", zIndex: 1 }}>
+        <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.05fr_0.95fr] items-center">
           <div>
             <span className="eyebrow">{HERO.eyebrow}</span>
             <h1 className="h1 mt-2">{HERO.h1}</h1>
-            <p className="lead mt-5 max-w-[60ch]">{HERO.lead}</p>
+            <p className="lead mt-5 max-w-[58ch]">{HERO.lead}</p>
 
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
               <a
@@ -59,48 +68,104 @@ export default function Hero() {
             </div>
 
             <p className="mt-4 text-sm soft max-w-[52ch]">{HERO.microcopy}</p>
+
+            <ul
+              className="mt-6 flex flex-wrap gap-2"
+              aria-label="Co vám slíbíme"
+            >
+              {TRUST_CHIPS.map((label) => (
+                <li key={label}>
+                  <span className="chip chip-brand">
+                    <CheckIcon style={{ width: "14px", height: "14px" }} />
+                    {label}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <HeroVisual />
-        </div>
-
-        <div className="mt-14 md:mt-20" aria-label="Co vám slíbíme">
-          <ul className="trust-strip">
-            {TRUST_STRIP.map((item) => (
-              <li key={item.label} className="trust-strip-item">
-                <span className="trust-strip-icon" aria-hidden="true">
-                  <CheckIcon style={{ width: "18px", height: "18px" }} />
-                </span>
-                <span>
-                  <span className="trust-strip-label">{item.label}</span>
-                  <span className="trust-strip-hint">{item.hint}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
   );
 }
 
+function BrandDecoration() {
+  // Subtle workflow motif — three soft brand-blue dots connected by a
+  // faint line, anchored top-left of the hero. Reads as "krok 1 → 2 → 3"
+  // without resorting to a SaaS grid or AI sparkles. Hidden behind the
+  // content via zIndex: 0.
+  return (
+    <svg
+      aria-hidden="true"
+      width="320"
+      height="120"
+      viewBox="0 0 320 120"
+      fill="none"
+      style={{
+        position: "absolute",
+        top: "1.5rem",
+        left: "-2rem",
+        zIndex: 0,
+        opacity: 0.55,
+        pointerEvents: "none",
+      }}
+    >
+      <path
+        d="M 30 60 L 160 60 L 290 60"
+        stroke="var(--brand-soft)"
+        strokeWidth="2"
+        strokeDasharray="4 6"
+        strokeLinecap="round"
+      />
+      <circle cx="30" cy="60" r="10" fill="var(--brand-soft)" />
+      <circle cx="30" cy="60" r="4" fill="var(--brand)" />
+      <circle cx="160" cy="60" r="10" fill="var(--brand-soft)" />
+      <circle cx="160" cy="60" r="4" fill="var(--brand)" />
+      <circle cx="290" cy="60" r="10" fill="var(--brand-soft)" />
+      <circle cx="290" cy="60" r="4" fill="var(--brand)" />
+    </svg>
+  );
+}
+
 function HeroVisual() {
-  // Concrete trade example so the hero reads as "your future website"
-  // rather than an abstract SaaS dashboard. Desktop card + floating
-  // mobile preview, both clearly an "elektrikář v Praze" mockup.
+  // Scaled-up browser mockup — concrete "Elektrikář Praha" example so the
+  // hero shows a real-looking small-business website, not an abstract
+  // dashboard. Stronger shadow + brand background panel for visual weight,
+  // no glass / SaaS chrome.
   return (
     <div
       className="relative"
       aria-hidden="true"
-      style={{ minHeight: "400px" }}
+      style={{ minHeight: "460px" }}
     >
+      {/* Subtle brand panel behind the mockup — gives the card weight
+          without a tech grid or glow halo */}
+      <div
+        style={{
+          position: "absolute",
+          top: "10%",
+          right: "-2%",
+          bottom: "-2%",
+          left: "6%",
+          background:
+            "linear-gradient(135deg, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
+          borderRadius: "var(--radius-lg)",
+          zIndex: 0,
+        }}
+      />
+
       <div
         className="card"
         style={{
+          position: "relative",
+          zIndex: 1,
           padding: 0,
           overflow: "hidden",
-          boxShadow: "var(--shadow-lg)",
-          transform: "rotate(-1deg)",
+          boxShadow:
+            "0 30px 70px rgba(7, 17, 31, 0.14), 0 8px 24px rgba(7, 17, 31, 0.06)",
+          transform: "rotate(-0.8deg)",
         }}
       >
         <div
@@ -108,7 +173,7 @@ function HeroVisual() {
             display: "flex",
             alignItems: "center",
             gap: "6px",
-            padding: "12px 18px",
+            padding: "13px 20px",
             background: "var(--bg-muted)",
             borderBottom: "1px solid var(--border)",
           }}
@@ -118,21 +183,21 @@ function HeroVisual() {
           <span style={dot("#28c840")} />
           <span
             style={{
-              marginLeft: "10px",
-              fontSize: "0.82rem",
+              marginLeft: "12px",
+              fontSize: "0.86rem",
               color: "var(--fg-soft)",
             }}
           >
             elektro-novak.cz
           </span>
         </div>
-        <div style={{ padding: "1.75rem 1.75rem 2rem" }}>
+        <div style={{ padding: "2rem 2rem 2.25rem" }}>
           <div
             style={{
-              fontSize: "0.72rem",
+              fontSize: "0.74rem",
               fontWeight: 600,
               color: "var(--brand)",
-              letterSpacing: "0.08em",
+              letterSpacing: "0.09em",
               textTransform: "uppercase",
             }}
           >
@@ -140,34 +205,35 @@ function HeroVisual() {
           </div>
           <div
             style={{
-              fontSize: "1.55rem",
+              fontSize: "1.75rem",
               fontWeight: 700,
-              lineHeight: 1.2,
+              lineHeight: 1.18,
               color: "var(--fg)",
-              marginTop: "0.45rem",
+              marginTop: "0.5rem",
               maxWidth: "20ch",
+              letterSpacing: "-0.015em",
             }}
           >
             Elektroinstalace bez zbytečných starostí.
           </div>
           <div
             style={{
-              fontSize: "0.92rem",
+              fontSize: "0.98rem",
               color: "var(--fg-muted)",
-              marginTop: "0.7rem",
+              marginTop: "0.8rem",
               maxWidth: "34ch",
             }}
           >
             Revize, rekonstrukce, nové rozvody. Reagujeme do 24 hodin.
           </div>
-          <div style={{ marginTop: "1.1rem", display: "flex", gap: "8px" }}>
+          <div style={{ marginTop: "1.25rem", display: "flex", gap: "10px" }}>
             <span
               style={{
                 background: "var(--brand)",
                 color: "#ffffff",
-                fontSize: "0.78rem",
+                fontSize: "0.82rem",
                 fontWeight: 600,
-                padding: "0.55rem 0.95rem",
+                padding: "0.62rem 1.05rem",
                 borderRadius: "10px",
               }}
             >
@@ -177,9 +243,9 @@ function HeroVisual() {
               style={{
                 background: "#ffffff",
                 color: "var(--fg)",
-                fontSize: "0.78rem",
+                fontSize: "0.82rem",
                 fontWeight: 600,
-                padding: "0.55rem 0.95rem",
+                padding: "0.62rem 1.05rem",
                 borderRadius: "10px",
                 border: "1px solid var(--border-strong)",
               }}
@@ -189,18 +255,18 @@ function HeroVisual() {
           </div>
           <div
             style={{
-              marginTop: "1.4rem",
+              marginTop: "1.5rem",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "0.55rem",
+              gap: "0.6rem",
             }}
           >
             {["Revize", "Rekonstrukce", "Rozvody", "Smart home"].map((s) => (
               <div
                 key={s}
                 style={{
-                  fontSize: "0.78rem",
-                  padding: "0.5rem 0.7rem",
+                  fontSize: "0.82rem",
+                  padding: "0.55rem 0.8rem",
                   background: "var(--bg-muted)",
                   borderRadius: "8px",
                   color: "var(--fg-muted)",
@@ -213,26 +279,27 @@ function HeroVisual() {
         </div>
       </div>
 
-      {/* Floating mobile preview — white card on light hero, no glass */}
+      {/* Floating mobile preview — proper card, slightly larger */}
       <div
         className="card"
         style={{
           position: "absolute",
-          bottom: "-18px",
-          right: "-10px",
-          width: "172px",
-          padding: "0.95rem",
+          bottom: "-22px",
+          right: "-14px",
+          width: "200px",
+          padding: "1.1rem",
           transform: "rotate(4deg)",
           boxShadow: "var(--shadow-lg)",
+          zIndex: 2,
         }}
       >
         <div
           style={{
-            fontSize: "0.72rem",
+            fontSize: "0.75rem",
             color: "var(--fg-soft)",
             display: "inline-flex",
             alignItems: "center",
-            gap: "4px",
+            gap: "5px",
           }}
         >
           Mobil
@@ -242,10 +309,10 @@ function HeroVisual() {
         </div>
         <div
           style={{
-            fontSize: "0.85rem",
+            fontSize: "0.92rem",
             fontWeight: 700,
             color: "var(--fg)",
-            marginTop: "0.25rem",
+            marginTop: "0.3rem",
             lineHeight: 1.2,
           }}
         >
@@ -255,35 +322,20 @@ function HeroVisual() {
           style={{
             background: "var(--brand)",
             color: "#fff",
-            fontSize: "0.7rem",
+            fontSize: "0.74rem",
             fontWeight: 600,
-            padding: "0.4rem 0.6rem",
-            borderRadius: "7px",
-            marginTop: "0.55rem",
+            padding: "0.45rem 0.7rem",
+            borderRadius: "8px",
+            marginTop: "0.65rem",
             display: "inline-flex",
             alignItems: "center",
-            gap: "4px",
+            gap: "5px",
           }}
         >
-          <PhoneIcon style={{ width: "11px", height: "11px" }} />
+          <PhoneIcon style={{ width: "12px", height: "12px" }} />
           <span>777 123 456</span>
         </div>
       </div>
-
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "-30px",
-          left: "-30px",
-          width: "200px",
-          height: "200px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
-          zIndex: -1,
-        }}
-      />
     </div>
   );
 }
