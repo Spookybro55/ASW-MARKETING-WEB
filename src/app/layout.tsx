@@ -37,24 +37,18 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Autosmartweby — weby pro živnostníky a malé firmy",
-      },
-    ],
+    // og:image, twitter:image and apple-icon are auto-discovered from
+    // src/app/opengraph-image.tsx, src/app/twitter-image.tsx and
+    // src/app/apple-icon.tsx respectively. favicon stays manual because
+    // /favicon.ico has historically lived at /public root.
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-icon.png",
   },
   twitter: {
     card: "summary_large_image",
     title: rootTitle,
     description: rootDescription,
-    images: ["/og-image.png"],
   },
 };
 
@@ -87,7 +81,7 @@ export default function RootLayout({
                   name: "Autosmartweby",
                   legalName: "Synkedo s.r.o.",
                   url: "https://autosmartweb.cz",
-                  logo: "https://autosmartweb.cz/og-image.png",
+                  logo: "https://autosmartweb.cz/logo.svg",
                   email: "sebastian@autosmartweb.cz",
                   telephone: "+420722525872",
                   sameAs: [],

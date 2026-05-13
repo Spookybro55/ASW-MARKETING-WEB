@@ -29,21 +29,14 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Web pro instalatéra na klíč — Autosmartweby",
-      },
-    ],
+    // og:image inherits from src/app/opengraph-image.tsx (v2 root card)
   },
   twitter: {
     card: "summary_large_image",
     title: "Web pro instalatéra na klíč – od 8 900 Kč | Autosmartweby",
     description:
       "Profesionální web pro instalatéra na klíč. Texty, design, SEO i spuštění na doméně. Hotovo za 3–5 dní, platíte až po schválení.",
-    images: [`${siteUrl}/og-image.png`],
+    // twitter:image inherits from src/app/twitter-image.tsx
   },
 };
 

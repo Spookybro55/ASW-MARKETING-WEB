@@ -37,20 +37,13 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Autosmartweby — Profesionální weby pro živnostníky a malé firmy",
-      },
-    ],
+    // og:image is auto-discovered from src/app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: [`${siteUrl}/og-image.png`],
+    // twitter:image is auto-discovered from src/app/twitter-image.tsx
   },
 };
 
