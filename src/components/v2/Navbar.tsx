@@ -111,23 +111,27 @@ export default function Navbar() {
           </a>
         </div>
 
-        <button
-          type="button"
-          className="xl:hidden btn btn-ghost btn-sm"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? "Zavřít menu" : "Otevřít menu"}
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpen((v) => !v);
-          }}
-        >
-          {open ? (
-            <CloseIcon className="h-5 w-5" />
-          ) : (
-            <MenuIcon className="h-5 w-5" />
-          )}
-        </button>
+        {/* Wrapper carries the xl:hidden rule so the .btn display:inline-flex
+            on the inner button cannot override it via cascade specificity. */}
+        <div className="xl:hidden">
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Zavřít menu" : "Otevřít menu"}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen((v) => !v);
+            }}
+          >
+            {open ? (
+              <CloseIcon className="h-5 w-5" />
+            ) : (
+              <MenuIcon className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
 
       {open && (
