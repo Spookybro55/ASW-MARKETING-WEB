@@ -72,7 +72,13 @@ export default function Navbar() {
             className="text-sm md:text-base xl:text-xl"
             style={{ letterSpacing: "0.04em", textTransform: "uppercase" }}
           >
-            {siteContact.brandName}
+            {/* Wordmark split into Auto + smart + weby so SMART can wear the
+                brand colour while the whole thing still reads as one word. */}
+            <span>{siteContact.brandName.slice(0, 4)}</span>
+            <span style={{ color: "var(--brand)", fontWeight: 800 }}>
+              {siteContact.brandName.slice(4, 9)}
+            </span>
+            <span>{siteContact.brandName.slice(9)}</span>
           </span>
         </Link>
 

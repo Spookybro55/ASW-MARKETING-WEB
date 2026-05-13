@@ -46,10 +46,15 @@ export default function Footer() {
                 height={29}
               />
               <span
-                className="text-lg"
+                className="text-lg whitespace-nowrap"
                 style={{ letterSpacing: "0.04em", textTransform: "uppercase" }}
               >
-                {siteContact.brandName}
+                {/* SMART highlighted in brand-sky for dark footer legibility. */}
+                <span>{siteContact.brandName.slice(0, 4)}</span>
+                <span style={{ color: "var(--brand-sky)", fontWeight: 800 }}>
+                  {siteContact.brandName.slice(4, 9)}
+                </span>
+                <span>{siteContact.brandName.slice(9)}</span>
               </span>
             </div>
             <p
