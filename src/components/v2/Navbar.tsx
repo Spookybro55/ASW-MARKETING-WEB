@@ -53,22 +53,23 @@ export default function Navbar() {
         transition: "border-color 0.2s ease, background-color 0.2s ease",
       }}
     >
-      <div className="container-wide flex items-center justify-between gap-6 px-5 py-3 md:py-4">
+      <div className="container-wide flex items-center justify-between gap-6 px-5 py-3 md:py-4 xl:py-4">
         <Link
           href="/"
-          className="flex flex-shrink-0 items-center gap-2 whitespace-nowrap font-bold tracking-tight"
+          className="flex flex-shrink-0 items-center gap-2.5 whitespace-nowrap font-bold tracking-tight"
           style={{ color: "var(--fg)" }}
           aria-label={`${siteContact.brandName} — domů`}
         >
           <Image
             src="/logo.svg"
             alt=""
-            width={32}
-            height={33}
+            width={40}
+            height={41}
             priority
+            className="h-7 w-auto md:h-8 xl:h-9"
           />
           <span
-            className="text-sm md:text-base xl:text-lg"
+            className="text-sm md:text-base xl:text-xl"
             style={{ letterSpacing: "0.04em", textTransform: "uppercase" }}
           >
             {siteContact.brandName}
@@ -76,7 +77,7 @@ export default function Navbar() {
         </Link>
 
         <nav
-          className="hidden xl:flex items-center gap-6 text-sm"
+          className="hidden xl:flex items-center gap-7 text-[0.95rem]"
           aria-label="Hlavní navigace"
         >
           {NAV_LINKS.map((link) => (
@@ -93,7 +94,7 @@ export default function Navbar() {
         <div className="hidden xl:flex items-center gap-3">
           <a
             href={siteContact.phoneHref}
-            className="btn btn-ghost btn-sm"
+            className="btn btn-ghost"
             data-cta-label="navbar_phone"
             data-cta-location="navbar"
             aria-label={`Zavolat — ${siteContact.phone}`}
@@ -103,7 +104,7 @@ export default function Navbar() {
           </a>
           <a
             href={PRIMARY_CTA.href}
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary"
             data-cta-label="navbar_primary"
             data-cta-location="navbar"
           >
