@@ -15,29 +15,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://autosmartweb.cz";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://autosmartweb.cz";
+
+const rootTitle =
+  "Autosmartweby.cz | Profesionální weby pro živnostníky a malé firmy";
+const rootDescription =
+  "Dostupné weby pro živnostníky, řemeslníky a malé firmy. Pomůžeme s texty, strukturou, základním SEO a spuštěním. Jasná cena a jednoduchý proces.";
 
 export const metadata: Metadata = {
-  title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-  description:
-    "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
+  metadataBase: new URL(siteUrl),
+  title: rootTitle,
+  description: rootDescription,
   alternates: {
-    canonical: siteUrl,
+    canonical: "/",
   },
   openGraph: {
-    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-    description:
-      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
-    url: siteUrl,
+    title: rootTitle,
+    description: rootDescription,
+    url: "/",
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
+        alt: "Autosmartweby — weby pro živnostníky a malé firmy",
       },
     ],
   },
@@ -47,10 +51,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-    description:
-      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
-    images: [`${siteUrl}/og-image.png`],
+    title: rootTitle,
+    description: rootDescription,
+    images: ["/og-image.png"],
   },
 };
 
