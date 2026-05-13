@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { footer, siteContact } from "@/data/siteContent";
+import CookieSettingsLink from "@/components/site/CookieSettingsLink";
 
 // Footer link columns are owned by Footer in Commit 3. The historical
 // `footer.columns` export in siteContent.ts stays unused for now and
@@ -111,6 +112,16 @@ export default function Footer() {
           <div>
             {siteContact.brandName} je obchodní označení {siteContact.legalName}.
           </div>
+        </div>
+
+        <div
+          className="mt-4 pt-4 text-xs"
+          style={{
+            borderTop: "1px solid rgba(245,248,255,0.08)",
+            color: "rgba(245,248,255,0.55)",
+          }}
+        >
+          <CookieSettingsLink />
         </div>
       </div>
     </footer>

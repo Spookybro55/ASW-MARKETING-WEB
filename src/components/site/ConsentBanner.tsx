@@ -61,8 +61,18 @@ export default function ConsentBanner() {
       }}
     >
       <p style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.5 }}>
-        Používáme základní cookies pro fungování webu. Analytiku zapneme jen
-        s vaším souhlasem, abychom věděli, co na webu zlepšit.
+        Používáme cookies a podobné technologie pro fungování webu. Analytiku
+        zapneme jen s vaším souhlasem, abychom věděli, co na webu zlepšit.{" "}
+        <a
+          href="/zasady-ochrany-osobnich-udaju"
+          style={{
+            color: "var(--brand)",
+            textDecoration: "underline",
+            textUnderlineOffset: "0.2em",
+          }}
+        >
+          Více v zásadách ochrany osobních údajů.
+        </a>
       </p>
       <div
         style={{
