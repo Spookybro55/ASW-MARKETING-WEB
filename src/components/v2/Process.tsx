@@ -2,7 +2,7 @@ import { process } from "@/data/siteContent";
 
 export default function Process() {
   return (
-    <section id="jak-to-probiha" className="section">
+    <section id="jak-to-probiha" className="section section-muted">
       <div className="container-wide px-5">
         <div className="grid gap-10 lg:gap-16 lg:grid-cols-[0.9fr_1.1fr] items-start">
           <div className="lg:sticky lg:top-24">

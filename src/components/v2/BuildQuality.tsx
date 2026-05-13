@@ -7,45 +7,38 @@ const BUILD = {
     {
       key: "struktura",
       label: "Struktura",
-      title: "Web jako přehledný příběh.",
+      title: "Přehledný příběh.",
       text:
-        "Návštěvník musí během chvíle pochopit, co děláte, pro koho, a co má udělat dál. Sekce skládáme jako příběh, ne jako sklad informací.",
+        "Návštěvník během chvíle pochopí, co děláte, pro koho, a co má udělat dál.",
     },
     {
       key: "texty",
       label: "Texty",
-      title: "Lidský jazyk, žádná vata.",
+      title: "Lidský jazyk.",
       text:
-        "Krátké odstavce, srozumitelný jazyk, nula marketingových frází. Texty pomůžeme sepsat z toho, co o své práci řeknete jednou větou.",
+        "Krátké odstavce, žádné fráze. Texty pomůžeme sepsat z toho, co o své práci řeknete.",
     },
     {
       key: "mobil",
       label: "Mobil",
       title: "Vyladěné pro telefon.",
       text:
-        "Většina lidí web otevře v ruce. Hlídáme, aby se načítal rychle, vypadal dobře a šel pohodlně použít palcem.",
+        "Většina lidí web otevře v ruce. Hlídáme rychlost, čitelnost a pohodlné ovládání palcem.",
     },
     {
       key: "kontakt",
       label: "Kontakt",
       title: "Ozvat se má být snadné.",
       text:
-        "Telefon, e-mail a formulář jsou dostupné z každé stránky. Kdo se chce ozvat, nemá hledat — má kliknout.",
+        "Telefon, e-mail a formulář na dosah z každé stránky. Kdo se chce ozvat, klikne, ne hledá.",
     },
   ],
 } as const;
 
 export default function BuildQuality() {
   return (
-    <section
-      id="kvalita"
-      className="section section-brand-soft"
-      style={{ position: "relative", overflow: "hidden" }}
-    >
-      <div
-        className="container-wide px-5"
-        style={{ position: "relative", zIndex: 1 }}
-      >
+    <section id="kvalita" className="section section-brand-soft">
+      <div className="container-wide px-5">
         <div className="max-w-[60ch]">
           <span className="eyebrow">{BUILD.eyebrow}</span>
           <h2 className="h2 mt-2">{BUILD.title}</h2>
@@ -61,52 +54,41 @@ export default function BuildQuality() {
               key={pillar.key}
               className="card card-interactive"
               style={{
-                padding: "0",
+                padding: "1.85rem 1.65rem 1.85rem",
                 display: "flex",
                 flexDirection: "column",
-                overflow: "hidden",
-                position: "relative",
+                gap: "1.1rem",
               }}
             >
-              <PillarIllustration kind={pillar.key} />
+              <PillarIcon kind={pillar.key} />
               <div
                 style={{
-                  padding: "1.6rem 1.6rem 1.85rem",
-                  flex: 1,
                   display: "flex",
-                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "0.55rem",
+                  color: "var(--fg-soft)",
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  fontFamily:
+                    "var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace",
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.7rem",
-                    color: "var(--fg-soft)",
-                    fontSize: "0.7rem",
-                    fontWeight: 600,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    fontFamily:
-                      "var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace",
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
-                    style={{ color: "var(--brand)" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span style={{ flex: 1 }}>{pillar.label}</span>
-                </div>
+                <span style={{ color: "var(--brand)" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>{pillar.label}</span>
+              </div>
+              <div>
                 <h3
                   style={{
-                    fontSize: "1.18rem",
+                    fontSize: "1.15rem",
                     fontWeight: 700,
                     color: "var(--fg)",
-                    margin: "0.75rem 0 0.6rem",
+                    margin: "0 0 0.55rem",
                     letterSpacing: "-0.01em",
-                    lineHeight: 1.25,
+                    lineHeight: 1.3,
                   }}
                 >
                   {pillar.title}
@@ -130,132 +112,64 @@ export default function BuildQuality() {
   );
 }
 
-function PillarIllustration({ kind }: { kind: string }) {
-  // Pillar-specific signature illustration. Brand colour palette only,
-  // geometric, no stock icons. Each one is a hint at what that pillar
-  // does (stacked sections, paragraph lines, phone outline, contact pin).
+function PillarIcon({ kind }: { kind: string }) {
+  // Simplified pillar icons — clean geometric shapes, large enough to
+  // read at a glance, no decorative band behind them. Each one stays
+  // recognisably "Struktura / Texty / Mobil / Kontakt" without the
+  // earlier illustrated complexity.
   return (
     <div
       aria-hidden="true"
       style={{
-        position: "relative",
-        height: "140px",
-        background:
-          "linear-gradient(160deg, #F4F8FF 0%, rgba(230,239,255,0.5) 100%)",
-        borderBottom: "1px solid var(--border)",
-        overflow: "hidden",
+        width: "52px",
+        height: "52px",
+        borderRadius: "14px",
+        background: "var(--brand-soft)",
+        color: "var(--brand)",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        boxShadow: "0 0 0 6px rgba(10, 102, 255, 0.05)",
       }}
     >
-      {kind === "struktura" && <StrukturaArt />}
-      {kind === "texty" && <TextyArt />}
-      {kind === "mobil" && <MobilArt />}
-      {kind === "kontakt" && <KontaktArt />}
+      {kind === "struktura" && (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="4" width="18" height="4" rx="1.2" fill="currentColor" />
+          <rect x="3" y="10" width="18" height="4" rx="1.2" fill="currentColor" opacity="0.55" />
+          <rect x="3" y="16" width="12" height="4" rx="1.2" fill="currentColor" opacity="0.35" />
+        </svg>
+      )}
+      {kind === "texty" && (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="5" width="18" height="2.4" rx="1.2" fill="currentColor" />
+          <rect x="3" y="10" width="14" height="2" rx="1" fill="currentColor" opacity="0.55" />
+          <rect x="3" y="14" width="16" height="2" rx="1" fill="currentColor" opacity="0.55" />
+          <rect x="3" y="18" width="10" height="2" rx="1" fill="currentColor" opacity="0.35" />
+        </svg>
+      )}
+      {kind === "mobil" && (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <rect
+            x="7"
+            y="3"
+            width="10"
+            height="18"
+            rx="2"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+          <rect x="10" y="17" width="4" height="1.6" rx="0.8" fill="currentColor" />
+        </svg>
+      )}
+      {kind === "kontakt" && (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 5.5C5 4.67 5.67 4 6.5 4h2.4c.55 0 1.04.37 1.18.9l.85 3.18c.13.5-.06 1.03-.5 1.34l-1.2.85a12 12 0 0 0 5.5 5.5l.85-1.2c.31-.44.85-.63 1.34-.5l3.18.85c.53.14.9.63.9 1.18v2.4c0 .83-.67 1.5-1.5 1.5C10.6 20 4 13.4 4 5.5z"
+            fill="currentColor"
+          />
+        </svg>
+      )}
     </div>
-  );
-}
-
-function StrukturaArt() {
-  // Stack of page sections — header, hero, services, footer — as the
-  // architecture of a page laid out cleanly.
-  return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 220 140"
-      fill="none"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <rect x="60" y="22" width="100" height="14" rx="3" fill="var(--brand-soft)" stroke="var(--brand)" strokeWidth="1.2" />
-      <rect x="60" y="42" width="100" height="28" rx="3" fill="#FFFFFF" stroke="var(--brand-soft)" strokeWidth="1.2" />
-      <rect x="68" y="50" width="40" height="4" rx="1.5" fill="var(--brand)" />
-      <rect x="68" y="58" width="68" height="3" rx="1.5" fill="var(--fg-soft)" opacity="0.6" />
-      <rect x="68" y="63" width="56" height="3" rx="1.5" fill="var(--fg-soft)" opacity="0.5" />
-      <rect x="60" y="76" width="48" height="22" rx="3" fill="#FFFFFF" stroke="var(--brand-soft)" strokeWidth="1.2" />
-      <rect x="112" y="76" width="48" height="22" rx="3" fill="#FFFFFF" stroke="var(--brand-soft)" strokeWidth="1.2" />
-      <rect x="60" y="104" width="100" height="10" rx="3" fill="var(--brand-soft)" opacity="0.6" />
-    </svg>
-  );
-}
-
-function TextyArt() {
-  // Paragraphs of text indicated as horizontal bars — first line bolder
-  // (a heading), rest tapering off (body lines).
-  return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 220 140"
-      fill="none"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <rect x="40" y="32" width="84" height="8" rx="2" fill="var(--brand)" />
-      <rect x="40" y="50" width="140" height="3.5" rx="1.5" fill="var(--fg-soft)" opacity="0.65" />
-      <rect x="40" y="60" width="130" height="3.5" rx="1.5" fill="var(--fg-soft)" opacity="0.55" />
-      <rect x="40" y="70" width="116" height="3.5" rx="1.5" fill="var(--fg-soft)" opacity="0.55" />
-      <rect x="40" y="80" width="92" height="3.5" rx="1.5" fill="var(--fg-soft)" opacity="0.45" />
-      <rect x="40" y="98" width="42" height="3.5" rx="1.5" fill="var(--brand)" opacity="0.65" />
-      <rect x="86" y="98" width="42" height="3.5" rx="1.5" fill="var(--brand)" opacity="0.45" />
-    </svg>
-  );
-}
-
-function MobilArt() {
-  // Phone outline with a tiny rendered layout inside — mockup-on-mockup
-  // hint.
-  return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 220 140"
-      fill="none"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <rect x="78" y="14" width="64" height="112" rx="9" fill="#FFFFFF" stroke="var(--brand)" strokeWidth="1.4" />
-      <rect x="98" y="20" width="24" height="3" rx="1.5" fill="var(--brand-soft)" />
-      <rect x="84" y="32" width="52" height="22" rx="3" fill="var(--brand-soft)" />
-      <rect x="90" y="38" width="32" height="3" rx="1.5" fill="var(--brand)" />
-      <rect x="90" y="45" width="22" height="2.5" rx="1.25" fill="var(--fg-soft)" opacity="0.6" />
-      <rect x="84" y="60" width="24" height="20" rx="3" fill="#FFFFFF" stroke="var(--brand-soft)" strokeWidth="1" />
-      <rect x="112" y="60" width="24" height="20" rx="3" fill="#FFFFFF" stroke="var(--brand-soft)" strokeWidth="1" />
-      <rect x="84" y="86" width="52" height="6" rx="2" fill="var(--brand)" />
-      <rect x="84" y="98" width="32" height="3" rx="1.5" fill="var(--fg-soft)" opacity="0.5" />
-      <rect x="84" y="106" width="38" height="3" rx="1.5" fill="var(--fg-soft)" opacity="0.4" />
-    </svg>
-  );
-}
-
-function KontaktArt() {
-  // Phone handset + map pin + signal line — "we put the contact path
-  // first". No stock icons; geometric primitives only.
-  return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 220 140"
-      fill="none"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <circle cx="68" cy="70" r="34" fill="#FFFFFF" stroke="var(--brand-soft)" strokeWidth="1.4" />
-      <path
-        d="M 55 60 L 60 58 L 68 66 L 64 72 C 70 78 76 84 82 90 L 88 86 L 96 94 L 94 99 C 90 106 78 106 70 100 C 60 92 50 80 50 70 C 50 65 52 62 55 60 Z"
-        fill="var(--brand)"
-      />
-      <path
-        d="M 110 96 L 110 74 L 130 60 L 150 74 L 150 96 Z"
-        fill="#FFFFFF"
-        stroke="var(--brand)"
-        strokeWidth="1.4"
-      />
-      <rect x="124" y="80" width="12" height="16" rx="1.5" fill="var(--brand-soft)" />
-      <circle cx="170" cy="58" r="6" fill="var(--brand)" />
-      <path
-        d="M 170 64 C 170 70 165 74 165 80 C 165 84 168 87 170 87"
-        stroke="var(--brand)"
-        strokeWidth="1.4"
-        fill="none"
-        strokeLinecap="round"
-        strokeDasharray="2 3"
-      />
-    </svg>
   );
 }

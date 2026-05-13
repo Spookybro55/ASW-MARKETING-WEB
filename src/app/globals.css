@@ -131,21 +131,17 @@ body {
     var(--bg);
 }
 
-/* Subtle brand-tinted section background — used to break the page out
-   of a long all-white run. Reads as a designed pause, not as a tech
-   accent. */
+/* Subtle brand-tinted section background — solid edges so the section
+   reads as its own zone, not a fade into the neighbours. */
 .section-brand-soft {
-  background:
-    linear-gradient(180deg, var(--bg) 0%, #F4F8FF 35%, #F4F8FF 65%, var(--bg) 100%);
+  background: #F4F8FF;
   position: relative;
 }
 
-/* Portfolio-specific accent: a soft brand-blue panel that frames the
-   showroom rows. */
+/* Portfolio-specific accent — clean panel-ish background that frames
+   the showroom rows without bleeding into the next section. */
 .section-showroom {
-  background:
-    radial-gradient(circle at 50% 0%, var(--brand-soft) 0%, rgba(230,239,255,0) 50%),
-    var(--bg);
+  background: #F7F9FE;
   position: relative;
 }
 

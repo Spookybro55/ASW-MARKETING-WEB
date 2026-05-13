@@ -5,22 +5,15 @@ type PortfolioItem = (typeof portfolio.items)[number];
 
 export default function Portfolio() {
   return (
-    <section
-      id="ukazky"
-      className="section section-showroom"
-      style={{ position: "relative", overflow: "hidden" }}
-    >
-      <div
-        className="container-wide px-5"
-        style={{ position: "relative", zIndex: 1 }}
-      >
+    <section id="ukazky" className="section section-showroom">
+      <div className="container-wide px-5">
         <div className="max-w-[60ch]">
           <span className="eyebrow">{portfolio.eyebrow}</span>
           <h2 className="h2 mt-2">{portfolio.title}</h2>
           <p className="lead mt-4">{portfolio.lead}</p>
         </div>
 
-        <div className="mt-12 flex flex-col gap-8 md:gap-10">
+        <div className="mt-12 flex flex-col gap-6 md:gap-8">
           {portfolio.items.map((item, i) => (
             <ShowcaseRow key={item.slug} item={item} index={i} />
           ))}
@@ -38,13 +31,6 @@ export default function Portfolio() {
 }
 
 function ShowcaseRow({ item, index }: { item: PortfolioItem; index: number }) {
-  // Alternate desktop/mobile side on every other row so the showroom
-  // doesn't read like a stacked list of identical tiles.
-  const visualOnLeft = index % 2 === 0;
-
-  const Visual = <ShowcaseVisual item={item} />;
-  const Context = <ShowcaseContext item={item} index={index} />;
-
   return (
     <article
       className="card card-interactive"
@@ -52,31 +38,11 @@ function ShowcaseRow({ item, index }: { item: PortfolioItem; index: number }) {
         padding: 0,
         overflow: "hidden",
         display: "grid",
-        gap: 0,
-        gridTemplateColumns: "1fr",
       }}
     >
-      <div
-        className="grid items-stretch"
-        style={{
-          gridTemplateColumns: "1fr",
-          gap: 0,
-        }}
-      >
-        <div className="md:grid md:grid-cols-[1.25fr_1fr] md:gap-0">
-          {visualOnLeft ? (
-            <>
-              {Visual}
-              {Context}
-            </>
-          ) : (
-            <>
-              <div className="hidden md:block">{Visual}</div>
-              {Context}
-              <div className="md:hidden">{Visual}</div>
-            </>
-          )}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-[1.15fr_1fr] items-stretch">
+        <ShowcaseVisual item={item} />
+        <ShowcaseContext item={item} index={index} />
       </div>
     </article>
   );
@@ -85,25 +51,27 @@ function ShowcaseRow({ item, index }: { item: PortfolioItem; index: number }) {
 function ShowcaseVisual({ item }: { item: PortfolioItem }) {
   const palette =
     item.template === "emergency-professional"
-      ? { from: "#e8f0fc", to: "#cfdcf3", accent: "#dde9f8" }
+      ? { from: "#eef3fb", to: "#dde7f4", chrome: "#e3ebf6" }
       : item.template === "community-expert"
-      ? { from: "#eef6ee", to: "#d6e9d6", accent: "#deedde" }
-      : { from: "#fdf2e6", to: "#f4dbb6", accent: "#f6e2c0" };
+      ? { from: "#eef5ee", to: "#dde9dd", chrome: "#e4ecdf" }
+      : { from: "#fbf3e8", to: "#f3e1c2", chrome: "#f1e2cb" };
 
   return (
     <div
       style={{
         position: "relative",
-        background: `linear-gradient(135deg, ${palette.from} 0%, ${palette.to} 100%)`,
-        minHeight: "320px",
-        padding: "2.25rem 2rem 2.5rem",
+        background: `linear-gradient(160deg, ${palette.from} 0%, ${palette.to} 100%)`,
+        minHeight: "340px",
+        padding: "1.85rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        gap: "1.25rem",
         borderBottom: "1px solid var(--border)",
       }}
       className="md:border-b-0 md:border-r md:border-r-[var(--border)]"
     >
+      {/* Demo concept chip */}
       <span
         className="chip"
         style={{
@@ -115,48 +83,37 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
           color: "var(--fg-muted)",
           fontSize: "0.72rem",
           fontWeight: 600,
-          backdropFilter: "blur(4px)",
         }}
       >
         Ukázkový koncept
       </span>
 
-      {/* Desktop mockup — substantial */}
+      {/* Desktop mockup — flat, centered, no rotation */}
       <div
         style={{
-          position: "relative",
-          width: "min(100%, 360px)",
+          flex: "1 1 auto",
+          maxWidth: "320px",
           background: "#FFFFFF",
-          borderRadius: "12px",
-          boxShadow:
-            "0 24px 50px rgba(11, 23, 48, 0.18), 0 4px 12px rgba(11, 23, 48, 0.06)",
+          borderRadius: "10px",
+          boxShadow: "0 16px 36px rgba(11, 23, 48, 0.12)",
           overflow: "hidden",
-          transform: "rotate(-1deg)",
+          border: `1px solid ${palette.chrome}`,
         }}
       >
         <div
           style={{
             display: "flex",
-            gap: "4px",
+            gap: "5px",
             padding: "9px 12px",
-            background: palette.accent,
+            background: palette.chrome,
             borderBottom: "1px solid rgba(7,17,31,0.06)",
           }}
         >
-          <span style={dot("#ddd")} />
-          <span style={dot("#ddd")} />
-          <span style={dot("#ddd")} />
-          <span
-            style={{
-              marginLeft: "8px",
-              fontSize: "0.6rem",
-              color: "var(--fg-soft)",
-            }}
-          >
-            {item.slug.replace(/^demo-/, "").replace(/-/g, "-")}.cz
-          </span>
+          <span style={dot()} />
+          <span style={dot()} />
+          <span style={dot()} />
         </div>
-        <div style={{ padding: "1rem 1.1rem 1.2rem" }}>
+        <div style={{ padding: "1rem 1.1rem 1.15rem" }}>
           <div
             style={{
               fontSize: "0.62rem",
@@ -179,12 +136,12 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
           >
             {item.goal}
           </div>
-          <div style={{ marginTop: "0.7rem", display: "flex", gap: "5px" }}>
+          <div style={{ marginTop: "0.75rem", display: "flex", gap: "5px" }}>
             <span
               style={{
                 background: "var(--brand)",
                 color: "#FFFFFF",
-                fontSize: "0.55rem",
+                fontSize: "0.6rem",
                 fontWeight: 600,
                 padding: "0.3rem 0.55rem",
                 borderRadius: "5px",
@@ -196,7 +153,7 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
               style={{
                 background: "#FFFFFF",
                 color: "var(--fg)",
-                fontSize: "0.55rem",
+                fontSize: "0.6rem",
                 fontWeight: 600,
                 padding: "0.3rem 0.55rem",
                 borderRadius: "5px",
@@ -208,18 +165,19 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
           </div>
           <div
             style={{
-              marginTop: "0.7rem",
+              marginTop: "0.85rem",
               display: "grid",
               gridTemplateColumns: "1fr 1fr 1fr",
-              gap: "3px",
+              gap: "4px",
             }}
           >
-            {["A", "B", "C", "D", "E", "F"].map((s, i) => (
+            {Array.from({ length: 6 }).map((_, i) => (
               <div
-                key={s}
+                key={i}
                 style={{
                   height: "10px",
-                  background: i === 0 ? "var(--brand-soft)" : "rgba(7,17,31,0.06)",
+                  background:
+                    i === 0 ? "var(--brand-soft)" : "rgba(7,17,31,0.06)",
                   borderRadius: "3px",
                 }}
               />
@@ -228,27 +186,34 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
         </div>
       </div>
 
-      {/* Mobile mockup beside the desktop one */}
+      {/* Mobile mockup — beside the desktop one, no rotation, no overlap */}
       <div
         style={{
-          position: "absolute",
-          right: "1.5rem",
-          bottom: "1.5rem",
-          width: "92px",
+          flex: "0 0 96px",
           background: "#FFFFFF",
           borderRadius: "10px",
-          boxShadow: "0 14px 30px rgba(11,23,48,0.20)",
+          boxShadow: "0 12px 28px rgba(11,23,48,0.14)",
           overflow: "hidden",
-          transform: "rotate(4deg)",
-          border: `1px solid ${palette.accent}`,
+          border: `1px solid ${palette.chrome}`,
+          alignSelf: "stretch",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <div
           style={{
-            padding: "0.5rem 0.55rem 0.7rem",
+            background: palette.chrome,
+            height: "12px",
+            borderBottom: "1px solid rgba(7,17,31,0.06)",
+          }}
+        />
+        <div
+          style={{
+            padding: "0.65rem",
             display: "flex",
             flexDirection: "column",
-            gap: "5px",
+            gap: "6px",
+            flex: 1,
           }}
         >
           <div
@@ -258,17 +223,17 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
               color: "var(--brand)",
               letterSpacing: "0.06em",
               textTransform: "uppercase",
-              lineHeight: 1.1,
+              lineHeight: 1.15,
             }}
           >
             {item.sector.split(" ")[0]}
           </div>
           <div
             style={{
-              fontSize: "0.55rem",
+              fontSize: "0.58rem",
               fontWeight: 700,
               color: "var(--fg)",
-              lineHeight: 1.15,
+              lineHeight: 1.2,
             }}
           >
             {item.city}
@@ -279,7 +244,7 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
               color: "#FFFFFF",
               fontSize: "0.5rem",
               fontWeight: 600,
-              padding: "0.22rem 0.35rem",
+              padding: "0.22rem 0.4rem",
               borderRadius: "4px",
               display: "inline-block",
               alignSelf: "flex-start",
@@ -299,6 +264,15 @@ function ShowcaseVisual({ item }: { item: PortfolioItem }) {
               height: "5px",
               background: "rgba(7,17,31,0.06)",
               borderRadius: "2px",
+              width: "70%",
+            }}
+          />
+          <div
+            style={{
+              height: "5px",
+              background: "rgba(7,17,31,0.06)",
+              borderRadius: "2px",
+              width: "55%",
             }}
           />
         </div>
@@ -320,7 +294,6 @@ function ShowcaseContext({
         padding: "1.85rem 1.85rem 2rem",
         display: "flex",
         flexDirection: "column",
-        gap: "0.55rem",
         background: "var(--bg-card)",
       }}
     >
@@ -351,7 +324,7 @@ function ShowcaseContext({
           letterSpacing: "-0.01em",
           color: "var(--fg)",
           lineHeight: 1.25,
-          margin: "0.3rem 0 0.6rem",
+          margin: "0.6rem 0 0.9rem",
         }}
       >
         {item.sector}
@@ -361,9 +334,10 @@ function ShowcaseContext({
         style={{
           display: "grid",
           gridTemplateColumns: "auto 1fr",
-          rowGap: "0.45rem",
+          rowGap: "0.5rem",
           columnGap: "1rem",
           fontSize: "0.92rem",
+          margin: 0,
         }}
       >
         <dt
@@ -399,7 +373,7 @@ function ShowcaseContext({
 
       <Link
         href={item.previewPath}
-        className="btn btn-secondary btn-sm self-start mt-4"
+        className="btn btn-secondary btn-sm mt-6 self-start"
         data-cta-label={`portfolio_${item.slug}`}
         data-cta-location="portfolio"
       >
@@ -409,12 +383,12 @@ function ShowcaseContext({
   );
 }
 
-function dot(color: string) {
+function dot() {
   return {
     width: 6,
     height: 6,
     borderRadius: "50%",
-    background: color,
+    background: "rgba(7,17,31,0.18)",
     display: "inline-block",
   } as const;
 }
