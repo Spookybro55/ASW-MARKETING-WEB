@@ -53,10 +53,10 @@ export default function Navbar() {
         transition: "border-color 0.2s ease, background-color 0.2s ease",
       }}
     >
-      <div className="container-wide flex items-center justify-between gap-4 px-5 py-3 md:py-4">
+      <div className="container-wide flex items-center justify-between gap-6 px-5 py-3 md:py-4">
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold tracking-tight"
+          className="flex flex-shrink-0 items-center gap-2 whitespace-nowrap font-bold tracking-tight"
           style={{ color: "var(--fg)" }}
           aria-label={`${siteContact.brandName} — domů`}
         >
@@ -68,7 +68,7 @@ export default function Navbar() {
             priority
           />
           <span
-            className="text-base md:text-lg"
+            className="text-sm md:text-base xl:text-lg"
             style={{ letterSpacing: "0.04em", textTransform: "uppercase" }}
           >
             {siteContact.brandName}
@@ -76,21 +76,21 @@ export default function Navbar() {
         </Link>
 
         <nav
-          className="hidden lg:flex items-center gap-7 text-sm"
+          className="hidden xl:flex items-center gap-6 text-sm"
           aria-label="Hlavní navigace"
         >
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="muted hover:text-[var(--fg)] transition-colors"
+              className="muted whitespace-nowrap hover:text-[var(--fg)] transition-colors"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <a
             href={siteContact.phoneHref}
             className="btn btn-ghost btn-sm"
@@ -113,7 +113,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="md:hidden btn btn-ghost btn-sm"
+          className="xl:hidden btn btn-ghost btn-sm"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Zavřít menu" : "Otevřít menu"}
@@ -133,7 +133,7 @@ export default function Navbar() {
       {open && (
         <div
           id="mobile-nav"
-          className="md:hidden border-t"
+          className="xl:hidden border-t"
           style={{ borderColor: "var(--border)", background: "white" }}
         >
           <div className="container-wide px-5 py-4 flex flex-col gap-3">
