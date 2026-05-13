@@ -15,27 +15,6 @@ const HERO = {
   secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
 } as const;
 
-// Labels that wear AROUND the mockup — they explain WHY this is a real
-// website mockup (not a startup dashboard).
-const MOCKUP_LABELS = [
-  "Mobilní verze",
-  "Rychlé načtení",
-  "Kontaktní CTA",
-  "SEO základ",
-] as const;
-
-// Build-quality promise list — sits below the hero grid as a small
-// "Co hlídáme u každého webu" sub-block. Replaces the previous wide
-// trust strip with something that frames our craft, not a generic list
-// of benefits.
-const BUILD_QUALITY = [
-  "Srozumitelná struktura",
-  "Mobilní zobrazení",
-  "Rychlé načtení",
-  "Kontaktní cesta",
-  "Základ pro Google",
-] as const;
-
 export default function Hero() {
   return (
     <section
@@ -43,7 +22,7 @@ export default function Hero() {
       className="section section-soft-gradient"
       style={{
         paddingTop: "2.5rem",
-        paddingBottom: "3.5rem",
+        paddingBottom: "4rem",
         position: "relative",
         overflow: "hidden",
       }}
@@ -54,93 +33,547 @@ export default function Hero() {
         className="container-wide px-5"
         style={{ position: "relative", zIndex: 1 }}
       >
-        <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.05fr_0.95fr] items-center">
-          <div>
-            <span className="eyebrow">{HERO.eyebrow}</span>
-            <h1 className="h1 mt-2">{HERO.h1}</h1>
-            <p className="lead mt-5 max-w-[58ch]">{HERO.lead}</p>
-
-            <div className="mt-7 flex flex-col sm:flex-row gap-3">
-              <a
-                href={HERO.primaryCta.href}
-                className="btn btn-primary btn-lg"
-                data-cta-label="hero_primary"
-                data-cta-location="hero"
-              >
-                {HERO.primaryCta.label}
-              </a>
-              <a
-                href={HERO.secondaryCta.href}
-                className="btn btn-secondary btn-lg"
-                data-cta-label="hero_secondary"
-                data-cta-location="hero"
-              >
-                {HERO.secondaryCta.label}
-              </a>
-            </div>
-
-            <p className="mt-4 text-sm soft max-w-[52ch]">{HERO.microcopy}</p>
-          </div>
-
-          <HeroVisual />
-        </div>
-
-        {/* Build-quality promise block. Replaces the old wide trust strip
-            with a tighter, framed "this is what we watch on every site"
-            statement — small heading + 5 chip-style points. */}
-        <div className="mt-12 md:mt-16">
-          <div
-            className="flex flex-wrap items-center gap-x-5 gap-y-3"
-            style={{
-              borderTop: "1px solid var(--border)",
-              paddingTop: "1.4rem",
-            }}
-          >
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.55rem",
-                fontWeight: 600,
-                color: "var(--fg)",
-                fontSize: "0.97rem",
-              }}
-            >
-              <span
-                aria-hidden="true"
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "999px",
-                  background: "var(--brand)",
-                  display: "inline-block",
-                }}
-              />
-              Co hlídáme u každého webu
-            </span>
-            <ul
-              className="flex flex-wrap gap-2"
-              aria-label="Co hlídáme u každého webu"
-            >
-              {BUILD_QUALITY.map((label) => (
-                <li key={label}>
-                  <span className="chip chip-brand">
-                    <CheckIcon style={{ width: "14px", height: "14px" }} />
-                    {label}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-[1fr_1.15fr] items-stretch">
+          <LeftPanel />
+          <ShowcasePanel />
         </div>
       </div>
     </section>
   );
 }
 
+function LeftPanel() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "2rem 2.1rem",
+        background: "rgba(255, 255, 255, 0.7)",
+        border: "1px solid var(--border)",
+        borderRadius: "var(--radius-lg)",
+        boxShadow: "var(--shadow-sm)",
+        backdropFilter: "saturate(140%) blur(4px)",
+      }}
+    >
+      <span className="eyebrow">{HERO.eyebrow}</span>
+      <h1 className="h1 mt-2">{HERO.h1}</h1>
+      <p className="lead mt-5 max-w-[54ch]">{HERO.lead}</p>
+
+      <div className="mt-7 flex flex-col sm:flex-row gap-3">
+        <a
+          href={HERO.primaryCta.href}
+          className="btn btn-primary btn-lg"
+          data-cta-label="hero_primary"
+          data-cta-location="hero"
+        >
+          {HERO.primaryCta.label}
+        </a>
+        <a
+          href={HERO.secondaryCta.href}
+          className="btn btn-secondary btn-lg"
+          data-cta-label="hero_secondary"
+          data-cta-location="hero"
+        >
+          {HERO.secondaryCta.label}
+        </a>
+      </div>
+
+      <p className="mt-4 text-sm soft max-w-[48ch]">{HERO.microcopy}</p>
+
+      {/* Small footer row: numeric process anchor instead of generic chip
+          strip. Integrated into the left panel composition. */}
+      <div
+        className="mt-6 pt-5"
+        style={{
+          borderTop: "1px solid var(--border)",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "1.25rem 1.75rem",
+          alignItems: "center",
+        }}
+      >
+        {[
+          { num: "3", label: "kroky ke spuštění" },
+          { num: "1", label: "domluvená cena předem" },
+          { num: "0", label: "skrytých poplatků" },
+        ].map((s) => (
+          <div
+            key={s.label}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.6rem",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "28px",
+                height: "28px",
+                borderRadius: "999px",
+                background: "var(--brand)",
+                color: "#FFFFFF",
+                fontWeight: 700,
+                fontSize: "0.85rem",
+              }}
+            >
+              {s.num}
+            </span>
+            <span
+              style={{
+                color: "var(--fg-muted)",
+                fontSize: "0.88rem",
+                fontWeight: 500,
+              }}
+            >
+              {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ShowcasePanel() {
+  return (
+    <div
+      style={{
+        position: "relative",
+        padding: "2rem 1.75rem",
+        background: "#FFFFFF",
+        border: "1px solid var(--border)",
+        borderRadius: "var(--radius-lg)",
+        boxShadow:
+          "0 24px 60px rgba(7, 17, 31, 0.10), 0 4px 14px rgba(7, 17, 31, 0.04)",
+        minHeight: "640px",
+        overflow: "hidden",
+      }}
+    >
+      <ShowcaseGrid />
+
+      {/* Panel label — like an architectural drawing caption */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "1.5rem",
+        }}
+      >
+        <span
+          className="eyebrow"
+          style={{ marginBottom: 0, fontSize: "0.7rem" }}
+        >
+          Stavba webu
+        </span>
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            color: "var(--fg-soft)",
+            fontSize: "0.72rem",
+            fontFamily:
+              "var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace",
+          }}
+        >
+          <span
+            aria-hidden="true"
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              background: "var(--brand)",
+            }}
+          />
+          ukázkový koncept
+        </span>
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          height: "calc(640px - 5.5rem)",
+        }}
+      >
+        <Mockup />
+
+        {/* Annotations — each one points at a specific feature of the
+            mockup so the showcase reads as a real "build of a website",
+            not a SaaS feature callout. Hidden on small screens to keep
+            mobile uncluttered. */}
+        <Annotation
+          label="SEO základ"
+          hint="meta, sitemap, popisky"
+          position={{ top: "2%", right: "0" }}
+          line={{ width: "60px", left: "-72px", top: "14px" }}
+        />
+        <Annotation
+          label="Služby"
+          hint="přehled toho, co děláte"
+          position={{ top: "44%", right: "0" }}
+          line={{ width: "44px", left: "-56px", top: "14px" }}
+        />
+        <Annotation
+          label="Kontaktní CTA"
+          hint="telefon, e-mail, formulář"
+          position={{ bottom: "20%", left: "0" }}
+          line={{ width: "44px", right: "-56px", top: "14px" }}
+        />
+        <Annotation
+          label="Mobil"
+          hint="vyladěné pro telefon"
+          position={{ bottom: "0", right: "0" }}
+          line={{ width: "40px", left: "-52px", top: "14px" }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Mockup() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        top: "0.5rem",
+        left: "50%",
+        transform: "translateX(-50%) rotate(-0.6deg)",
+        width: "min(100%, 480px)",
+        borderRadius: "var(--radius-lg)",
+        overflow: "hidden",
+        background: "#FFFFFF",
+        border: "1px solid var(--border)",
+        boxShadow:
+          "0 30px 70px rgba(7, 17, 31, 0.16), 0 8px 24px rgba(7, 17, 31, 0.06)",
+        zIndex: 1,
+      }}
+    >
+      {/* Browser chrome */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "13px 20px",
+          background: "var(--bg-muted)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        <span style={dot("#ff5f57")} />
+        <span style={dot("#ffbd2e")} />
+        <span style={dot("#28c840")} />
+        <span
+          style={{
+            marginLeft: "12px",
+            fontSize: "0.84rem",
+            color: "var(--fg-soft)",
+          }}
+        >
+          elektro-novak.cz
+        </span>
+      </div>
+
+      {/* Mockup body — bigger than before */}
+      <div style={{ padding: "2rem 2rem 2.25rem" }}>
+        <div
+          style={{
+            fontSize: "0.78rem",
+            fontWeight: 600,
+            color: "var(--brand)",
+            letterSpacing: "0.09em",
+            textTransform: "uppercase",
+          }}
+        >
+          Elektrikář Praha
+        </div>
+        <div
+          style={{
+            fontSize: "2rem",
+            fontWeight: 700,
+            lineHeight: 1.15,
+            color: "var(--fg)",
+            marginTop: "0.55rem",
+            maxWidth: "16ch",
+            letterSpacing: "-0.018em",
+          }}
+        >
+          Elektroinstalace bez zbytečných starostí.
+        </div>
+        <div
+          style={{
+            fontSize: "1rem",
+            color: "var(--fg-muted)",
+            marginTop: "0.85rem",
+            maxWidth: "32ch",
+          }}
+        >
+          Revize, rekonstrukce, nové rozvody. Reagujeme do 24 hodin.
+        </div>
+        <div style={{ marginTop: "1.35rem", display: "flex", gap: "10px" }}>
+          <span
+            style={{
+              background: "var(--brand)",
+              color: "#ffffff",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              padding: "0.65rem 1.1rem",
+              borderRadius: "10px",
+            }}
+          >
+            Zavolat
+          </span>
+          <span
+            style={{
+              background: "#ffffff",
+              color: "var(--fg)",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              padding: "0.65rem 1.1rem",
+              borderRadius: "10px",
+              border: "1px solid var(--border-strong)",
+            }}
+          >
+            Reference
+          </span>
+        </div>
+        <div
+          style={{
+            marginTop: "1.6rem",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            gap: "0.55rem",
+          }}
+        >
+          {[
+            "Revize",
+            "Rekonstrukce",
+            "Rozvody",
+            "Smart home",
+            "Bytová",
+            "Průmyslová",
+          ].map((s) => (
+            <div
+              key={s}
+              style={{
+                fontSize: "0.78rem",
+                padding: "0.55rem 0.7rem",
+                background: "var(--bg-muted)",
+                borderRadius: "8px",
+                color: "var(--fg-muted)",
+                textAlign: "center",
+              }}
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Floating mobile preview anchored to mockup */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-26px",
+          right: "-22px",
+          width: "152px",
+          padding: "0.85rem",
+          background: "#FFFFFF",
+          borderRadius: "var(--radius)",
+          border: "1px solid var(--border)",
+          boxShadow:
+            "0 18px 36px rgba(7, 17, 31, 0.18), 0 4px 10px rgba(7, 17, 31, 0.06)",
+          transform: "rotate(5deg)",
+          zIndex: 2,
+        }}
+      >
+        <div
+          style={{
+            fontSize: "0.7rem",
+            color: "var(--fg-soft)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "5px",
+          }}
+        >
+          Mobil
+          <CheckIcon
+            style={{ width: "12px", height: "12px", color: "var(--success)" }}
+          />
+        </div>
+        <div
+          style={{
+            fontSize: "0.85rem",
+            fontWeight: 700,
+            color: "var(--fg)",
+            marginTop: "0.3rem",
+            lineHeight: 1.2,
+          }}
+        >
+          Elektrikář Praha
+        </div>
+        <div
+          style={{
+            background: "var(--brand)",
+            color: "#fff",
+            fontSize: "0.7rem",
+            fontWeight: 600,
+            padding: "0.4rem 0.6rem",
+            borderRadius: "7px",
+            marginTop: "0.55rem",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "5px",
+          }}
+        >
+          <PhoneIcon style={{ width: "11px", height: "11px" }} />
+          <span>777 123 456</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Annotation({
+  label,
+  hint,
+  position,
+  line,
+}: {
+  label: string;
+  hint: string;
+  position: CSSProperties;
+  line: { width: string; left?: string; right?: string; top: string };
+}) {
+  return (
+    <div
+      className="hidden md:flex"
+      style={{
+        position: "absolute",
+        ...position,
+        alignItems: "center",
+        gap: "0.5rem",
+        zIndex: 3,
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: line.top,
+          left: line.left,
+          right: line.right,
+          width: line.width,
+          height: "1px",
+          background:
+            "repeating-linear-gradient(to right, var(--brand) 0 4px, transparent 4px 8px)",
+        }}
+      />
+      <span
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: `calc(${line.top} - 3px)`,
+          ...(line.left
+            ? { left: `calc(${line.left} - 4px)` }
+            : { right: `calc(${line.right} - 4px)` }),
+          width: "8px",
+          height: "8px",
+          borderRadius: "50%",
+          background: "var(--brand)",
+        }}
+      />
+      <div
+        style={{
+          background: "#FFFFFF",
+          border: "1px solid var(--brand-soft)",
+          borderRadius: "10px",
+          padding: "0.5rem 0.75rem",
+          boxShadow: "var(--shadow-sm)",
+          maxWidth: "180px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "0.66rem",
+            fontWeight: 700,
+            color: "var(--brand)",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+          }}
+        >
+          {label}
+        </div>
+        <div
+          style={{
+            fontSize: "0.72rem",
+            color: "var(--fg-muted)",
+            marginTop: "0.15rem",
+            lineHeight: 1.35,
+          }}
+        >
+          {hint}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShowcaseGrid() {
+  // Faint structural layout grid inside the showcase panel. Reads as
+  // architectural blueprint, not a tech grid — solid faint brand-soft
+  // lines, masked by the panel rounded corners + low opacity.
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 600 640"
+      preserveAspectRatio="none"
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        opacity: 0.55,
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
+    >
+      {[1, 2, 3, 4, 5].map((i) => (
+        <line
+          key={`v-${i}`}
+          x1={(600 / 6) * i}
+          x2={(600 / 6) * i}
+          y1={0}
+          y2={640}
+          stroke="var(--brand-soft)"
+          strokeWidth="1"
+        />
+      ))}
+      {[1, 2, 3, 4, 5, 6].map((i) => (
+        <line
+          key={`h-${i}`}
+          x1={0}
+          x2={600}
+          y1={(640 / 7) * i}
+          y2={(640 / 7) * i}
+          stroke="var(--brand-soft)"
+          strokeWidth="1"
+        />
+      ))}
+    </svg>
+  );
+}
+
 function BrandDecoration() {
-  // Subtle workflow motif — three brand dots connected by a faint dashed
-  // line. Reads as "krok 1 -> 2 -> 3" without resorting to a tech grid.
   return (
     <svg
       aria-hidden="true"
@@ -153,7 +586,7 @@ function BrandDecoration() {
         top: "1.5rem",
         left: "-2rem",
         zIndex: 0,
-        opacity: 0.55,
+        opacity: 0.4,
         pointerEvents: "none",
       }}
     >
@@ -171,244 +604,6 @@ function BrandDecoration() {
       <circle cx="290" cy="60" r="10" fill="var(--brand-soft)" />
       <circle cx="290" cy="60" r="4" fill="var(--brand)" />
     </svg>
-  );
-}
-
-function HeroVisual() {
-  // Browser mockup of a real-looking small-business site. Below the card
-  // we render 4 small quality labels that explain WHAT makes the mockup
-  // a proper site (not a startup dashboard).
-  return (
-    <div className="relative" style={{ minHeight: "460px" }}>
-      {/* Soft brand panel behind the card */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "10%",
-          right: "-2%",
-          bottom: "10%",
-          left: "6%",
-          background:
-            "linear-gradient(135deg, var(--brand-soft) 0%, rgba(230,239,255,0) 70%)",
-          borderRadius: "var(--radius-lg)",
-          zIndex: 0,
-        }}
-      />
-
-      <div
-        className="card"
-        aria-hidden="true"
-        style={{
-          position: "relative",
-          zIndex: 1,
-          padding: 0,
-          overflow: "hidden",
-          boxShadow:
-            "0 30px 70px rgba(7, 17, 31, 0.14), 0 8px 24px rgba(7, 17, 31, 0.06)",
-          transform: "rotate(-0.8deg)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "6px",
-            padding: "13px 20px",
-            background: "var(--bg-muted)",
-            borderBottom: "1px solid var(--border)",
-          }}
-        >
-          <span style={dot("#ff5f57")} />
-          <span style={dot("#ffbd2e")} />
-          <span style={dot("#28c840")} />
-          <span
-            style={{
-              marginLeft: "12px",
-              fontSize: "0.86rem",
-              color: "var(--fg-soft)",
-            }}
-          >
-            elektro-novak.cz
-          </span>
-        </div>
-        <div style={{ padding: "2rem 2rem 2.25rem" }}>
-          <div
-            style={{
-              fontSize: "0.74rem",
-              fontWeight: 600,
-              color: "var(--brand)",
-              letterSpacing: "0.09em",
-              textTransform: "uppercase",
-            }}
-          >
-            Elektrikář Praha
-          </div>
-          <div
-            style={{
-              fontSize: "1.75rem",
-              fontWeight: 700,
-              lineHeight: 1.18,
-              color: "var(--fg)",
-              marginTop: "0.5rem",
-              maxWidth: "20ch",
-              letterSpacing: "-0.015em",
-            }}
-          >
-            Elektroinstalace bez zbytečných starostí.
-          </div>
-          <div
-            style={{
-              fontSize: "0.98rem",
-              color: "var(--fg-muted)",
-              marginTop: "0.8rem",
-              maxWidth: "34ch",
-            }}
-          >
-            Revize, rekonstrukce, nové rozvody. Reagujeme do 24 hodin.
-          </div>
-          <div style={{ marginTop: "1.25rem", display: "flex", gap: "10px" }}>
-            <span
-              style={{
-                background: "var(--brand)",
-                color: "#ffffff",
-                fontSize: "0.82rem",
-                fontWeight: 600,
-                padding: "0.62rem 1.05rem",
-                borderRadius: "10px",
-              }}
-            >
-              Zavolat
-            </span>
-            <span
-              style={{
-                background: "#ffffff",
-                color: "var(--fg)",
-                fontSize: "0.82rem",
-                fontWeight: 600,
-                padding: "0.62rem 1.05rem",
-                borderRadius: "10px",
-                border: "1px solid var(--border-strong)",
-              }}
-            >
-              Reference
-            </span>
-          </div>
-          <div
-            style={{
-              marginTop: "1.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "0.6rem",
-            }}
-          >
-            {["Revize", "Rekonstrukce", "Rozvody", "Smart home"].map((s) => (
-              <div
-                key={s}
-                style={{
-                  fontSize: "0.82rem",
-                  padding: "0.55rem 0.8rem",
-                  background: "var(--bg-muted)",
-                  borderRadius: "8px",
-                  color: "var(--fg-muted)",
-                }}
-              >
-                {s}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Floating mobile preview */}
-      <div
-        className="card"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          right: "-14px",
-          width: "200px",
-          padding: "1.1rem",
-          transform: "rotate(4deg)",
-          boxShadow: "var(--shadow-lg)",
-          zIndex: 2,
-        }}
-      >
-        <div
-          style={{
-            fontSize: "0.75rem",
-            color: "var(--fg-soft)",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "5px",
-          }}
-        >
-          Mobil
-          <CheckIcon
-            style={{ width: "12px", height: "12px", color: "var(--success)" }}
-          />
-        </div>
-        <div
-          style={{
-            fontSize: "0.92rem",
-            fontWeight: 700,
-            color: "var(--fg)",
-            marginTop: "0.3rem",
-            lineHeight: 1.2,
-          }}
-        >
-          Elektrikář Praha
-        </div>
-        <div
-          style={{
-            background: "var(--brand)",
-            color: "#fff",
-            fontSize: "0.74rem",
-            fontWeight: 600,
-            padding: "0.45rem 0.7rem",
-            borderRadius: "8px",
-            marginTop: "0.65rem",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "5px",
-          }}
-        >
-          <PhoneIcon style={{ width: "12px", height: "12px" }} />
-          <span>777 123 456</span>
-        </div>
-      </div>
-
-      {/* Quality labels under the mockup. Explain WHY the mockup looks
-          like a proper website — not a startup dashboard. */}
-      <ul
-        className="mt-6 hidden md:flex flex-wrap gap-2 justify-start"
-        aria-label="Vlastnosti, které u mockupu vidíte"
-      >
-        {MOCKUP_LABELS.map((label) => (
-          <li key={label}>
-            <span
-              className="chip"
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid var(--border)",
-                color: "var(--fg-muted)",
-                boxShadow: "var(--shadow-sm)",
-              }}
-            >
-              <CheckIcon
-                style={{
-                  width: "13px",
-                  height: "13px",
-                  color: "var(--brand)",
-                }}
-              />
-              {label}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 
