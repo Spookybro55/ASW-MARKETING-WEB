@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/v2/Navbar";
 import Hero from "@/components/v2/Hero";
+import TrustStrip from "@/components/v2/TrustStrip";
 import Audience from "@/components/v2/Audience";
 import BuildQuality from "@/components/v2/BuildQuality";
 import ProblemSolution from "@/components/v2/ProblemSolution";
@@ -10,7 +11,9 @@ import Pricing from "@/components/v2/Pricing";
 import Portfolio from "@/components/v2/Portfolio";
 import References from "@/components/v2/References";
 import Comparison from "@/components/v2/Comparison";
+import MidCta from "@/components/v2/MidCta";
 import Faq from "@/components/v2/Faq";
+import Team from "@/components/v2/Team";
 import FinalCta from "@/components/v2/FinalCta";
 import Footer from "@/components/v2/Footer";
 
@@ -57,6 +60,7 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        <TrustStrip />
         <Audience />
         <BuildQuality />
         <ProblemSolution />
@@ -66,7 +70,9 @@ export default function Home() {
         <Portfolio />
         <References />
         <Comparison />
+        <MidCta />
         <Faq />
+        <Team />
         <FinalCta />
       </main>
       <Footer />

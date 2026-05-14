@@ -1,16 +1,6 @@
 import type { CSSProperties } from "react";
+import { hero } from "@/data/siteContent";
 import { CheckIcon, PhoneIcon } from "./icons";
-
-const HERO = {
-  eyebrow: "Pro živnostníky, řemeslníky a malé firmy",
-  h1: "Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.",
-  lead:
-    "Řeknete nám, co děláte. My vám pomůžeme s texty, strukturou a spuštěním webu, který dobře vypadá, funguje na mobilu a zákazníkům usnadní ozvat se. Nejčastěji kolem 10 000 Kč podle rozsahu.",
-  microcopy:
-    "Nemusíte mít připravené texty ani přesné zadání. Stačí pár informací o vaší službě.",
-  primaryCta: { label: "Nezávazně probrat web", href: "#kontakt" },
-  secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
-} as const;
 
 export default function Hero() {
   return (
@@ -37,30 +27,30 @@ export default function Hero() {
 function LeftCopy() {
   return (
     <div>
-      <span className="eyebrow">{HERO.eyebrow}</span>
-      <h1 className="h1 mt-2">{HERO.h1}</h1>
-      <p className="lead mt-5 max-w-[58ch]">{HERO.lead}</p>
+      <span className="eyebrow">{hero.eyebrow}</span>
+      <h1 className="h1 mt-2">{hero.h1}</h1>
+      <p className="lead mt-5 max-w-[58ch]">{hero.lead}</p>
 
       <div className="mt-7 flex flex-col sm:flex-row gap-3">
         <a
-          href={HERO.primaryCta.href}
+          href={hero.primaryCta.href}
           className="btn btn-primary btn-lg"
           data-cta-label="hero_primary"
           data-cta-location="hero"
         >
-          {HERO.primaryCta.label}
+          {hero.primaryCta.label}
         </a>
         <a
-          href={HERO.secondaryCta.href}
+          href={hero.secondaryCta.href}
           className="btn btn-secondary btn-lg"
           data-cta-label="hero_secondary"
           data-cta-location="hero"
         >
-          {HERO.secondaryCta.label}
+          {hero.secondaryCta.label}
         </a>
       </div>
 
-      <p className="mt-4 text-sm soft max-w-[52ch]">{HERO.microcopy}</p>
+      <p className="mt-4 text-sm soft max-w-[52ch]">{hero.microcopy}</p>
 
       <div
         className="mt-8 pt-6"

@@ -45,7 +45,7 @@ export const nav = {
 
 export const hero = {
   eyebrow: "Pro živnostníky, řemeslníky a malé firmy",
-  h1: "Profesionální web pro malé firmy bez zbytečných starostí.",
+  h1: "Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.",
   lead:
     "Pomůžeme vám s texty, strukturou i spuštěním webu, který působí důvěryhodně a zákazníkům usnadní ozvat se. Nejčastěji kolem 10 000 Kč podle rozsahu.",
   microcopy:
@@ -343,6 +343,13 @@ export const comparison = {
   ],
 } as const;
 
+export const midCta = {
+  title: "Nejste si jistí, který balíček dává smysl?",
+  lead: "Napište nám pár vět a nezávazně to probereme.",
+  ctaLabel: "Nezávazně probrat web",
+  ctaHref: "#kontakt",
+} as const;
+
 export const faq = {
   eyebrow: "FAQ",
   title: "Nejčastější otázky před začátkem.",
@@ -397,6 +404,34 @@ export const faq = {
       q: "Pracujete jen v Praze?",
       a:
         "Sídlíme v Praze, ale pracujeme online po celé ČR. Osobní schůzka není potřeba — vše vyřešíme telefonem, e-mailem nebo videohovorem.",
+    },
+  ],
+  closing: {
+    text: "Nenašli jste odpověď?",
+    ctaLabel: "Zeptat se bez závazku",
+    ctaHref: "#kontakt",
+  },
+} as const;
+
+export const team = {
+  eyebrow: "Kdo za tím stojí",
+  title: "Dva lidé, žádná anonymní agentura.",
+  lead:
+    "U Autosmartwebů víte, s kým mluvíte. Žádné call centrum, žádný anonymní nástroj — web s vámi řeší konkrétní lidé.",
+  members: [
+    {
+      initials: "S",
+      name: "Sebastián",
+      role: "Web a technické řešení",
+      text:
+        "Postaví web, nasadí ho a srozumitelně vysvětlí, jak funguje doména, hosting a přístupy.",
+    },
+    {
+      initials: "T",
+      name: "Tomáš",
+      role: "Poptávky a komunikace s klientem",
+      text:
+        "Ozve se vám na poptávku, probere s vámi rozsah a cenu a provede vás celým procesem.",
     },
   ],
 } as const;

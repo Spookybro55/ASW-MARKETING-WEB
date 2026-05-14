@@ -59,6 +59,20 @@ export default function Faq() {
           ))}
         </div>
 
+        <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <p className="muted" style={{ fontSize: "0.97rem" }}>
+            {faq.closing.text}
+          </p>
+          <a
+            href={faq.closing.ctaHref}
+            className="btn btn-secondary"
+            data-cta-label="faq_closing"
+            data-cta-location="faq"
+          >
+            {faq.closing.ctaLabel}
+          </a>
+        </div>
+
         <style>
           {`
             details summary::-webkit-details-marker { display: none; }

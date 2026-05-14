@@ -101,8 +101,8 @@ export default function ContactForm() {
           Děkujeme, máme to.
         </div>
         <p className="mt-2 text-[0.97rem]">
-          Ozveme se obvykle do jednoho pracovního dne — typicky telefonem nebo
-          krátkým e-mailem s prvním návrhem dalšího kroku.
+          Ozve se vám Tomáš obvykle do jednoho pracovního dne — typicky telefonem
+          nebo krátkým e-mailem s prvním návrhem dalšího kroku.
         </p>
         <button
           type="button"

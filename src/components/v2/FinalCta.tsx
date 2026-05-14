@@ -95,8 +95,8 @@ export default function FinalCta() {
               className="mt-7 text-sm max-w-[42ch]"
               style={{ color: "rgba(245,248,255,0.65)" }}
             >
-              Reagujeme typicky do jednoho pracovního dne. Pondělí–pátek mezi
-              9:00 a 18:00.
+              Ozve se vám Tomáš obvykle do jednoho pracovního dne. Pondělí–pátek
+              mezi 9:00 a 18:00.
             </p>
           </div>
 
