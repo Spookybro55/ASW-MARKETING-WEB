@@ -5,6 +5,7 @@ import TrustStrip from "@/components/v2/TrustStrip";
 import Services from "@/components/v2/Services";
 import ProblemSolution from "@/components/v2/ProblemSolution";
 import Deliverables from "@/components/v2/Deliverables";
+import Results from "@/components/v2/Results";
 import Pricing from "@/components/v2/Pricing";
 import Portfolio from "@/components/v2/Portfolio";
 import References from "@/components/v2/References";
@@ -62,6 +63,7 @@ export default function Home() {
         <Services />
         <ProblemSolution />
         <Deliverables />
+        <Results />
         <Pricing />
         <Portfolio />
         <References />
