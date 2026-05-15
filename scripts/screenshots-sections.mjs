@@ -14,13 +14,24 @@ import { mkdir } from "node:fs/promises";
 const URL = process.env.URL || "http://localhost:3000";
 const OUT = ".screenshots/sections";
 
+// Full v0 redesign coverage. Order matches the homepage scroll order so
+// a visual review can scan the .screenshots/sections folder top-down.
 const targets = [
   { name: "hero", selector: "#hero" },
   { name: "trust-strip", selector: 'section[aria-label="Proč spolupracovat s Autosmartweby"]' },
+  { name: "services", selector: "#weby" },
+  { name: "problem-solution", selector: "#co-resime" },
+  { name: "deliverables", selector: "#balicek" },
+  { name: "results", selector: "#vysledky" },
+  { name: "pricing", selector: "#cenik" },
+  { name: "portfolio", selector: "#ukazky" },
+  { name: "references", selector: "#reference" },
+  { name: "comparison", selector: "#srovnani" },
+  { name: "mid-cta", selector: ".asw-v0-cta-band" },
   { name: "faq", selector: "#faq" },
   { name: "team", selector: "#kdo-za-tim-stoji" },
-  { name: "mid-cta", selector: ".asw-v0-cta-band" },
   { name: "final-cta", selector: "#kontakt" },
+  { name: "footer", selector: "footer" },
 ];
 
 const widths = [
