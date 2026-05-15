@@ -17,6 +17,10 @@
 /.screenshots/
 /.dev-server.log
 
+# local screenshot dropbox (raw incoming visual references — copies
+# that should ship live in design-reference/ with explicit naming)
+/screenshots/
+
 # next.js
 /.next/
 /out/
