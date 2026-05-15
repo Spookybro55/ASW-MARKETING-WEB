@@ -3,39 +3,41 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { siteContact } from "@/data/siteContent";
-import { PhoneIcon, MenuIcon, CloseIcon } from "./icons";
+import { navV0, siteContact } from "@/data/siteContent";
+import { MenuIcon, CloseIcon } from "./icons";
 
-// Navigation links are owned by Navbar in Commit 3. The historical
-// `nav.links` export in siteContent.ts stays unused for now and will be
-// reconciled in a later cleanup commit. Anchor targets correspond to
-// section ids in the v2 components that ship in later commits.
-const NAV_LINKS = [
-  { href: "#jak-to-probiha", label: "Jak to funguje" },
-  { href: "#sluzby", label: "Co dostanete" },
-  { href: "#cenik", label: "Cena" },
-  { href: "#ukazky", label: "Ukázky" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#kontakt", label: "Kontakt" },
-] as const;
-
-const PRIMARY_CTA = {
-  label: "Nezávazně probrat web",
-  href: "#kontakt",
-} as const;
-
+/**
+ * v0 floating dark navbar (Commit 3 of v0 redesign).
+ *
+ * Sticky pill that floats away from the page edges. The outer <header>
+ * carries .asw-v0-navbar-wrap (sticky, max-width centred) so it sits
+ * directly under <body>; sticky positioning then works across the whole
+ * page, not just inside the hero. The pill itself owns its dark
+ * background — header is layout-only and transparent, so the navbar
+ * looks correct on both the dark hero and the light sections below.
+ *
+ * Mobile (<768px): collapses to a brand mark + CTA + hamburger that
+ * reveals .asw-v0-navbar-drawer below the pill.
+ */
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeHash, setActiveHash] = useState<string>("#hero");
 
+  // Reflect the URL hash in the active nav item so the user sees where
+  // they are. A proper IntersectionObserver-based scroll-spy can land in
+  // a follow-up commit; this keeps the active state honest at minimum.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const updateHash = () => {
+      if (typeof window !== "undefined" && window.location.hash) {
+        setActiveHash(window.location.hash);
+      }
+    };
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
   }, []);
 
-  // Close mobile menu when user clicks anywhere (including a nav anchor).
+  // Close mobile drawer on any outside click (incl. anchor navigation).
   useEffect(() => {
     if (!open) return;
     const close = () => setOpen(false);
@@ -44,86 +46,57 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className="sticky top-0 z-50"
-      style={{
-        background: scrolled ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.85)",
-        backdropFilter: "saturate(180%) blur(12px)",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-        transition: "border-color 0.2s ease, background-color 0.2s ease",
-      }}
-    >
-      <div className="container-wide flex items-center justify-between gap-6 px-5 py-3 md:py-4 xl:py-4">
+    <header className="asw-v0-navbar-wrap">
+      <nav className="asw-v0-navbar" aria-label="Hlavní navigace">
         <Link
           href="/"
-          className="flex flex-shrink-0 items-center gap-2.5 whitespace-nowrap font-bold tracking-tight"
-          style={{ color: "var(--fg)" }}
+          className="asw-v0-navbar-brand"
           aria-label={`${siteContact.brandName} — domů`}
         >
-          <Image
-            src="/logo.svg"
-            alt=""
-            width={40}
-            height={41}
-            priority
-            className="h-7 w-auto md:h-8 xl:h-9"
-          />
-          <span
-            className="text-sm md:text-base xl:text-xl"
-            style={{ letterSpacing: "0.04em", textTransform: "uppercase" }}
-          >
-            {/* Wordmark split into Auto + smart + weby so SMART can wear the
-                brand colour while the whole thing still reads as one word. */}
-            <span>{siteContact.brandName.slice(0, 4)}</span>
-            <span style={{ color: "var(--brand)", fontWeight: 800 }}>
-              {siteContact.brandName.slice(4, 9)}
-            </span>
-            <span>{siteContact.brandName.slice(9)}</span>
+          <span className="asw-v0-navbar-brand-mark" aria-hidden="true">
+            <Image
+              src="/logo-on-dark.svg"
+              alt=""
+              width={22}
+              height={23}
+              priority
+            />
           </span>
         </Link>
 
-        <nav
-          className="hidden xl:flex items-center gap-7 text-[0.95rem]"
-          aria-label="Hlavní navigace"
-        >
-          {NAV_LINKS.map((link) => (
+        <div className="asw-v0-navbar-links">
+          {navV0.links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="muted whitespace-nowrap hover:text-[var(--fg)] transition-colors"
+              className="asw-v0-navbar-link"
+              data-active={activeHash === link.href ? "true" : undefined}
             >
               {link.label}
             </a>
           ))}
-        </nav>
+        </div>
 
-        <div className="hidden xl:flex items-center gap-3">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            flexShrink: 0,
+          }}
+        >
           <a
-            href={siteContact.phoneHref}
-            className="btn btn-ghost"
-            data-cta-label="navbar_phone"
-            data-cta-location="navbar"
-            aria-label={`Zavolat — ${siteContact.phone}`}
-          >
-            <PhoneIcon className="h-4 w-4" />
-            <span>{siteContact.phone}</span>
-          </a>
-          <a
-            href={PRIMARY_CTA.href}
-            className="btn btn-primary"
+            href={navV0.ctaHref}
+            className="asw-v0-navbar-cta"
             data-cta-label="navbar_primary"
             data-cta-location="navbar"
           >
-            {PRIMARY_CTA.label}
+            {navV0.ctaLabel}
           </a>
-        </div>
 
-        {/* Wrapper carries the xl:hidden rule so the .btn display:inline-flex
-            on the inner button cannot override it via cascade specificity. */}
-        <div className="xl:hidden">
           <button
             type="button"
-            className="btn btn-ghost btn-sm"
+            className="asw-v0-navbar-toggle"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Zavřít menu" : "Otevřít menu"}
@@ -139,38 +112,28 @@ export default function Navbar() {
             )}
           </button>
         </div>
-      </div>
+      </nav>
 
       {open && (
-        <div
-          id="mobile-nav"
-          className="xl:hidden border-t"
-          style={{ borderColor: "var(--border)", background: "white" }}
-        >
-          <div className="container-wide px-5 py-4 flex flex-col gap-3">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="py-2 muted">
-                {link.label}
-              </a>
-            ))}
+        <div id="mobile-nav" className="asw-v0-navbar-drawer">
+          {navV0.links.map((link) => (
             <a
-              href={siteContact.phoneHref}
-              className="btn btn-secondary mt-2"
-              data-cta-label="mobile_phone"
-              data-cta-location="navbar_mobile"
+              key={link.href}
+              href={link.href}
+              className="asw-v0-navbar-link"
+              data-active={activeHash === link.href ? "true" : undefined}
             >
-              <PhoneIcon className="h-4 w-4" />
-              <span>{siteContact.phone}</span>
+              {link.label}
             </a>
-            <a
-              href={PRIMARY_CTA.href}
-              className="btn btn-primary"
-              data-cta-label="mobile_primary"
-              data-cta-location="navbar_mobile"
-            >
-              {PRIMARY_CTA.label}
-            </a>
-          </div>
+          ))}
+          <a
+            href={siteContact.phoneHref}
+            className="asw-v0-navbar-link"
+            data-cta-label="mobile_phone"
+            data-cta-location="navbar_mobile"
+          >
+            {siteContact.phone}
+          </a>
         </div>
       )}
     </header>
