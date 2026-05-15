@@ -22,13 +22,18 @@ import { ChevronRightIcon } from "./icons";
  * for now; if a dedicated process timeline is needed later, it can
  * land as a separate component.
  */
-// Section id="cesty" (Tři cesty k růstu). Intentionally differs from
-// Deliverables (#sluzby) to avoid duplicate-id collision. Service items
-// below carry their own ids (#weby / #lokalni-seo / #automatizace) so
-// the navbar links target them directly.
+// Section id="weby". Aligns with the navbar/footer "Weby" link target so
+// jumping there lands on the centered header ("Tři cesty k růstu") above
+// all three service rows. Sub-anchors on individual rows (#lokalni-seo,
+// #automatizace) still allow deep links to specific services. Row 1 in
+// the data carries `anchorId: "weby"` to keep the data layer in sync
+// with the section, but the article-level id is suppressed at render
+// time to avoid an HTML duplicate-id error — see SECTION_ID below.
+const SECTION_ID = "weby";
+
 export default function Services() {
   return (
-    <section id="cesty" className="section">
+    <section id={SECTION_ID} className="section">
       <div className="container-wide px-5">
         <header
           style={{
@@ -49,7 +54,7 @@ export default function Services() {
           {services.items.map((item, idx) => (
             <article
               key={item.number}
-              id={item.anchorId}
+              id={item.anchorId === SECTION_ID ? undefined : item.anchorId}
               className="asw-v0-service-row"
               data-flip={idx % 2 === 1 ? "true" : undefined}
             >
