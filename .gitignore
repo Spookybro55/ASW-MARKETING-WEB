@@ -13,6 +13,15 @@
 # testing
 /coverage
 
+# visual review (Visual UI workflow)
+/.screenshots/
+/.dev-server.log
+/.dev-server.err.log
+
+# local screenshot dropbox (raw incoming visual references — copies
+# that should ship live in design-reference/ with explicit naming)
+/screenshots/
+
 # next.js
 /.next/
 /out/
@@ -32,6 +41,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +49,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# interni reference dokumenty (studie, brand, logo) - nikdy do gitu
+/Analysis/
+
+# Claude Code lokalni nastaveni session
+/.claude/settings.local.json

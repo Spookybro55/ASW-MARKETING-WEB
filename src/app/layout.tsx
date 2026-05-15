@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
 import EngagementSignals from "@/components/EngagementSignals";
+import AnalyticsGate from "@/components/site/AnalyticsGate";
+import ConsentBanner from "@/components/site/ConsentBanner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,42 +16,39 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://autosmartweb.cz";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://autosmartweb.cz";
+
+const rootTitle =
+  "Autosmartweby.cz | Profesionální weby pro živnostníky a malé firmy";
+const rootDescription =
+  "Dostupné weby pro živnostníky, řemeslníky a malé firmy. Pomůžeme s texty, strukturou, základním SEO a spuštěním. Jasná cena a jednoduchý proces.";
 
 export const metadata: Metadata = {
-  title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-  description:
-    "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
+  metadataBase: new URL(siteUrl),
+  title: rootTitle,
+  description: rootDescription,
   alternates: {
-    canonical: siteUrl,
+    canonical: "/",
   },
   openGraph: {
-    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-    description:
-      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
-    url: siteUrl,
+    title: rootTitle,
+    description: rootDescription,
+    url: "/",
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-      },
-    ],
+    // og:image, twitter:image and apple-icon are auto-discovered from
+    // src/app/opengraph-image.tsx, src/app/twitter-image.tsx and
+    // src/app/apple-icon.tsx respectively. favicon stays manual because
+    // /favicon.ico has historically lived at /public root.
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-icon.png",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Autosmartweby — Weby, automatizace a AI pro malé firmy",
-    description:
-      "Tvoříme profesionální weby, automatizace a AI řešení pro živnostníky a malé firmy. Rychle, férově a na klíč.",
-    images: [`${siteUrl}/og-image.png`],
+    title: rootTitle,
+    description: rootDescription,
   },
 };
 
@@ -83,9 +81,9 @@ export default function RootLayout({
                   name: "Autosmartweby",
                   legalName: "Synkedo s.r.o.",
                   url: "https://autosmartweb.cz",
-                  logo: "https://autosmartweb.cz/og-image.png",
+                  logo: "https://autosmartweb.cz/logo.svg",
                   email: "sebastian@autosmartweb.cz",
-                  telephone: "+420601557018",
+                  telephone: "+420722525872",
                   sameAs: [],
                 },
                 {
@@ -93,7 +91,7 @@ export default function RootLayout({
                   "@id": "https://autosmartweb.cz/#localbusiness",
                   name: "Autosmartweby (Synkedo s.r.o.)",
                   url: "https://autosmartweb.cz",
-                  telephone: "+420601557018",
+                  telephone: "+420722525872",
                   email: "sebastian@autosmartweb.cz",
                   address: {
                     "@type": "PostalAddress",
@@ -123,8 +121,9 @@ export default function RootLayout({
         <AnalyticsEvents />
         <EngagementSignals />
         {children}
+        <ConsentBanner />
       </body>
-      <GoogleAnalytics gaId="G-E2WG8LP9DV" />
+      <AnalyticsGate />
     </html>
   );
 }

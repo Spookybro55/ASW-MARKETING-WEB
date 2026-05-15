@@ -1,3 +1,8 @@
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+# pnpm v11+ requires an explicit decision for native build scripts.
+# Both kept disabled by default — Next.js 16 ships its own image
+# processing (no sharp dependency required) and unrs-resolver has a
+# JS fallback. Flip a value to true if a future feature actually
+# needs the native binary; rerun `pnpm install` after the change.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false

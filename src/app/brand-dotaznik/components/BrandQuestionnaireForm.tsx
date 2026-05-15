@@ -107,7 +107,7 @@ export default function BrandQuestionnaireForm({ uploadUrl }: Props) {
                 href={uploadUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="secondary-button inline-flex items-center justify-center gap-2 text-sm"
+                className="btn btn-secondary inline-flex items-center justify-center gap-2 text-sm"
               >
                 Nahrát audio/video odpovědi
               </a>

@@ -1,64 +1,79 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import AudienceSection from "@/components/AudienceSection";
-import ServicesSection from "@/components/ServicesSection";
-import PricingSection from "@/components/PricingSection";
-import ProcessSection from "@/components/ProcessSection";
-import ContactCtaSection from "@/components/ContactCtaSection";
+import type { Metadata } from "next";
+import Navbar from "@/components/v2/Navbar";
+import Hero from "@/components/v2/Hero";
+import TrustStrip from "@/components/v2/TrustStrip";
+import Services from "@/components/v2/Services";
+import ProblemSolution from "@/components/v2/ProblemSolution";
+import Deliverables from "@/components/v2/Deliverables";
+import Results from "@/components/v2/Results";
+import Pricing from "@/components/v2/Pricing";
+import Portfolio from "@/components/v2/Portfolio";
+import References from "@/components/v2/References";
+import Comparison from "@/components/v2/Comparison";
+import MidCta from "@/components/v2/MidCta";
+import Faq from "@/components/v2/Faq";
+import Team from "@/components/v2/Team";
+import FinalCta from "@/components/v2/FinalCta";
+import Footer from "@/components/v2/Footer";
 
-function ProofStrip() {
-  const items = [
-    { value: "3–5 dní", label: "průměrná doba dodání webu" },
-    { value: "100 %", label: "platba až po spokojenosti" },
-    { value: "0 Kč", label: "za úvodní konzultaci" },
-  ];
+// Homepage metadata overrides the v1 layout.tsx defaults (which still
+// carry AI-laden copy). layout.tsx will be rewritten in Commit 9; this
+// page-level override fixes the homepage <title> / OG immediately.
 
-  return (
-    <section className="px-6 py-14 md:py-16 border-t border-white/10">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-8 md:grid-cols-3 text-center md:text-left">
-          {items.map((item) => (
-            <div key={item.label}>
-              <div className="text-2xl font-bold text-white md:text-3xl">{item.value}</div>
-              <div className="mt-1 text-sm text-gray-400">{item.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+const siteUrl = "https://autosmartweb.cz";
+
+const title =
+  "Autosmartweby.cz | Profesionální weby pro živnostníky a malé firmy";
+
+const description =
+  "Dostupné weby pro živnostníky, řemeslníky a malé firmy. Pomůžeme s texty, strukturou, základním SEO a spuštěním. Jasná cena a jednoduchý proces.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: { canonical: siteUrl },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    siteName: "Autosmartweby",
+    locale: "cs_CZ",
+    type: "website",
+    // og:image is auto-discovered from src/app/opengraph-image.tsx
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    // twitter:image is auto-discovered from src/app/twitter-image.tsx
+  },
+};
+
+// ISR — homepage copy is static-ish, recompute every hour at the edge.
+export const revalidate = 3600;
 
 export default function Home() {
   return (
-    <main id="main" className="bg-[#050B1F] text-white relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-[-200px] left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#36E2A3]/10 blur-3xl" />
-        <div className="absolute bottom-[-200px] right-[-100px] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-3xl" />
-      </div>
-
+    <>
       <Navbar />
-      <HeroSection />
-      <AudienceSection />
-      <ServicesSection />
-      <ProofStrip />
-      <PricingSection />
-      <ProcessSection />
-      <ContactCtaSection />
-
-      <footer className="border-t border-white/10 px-6 py-8 text-center text-sm text-gray-400">
-        <div className="mx-auto max-w-6xl space-y-2">
-          <div>© {new Date().getFullYear()} Synkedo s.r.o. Všechna práva vyhrazena.</div>
-          <div>
-            <a
-              href="/zasady-ochrany-osobnich-udaju"
-              className="underline underline-offset-2 transition hover:text-white"
-            >
-              Zásady ochrany osobních údajů
-            </a>
-          </div>
-        </div>
-      </footer>
-    </main>
+      <main id="main">
+        <Hero />
+        <TrustStrip />
+        <Services />
+        <ProblemSolution />
+        <Deliverables />
+        <Results />
+        <Pricing />
+        <Portfolio />
+        <References />
+        <Comparison />
+        <MidCta />
+        <Faq />
+        <Team />
+        <FinalCta />
+      </main>
+      <Footer />
+    </>
   );
 }
