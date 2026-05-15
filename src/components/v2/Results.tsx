@@ -6,18 +6,11 @@ import { BoltIcon, ClockIcon, EyeIcon, TrendUpIcon } from "./icons";
  *
  * Four metric tiles after the Růstový balíček bento. Visual layout matches
  * v0 (4-up on desktop, 2-up on mobile, big brand metric + small label +
- * tiny note) but content respects the project guardrails:
- *
- *   - Tiles WITHOUT a hard, citable number stay qualitative
- *     ("Úspora času", "Lepší viditelnost") — safe to ship.
- *   - Tiles WITH a hard number ("Až +300 %", "7–14 dní") carry a
- *     verifyBeforeProd flag in the data layer (siteContent.results)
- *     and a TODO note. They render now for design fidelity, but a
- *     production launch checklist must replace each unverified
- *     number with our own measured uplift OR remove the metric and
- *     keep only the qualitative benefit.
- *
- * No invented sources are added at the UI layer; this is pure render.
+ * tiny note). All tiles render qualitative benefits — no hard numbers,
+ * no fake guarantees — per CLAUDE.md §9 (no unbacked claims). Tile copy
+ * lives in siteContent.results; if a tile is ever flipped back to a
+ * citable measured uplift, see the doc comment on `results` for the
+ * verifyBeforeProd convention.
  *
  * Section id="vysledky". No navbar entry yet — anchor reserved for
  * later use (e.g. CTA links from external campaigns).

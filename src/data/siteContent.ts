@@ -703,38 +703,41 @@ export const deliverablesBento = {
 /**
  * results — „Výsledky, na kterých záleží" (4 metric tiles).
  *
- * v0 ships strong numbers ("Až +300 %", "7–14 dní"). We keep the visual
- * tile structure but every tile MUST be reviewed before production:
+ * v0 originally shipped strong numbers ("Až +300 %", "7–14 dní") that
+ * were both unverifiable and (in the case of "7–14 dní") inconsistent
+ * with the timelines we promise in FAQ. Per CLAUDE.md §9 + project
+ * guardrails (no unbacked claims, no fake guarantees) all four tiles
+ * are now qualitative benefits only — they keep the v0 visual rhythm
+ * and growth-oriented framing without putting a number on the page
+ * that we cannot back up.
  *
- *   - hard numbers without a cited source are not allowed in launch copy
- *   - either replace the metric with a verifiable claim, OR
- *   - reframe the tile as a qualitative benefit (no number)
- *
- * Each tile carries `verifyBeforeProd: true` and a `todo` note so the
- * launch checklist can grep them. UI may render numbers as-is during
- * design QA; they will be sanitized before going to production.
+ * If a real, measurable uplift is collected from a consenting client
+ * later, a tile can be flipped back to a hard number with a cited
+ * source — flip `verifyBeforeProd` to true again and add a `todo` with
+ * the source citation requirement.
  */
 export const results = {
   eyebrow: "VÝSLEDKY",
   title: "Výsledky, na kterých záleží",
   // No lead — visual rhythm handled by tile grid alone.
-  // STATISTIC:UNVERIFIED — see TODO(verify-before-prod) on each tile.
+  // All tiles are launch-safe qualitative benefits — no unverified
+  // numbers, no fake guarantees.
   tiles: [
     {
       icon: "trend-up",
-      metric: "Až +300 %",
-      label: "více poptávek",
-      note: "díky webu, který prodává za vás",
-      verifyBeforeProd: true,
-      todo: "TODO(verify-before-prod): replace with our own measured uplift OR remove the number and keep the qualitative benefit only. Source must be cited or the metric removed.",
+      metric: "Více poptávek",
+      label: "díky jasnější cestě ke kontaktu",
+      note: "Web návštěvníkovi rychle vysvětlí nabídku a usnadní mu udělat první krok.",
+      verifyBeforeProd: false,
+      todo: null,
     },
     {
       icon: "clock",
-      metric: "7–14 dní",
-      label: "od zadání k webu",
-      note: "Rychle dodán bez zbytečného zdržování.",
-      verifyBeforeProd: true,
-      todo: "TODO(verify-before-prod): align with FAQ (Start web 5–10 dní, Lokální web 2–3 týdny). Either rephrase to match or document why this band is correct.",
+      metric: "Rychlejší start",
+      label: "podle rozsahu a dodaných podkladů",
+      note: "Jednodušší web umíme připravit rychle, větší rozsah si vždy naceníme a naplánujeme předem.",
+      verifyBeforeProd: false,
+      todo: null,
     },
     {
       icon: "automation",
