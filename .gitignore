@@ -16,6 +16,7 @@
 # visual review (Visual UI workflow)
 /.screenshots/
 /.dev-server.log
+/.dev-server.err.log
 
 # local screenshot dropbox (raw incoming visual references — copies
 # that should ship live in design-reference/ with explicit naming)
