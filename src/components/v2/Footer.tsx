@@ -40,7 +40,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 font-bold">
               <Image
-                src="/logo-on-dark.svg"
+                src="/logo-mark.svg"
                 alt=""
                 width={28}
                 height={29}

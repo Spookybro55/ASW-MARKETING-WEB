@@ -55,7 +55,7 @@ export default function Navbar() {
         >
           <span className="asw-v0-navbar-brand-mark" aria-hidden="true">
             <Image
-              src="/logo-on-dark.svg"
+              src="/logo-mark.svg"
               alt=""
               width={22}
               height={23}
