@@ -676,3 +676,935 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============================================================================
+ * v0 redesign utilities (2026-05-15).
+ *
+ * Visual primitives for the v0-inspired homepage redesign. All classes are
+ * namespaced `asw-v0-*` so they coexist with the existing v2 design system
+ * (no existing class is touched). Each section is opt-in: a component must
+ * explicitly add the relevant class for the new look to apply.
+ *
+ * Source: design-reference/v0-autosmartweby/*.png
+ * Rules: light/dark rhythm preserved, no neon, no heavy motion, AA contrast,
+ * mobile-first sizing.
+ * ========================================================================== */
+
+:root {
+  /* Deeper navy used by v0 hero — slightly darker than --bg-inverse so the
+     hero reads as the most premium surface on the page. */
+  --asw-v0-bg-deep: #050D1F;
+  --asw-v0-bg-deep-2: #0A1830;
+
+  /* Soft warm pill used for v0 navbar CTA. Matt gold tone (NOT neon).
+     Stays inside brand neutrality envelope. */
+  --asw-v0-pill: #E8D5A5;
+  --asw-v0-pill-hover: #DDC58F;
+  --asw-v0-pill-fg: #1F1A0F;
+
+  /* Subtle glow for dark cards on hero — replaces heavy box shadows. */
+  --asw-v0-card-ring: 0 0 0 1px rgba(34, 184, 255, 0.10);
+  --asw-v0-card-ring-strong: 0 0 0 1px rgba(34, 184, 255, 0.22);
+}
+
+/* ── Italic accent ──────────────────────────────────────────────────────────
+   Inline emphasis for the second half of v0 headlines
+   ("…Online do 7 dní.", "Tři cesty k růstu.", "…růstový balíček").
+   Keep restrained: italic + brand-sky on dark, brand on light.
+   The fallback variant swaps italic for a thick brand underline so titles
+   with heavy diacritics still read cleanly on small screens. */
+.asw-v0-accent {
+  font-style: italic;
+  color: var(--brand-sky);
+  font-weight: 700;
+}
+.section:not(.section-inverse) .asw-v0-accent,
+.asw-v0-section-light .asw-v0-accent {
+  color: var(--brand);
+}
+.asw-v0-accent-fallback {
+  font-style: normal;
+  color: var(--brand);
+  background-image: linear-gradient(transparent 65%, rgba(10,102,255,0.18) 65%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-weight: 700;
+}
+
+/* ── Floating dark navbar shell ─────────────────────────────────────────────
+   Pill-shaped, floats away from the page edges, dark navy with subtle
+   glow border. Lives inside a sticky wrapper the component supplies. */
+.asw-v0-navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(10, 24, 48, 0.92) 0%, rgba(7, 17, 31, 0.92) 100%);
+  border: 1px solid rgba(245, 248, 255, 0.10);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  color: var(--fg-inverse);
+}
+.asw-v0-navbar-wrap {
+  position: sticky;
+  top: 0.85rem;
+  z-index: 50;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.asw-v0-navbar-wrap > * {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 960px;
+}
+.asw-v0-navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-shrink: 0;
+  color: var(--fg-inverse);
+  text-decoration: none;
+}
+.asw-v0-navbar-brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(245, 248, 255, 0.06);
+  border: 1px solid rgba(245, 248, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.asw-v0-navbar-links {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+}
+@media (min-width: 768px) {
+  .asw-v0-navbar-links { display: inline-flex; }
+}
+.asw-v0-navbar-link {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  color: rgba(245, 248, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.asw-v0-navbar-link:hover,
+.asw-v0-navbar-link[data-active="true"] {
+  color: var(--asw-v0-pill);
+  background: rgba(232, 213, 165, 0.08);
+}
+.asw-v0-navbar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  background: var(--asw-v0-pill);
+  color: var(--asw-v0-pill-fg);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.asw-v0-navbar-cta:hover { background: var(--asw-v0-pill-hover); }
+.asw-v0-navbar-cta:active { transform: translateY(1px); }
+
+/* Mobile menu trigger inside dark pill */
+.asw-v0-navbar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: rgba(245, 248, 255, 0.06);
+  border: 1px solid rgba(245, 248, 255, 0.12);
+  color: var(--fg-inverse);
+}
+@media (min-width: 768px) {
+  .asw-v0-navbar-toggle { display: none; }
+}
+
+/* ── Dark hero section ──────────────────────────────────────────────────────
+   Centered composition: large H1, accent line, lead, single primary CTA.
+   Background blends two brand glows over a deep navy base. Subtle dot
+   grid (not a noisy line grid) so headline owns the focus. */
+.asw-v0-hero {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 80% 14%, rgba(34, 184, 255, 0.20) 0%, rgba(34, 184, 255, 0) 45%),
+    radial-gradient(circle at 12% 90%, rgba(10, 102, 255, 0.22) 0%, rgba(10, 102, 255, 0) 50%),
+    linear-gradient(180deg, var(--asw-v0-bg-deep) 0%, var(--asw-v0-bg-deep-2) 60%, #08152C 100%);
+  color: var(--fg-inverse);
+  padding: 6rem 1.25rem 4.5rem;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .asw-v0-hero { padding: 7.5rem 2rem 5.5rem; }
+}
+@media (min-width: 1024px) {
+  .asw-v0-hero { padding: 9rem 2.5rem 6.5rem; }
+}
+.asw-v0-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, rgba(245, 248, 255, 0.10) 1px, transparent 1.4px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 50% 35%, black 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 0%, transparent 78%);
+  pointer-events: none;
+  z-index: -1;
+}
+.asw-v0-hero-inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  text-align: center;
+}
+.asw-v0-hero-h1 {
+  font-size: clamp(2.1rem, 4vw + 1rem, 3.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--fg-inverse);
+  max-width: 22ch;
+  margin-inline: auto;
+}
+.asw-v0-hero-lead {
+  margin-top: 1.25rem;
+  font-size: clamp(1rem, 0.5vw + 0.95rem, 1.15rem);
+  line-height: 1.55;
+  color: rgba(245, 248, 255, 0.72);
+  max-width: 56ch;
+  margin-inline: auto;
+}
+.asw-v0-hero-note {
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: rgba(245, 248, 255, 0.5);
+  max-width: 50ch;
+  margin-inline: auto;
+}
+.asw-v0-hero-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.asw-v0-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.65rem;
+  border-radius: 999px;
+  background: var(--asw-v0-pill);
+  color: var(--asw-v0-pill-fg);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.asw-v0-hero-pill:hover { background: var(--asw-v0-pill-hover); }
+.asw-v0-hero-pill:active { transform: translateY(1px); }
+
+/* Small problem-badge above the 3 hero cards */
+.asw-v0-problems-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 3.25rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #FCA5A5;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.28);
+}
+
+/* ── Hero problem cards (3-up under hero) ─────────────────────────────────── */
+.asw-v0-problems {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .asw-v0-problems {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+}
+.asw-v0-problem-card {
+  background: linear-gradient(180deg, rgba(15, 28, 50, 0.7) 0%, rgba(10, 22, 42, 0.7) 100%);
+  border: 1px solid rgba(245, 248, 255, 0.10);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: var(--fg-inverse);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: left;
+}
+.asw-v0-problem-card:hover {
+  border-color: rgba(34, 184, 255, 0.32);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+}
+.asw-v0-problem-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: rgba(34, 184, 255, 0.10);
+  color: var(--brand-sky);
+  margin-bottom: 1rem;
+}
+.asw-v0-problem-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.asw-v0-problem-text {
+  margin-top: 0.5rem;
+  color: rgba(245, 248, 255, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.asw-v0-problem-link {
+  margin-top: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brand-sky);
+  text-decoration: none;
+}
+.asw-v0-problem-link:hover { color: #5DD0FF; }
+
+/* ── Dark trust strip (4 trust pointers under hero in dark hero) ─────────── */
+.asw-v0-trust-dark {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+  background: rgba(10, 22, 42, 0.65);
+  border: 1px solid rgba(245, 248, 255, 0.10);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .asw-v0-trust-dark { grid-template-columns: repeat(4, 1fr); }
+}
+.asw-v0-trust-dark-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.4rem 1rem;
+  border-bottom: 1px solid rgba(245, 248, 255, 0.08);
+}
+@media (min-width: 768px) {
+  .asw-v0-trust-dark-item {
+    border-bottom: 0;
+    border-right: 1px solid rgba(245, 248, 255, 0.08);
+  }
+  .asw-v0-trust-dark-item:last-child { border-right: 0; }
+}
+.asw-v0-trust-dark-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--fg-inverse);
+}
+.asw-v0-trust-dark-hint {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: rgba(245, 248, 255, 0.5);
+}
+
+/* ── Service rows (3 alternating rows: copy + preview card) ───────────────── */
+.asw-v0-service-row {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .asw-v0-service-row { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .asw-v0-service-row[data-flip="true"] .asw-v0-service-copy { order: 2; }
+  .asw-v0-service-row[data-flip="true"] .asw-v0-service-preview { order: 1; }
+}
+.asw-v0-service-row + .asw-v0-service-row { margin-top: 4rem; }
+@media (min-width: 1024px) {
+  .asw-v0-service-row + .asw-v0-service-row { margin-top: 6rem; }
+}
+.asw-v0-service-number {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+}
+.asw-v0-service-title {
+  margin-top: 0.3rem;
+  font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+}
+.asw-v0-service-text {
+  margin-top: 0.85rem;
+  color: var(--fg-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 48ch;
+}
+.asw-v0-service-link {
+  margin-top: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+}
+.asw-v0-service-link:hover { color: var(--brand-hover); }
+
+.asw-v0-service-preview {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-md);
+}
+.asw-v0-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-muted);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fg-muted);
+}
+.asw-v0-preview-header[data-tone="brand"] {
+  background: var(--brand-soft);
+  color: var(--brand-hover);
+}
+.asw-v0-preview-list {
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.asw-v0-preview-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+  color: var(--fg);
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.asw-v0-preview-item-state {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--fg-soft);
+  white-space: nowrap;
+}
+.asw-v0-preview-progress {
+  margin-top: 0.85rem;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--bg-muted);
+  overflow: hidden;
+}
+.asw-v0-preview-progress::after {
+  content: "";
+  display: block;
+  width: 64%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand) 0%, var(--brand-sky) 100%);
+}
+
+/* ── Bento (deliverables — Růstový balíček) ───────────────────────────────── */
+.asw-v0-bento {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .asw-v0-bento { grid-template-columns: repeat(2, 1fr); gap: 1.1rem; } }
+@media (min-width: 1024px) { .asw-v0-bento { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+.asw-v0-bento-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.asw-v0-bento-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.asw-v0-bento-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  margin-bottom: 0.95rem;
+}
+.asw-v0-bento-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+}
+.asw-v0-bento-text {
+  margin-top: 0.5rem;
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.asw-v0-bento-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--fg-soft);
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+}
+
+/* ── Result tiles (4 metric tiles — Výsledky, na kterých záleží) ──────────── */
+.asw-v0-results {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 1024px) { .asw-v0-results { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+.asw-v0-result-tile {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+.asw-v0-result-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  margin-bottom: 0.85rem;
+}
+.asw-v0-result-metric {
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--brand);
+  line-height: 1.05;
+}
+.asw-v0-result-label {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+.asw-v0-result-note {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+}
+
+/* ── Reality check stat cards (3 cards — Kontrola reality) ────────────────── */
+.asw-v0-reality {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) { .asw-v0-reality { grid-template-columns: repeat(3, 1fr); } }
+.asw-v0-reality-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.asw-v0-reality-percent {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--danger);
+  letter-spacing: -0.01em;
+}
+.asw-v0-reality-headline {
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+.asw-v0-reality-text {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+.asw-v0-reality-source {
+  margin-top: 0.75rem;
+  font-size: 0.7rem;
+  color: var(--fg-soft);
+  font-style: italic;
+}
+.asw-v0-reality-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--danger);
+  background: rgba(192, 41, 31, 0.10);
+  border: 1px solid rgba(192, 41, 31, 0.28);
+}
+
+/* ── Dark reference cards (testimonial style, launch-safe) ────────────────── */
+.asw-v0-references-dark {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) { .asw-v0-references-dark { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+.asw-v0-reference-card {
+  background: linear-gradient(180deg, rgba(15, 28, 50, 0.65) 0%, rgba(10, 22, 42, 0.65) 100%);
+  border: 1px solid rgba(245, 248, 255, 0.10);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  color: var(--fg-inverse);
+}
+.asw-v0-reference-stars {
+  display: inline-flex;
+  gap: 0.15rem;
+  color: var(--asw-v0-pill);
+}
+.asw-v0-reference-stars[data-empty="true"] { display: none; }
+.asw-v0-reference-quote {
+  margin-top: 0.85rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(245, 248, 255, 0.85);
+}
+.asw-v0-reference-author {
+  margin-top: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.asw-v0-reference-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(34, 184, 255, 0.14);
+  color: var(--brand-sky);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.asw-v0-reference-meta {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+}
+.asw-v0-reference-name {
+  color: var(--fg-inverse);
+  font-weight: 600;
+}
+.asw-v0-reference-role {
+  color: rgba(245, 248, 255, 0.55);
+}
+/* Principle variant — no author block, no stars, just the quote */
+.asw-v0-reference-card[data-kind="principle"] .asw-v0-reference-stars,
+.asw-v0-reference-card[data-kind="principle"] .asw-v0-reference-author {
+  display: none;
+}
+.asw-v0-reference-card[data-kind="principle"] .asw-v0-reference-quote {
+  margin-top: 0;
+}
+
+/* ── Philosophy block (Poznejte Autosmartweby) ────────────────────────────── */
+.asw-v0-philosophy {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) { .asw-v0-philosophy { grid-template-columns: 0.85fr 1.15fr; gap: 4rem; } }
+.asw-v0-philosophy-mark {
+  width: clamp(180px, 30vw, 280px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, rgba(10, 102, 255, 0.18) 0%, rgba(10, 102, 255, 0.04) 60%, transparent 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.asw-v0-philosophy-mark-inner {
+  width: 60%;
+  height: 60%;
+  border-radius: 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  box-shadow: var(--shadow-md);
+}
+.asw-v0-philosophy-quote {
+  margin-top: 1.5rem;
+  background: var(--brand-soft);
+  border-left: 4px solid var(--brand);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  color: var(--fg);
+}
+.asw-v0-philosophy-quote-eyebrow {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-hover);
+  margin-bottom: 0.45rem;
+}
+.asw-v0-philosophy-quote-body {
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--fg);
+}
+.asw-v0-philosophy-slogan {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: clamp(1.15rem, 1.2vw + 0.9rem, 1.5rem);
+  color: var(--fg);
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* ── Blue CTA band ────────────────────────────────────────────────────────── */
+.asw-v0-cta-band {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, var(--brand) 0%, #1F7BFF 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: 0 24px 60px rgba(10, 102, 255, 0.25);
+}
+@media (min-width: 768px) {
+  .asw-v0-cta-band {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.25rem 2.5rem;
+    gap: 2rem;
+  }
+}
+.asw-v0-cta-band-title {
+  font-size: clamp(1.25rem, 1.4vw + 0.9rem, 1.6rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+}
+.asw-v0-cta-band-lead {
+  margin-top: 0.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+.asw-v0-cta-band-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--brand-hover);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.98rem;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.asw-v0-cta-band-pill:hover { background: #F1F4FA; }
+.asw-v0-cta-band-pill:active { transform: translateY(1px); }
+.asw-v0-cta-band-checks {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.asw-v0-cta-band-checks > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ── Multi-column footer ──────────────────────────────────────────────────── */
+.asw-v0-footer {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .asw-v0-footer {
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+.asw-v0-footer-col-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.asw-v0-footer-col-list {
+  margin-top: 0.85rem;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.asw-v0-footer-link {
+  font-size: 0.92rem;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.asw-v0-footer-link:hover { color: var(--brand); }
+/* Planned/static link state — visually present but visibly inactive */
+.asw-v0-footer-link[data-status="planned"],
+.asw-v0-footer-link[data-status="static"] {
+  color: var(--fg-soft);
+  cursor: default;
+  pointer-events: none;
+}
+.asw-v0-footer-link[data-status="planned"]::after {
+  content: " · brzy";
+  font-size: 0.72rem;
+  color: var(--fg-soft);
+  font-style: italic;
+}
+
+/* Footer used on dark sections (e.g. inside section-inverse) */
+.section-inverse .asw-v0-footer-col-title { color: rgba(245, 248, 255, 0.55); }
+.section-inverse .asw-v0-footer-link { color: rgba(245, 248, 255, 0.78); }
+.section-inverse .asw-v0-footer-link:hover { color: var(--brand-sky); }
+.section-inverse .asw-v0-footer-link[data-status="planned"],
+.section-inverse .asw-v0-footer-link[data-status="static"] { color: rgba(245, 248, 255, 0.4); }
+
+/* ── Social icons (planned state) ─────────────────────────────────────────── */
+.asw-v0-social {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+.asw-v0-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--bg-muted);
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.asw-v0-social-icon:hover {
+  background: var(--brand-soft);
+  color: var(--brand);
+  border-color: var(--brand-soft);
+}
+.section-inverse .asw-v0-social-icon {
+  background: rgba(245, 248, 255, 0.06);
+  color: rgba(245, 248, 255, 0.65);
+  border-color: rgba(245, 248, 255, 0.10);
+}
+.section-inverse .asw-v0-social-icon:hover {
+  background: rgba(34, 184, 255, 0.14);
+  color: var(--brand-sky);
+  border-color: rgba(34, 184, 255, 0.32);
+}
+/* Planned social icons — visibly subdued and not navigable */
+.asw-v0-social-icon[data-status="planned"] {
+  opacity: 0.55;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Mobile-first dark hero menu drawer (used when navbar toggle is open) */
+.asw-v0-navbar-drawer {
+  margin-top: 0.6rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: rgba(7, 17, 31, 0.96);
+  border: 1px solid rgba(245, 248, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+@media (min-width: 768px) {
+  .asw-v0-navbar-drawer { display: none; }
+}
+.asw-v0-navbar-drawer .asw-v0-navbar-link {
+  padding: 0.7rem 0.9rem;
+  font-size: 1rem;
+  border-radius: 12px;
+}
