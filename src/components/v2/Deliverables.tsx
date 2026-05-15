@@ -1,70 +1,93 @@
-import { deliverables } from "@/data/siteContent";
-import { CheckIcon } from "./icons";
+import { deliverablesBento } from "@/data/siteContent";
+import {
+  AtSignIcon,
+  BoltIcon,
+  BrowserIcon,
+  BuildingIcon,
+  MapPinIcon,
+  QrCodeIcon,
+  StarIcon,
+} from "./icons";
+
+/**
+ * Deliverables — „Váš kompletní růstový balíček" (Commit 6 of v0 redesign).
+ *
+ * Replaces the previous linear "co dostanete / co naceníme zvlášť" layout
+ * with the v0 bento grid (7 product/service tiles). Each tile carries an
+ * icon, a name, a short description and an optional "Doplněk" badge that
+ * marks features which ship in higher Web+ chytrý proces / Lokální tier
+ * — so visitors do not assume every tile is part of the Start balíček.
+ *
+ * Section id="balicek" — anchor target for:
+ *   - navbar "AI Recepční" (navV0.links[3])
+ *   - hero problem card 3 "Zmeškáváte hovory" (heroV0.problemCards[2].ctaHref)
+ *   - services row 3 "Automatizace" (services.items[2].ctaHref)
+ *
+ * Previous id="sluzby" intentionally retired here. Legacy `nav.links` and
+ * `footer.columns` exports in siteContent.ts still reference #sluzby but
+ * are not rendered by any current component (Navbar uses navV0, Footer
+ * uses local COLUMNS). They will be cleaned up in a later cleanup commit.
+ */
+
+// Map deliverablesBento.items[].icon → icon component. Keeps siteContent
+// pure data; component layer owns the visual mapping.
+const BENTO_ICONS = {
+  browser: BrowserIcon,
+  "map-pin": MapPinIcon,
+  "phone-circle": BoltIcon,
+  star: StarIcon,
+  "google-business": BuildingIcon,
+  "mail-business": AtSignIcon,
+  "qr-code": QrCodeIcon,
+} as const;
+
+type IconKey = keyof typeof BENTO_ICONS;
 
 export default function Deliverables() {
   return (
-    <section id="sluzby" className="section">
+    <section id="balicek" className="section section-muted">
       <div className="container-wide px-5">
-        <div className="max-w-[60ch]">
-          <span className="eyebrow">{deliverables.eyebrow}</span>
-          <h2 className="h2 mt-2">{deliverables.title}</h2>
-          <p className="lead mt-4">{deliverables.lead}</p>
-        </div>
+        <header
+          style={{
+            maxWidth: "60ch",
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <span className="eyebrow">{deliverablesBento.eyebrow}</span>
+          <h2 className="h2 mt-2">
+            {deliverablesBento.titleLead}{" "}
+            <span className="asw-v0-accent">{deliverablesBento.titleAccent}</span>
+          </h2>
+          <p className="lead mt-4">{deliverablesBento.lead}</p>
+        </header>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-[1.4fr_1fr]">
-          <div className="card" style={{ padding: "2rem" }}>
-            <h3 className="h3">Co je v ceně</h3>
-            <ul className="mt-4 space-y-3">
-              {deliverables.included.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-[0.97rem]"
-                >
-                  <CheckIcon
-                    style={{
-                      color: "var(--brand)",
-                      width: "18px",
-                      height: "18px",
-                      flexShrink: 0,
-                      marginTop: "3px",
-                    }}
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div
-            className="card"
-            style={{ padding: "2rem", background: "var(--bg-muted)" }}
-          >
-            <h3 className="h3">{deliverables.notIncludedTitle}</h3>
-            <ul className="mt-4 space-y-3">
-              {deliverables.notIncluded.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-[0.95rem]"
-                  style={{ color: "var(--fg-muted)" }}
-                >
+        <ul
+          className="asw-v0-bento"
+          role="list"
+          style={{ marginTop: "3rem", listStyle: "none", padding: 0 }}
+        >
+          {deliverablesBento.items.map((item) => {
+            const Icon = BENTO_ICONS[item.icon as IconKey];
+            return (
+              <li key={item.title} className="asw-v0-bento-card">
+                {item.badge && (
                   <span
-                    aria-hidden
-                    style={{ flexShrink: 0, marginTop: "2px" }}
+                    className="asw-v0-bento-badge"
+                    title={item.badge.tier}
                   >
-                    +
+                    {item.badge.label}
                   </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p
-              className="mt-5 text-sm soft"
-              style={{ paddingTop: "1rem", borderTop: "1px solid var(--border)" }}
-            >
-              Naceníme předem, žádné překvapení po spuštění.
-            </p>
-          </div>
-        </div>
+                )}
+                <span className="asw-v0-bento-icon" aria-hidden="true">
+                  {Icon ? <Icon className="h-5 w-5" /> : null}
+                </span>
+                <h3 className="asw-v0-bento-title">{item.title}</h3>
+                <p className="asw-v0-bento-text">{item.text}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
