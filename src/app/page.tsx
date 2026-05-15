@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "@/components/v2/Navbar";
 import Hero from "@/components/v2/Hero";
 import TrustStrip from "@/components/v2/TrustStrip";
-import Audience from "@/components/v2/Audience";
-import BuildQuality from "@/components/v2/BuildQuality";
+import Services from "@/components/v2/Services";
 import ProblemSolution from "@/components/v2/ProblemSolution";
-import Process from "@/components/v2/Process";
 import Deliverables from "@/components/v2/Deliverables";
 import Pricing from "@/components/v2/Pricing";
 import Portfolio from "@/components/v2/Portfolio";
@@ -61,10 +59,8 @@ export default function Home() {
       <main id="main">
         <Hero />
         <TrustStrip />
-        <Audience />
-        <BuildQuality />
+        <Services />
         <ProblemSolution />
-        <Process />
         <Deliverables />
         <Pricing />
         <Portfolio />
