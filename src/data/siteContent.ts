@@ -30,65 +30,12 @@ export const siteContact = {
   },
 } as const;
 
-export const nav = {
-  brand: "Autosmartweby",
-  links: [
-    { href: "#sluzby", label: "Co dostanete" },
-    { href: "#cenik", label: "Ceník" },
-    { href: "#ukazky", label: "Ukázky" },
-    { href: "#jak-to-probiha", label: "Jak to probíhá" },
-    { href: "#faq", label: "FAQ" },
-  ],
-  ctaLabel: "Nezávazně probrat web",
-  ctaHref: "#kontakt",
-} as const;
-
-export const hero = {
-  eyebrow: "Pro živnostníky, řemeslníky a malé firmy",
-  h1: "Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.",
-  lead:
-    "Pomůžeme vám s texty, strukturou i spuštěním webu, který působí důvěryhodně a zákazníkům usnadní ozvat se. Nejčastěji kolem 10 000 Kč podle rozsahu.",
-  microcopy:
-    "Nemusíte mít připravené texty ani přesné zadání. Stačí pár informací o vaší službě.",
-  primaryCta: { label: "Nezávazně probrat web", href: "#kontakt" },
-  secondaryCta: { label: "Podívat se na ukázky", href: "#ukazky" },
-} as const;
-
 export const trustStrip = {
   items: [
     { label: "Jasná cena předem", hint: "Žádné skryté poplatky" },
     { label: "Pomoc s texty", hint: "Nemusíte mít připravené zadání" },
     { label: "Web pod vaší kontrolou", hint: "Doména, hosting, obsah vlastníte vy" },
     { label: "Spuštění po odsouhlasení", hint: "Bez tlaku, bez závazku předem" },
-  ],
-} as const;
-
-export const audience = {
-  eyebrow: "Pro koho to je",
-  title: "Poznáváte se?",
-  lead:
-    "Tohle je pro lidi, kteří dělají svoji práci dobře, ale nemají čas řešit texty, techniku ani složitý marketingový projekt. Stačí, že umíte, co děláte — o web se postaráme my.",
-  items: [
-    {
-      title: "Řemeslníci a živnostníci",
-      text:
-        "Elektrikáři, instalatéři, zedníci, autoservisy, plynaři. Web, který lidé najdou na Googlu a pochopí, co děláte.",
-    },
-    {
-      title: "Lokální služby",
-      text:
-        "Salony, gastro, fitness, doprava. Adresa, otvírací hodiny, rezervace a důvěryhodné kontakty — bez složitostí.",
-    },
-    {
-      title: "Malé firmy a OSVČ",
-      text:
-        "Konzultanti, servisy, výroba na zakázku. Web jako důvěryhodná vizitka, která připraví zákazníka před prvním hovorem.",
-    },
-    {
-      title: "Nové provozovny",
-      text:
-        "Začínáte? Připravíme základ, na kterém se dá růst — bez agenturních cen a bez závislosti na webaři.",
-    },
   ],
 } as const;
 
@@ -114,54 +61,6 @@ export const problemSolution = {
       problem: "„Nechci řešit technické detaily.“",
       solution: "Nemusíte. Mobil, SEO základ, kontakt, formulář — to všechno nastavíme za vás a vysvětlíme lidsky.",
     },
-  ],
-} as const;
-
-export const process = {
-  eyebrow: "Jak to probíhá",
-  title: "Tři kroky bez složitostí.",
-  lead: "Žádné dlouhé workshopy, žádná agenturní zadání. Jednoduchý proces, který stihneme rychle.",
-  steps: [
-    {
-      number: "01",
-      title: "Řeknete nám, co děláte",
-      text:
-        "Krátký dotazník nebo 15minutový hovor. Stačí pár vět o vaší práci, zákaznících a oboru. Žádné marketingové zadání.",
-    },
-    {
-      number: "02",
-      title: "Připravíme návrh",
-      text:
-        "Sestavíme strukturu webu a první návrh textů přizpůsobený vašemu oboru. Ukážeme, jak bude web vypadat, ještě než cokoliv zaplatíte.",
-    },
-    {
-      number: "03",
-      title: "Spustíme web",
-      text:
-        "Po vašem odsouhlasení web nasadíme, propojíme s doménou a předáme vám přístupy. Drobné úpravy řešíme s vámi i po spuštění.",
-    },
-  ],
-} as const;
-
-export const deliverables = {
-  eyebrow: "Co dostanete",
-  title: "Konkrétní výstup, ne agenturní balík.",
-  lead: "Každý web obsahuje to, co malá firma potřebuje, aby ji lidé našli, pochopili a snadno kontaktovali.",
-  included: [
-    "Struktura webu přizpůsobená vašemu oboru",
-    "Základní texty (pomůžeme s tím, co nemáte připravené)",
-    "Responzivní zobrazení na mobilu i desktopu",
-    "Klikatelné kontakty — telefon, e-mail, formulář",
-    "Základní SEO nastavení (meta, sitemap, strukturovaná data)",
-    "Spuštění a předání přístupů k doméně i hostingu",
-    "Vysvětlení vlastnictví a provozu po spuštění",
-  ],
-  notIncludedTitle: "Co naceníme zvlášť",
-  notIncluded: [
-    "Profesionální focení a video",
-    "Rozsáhlé texty nad rámec hlavních stránek",
-    "Individuální aplikace, e-shop nebo rezervační systém",
-    "Placené reklamní kampaně",
   ],
 } as const;
 
@@ -264,42 +163,6 @@ export const portfolio = {
     "Vlastní web na klíč připravíme i pro obor, který tady není — strukturu a copy přizpůsobíme po krátkém hovoru.",
 } as const;
 
-// Launch-safe replacement for the original placeholder testimonials.
-// Per the 2026-05 strategy review: do not publish invented quotes, even
-// pseudonymous ones — they read as real client voices and that's not OK.
-// Real client references will be added later, one at a time, only after
-// written consent.
-export const references = {
-  eyebrow: "Spolupráce",
-  title: "Na čem si při spolupráci zakládáme.",
-  lead:
-    "Místo smyšlených citací raději popíšeme, co u nás můžete při spolupráci čekat.",
-  items: [
-    {
-      title: "Jasně víte, co se bude dít",
-      text:
-        "Na začátku si ujasníme rozsah, cenu a další krok. Žádné složité zadání ani dlouhé technické schůzky.",
-    },
-    {
-      title: "Pomůžeme s texty a strukturou",
-      text:
-        "Nemusíte mít hotové texty. Zeptáme se na vaši službu, zákazníky a lokalitu a pomůžeme obsah poskládat.",
-    },
-    {
-      title: "Cena a rozsah jsou domluvené předem",
-      text:
-        "Dopředu víte, co je v ceně, co by bylo navíc a jak se řeší provoz nebo úpravy po spuštění.",
-    },
-    {
-      title: "Web má působit důvěryhodně",
-      text:
-        "Cílem není efektní showreel, ale přehledný web, který zákazníkům rychle vysvětlí, co děláte a jak se ozvat.",
-    },
-  ],
-  microcopy:
-    "Reálné reference doplníme postupně u klientů, kteří nám dají souhlas se zveřejněním.",
-} as const;
-
 export const comparison = {
   eyebrow: "Proč ne jinak",
   title: "Praktická cesta mezi DIY a agenturou.",
@@ -341,13 +204,6 @@ export const comparison = {
       ],
     },
   ],
-} as const;
-
-export const midCta = {
-  title: "Nejste si jistí, který balíček dává smysl?",
-  lead: "Napište nám pár vět a nezávazně to probereme.",
-  ctaLabel: "Nezávazně probrat web",
-  ctaHref: "#kontakt",
 } as const;
 
 export const faq = {
@@ -447,37 +303,6 @@ export const finalCta = {
   ],
   formMicrocopy:
     "Odesláním souhlasíte se zpracováním kontaktních údajů pro vyřízení vaší poptávky. Žádný marketing, žádný newsletter.",
-} as const;
-
-export const footer = {
-  description:
-    "Autosmartweby pomáhají živnostníkům, řemeslníkům a malým firmám získat profesionální web bez složitého zadávání, agenturních cen a technických starostí.",
-  columns: [
-    {
-      title: "Web a služby",
-      links: [
-        { href: "#sluzby", label: "Co dostanete" },
-        { href: "#cenik", label: "Ceník" },
-        { href: "#ukazky", label: "Ukázky" },
-        { href: "#jak-to-probiha", label: "Jak to probíhá" },
-        { href: "#faq", label: "FAQ" },
-      ],
-    },
-    {
-      title: "Kontakt",
-      links: [
-        { href: "tel:+420722525872", label: "+420 722 525 872" },
-        { href: "mailto:tomas@autosmartweb.cz", label: "tomas@autosmartweb.cz" },
-        { href: "/brand-dotaznik", label: "Brand dotazník" },
-      ],
-    },
-    {
-      title: "Právní",
-      links: [
-        { href: "/zasady-ochrany-osobnich-udaju", label: "Zásady ochrany osobních údajů" },
-      ],
-    },
-  ],
 } as const;
 
 /* ============================================================================
