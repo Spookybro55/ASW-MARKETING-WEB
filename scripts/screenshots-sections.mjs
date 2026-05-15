@@ -19,7 +19,7 @@ const targets = [
   { name: "trust-strip", selector: 'section[aria-label="Proč spolupracovat s Autosmartweby"]' },
   { name: "faq", selector: "#faq" },
   { name: "team", selector: "#kdo-za-tim-stoji" },
-  { name: "mid-cta", selector: 'section[aria-label="Nezávazná konzultace"]' },
+  { name: "mid-cta", selector: ".asw-v0-cta-band" },
   { name: "final-cta", selector: "#kontakt" },
 ];
 
