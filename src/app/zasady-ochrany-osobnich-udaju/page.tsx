@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 // Privacy policy — changes very rarely (legal updates). 24h ISR.
 export const revalidate = 86400;
 
-const PRIVACY_CONTACT = contact.emailFallback; // sebastian@ admin alias
-const HUMAN_CONTACT = contact.email; // tomas@ general
+const PRIVACY_CONTACT = contact.email; // info@ general
+const HUMAN_CONTACT = contact.email; // info@ general
 
 export default function PrivacyPage() {
   return (

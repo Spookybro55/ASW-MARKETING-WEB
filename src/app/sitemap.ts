@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/lokalni-seo", 0.9),
     page("/ai-asistent", 0.9),
     page("/cenik", 0.8),
+    page("/konzultace", 0.8),
     page("/kontakt", 0.7),
     page("/zasady-ochrany-osobnich-udaju", 0.3, "yearly"),
   ];

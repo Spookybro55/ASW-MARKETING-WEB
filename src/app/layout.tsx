@@ -44,14 +44,12 @@ export const metadata: Metadata = {
     siteName: "Autosmartweby",
     locale: "cs_CZ",
     type: "website",
-    // og:image, twitter:image and apple-icon are auto-discovered from
-    // src/app/opengraph-image.tsx, src/app/twitter-image.tsx and
-    // src/app/apple-icon.tsx respectively. favicon stays manual because
-    // /favicon.ico has historically lived at /public root.
+    // og:image, twitter:image are auto-discovered from
+    // src/app/opengraph-image.tsx / twitter-image.tsx.
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  // Favicon + apple touch icon are auto-discovered from src/app/icon.tsx and
+  // src/app/apple-icon.tsx (white logo mark on a brand-blue tile). The legacy
+  // public/favicon.ico is kept as a static fallback but no longer linked.
   twitter: {
     card: "summary_large_image",
     title: rootTitle,
@@ -89,7 +87,7 @@ export default function RootLayout({
                   legalName: "Synkedo s.r.o.",
                   url: "https://autosmartweb.cz",
                   logo: "https://autosmartweb.cz/logo.svg",
-                  email: "sebastian@autosmartweb.cz",
+                  email: "info@autosmartweb.cz",
                   telephone: "+420722525872",
                   sameAs: [],
                 },
@@ -99,7 +97,7 @@ export default function RootLayout({
                   name: "Autosmartweby (Synkedo s.r.o.)",
                   url: "https://autosmartweb.cz",
                   telephone: "+420722525872",
-                  email: "sebastian@autosmartweb.cz",
+                  email: "info@autosmartweb.cz",
                   address: {
                     "@type": "PostalAddress",
                     streetAddress: "Příčná 1892/4",

@@ -36,7 +36,7 @@ export default function AiAsistentPage() {
           ctaText={p.hero.ctaText}
           ctaUrl={p.hero.ctaUrl}
           secondaryText="Objednat konzultaci"
-          secondaryUrl="/kontakt"
+          secondaryUrl="/konzultace"
         />
 
         {/* Explanation */}

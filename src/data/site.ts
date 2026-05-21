@@ -16,9 +16,8 @@ export const contact = {
   ico: "24571831",
   phone: "+420 722 525 872",
   phoneHref: "tel:+420722525872",
-  email: "tomas@autosmartweb.cz",
-  emailHref: "mailto:tomas@autosmartweb.cz",
-  emailFallback: "sebastian@autosmartweb.cz",
+  email: "info@autosmartweb.cz",
+  emailHref: "mailto:info@autosmartweb.cz",
   address: {
     street: "Příčná 1892/4",
     city: "Praha 1",
@@ -29,6 +28,38 @@ export const contact = {
   responseTime: "Ozveme se vám do 24 hodin. První konzultace je zdarma.",
 } as const;
 
+/* Team — real people behind AutoSmartWeb, shown on the /kontakt trust page.
+   Centralized so contact details live in one place (no hardcoded copies). */
+export const team = [
+  {
+    initials: "TM",
+    name: "Tomáš Maixner",
+    role: "Obchod a komunikace se zákazníky",
+    phone: "+420 722 525 872",
+    phoneHref: "tel:+420722525872",
+    email: "t.maixner@autosmartweb.cz",
+    emailHref: "mailto:t.maixner@autosmartweb.cz",
+  },
+  {
+    initials: "JB",
+    name: "Jan Bezemek",
+    role: "Technické řešení, web a systém",
+    phone: "+420 773 466 699",
+    phoneHref: "tel:+420773466699",
+    email: "j.bezemek@autosmartweb.cz",
+    emailHref: "mailto:j.bezemek@autosmartweb.cz",
+  },
+  {
+    initials: "SF",
+    name: "Sebastián Fridrich",
+    role: "Technické řešení a realizace",
+    phone: "+420 601 557 018",
+    phoneHref: "tel:+420601557018",
+    email: "s.fridrich@autosmartweb.cz",
+    emailHref: "mailto:s.fridrich@autosmartweb.cz",
+  },
+] as const;
+
 /** Primary + alternate CTA labels (CLAUDE.md §4). */
 export const cta = {
   primary: "Objednat konzultaci",
@@ -38,7 +69,7 @@ export const cta = {
   vice: "Zjistit více",
   konzultaceZdarma: "Konzultace zdarma",
   demo: "Vyzkoušet demo",
-  href: "/kontakt",
+  href: "/konzultace",
 } as const;
 
 /** Top navigation — matches the sitemap exactly (CLAUDE.md §2). */
@@ -88,10 +119,16 @@ export const seo = {
     path: "/cenik",
   },
   kontakt: {
-    title: "Kontakt | AutoSmartWeby",
+    title: "Kontakt — kdo za AutoSmartWeby stojí | AutoSmartWeby",
     description:
-      "Ozvěte se nám — ozveme se do 24 hodin a první konzultace je zdarma. Telefon, e-mail nebo krátký formulář. Pomůžeme s webem, lokálním SEO i AI asistentem.",
+      "Poznejte AutoSmartWeby. Za každým webem stojí konkrétní lidé, kteří chtějí, aby vaše firma byla vidět a získávala nové zákazníky. Kontakty na tým a obecný e-mail.",
     path: "/kontakt",
+  },
+  konzultace: {
+    title: "Objednat nezávaznou konzultaci | AutoSmartWeby",
+    description:
+      "Napište nám pár informací a ozveme se vám s doporučením dalšího postupu. Konzultace je nezávazná, cenu a rozsah potvrdíme předem.",
+    path: "/konzultace",
   },
 } as const;
 
@@ -112,7 +149,7 @@ export const homeHero = {
   h1Accent: "Online do 7 dnů.",
   subheadline:
     "Postavíme vám profesionální web, který jasně vysvětlí vaši nabídku, pomůže zákazníkům se ozvat a připraví základ pro lepší dohledatelnost.",
-  primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/kontakt" },
+  primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/konzultace" },
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-funguje" },
   trustMicrocopy: "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem",
   problemsLabel: "CO VÁS MOŽNÁ BRZDÍ?",
@@ -286,7 +323,7 @@ export const pricing = {
       ],
       isFeatured: false,
       ctaText: "Chci Web Standard",
-      ctaUrl: "/kontakt?balicek=web-standard",
+      ctaUrl: "/konzultace?balicek=web-standard",
     },
     {
       id: "pro",
@@ -307,7 +344,7 @@ export const pricing = {
       ],
       isFeatured: true,
       ctaText: "Chci Web Pro",
-      ctaUrl: "/kontakt?balicek=web-pro",
+      ctaUrl: "/konzultace?balicek=web-pro",
     },
   ],
 } as const;
@@ -361,13 +398,12 @@ export const contactSection = {
   gdpr: "Odesláním souhlasíte se zpracováním kontaktních údajů pro vyřízení vaší poptávky. Žádný marketing, žádný newsletter.",
 } as const;
 
-/* Homepage final conversion band (CTA → /kontakt). The full lead form lives
-   on /kontakt; here we keep a direct, low-pressure ask + phone/email. */
+/* Homepage final conversion band (CTA → /konzultace, the lead form page). */
 export const finalCta = {
   title: "Chcete zjistit, co by dávalo smysl pro váš web?",
   text: "Pošlete nám krátkou poptávku. Ozveme se vám, projdeme váš záměr a řekneme, jaký rozsah a cena dávají smysl.",
   ctaLabel: "Nezávazně poptat web",
-  ctaHref: "/kontakt",
+  ctaHref: "/konzultace",
 } as const;
 
 /* ── Detail page content ──────────────────────────────────────────────────── */
@@ -501,14 +537,61 @@ export const aiAsistentPage = {
   },
 } as const;
 
+/* /kontakt — trust / "who's behind it" page (NOT the lead form; that's
+   /konzultace). Builds trust and shows the real people (see `team`). */
 export const kontaktPage = {
   hero: {
-    headline: "Pojďme probrat váš web",
-    subheadline: contact.responseTime,
+    headline: "Poznejte AutoSmartWeby",
+    subheadline:
+      "Za každým webem stojí lidé, kteří chtějí, aby vaše firma byla vidět a získávala nové zákazníky.",
   },
-  companyPlaceholder: {
-    note: "Fakturační a firemní údaje doplníme v nabídce.",
+  why: {
+    eyebrow: "Proč AutoSmartWeby",
+    title: "Spolehlivý parťák pro váš web",
+    paragraphs: [
+      "Pomáháme malým a středním firmám v Česku získat profesionální online prezentaci, lepší dohledatelnost na Googlu a víc poptávek — bez zbytečných starostí a technických řečí.",
+      "Nejsme anonymní šablonový nástroj ani drahá agentura. Web s vámi řeší konkrétní lidé, kteří vám rovnou řeknou jasnou cenu, rozsah i další krok.",
+    ],
   },
+  teamSection: {
+    eyebrow: "Kdo za tím stojí",
+    title: "Lidé za AutoSmartWeby",
+    lead: "U nás víte, s kým mluvíte. Ozvěte se komukoli z týmu podle toho, co potřebujete řešit.",
+  },
+  contactSection: {
+    eyebrow: "Kontakt",
+    title: "Obecný kontakt",
+    lead: "Nevíte, na koho se obrátit? Napište na obecný e-mail a my vás nasměrujeme.",
+    company: "Fakturační údaje: Synkedo s.r.o., IČO 24571831.",
+  },
+  cta: {
+    title: "Chcete probrat konkrétní web?",
+    text: "Objednejte si nezávaznou konzultaci — ozveme se s doporučením dalšího postupu.",
+    label: "Objednat konzultaci",
+    href: "/konzultace",
+  },
+} as const;
+
+/* /konzultace — primary conversion page (the lead/consultation form). */
+export const konzultacePage = {
+  hero: {
+    headline: "Objednat nezávaznou konzultaci",
+    subheadline:
+      "Napište nám pár informací a ozveme se vám s doporučením dalšího postupu.",
+  },
+  services: [
+    "Webové stránky",
+    "Lokální SEO",
+    "AI asistent",
+    "Nejsem si jistý, potřebuji poradit",
+  ],
+  reassurance: [
+    "Konzultace je nezávazná.",
+    "Ozveme se co nejdříve.",
+    "Doporučíme vhodné řešení podle situace.",
+    "Cenu a rozsah si potvrdíme předem.",
+  ],
+  gdpr: "Souhlasím se zpracováním osobních údajů pro vyřízení mé poptávky. Žádný marketing, žádný newsletter.",
 } as const;
 
 /* ── Footer ───────────────────────────────────────────────────────────────── */

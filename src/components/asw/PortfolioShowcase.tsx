@@ -205,7 +205,7 @@ export function PortfolioShowcase() {
 
         <div className="mt-9 text-center">
           <Link
-            href="/kontakt"
+            href="/konzultace"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#9FC6FF] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             data-cta-label="showcase"
             data-cta-location="hero_showcase"
