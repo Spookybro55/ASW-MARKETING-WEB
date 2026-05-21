@@ -1,56 +1,72 @@
 @import "tailwindcss";
 
 /*
- * v2 design system (2026-05).
+ * AutoSmartWeby design system — source-of-truth spec (2026-05-21).
  *
- * Strategy direction (Web_Design_Master_strategie_Autosmartweby.docx):
- *   • Light background, navy/anthracite for headings.
- *   • One CTA accent — bright but trustworthy (NOT neon, NOT futuristic).
- *   • Sans-serif (Geist), strong H1/H2, 75 % simplicity / 25 % polish.
- *   • Forbidden: dark mode default, neon gradients, agency showreel,
- *     futuristic SaaS look — would clash with the "spolehlivý parťák"
- *     positioning and trigger price-expectation mismatch.
+ *   • Modern, clean, trustworthy, conversion-focused. Light-first.
+ *   • Blue is the main trust colour: primary #0D47A1, secondary #1976D2.
+ *     CTAs are BLUE only — the spec's orange accent (#F2994A) is
+ *     intentionally NOT used (owner decision 2026-05-21). No orange,
+ *     no gold, no red accents, no neon, no SaaS glow.
+ *   • Headings: Montserrat. Body: Roboto. Both carry Czech diacritics.
+ *   • White cards, soft neutral shadows, rounded corners, generous spacing.
+ *   • Contrast targets WCAG AA.
  */
 
 :root {
-  /* ── ASW canonical palette (per project_brand_visual_system memory) ── */
+  /* ── Dark-first design system (black-first redesign 2026-05-21) ──
+     Whole site is dark premium. Tokens below feed both raw vars and the
+     Tailwind @theme utilities, so semantic-token components flip automatically. */
 
-  /* Surface — light-first */
-  --bg: #FFFFFF;          /* ASW White */
-  --bg-muted: #F5F8FC;    /* ASW Soft */
-  --bg-card: #FFFFFF;
-  --bg-inverse: #07111F;  /* ASW Navy — premium dark sections */
+  /* Surface — dark-first, UNIFIED (no striped section bands).
+     Page is one continuous #05070D; sections differ only very subtly.
+     Cards (--surface) carry the visual hierarchy, not section backgrounds. */
+  --bg: #05070D;          /* page background — default for the whole site */
+  --bg-soft: #080B12;
+  --bg-muted: #0A1020;    /* subtle muted section (barely lighter than --bg) */
+  --bg-card: #111827;     /* card surface */
+  --bg-inverse: #03050A;  /* footer — deepest, must not compete with CTA */
+  --surface: #111827;     /* primary card surface */
+  --surface-elevated: #161E2E;
+  --surface-glass: rgba(255, 255, 255, 0.05);
 
-  /* Text */
-  --fg: #1D2733;          /* ASW Graphite — body + headings on light */
-  --fg-muted: #667085;    /* ASW Muted — secondary text */
-  --fg-soft: #8A95A8;     /* lighter shade of Muted — tertiary / captions */
-  --fg-inverse: #F5F8FC;  /* text on inverse navy sections */
+  /* Text — light on dark */
+  --fg: #F8FAFC;
+  --fg-muted: #A7B0C0;
+  --fg-soft: #7E8796;
+  --fg-inverse: #05070D;  /* text on a light/blue fill (e.g. white button) */
 
-  /* Borders */
-  --border: #E3E8F0;
-  --border-strong: #C9D2E0;
+  /* Borders — translucent white on dark (subtle; cards use 0.08) */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-blue: rgba(25, 118, 210, 0.35);
 
-  /* Brand — single CTA accent (ASW Blue), never neon */
-  --brand: #0A66FF;       /* ASW Blue */
-  --brand-hover: #0852CC; /* darker ASW Blue for hover/active */
-  --brand-soft: #E6EFFF;  /* tinted blue surface */
-  --brand-ring: rgba(10, 102, 255, 0.25);
-  --brand-sky: #22B8FF;   /* ASW Sky — decorative / secondary accent only */
+  /* Brand blue (no orange/gold/neon). CTA fills use --brand/--brand-2;
+     accents/icons/links on dark use --brand-light for contrast. */
+  --brand: #0D47A1;
+  --brand-hover: #1257C4; /* lighter on hover (was darker — dark UI wants brighter) */
+  --brand-2: #1976D2;
+  --brand-light: #8FBEF7; /* readable blue accent on dark surfaces */
+  --brand-soft: rgba(25, 118, 210, 0.14); /* dark blue glass for chips/icon bg */
+  --brand-ring: rgba(25, 118, 210, 0.45);
+  --brand-sky: #1976D2;   /* legacy alias */
 
   /* Semantic */
-  --success: #18B26B;     /* ASW Success */
-  --warning: #B58105;
-  --danger: #C0291F;
+  --success: #4ADE80;
+  --warning: #FBBF24;
+  --danger: #F87171;
 
-  /* Radius / shadows / spacing — shadows derived from ASW Navy (7,17,31) */
+  /* Effects */
+  --glow-blue: rgba(25, 118, 210, 0.35);
+
+  /* Radius / shadows — deep dark shadows */
   --radius: 14px;
-  --radius-lg: 18px;
+  --radius-lg: 20px;
   --radius-pill: 999px;
-  --shadow-sm: 0 1px 2px rgba(7, 17, 31, 0.04);
-  --shadow-md: 0 8px 24px rgba(7, 17, 31, 0.06), 0 2px 6px rgba(7, 17, 31, 0.04);
-  --shadow-lg: 0 18px 48px rgba(7, 17, 31, 0.10), 0 4px 12px rgba(7, 17, 31, 0.06);
-  --container-max: 1440px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 10px 30px -12px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 30px 70px -24px rgba(0, 0, 0, 0.7), 0 8px 20px rgba(0, 0, 0, 0.5);
+  --container-max: 1200px;
 }
 
 @theme inline {
@@ -58,18 +74,24 @@
   --color-foreground: var(--fg);
   --color-brand: var(--brand);
   --color-brand-hover: var(--brand-hover);
+  --color-brand-2: var(--brand-2);
+  --color-brand-light: var(--brand-light);
   --color-brand-soft: var(--brand-soft);
   --color-brand-sky: var(--brand-sky);
   --color-fg-muted: var(--fg-muted);
   --color-fg-soft: var(--fg-soft);
   --color-fg-inverse: var(--fg-inverse);
+  --color-bg-soft: var(--bg-soft);
   --color-bg-muted: var(--bg-muted);
   --color-bg-inverse: var(--bg-inverse);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-success: var(--success);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-roboto);
+  --font-display: var(--font-montserrat);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }
 
 html {
@@ -79,17 +101,23 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-roboto), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* Headings default to the display face (Montserrat). Individual components
+   may override weight/size, but the family is consistent site-wide. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-montserrat), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
 /* Selection */
 ::selection {
-  background: var(--brand-soft);
-  color: var(--fg);
+  background: rgba(25, 118, 210, 0.45);
+  color: #F8FAFC;
 }
 
 /* Focus visible — strong but not garish */
@@ -194,6 +222,7 @@ body {
 }
 
 .h1 {
+  font-family: var(--font-display), system-ui, sans-serif;
   font-size: clamp(2rem, 4.2vw + 1rem, 3.5rem);
   font-weight: 700;
   line-height: 1.1;
@@ -202,6 +231,7 @@ body {
 }
 
 .h2 {
+  font-family: var(--font-display), system-ui, sans-serif;
   font-size: clamp(1.6rem, 2vw + 1rem, 2.4rem);
   font-weight: 700;
   line-height: 1.2;
@@ -210,10 +240,25 @@ body {
 }
 
 .h3 {
+  font-family: var(--font-display), system-ui, sans-serif;
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.35;
   color: var(--fg);
+}
+
+/* Display font (Manrope) on the v0 large headline classes — keeps the
+   premium hierarchy consistent with the .h1/.h2 utilities above. Body
+   text stays on Inter via the global body rule. */
+.asw-v0-hero-h1,
+.asw-v0-service-title,
+.asw-v0-cta-band-title,
+.asw-v0-philosophy-slogan,
+.asw-v0-problem-title,
+.asw-v0-bento-title,
+.asw-v0-reality-headline,
+.asw-v0-result-metric {
+  font-family: var(--font-display), system-ui, sans-serif;
 }
 
 .lead {
@@ -696,8 +741,10 @@ body {
   --asw-v0-bg-deep: #050D1F;
   --asw-v0-bg-deep-2: #0A1830;
 
-  /* Soft warm pill used for v0 navbar CTA. Matt gold tone (NOT neon).
-     Stays inside brand neutrality envelope. */
+  /* Matt gold tone (NOT neon). Commit 0: DEMOTED from primary CTA — the
+     single primary accent is now ASW Blue (--brand). This token is kept
+     only as a muted neutral support detail; do NOT use it as a primary
+     call-to-action style. */
   --asw-v0-pill: #E8D5A5;
   --asw-v0-pill-hover: #DDC58F;
   --asw-v0-pill-fg: #1F1A0F;
@@ -799,8 +846,8 @@ body {
 }
 .asw-v0-navbar-link:hover,
 .asw-v0-navbar-link[data-active="true"] {
-  color: var(--asw-v0-pill);
-  background: rgba(232, 213, 165, 0.08);
+  color: var(--brand-sky);
+  background: rgba(34, 184, 255, 0.10);
 }
 .asw-v0-navbar-cta {
   display: inline-flex;
@@ -808,15 +855,15 @@ body {
   gap: 0.4rem;
   padding: 0.55rem 1.15rem;
   border-radius: 999px;
-  background: var(--asw-v0-pill);
-  color: var(--asw-v0-pill-fg);
+  background: var(--brand);
+  color: #ffffff;
   font-weight: 600;
   font-size: 0.92rem;
   text-decoration: none;
   border: 1px solid transparent;
   transition: background-color 0.15s ease, transform 0.15s ease;
 }
-.asw-v0-navbar-cta:hover { background: var(--asw-v0-pill-hover); }
+.asw-v0-navbar-cta:hover { background: var(--brand-hover); }
 .asw-v0-navbar-cta:active { transform: translateY(1px); }
 
 /* Mobile menu trigger inside dark pill */
@@ -909,32 +956,75 @@ body {
   gap: 0.5rem;
   padding: 0.95rem 1.65rem;
   border-radius: 999px;
-  background: var(--asw-v0-pill);
-  color: var(--asw-v0-pill-fg);
+  background: var(--brand);
+  color: #ffffff;
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
   border: 1px solid transparent;
   transition: background-color 0.15s ease, transform 0.15s ease;
 }
-.asw-v0-hero-pill:hover { background: var(--asw-v0-pill-hover); }
+.asw-v0-hero-pill:hover { background: var(--brand-hover); }
 .asw-v0-hero-pill:active { transform: translateY(1px); }
 
-/* Small problem-badge above the 3 hero cards */
-.asw-v0-problems-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 3.25rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 999px;
+/* Short uppercase label above the 3 hero cards (GozieOkenu rhythm).
+   A quiet, centered section lead-in — blue subtle (brand-sky), generous
+   whitespace above to separate the cards from the hero CTA. Not a pill,
+   no warning tone, no gold. */
+.asw-v0-problems-label {
+  display: block;
+  margin-top: 5rem;
+  text-align: center;
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  color: #FCA5A5;
-  background: rgba(220, 38, 38, 0.12);
-  border: 1px solid rgba(220, 38, 38, 0.28);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-sky);
 }
+@media (min-width: 768px) {
+  .asw-v0-problems-label { margin-top: 6rem; }
+}
+
+/* ── Hero LIGHT variant (preview /hero-light) ───────────────────────────────
+   Variant B for comparison. Same composition + copy as the dark hero; only
+   colours change. Light blue-grey tinted surface, dark text, ASW Blue CTA,
+   light cards with soft border + shadow. No neon, no gold, no SaaS glow.
+   All rules scoped under .asw-v0-hero--light so the dark hero is untouched. */
+.asw-v0-hero--light {
+  background:
+    radial-gradient(circle at 82% 12%, rgba(10, 102, 255, 0.07) 0%, rgba(10, 102, 255, 0) 50%),
+    radial-gradient(circle at 10% 92%, rgba(34, 184, 255, 0.06) 0%, rgba(34, 184, 255, 0) 48%),
+    linear-gradient(180deg, #F7FAFF 0%, #EEF3FB 100%);
+  color: var(--fg);
+}
+/* Swap the white dot-grid (invisible on light) for a faint dark one. */
+.asw-v0-hero--light::before {
+  background-image: radial-gradient(circle at center, rgba(7, 17, 31, 0.05) 1px, transparent 1.4px);
+}
+.asw-v0-hero--light .asw-v0-hero-h1 { color: var(--fg); }
+.asw-v0-hero--light .asw-v0-accent { color: var(--brand); }
+.asw-v0-hero--light .asw-v0-hero-lead { color: var(--fg-muted); }
+.asw-v0-hero--light .asw-v0-hero-note { color: var(--fg-soft); }
+.asw-v0-hero--light .asw-v0-problems-label { color: var(--brand); }
+
+/* Light problem cards (dark variant keeps its navy gradient untouched). */
+.asw-v0-hero--light .asw-v0-problem-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.asw-v0-hero--light .asw-v0-problem-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+.asw-v0-hero--light .asw-v0-problem-icon {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+.asw-v0-hero--light .asw-v0-problem-title { color: var(--fg); }
+.asw-v0-hero--light .asw-v0-problem-text { color: var(--fg-muted); }
+.asw-v0-hero--light .asw-v0-problem-link { color: var(--brand); }
+.asw-v0-hero--light .asw-v0-problem-link:hover { color: var(--brand-hover); }
 
 /* ── Hero problem cards (3-up under hero) ─────────────────────────────────── */
 .asw-v0-problems {

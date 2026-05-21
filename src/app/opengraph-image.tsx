@@ -12,7 +12,7 @@ export const contentType = "image/png";
 const NAVY = "#07111F";
 const GRAPHITE = "#1D2733";
 const MUTED = "#667085";
-const BRAND = "#0A66FF";
+const BRAND = "#0D47A1";
 const BRAND_SOFT = "#E6EFFF";
 const BORDER = "#E3E8F0";
 

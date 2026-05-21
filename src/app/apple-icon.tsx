@@ -1,14 +1,11 @@
 import { ImageResponse } from "next/og";
+import { LogoMark } from "./_logo-mark";
 
-// Apple touch icon — iOS auto-rounds the corners, so we leave the
-// square bleed full and just keep the mark centered. No text (it would
-// be unreadable at home-screen size).
+// Apple touch icon — dark premium, matching the favicon: near-black background
+// + white logo mark, no blue tile. iOS rounds the corners itself.
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
-
-const BRAND = "#0A66FF";
-const BRAND_HOVER = "#0852CC";
 
 export default function AppleIcon() {
   return new ImageResponse(
@@ -20,28 +17,10 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: `linear-gradient(135deg, ${BRAND} 0%, ${BRAND_HOVER} 100%)`,
+          background: "#0A0C12",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 110,
-            height: 110,
-            background: "#FFFFFF",
-            borderRadius: 26,
-            color: BRAND,
-            fontSize: 86,
-            fontWeight: 800,
-            lineHeight: 1,
-            letterSpacing: "-0.04em",
-            fontFamily: "sans-serif",
-          }}
-        >
-          A
-        </div>
+        <LogoMark size={132} color="#FFFFFF" />
       </div>
     ),
     { ...size },

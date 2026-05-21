@@ -1,580 +1,241 @@
-# Autosmartweby – Claude Code Guardrails
+# AutoSmartWeby – Source of Truth (Claude Code Guardrails)
+
+> Tento dokument je **jediná závazná pravda** pro marketingový web AutoSmartWeby.
+> Nahrazuje všechny předchozí verze, drafty a positioning poznámky (2026-05-21).
+> Pokud starší soubor, README, prompt nebo hardcoded obsah odporuje tomuto
+> dokumentu, vyhrává tento dokument.
+
+---
 
 ## 1. Role projektu
 
-Autosmartweby.cz je marketingový web pro službu, která tvoří profesionální, dostupné a rychle dodané weby pro živnostníky, řemeslníky, lokální služby a malé firmy v Česku.
+AutoSmartWeby je moderní, profesionální a důvěryhodný **konverzní web** pro malé
+a střední firmy v Česku.
 
-Web má prodávat hlavně:
+Cílová skupina:
+- živnostníci, lokální služby, řemeslníci, restaurace, poskytovatelé služeb a další české SMB,
+- kteří potřebují: lepší web, lepší viditelnost v Google / Mapách, AI asistenta / virtuálního recepčního, a jednoduchou cestu k více poptávkám.
 
-- úlevu
-- bezpečí
-- důvěru
-- jednoduchost
-- jasnou cenu
-- rychlý a srozumitelný proces
+Web má působit pomocně, profesionálně a srozumitelně pro netechnické zákazníky.
 
-Klient si nekupuje technologii. Kupuje si jistotu, že bude na internetu působit důvěryhodně, lidé ho najdou a snadno se ozvou.
+**Pozor — souběžné produktové vrstvy v repu (NEMAZAT):** repozitář kromě
+marketingového webu obsahuje i produkt a nástroje, které tato spec NEŘEŠÍ a které
+se nesmí smazat při „úklidu starších verzí":
+- `src/templates/*` (klientské šablony webů: community-expert, emergency-professional, core),
+- `src/app/preview/`, `src/app/preview2/` + `src/lib/sheets/` (náhledový systém z Google Sheets),
+- `src/app/brand-dotaznik/` + jeho API (brand dotazník / lead nástroj),
+- `src/app/api/*` (funkční contact backend a další),
+- právní stránky (`/zasady-ochrany-osobnich-udaju`), `sitemap.ts`, `robots.ts`, OG/analytics/consent.
 
-Web nesmí působit jako:
-
-- AI hype studio
-- drahá agentura
-- levný anonymní šablonář
-- technologický startup
-- generický SaaS landing page
-
----
-
-## 2. Hlavní positioning
-
-Hlavní positioning:
-
-> Profesionální web pro živnostníky a malé firmy bez zbytečných starostí.
-
-Autosmartweby mají působit jako spolehlivý digitální parťák a digitální řemeslník pro malé firmy.
-
-Značka má stát mezi dvěma extrémy:
-
-- není to levný anonymní web z šablony
-- není to drahá agentura pro korporace
-
-Správný dojem návštěvníka během prvních 10 sekund:
-
-> „Tohle je přesně pro mě. Nevypadá to levně. Není to agenturní divadlo. Rozumím ceně. Můžu udělat první krok bez rizika.“
+„Source of truth" se týká **veřejného marketingového webu** (homepage + 5 detailních stránek).
 
 ---
 
-## 3. Povinné hero prvky
+## 2. Sitemap (cílová struktura)
 
-Hero sekce musí během 5–10 sekund sdělit:
+| Route | Menu | Účel |
+|---|---|---|
+| `/` | Domů | Hlavní landing s přehledem služeb a CTA |
+| `/weby` | Webové stránky | Detail o tvorbě webů |
+| `/lokalni-seo` | Lokální SEO | Detail o lokálním SEO a viditelnosti v Google (preferovat `/lokalni-seo`, ne `/seo`) |
+| `/ai-asistent` | AI asistent | Detail o AI recepčním / asistentovi |
+| `/cenik` | Ceník / Balíčky | Přehled balíčků |
+| `/kontakt` | Kontakt | Kontakt a lead formulář |
 
-1. Pro koho služba je.
-2. Co klient dostane.
-3. Že proces nebude složitý.
-4. Orientační cenu nebo cenový rámec.
-5. Jasnou primární CTA.
-6. Důvěryhodnostní mikrocopy.
-
-Doporučený hero směr:
-
-**H1:**
-
-> Profesionální web pro malé firmy bez zbytečných starostí
-
-**Podnadpis:**
-
-> Pomůžeme vám s texty, strukturou i spuštěním. Dostanete přehledný web, který působí důvěryhodně, funguje na mobilu a usnadní zákazníkům se ozvat.
-
-**Trust line:**
-
-> Obvykle kolem 10 000 Kč. Jasný proces, pomoc s obsahem a férová cena předem.
-
-**Primární CTA:**
-
-> Chci nezávazně zjistit cenu
-
-**Sekundární CTA:**
-
-> Podívat se, jak to funguje
-
-Hero nesmí být technologický pitch. AI a automatizace mohou být zmíněny až později jako praktické rozšíření nebo interní výhoda.
+Všechny stránky sdílí konzistentní **Header** a **Footer**.
 
 ---
 
-## 4. Tone of voice
+## 3. Tone of voice
 
-Piš česky, lidsky, klidně a konkrétně.
+Přátelský, jasný, důvěryhodný, praktický, lidský, ne-korporátní. Přirozená čeština,
+vykání. Bez prázdného marketingového žargonu. Web musí být srozumitelný i pro
+netechnické zákazníky.
 
-Komunikace má znít jako schopný člověk, který rozumí malým firmám, ne jako agenturní prezentace ani technologický pitch.
-
-### Používej
-
-- jasná cena
-- pomůžeme s texty
-- bez technických řečí
-- ověřený postup
-- profesionální web
-- pro živnostníky a malé firmy
-- férová cena předem
-- jednoduchý proces
-- web, který lidé najdou
-- zákazníci se snadno ozvou
-- web pod vaší kontrolou
-
-### Nepoužívej
-
-- digitální transformace
-- AI revoluce
-- komplexní řešení
-- škálovatelný ekosystém
-- posuňte své podnikání na další úroveň
-- moderní weby na míru bez vysvětlení
-- nejlevnější web v Česku
-- garantujeme zákazníky
-- revoluční technologie
-- autopilot bez kontextu
-- growth hacking
-- full-service digitální ekosystém
-
-### Copy pravidla
-
-- Každý nadpis musí nést konkrétní informaci.
-- Každá sekce musí odbourávat jednu bariéru: cenu, čas, techniku, nedůvěru, nejasnost nebo strach ze špatného dodavatele.
-- Nepoužívej dlouhé odstavce.
-- CTA vždy doplň mikrocopy, co se stane po kliknutí.
-- Neslibuj garantované zákazníky, pozice ve vyhledávání ani růst bez důkazu.
-- Nevymýšlej reference, roky praxe, certifikace, počty klientů ani konkrétní výsledky.
-- Pokud chybí důkaz, použij launch-safe formulaci.
+Negarantuj konkrétní výsledky (pozice v Google, počty zákazníků, růst). Nevymýšlej
+reference, roky praxe, certifikace ani čísla. Ceny uváděj s „od" a jako orientační.
 
 ---
 
-## 5. Design direction
+## 4. CTA
 
-Design má být:
+Primární CTA: **„Objednat konzultaci"**
 
-- světlý
-- čistý
-- moderní
-- důvěryhodný
-- vzdušný
-- dobře čitelný
-- mobil-first
-- obchodně srozumitelný
+Další povolené CTA: „Nezávazně poptat web" (ceník), „Poptat web",
+„Získat nabídku", „Zjistit více", „Konzultace zdarma", „Vyzkoušet demo".
 
-Ideální poměr:
-
-> 75 % jednoduchost, důvěra a čitelnost.
-> 25 % moderní vizuální kvalita.
-
-Modernost má být vidět v typografii, kontrastu, čistotě, mobilní použitelnosti a kvalitní kompozici. Nemá být postavená na efektech, které zpomalují pochopení nabídky.
-
-### Vyhnout se
-
-- neonovým gradientům
-- fialovému AI looku
-- temnému SaaS stylu
-- přehnaným animacím
-- 3D efektům bez účelu
-- příliš abstraktním ilustracím
-- generickým stock fotkám
-- přeplněným sekcím
-- rotovaným kartám bez důvodu
-- dekoracím, které snižují čitelnost
-- scroll-jackingu
-- těžkým animacím nad foldem
-
-### Preferovat
-
-- jasnou typografickou hierarchii
-- čisté světlé pozadí
-- důvěryhodnou modrou / antracit / neutrální paletu
-- jeden výrazný CTA akcent
-- jednoduché line ikony
-- mockupy webů v desktopu i mobilu
-- reálné ukázky práce, pokud existují
-- launch-safe placeholders, pokud ukázky zatím nejsou
-- dostatečný whitespace
-- konzistentní spacing scale
+CTA je nízkotlaké, ne agresivní prodej.
 
 ---
 
-## 6. Povinná homepage struktura
+## 5. Struktura homepage (v tomto pořadí)
 
-Homepage má obsahovat tyto sekce:
-
-1. Header
-2. Hero
-3. Trust strip
-4. Pro koho to je
-5. Problém a řešení
-6. Co dostanete
-7. Proces ve 3 krocích
-8. Cena / balíčky
-9. Ukázky webů
-10. Reference nebo launch-safe alternativa
-11. Volitelná rozšíření
-12. Porovnání DIY vs. agentura vs. Autosmartweby
-13. FAQ
-14. Kontaktní blok
-15. Footer s důvěryhodnostními údaji
-
-Každá sekce musí mít jasný obchodní účel. Nepřidávej sekci jen proto, že vizuálně vypadá dobře.
+1. **Hero** — okamžitě sdělí hodnotu. Hlavní emoce = úleva, bezpečí, jasný proces. **Hero NEprodává primárně „AI" ani marketingový hype.**
+   - Headline (jeden inline tok): „Váš systém pro nové zákazníky." + modře/italic inline „Online do 7 dnů." (schválený claim 2026-05-21). ⚠️ „Online do 7 dnů" je veřejný příslib termínu — držet jen dokud je reálně splnitelný (viz §9), jinak zjemnit/odebrat.
+   - Subheadline: lidsky o pomoci s texty/strukturou/spuštěním a důvěryhodném webu na mobilu.
+   - CTA: „Objednat konzultaci"; orientační cena v hero (od 8 900 Kč). AI/automatizace zmínit až níž jako jednu ze služeb.
+2. **Problém** — zastaralý web, nízká důvěryhodnost, nízká návštěvnost, chybějící lokální SEO, zmeškané hovory a poptávky.
+3. **Služby** — 3 karty: Webové stránky / Lokální SEO / AI asistent (ikona, titulek, krátký popis, odkaz na detail).
+4. **Benefity** — 4–6 karet: Více zákazníků online, Nepřetržitá dostupnost, Klid v duši, Rychlé načítání, Lokální zaměření, Profesionální vzhled.
+5. **Proces** — 1. Konzultace → 2. Návrh a vývoj → 3. Spuštění a podpora.
+6. **Reference / testimonials** — reálné, pokud jsou; jinak čisté placeholdery připravené na reálné reference. Žádné smyšlené přehnané claims.
+7. **Ceník (preview)** — 3 balíčky: Start / Business / Premium.
+8. **FAQ** — Jak rychle se dostaví výsledky SEO? / Kolik stojí tvorba webu? / Jak funguje AI asistent? / Jak probíhá spolupráce? / Co se stane po spuštění webu?
+9. **Kontakt / lead formulář** — jméno, e-mail, telefon, firma/web, zpráva, odeslat.
 
 ---
 
-## 7. CTA pravidla
+## 6. Detailní stránky
 
-Primární CTA:
+**/weby:** Hero „Profesionální weby na míru" → proč investovat do webu → ukázky/portfolio placeholder → proces tvorby → balíčky → benefity moderního webu → CTA → Footer.
 
-> Chci nezávazně zjistit cenu
+**/lokalni-seo:** Hero „Zvyšte svoji viditelnost v okolí" → problém (zákazníci hledají online a v mapách) → řešení (Google profil, klíčová slova, recenze, lokální viditelnost) → výsledky/metriky placeholder → proces (analýza, implementace, měření) → SEO FAQ → CTA / formulář.
 
-Alternativy:
+**/ai-asistent:** Hero „Váš 24/7 virtuální recepční" → vysvětlení AI asistenta → use cases (služby, restaurace, řemesla, retail, rezervace) → benefity (méně zmeškaných hovorů, úspora času, lepší zákaznická zkušenost) → teaser ceny → CTA (konzultace nebo demo).
 
-- Chci návrh webu pro můj obor
-- Nezávazně poptat web
-- Domluvit krátký hovor
-- Spočítat orientační cenu
-- Ověřit cenu webu
-- Poslat stručnou poptávku
+**/cenik:** detailní karty balíčků (aktuální source of truth — korekce 2026-05-21):
+- **Web Standard** — pro živnostníky a malé firmy; přehledný web, pomoc s texty, responzivní, formulář, základní SEO, spuštění; **8 900 Kč**.
+- **Web Pro** — pro firmy s více obsahem; rozšířený web, lokální SEO základ, reference, formulář s autoodpovědí, podpora; **16 900 Kč**; označit **„Doporučená volba"**.
+- CTA na ceníku: **„Nezávazně poptat web"**.
+- **Externí náklady** (doména, hosting, placené nástroje, individuální napojení) řešit **zvlášť** a vždy vysvětlit předem.
+- Ceny jsou orientační, finální cena potvrzená předem. Negarantuj nereálné výsledky.
+- ⚠️ Staré balíčky **Start 9 990 / Business 19 990 / Premium** jsou DEPRECATED rámec — nepoužívat jako hlavní ceník.
 
-CTA má být nízkotlaké. Nesmí působit jako agresivní prodej.
-
-### Mikrocopy pod CTA
-
-Používej například:
-
-- Bez závazku. Stačí pár vět o vašem podnikání.
-- Ozveme se s doporučením, co dává smysl.
-- Nečeká vás žádný dlouhý formulář.
-- Nejdřív si ujasníme rozsah a cenu.
+**/kontakt:** formulář + e-mail + telefon placeholder + firemní údaje placeholder + trust text: „Ozveme se vám do 24 hodin. První konzultace je zdarma."
 
 ---
 
-## 8. Cena a balíčky
+## 7. Design system
 
-Cena kolem 10 000 Kč je výhoda pouze tehdy, když je správně vysvětlená.
+Profesionální, moderní, čistý, light-first.
 
-Cena nesmí působit jako podezřele levná šablona. Musí působit jako výsledek ověřeného postupu a jasně daného rozsahu.
+**Barvy (tokeny v `src/app/globals.css`):**
+- Primary: `#0D47A1` (`--brand`) — primární tlačítka a klíčové akcenty
+- Secondary: `#1976D2` (`--brand-2`) — odkazy, lehčí akcenty, gradienty
+- Light background: `#F9F9F9` (`--bg-muted`), bílá `#FFFFFF`
+- Dark background: `#212121` (`--bg-inverse`) — footer / tmavé pásy
+- Primary text: `#212121` (`--fg`), Secondary text: `#555555` (`--fg-muted`)
 
-### Doporučený rámec
+Modrá je hlavní barva důvěry. **Oranžová `#F2994A` ZE SPEC SE NEPOUŽÍVÁ**
+(rozhodnutí majitele 2026-05-21): CTA jsou **modrá**. Žádná oranžová, zlatá,
+červená jako akcent, žádný neon, žádný SaaS glow. Kontrast cílí na WCAG AA.
 
-- Start web: od 10 000 Kč
-- Lokální web: cca 15 000–25 000 Kč
-- Web + chytrý proces: cca 25 000–45 000 Kč
-- Péče po spuštění: měsíčně nebo kvartálně podle rozsahu
+**Typografie:**
+- Nadpisy: **Montserrat** (`--font-montserrat`). (Spec nabízí „Poppins nebo Montserrat"; Montserrat zvolen kvůli plné podpoře českých diakritik.)
+- Text: **Roboto** (`--font-roboto`).
+- Velikosti: H1 ~40px (text-4xl), H2 ~32px (text-3xl), H3 ~24–28px, body 16px, small 14px.
 
-### Povinně vysvětlit
+**UI styl:** čistá grid layout, bílé karty, měkké stíny, zaoblené rohy, jasný
+spacing, mobile-first, žádný clutter, žádné agresivní animace, žádný tmavý/chaotický/gaming look.
 
-- co je v ceně
-- co není v ceně
-- kolik je revizí
-- co stojí provoz
-- jak se řeší doména
-- jak se řeší hosting
-- kdo vlastní web
-- jak se řeší úpravy po spuštění
-- že finální cena je vždy potvrzená předem
-
-### Nepoužívat
-
-- nejlevnější web
-- web za pár korun
-- sleva jen dnes
-- garance zákazníků
-- bezplatně všechno navždy
+**Tlačítka:**
+- Primary: pozadí primární modrá, bílý text, zaoblené, ~`px-6 py-3`, hover tmavší modrá.
+- Secondary: průhledné/bílé pozadí, modrý border, modrý text, hover jemně modré pozadí.
+- (Akcentní CTA: spec zmiňuje oranžovou — NEPOUŽÍVAT; místo toho primární modrá.)
 
 ---
 
-## 9. Trust a důvěryhodnost
+## 8. Komponenty (musí existovat / být vytvořené)
 
-Důvěryhodnost musí být konkrétní, ne obecná.
+1. **Header** — logo, menu items, CTA tlačítko; desktop nav + mobilní hamburger; aria labely; sticky jen pokud neškodí UX.
+2. **Footer** — logo/název firmy, navigace, kontakt, copyright, právní odkazy.
+3. **HeroSection** — `headline`, `subheadline`, `ctaText`, `ctaUrl`, volitelně `image`.
+4. **ServiceCard** — `icon/image`, `title`, `description`, `linkText`, `linkUrl`.
+5. **BenefitCard** — `icon`, `title`, `description`.
+6. **ProcessStep** — `stepNumber`, `title`, `description`, volitelně `icon`.
+7. **TestimonialCard** — `text`, `authorName`, `authorRole`, volitelně `authorImage`.
+8. **PricingCard** — `planName`, `price`, `features`, `isFeatured`, `ctaText`, `ctaUrl`.
+9. **ContactForm** — pole: `name`, `email`, `phone`, `companyOrWebsite`, `message`; validace, přístupné labely, success message, error stav; **napojeno na stávající `/api/contact` backend (nerozbít)**.
+10. **StickyCTA** (volitelné) — text „Objednat konzultaci"; jen pokud nepřekrývá obsah na mobilu.
 
-Povinné trust prvky:
-
-- jasná cena nebo cenový rámec
-- jasný proces
-- pomoc s texty
-- ukázky webů nebo launch-safe ukázky
-- reference, pokud jsou pravdivé a schválené
-- IČO / fakturační údaje
-- e-mail
-- telefon
-- vysvětlení vlastnictví webu
-- GDPR / ochrana osobních údajů
-- FAQ k ceně, doméně, hostingu, textům, fotkám a úpravám
-
-Nikdy nevymýšlej:
-
-- falešné recenze
-- falešná jména klientů
-- loga firem bez svolení
-- počty zákazníků
-- roky praxe
-- certifikace
-- mediální zmínky
-- garantované výsledky
-
-Pokud reference nejsou dostupné, použij launch-safe alternativu:
-
-- „Ukázky připravujeme“
-- „Podívejte se na modelové ukázky podle oboru“
-- „První projekty zveřejníme po schválení klienty“
-- „Zatím ukazujeme typové návrhy, aby bylo jasné, jak web může vypadat“
+Centralizuj znovupoužitelná data: navigace, služby, benefity, ceník, FAQ, SEO metadata.
 
 ---
 
-## 10. Formulář
+## 9. SEO
 
-Kontaktní formulář má být krátký.
+- HTML `lang="cs"` (resp. `cs-CZ`).
+- Každá stránka právě jedno `H1`, logická hierarchie H2/H3.
+- Title + meta description pro každou stránku. České SEO-friendly slugy (`/lokalni-seo`, ne `/seo`).
+- Alt texty u významových obrázků, prázdný alt u dekorativních.
+- Open Graph metadata; Organization / LocalBusiness schema (placeholder údaje, dokud nejsou finální).
+- Udržuj `sitemap.ts` a `robots.ts` v souladu s aktuálními routami.
 
-Povinná pole:
-
-- jméno
-- e-mail nebo telefon
-- obor / firma
-- co potřebujete
-
-Volitelné pole:
-
-- poznámka
-
-Formulář nesmí působit jako dlouhý agenturní brief. Cílem je snížit tření a získat první kontakt.
-
-### Formulář musí mít
-
-- server-side validaci
-- ochranu proti spamu
-- jasnou GDPR mikrocopy
-- potvrzení po odeslání
-- žádné zbytečné povinné otázky
-- srozumitelné chybové hlášky
-- přístupné labely
-- focus states
-
-### Mikrocopy formuláře
-
-Použij například:
-
-> Stačí pár vět. Ozveme se vám a doporučíme, co by pro váš web dávalo smysl.
-
-Nebo:
-
-> Nemusíte mít připravené texty ani fotky. Probereme to spolu.
+**Doporučené meta tituly:**
+- Domů: „AutoSmartWeby – moderní weby, lokální SEO a AI asistent"
+- Weby: „Tvorba webových stránek pro malé firmy | AutoSmartWeby"
+- Lokální SEO: „Lokální SEO a viditelnost na Google | AutoSmartWeby"
+- AI asistent: „AI asistent a virtuální recepční 24/7 | AutoSmartWeby"
+- Ceník: „Ceník webů, SEO a AI asistenta | AutoSmartWeby"
+- Kontakt: „Kontakt | AutoSmartWeby"
 
 ---
 
-## 11. Security minimum
+## 10. Analytics / conversion tracking
 
-Kontaktní formulář nesmí být pouze client-side.
+Připrav event hooky / helper funkce (čistá abstrakce, nehardcoduj GA, pokud projekt
+GA už nepoužívá — projekt má `src/lib/analytics.ts`, využij ho):
+- `cta_hero_click`
+- `cta_services_click`
+- `cta_pricing_click`
+- `form_submit`
 
-Povinné:
+---
 
-- POST only
-- server-side validation
-- Zod schema nebo ekvivalent
-- honeypot
-- rate limit
-- anti-replay nebo základní anti-spam kontrola
-- bezpečné e-mail odesílání
-- žádné secrety v klientovi
-- žádné tajné hodnoty v `NEXT_PUBLIC_`
-- žádný `.env` commitnutý do repozitáře
-- `.env.example` pouze s názvy proměnných
-- bezpečné chybové hlášky bez interních detailů
+## 11. Security minimum (kontaktní formulář)
 
-### Zakázáno
+Kontaktní formulář nesmí být pouze client-side. Stávající `/api/contact` backend
+splňuje níže uvedené — **nerozbít ho**:
+- POST only, server-side validace (Zod nebo ekvivalent),
+- honeypot, rate limit, základní anti-spam,
+- bezpečné odesílání e-mailu,
+- žádné secrety v klientovi, žádné tajné hodnoty v `NEXT_PUBLIC_`, žádný `.env` v repu,
+- `.env.example` pouze s názvy proměnných,
+- bezpečné chybové hlášky bez interních detailů.
 
-- odesílat formulář jen z klienta bez serverové validace
-- vystavit API klíče do browseru
-- renderovat raw HTML bez sanitizace
-- logovat celé osobní zprávy do veřejných logů
-- zveřejnit preview se sensitive daty
-- používat třetí skripty bez důvodu
+Zakázáno: odeslat formulář jen z klienta, vystavit API klíče do browseru,
+renderovat raw HTML bez sanitizace, logovat celé osobní zprávy do veřejných logů.
 
 ---
 
 ## 12. Visual QA workflow
 
-Po každé větší vizuální změně proveď:
+Po každé větší vizuální změně: lint → typecheck → build → dev server → Playwright
+screenshoty desktop **1440**, tablet **768**, mobile **390** → kontrola overflow a
+vizuální kvality → oprava → re-screenshot → teprve potom návrh commitu.
 
-1. Spusť lint.
-2. Spusť typecheck.
-3. Spusť build.
-4. Spusť lokální dev server.
-5. Otevři stránku přes Playwright.
-6. Vytvoř screenshot desktop 1440px.
-7. Vytvoř screenshot tablet 768px, pokud se měnil layout.
-8. Vytvoř screenshot mobile 390px.
-9. Zkontroluj vizuální kvalitu.
-10. Oprav nalezené problémy.
-11. Opakuj screenshot kontrolu.
-12. Teprve potom navrhni commit.
+Kontroluj: čitelnost H1/subheadline, viditelnost CTA, spacing, zarovnání karet,
+konzistentní radiusy/stíny, mobilní layout, žádný horizontální scroll, žádné překryvy,
+čitelnost a přístupnost formuláře, kontrast, focus states.
 
-### Kontroluj hlavně
-
-- hero nad foldem
-- jasnou hodnotu během 5–10 sekund
-- čitelnost H1 a podnadpisu
-- viditelnost CTA
-- spacing mezi sekcemi
-- zarovnání karet
-- konzistentní radiusy a stíny
-- mobilní layout
-- žádný horizontální scroll
-- žádné překryvy
-- čitelnost formuláře
-- dostatečný kontrast
-- focus states
-- rychlost načítání
-- vizuální důvěryhodnost
-
-### Vizuální anti-patterny
-
-Oprav okamžitě:
-
-- text je moc dlouhý
-- CTA zaniká
-- hero působí technologicky, ne lidsky
-- cena není vidět nebo je nejasná
-- mobilní verze má špatné mezery
-- karty nejsou zarovnané
-- sekce působí jako generický SaaS template
-- design vypadá draze a agenturně
-- design vypadá lacině a šablonově
-- animace odvádí pozornost
-- text je špatně čitelný
-- formulář působí složitě
+Skripty: `pnpm screenshots` (`scripts/screenshots.mjs`, env `URL=...`). pnpm spouštěj
+přes `corepack pnpm <script>` (pnpm není v PATH).
 
 ---
 
-## 13. Playwright a browser kontrola
+## 13. Pravidla pro změny v kódu
 
-Při vizuálních změnách používej browser, ne pouze statickou analýzu kódu.
-
-Minimální viewporty:
-
-- desktop: 1440 × 1000
-- tablet: 768 × 1000
-- mobile: 390 × 900
-
-Kontroluj:
-
-- homepage
-- kontaktní formulář
-- ceník / balíčky
-- FAQ
-- footer
-- stav po odeslání formuláře
-- chybové stavy formuláře
-- menu na mobilu
-
-Pokud Playwright není nastavený, navrhni jeho instalaci a základní smoke test.
+- Preferuj TypeScript, React/Next.js a Tailwind (projekt je používá; Tailwind 4 CSS-first, tokeny v `globals.css`).
+- Nezaváděj zbytečné závislosti. Měň co nejmenší nutný rozsah, neduplikuj komponenty, neporušuj typy.
+- Neodstraňuj security, SEO, právní stránky ani consent/GDPR logiku.
+- Neodstraňuj produktové vrstvy z §1 (templates/preview/dotazník/api).
+- Po úpravě vrať report: změněné soubory, co a proč, jaké testy proběhly, co zůstává rizikové, další krok.
 
 ---
 
-## 14. Performance, SEO a accessibility
+## 14. Kritéria hotového výsledku
 
-Web musí být rychlý, čitelný a přístupný.
-
-Povinně hlídat:
-
-- správné H1 pouze jednou na stránce
-- logická hierarchie H2/H3
-- metadata title a description
-- Open Graph
-- alt texty u významových obrázků
-- lazy loading mimo hero
-- optimalizované obrázky přes Next/Image, pokud projekt používá Next.js
-- lokální fonty přes `next/font` nebo bezpečné self-host řešení
-- přístupné formulářové labely
-- dostatečný kontrast
-- focus visible
-- žádné layout shifty nad foldem
-- rozumná velikost JS
-- nepoužívat těžké knihovny bez důvodu
+- Struktura webu odpovídá sitemapě (§2), navigace odpovídá sitemapě.
+- Homepage dodržuje pořadí sekcí (§5). Detailní stránky existují a mají českou copy.
+- Design tokeny odpovídají barvám (§7), CTA text konzistentní, ceník konzistentní.
+- FAQ existuje, kontaktní formulář existuje a je napojený na backend.
+- SEO metadata pro všechny stránky, jedno H1 na stránku.
+- Žádné starší konfliktní verze jako aktivní kód/dokumentace.
+- `pnpm build` prochází, žádné zjevné a11y / performance problémy.
+- Plně responzivní (mobil/tablet/desktop), dobrá čeština bez překlepů, žádné rozbité odkazy, prázdná tlačítka ani lorem ipsum.
 
 ---
 
-## 15. Pravidla pro změny v kódu
-
-Před úpravou:
-
-1. Zjisti strukturu projektu.
-2. Najdi hlavní homepage komponenty.
-3. Najdi zdroj obsahu.
-4. Zkontroluj, jestli existují sdílené komponenty.
-5. Neprováděj plošné přepisování bez důvodu.
-
-Při úpravě:
-
-- měň co nejmenší nutný rozsah
-- zachovej existující architekturu, pokud není problémová
-- nevytvářej duplicitní komponenty
-- neporušuj typy
-- neodstraňuj security nebo SEO prvky
-- neodstraňuj právní stránky
-- neodstraňuj consent / GDPR logiku
-- nepřepisuj data bez vysvětlení
-
-Po úpravě vždy vrať report:
-
-- změněné soubory
-- co bylo opraveno
-- proč byla změna potřeba
-- jaké testy proběhly
-- co zůstává rizikové
-- doporučený další krok
-
----
-
-## 16. Kritéria hotového výsledku
-
-Výsledek je hotový až když:
-
-- návštěvník do 10 sekund ví, co Autosmartweby nabízí
-- je jasné, že služba je pro malé firmy
-- je viditelná cena nebo cenový rámec
-- CTA je zřejmá
-- texty jsou krátké a konkrétní
-- web nepůsobí levně
-- web nepůsobí agenturně draze
-- web nepůsobí jako AI hype
-- mobilní verze je stejně kvalitní jako desktop
-- formulář je jednoduchý a bezpečný
-- footer obsahuje důvěryhodnostní údaje
-- nejsou použité falešné reference
-- nejsou použité nepodložené claims
-- build prochází
-- nejsou zjevné accessibility chyby
-- nejsou zjevné performance problémy
-
----
-
-## 17. První auditní příkaz
-
-Když začínáš práci v repozitáři, postupuj podle tohoto zadání:
-
-```text
-Nejdřív si přečti CLAUDE.md a aktuální stav repozitáře.
-
-Cíl:
-Připrav projekt Autosmartweby na profesionální design + visual QA workflow.
-
-Úkol:
-1. Zkontroluj aktuální strukturu projektu.
-2. Najdi hlavní homepage komponenty.
-3. Zkontroluj, jestli projekt používá Next.js, TypeScript, Tailwind a Vercel-ready setup.
-4. Zkontroluj, jestli existuje Playwright konfigurace.
-5. Zkontroluj, jestli existuje kontaktní formulář a jak je řešený.
-6. Zkontroluj, jestli existují lint/build/test skripty.
-7. Nic zásadního zatím nepřepisuj.
-8. Vrať report:
-   - struktura projektu
-   - hlavní soubory homepage
-   - aktuální rizika designu
-   - aktuální rizika formuláře/security
-   - chybějící nástroje
-   - doporučený první implementační krok
-   - přesné příkazy, které mám spustit
-
-Důležité:
-Neoptimalizuj pouze vizuál. Kontroluj web podle strategie Autosmartweby: důvěra, jasná cena, jednoduchost, mobil, rychlé pochopení nabídky a bezpečný formulář.
-```
-
----
-
-## 18. Finální pravidlo
-
-Když vznikne konflikt mezi efektním designem a důvěryhodností pro malou firmu, vyhraje důvěryhodnost.
-
-Když vznikne konflikt mezi AI hype a lidskou srozumitelností, vyhraje lidská srozumitelnost.
-
-Když vznikne konflikt mezi wow efektem a jasným pochopením nabídky během 10 sekund, vyhraje jasné pochopení.
-
----
-
-## 19. Project-specific existing instructions
-
-Původní `CLAUDE.md` obsahoval pouze import `@AGENTS.md`, který načítá kritické varování o breaking changes v Next.js verzi používané v tomto projektu. Tento import zde zachováváme — Next.js v tomto repozitáři má jiné API než ve většině trénovacích dat, a před psaním kódu je nutné číst dokumentaci v `node_modules/next/dist/docs/`.
+## 15. Důležité technické upozornění (Next.js)
 
 @AGENTS.md

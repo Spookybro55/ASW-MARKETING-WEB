@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import Footer from "@/components/v2/Footer";
-import { siteContact } from "@/data/siteContent";
+import Header from "@/components/asw/Header";
+import Footer from "@/components/asw/Footer";
+import { contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Zásady ochrany osobních údajů — Autosmartweby",
@@ -20,63 +19,13 @@ export const metadata: Metadata = {
 // Privacy policy — changes very rarely (legal updates). 24h ISR.
 export const revalidate = 86400;
 
-const PRIVACY_CONTACT = siteContact.emailFallback; // sebastian@ admin alias
-const HUMAN_CONTACT = siteContact.email; // tomas@ general
+const PRIVACY_CONTACT = contact.email; // info@ general
+const HUMAN_CONTACT = contact.email; // info@ general
 
 export default function PrivacyPage() {
   return (
     <>
-      <header
-        style={{
-          borderBottom: "1px solid var(--border)",
-          background: "var(--bg)",
-        }}
-      >
-        <div
-          className="container-wide px-5"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            minHeight: "4rem",
-            gap: "1rem",
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.55rem",
-              color: "var(--fg)",
-              textDecoration: "none",
-            }}
-            aria-label="Autosmartweby — zpět na hlavní stranu"
-          >
-            <Image src="/logo.svg" alt="" width={28} height={29} />
-            <span
-              style={{
-                fontWeight: 700,
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                fontSize: "1rem",
-              }}
-            >
-              {siteContact.brandName}
-            </span>
-          </Link>
-          <Link
-            href="/"
-            style={{
-              color: "var(--fg-muted)",
-              textDecoration: "none",
-              fontSize: "0.9rem",
-            }}
-          >
-            ← Zpět na hlavní stranu
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       <main className="section" style={{ background: "var(--bg)" }}>
         <article
@@ -115,10 +64,10 @@ export default function PrivacyPage() {
           <Section title="1. Kdo je správce">
             <p>
               Správcem osobních údajů je{" "}
-              <strong>{siteContact.legalName}</strong>, se sídlem{" "}
-              {siteContact.address.street}, {siteContact.address.zip}{" "}
-              {siteContact.address.city}, IČO {siteContact.ico}. {" "}
-              {siteContact.brandName} je obchodní označení této společnosti.
+              <strong>{contact.legalName}</strong>, se sídlem{" "}
+              {contact.address.street}, {contact.address.zip}{" "}
+              {contact.address.city}, IČO {contact.ico}. {" "}
+              {contact.brandName} je obchodní označení této společnosti.
             </p>
             <p>
               Ve věcech ochrany osobních údajů nás zastihnete na{" "}
@@ -390,7 +339,7 @@ const listStyle: React.CSSProperties = {
 };
 
 const codeStyle: React.CSSProperties = {
-  fontFamily: "var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace",
+  fontFamily: "var(--font-mono), ui-monospace, SFMono-Regular, monospace",
   fontSize: "0.92em",
   background: "var(--bg-muted)",
   padding: "0.1em 0.4em",

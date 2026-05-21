@@ -51,7 +51,7 @@ export default function PreviewNotFound() {
           nás pro nový návrh nebo informace.
         </p>
         <a
-          href="mailto:sebastian@autosmartweb.cz?subject=Dotaz%20na%20n%C3%A1vrh%20webu"
+          href="mailto:info@autosmartweb.cz?subject=Dotaz%20na%20n%C3%A1vrh%20webu"
           style={{
             display: "inline-block",
             padding: "14px 28px",
