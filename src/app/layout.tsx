@@ -1,19 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat, Roboto } from "next/font/google";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
 import EngagementSignals from "@/components/EngagementSignals";
 import AnalyticsGate from "@/components/site/AnalyticsGate";
 import ConsentBanner from "@/components/site/ConsentBanner";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Source-of-truth spec (2026-05-21): Montserrat = headings/display,
+// Roboto = body/UI. The spec offers "Poppins or Montserrat" for headings;
+// Montserrat is chosen because Poppins lacks full Czech diacritics
+// (ě š č ř ž ů …). latin-ext is required so those glyphs render in the
+// real face, not a fallback. Both are variable fonts (no weight array).
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const roboto = Roboto({
+  variable: "--font-roboto",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://autosmartweb.cz";
@@ -60,12 +67,12 @@ export default function RootLayout({
   return (
     <html
       lang="cs-CZ"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${roboto.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-[var(--brand)] focus:text-black focus:rounded-lg focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-[var(--brand)] focus:text-white focus:rounded-lg focus:font-semibold"
         >
           Přeskočit na obsah
         </a>

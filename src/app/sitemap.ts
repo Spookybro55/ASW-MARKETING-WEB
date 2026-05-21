@@ -11,18 +11,19 @@ const BASE = "https://autosmartweb.cz";
 // When adding a new public marketing page, add it here.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const page = (
+    path: string,
+    priority: number,
+    changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly",
+  ) => ({ url: `${BASE}${path}`, lastModified: now, changeFrequency, priority });
+
   return [
-    {
-      url: BASE,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${BASE}/zasady-ochrany-osobnich-udaju`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
+    page("", 1, "weekly"),
+    page("/weby", 0.9),
+    page("/lokalni-seo", 0.9),
+    page("/ai-asistent", 0.9),
+    page("/cenik", 0.8),
+    page("/kontakt", 0.7),
+    page("/zasady-ochrany-osobnich-udaju", 0.3, "yearly"),
   ];
 }

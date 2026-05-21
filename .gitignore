@@ -55,3 +55,15 @@ next-env.d.ts
 
 # Claude Code lokalni nastaveni session
 /.claude/settings.local.json
+
+# Lokalni dev skilly a session logy (negitovat) - pridano 2026-05-20
+# Pluginy a marketplaces jsou v settings.local.json (viz vyse), nic z nich nelezi v repu.
+/.claude/skills/humanizer/
+/.claude/skills/prompt-master/
+/.claude/skills/brand-voice-generator/
+/.claude/commands/sessions/
+/.claude/sessions/
+/.claude/TOOLING.local.md
+
+# lokalni zaloha CLAUDE.md (negitovat)
+/CLAUDE.backup.md
