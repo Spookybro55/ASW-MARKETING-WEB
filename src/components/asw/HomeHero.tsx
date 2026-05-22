@@ -78,9 +78,9 @@ export function HomeHero() {
           {homeHero.problemCards.map((card) => (
             <li
               key={card.title}
-              className="group flex flex-col rounded-2xl border border-white/12 bg-white/[0.045] p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1976D2]/45 hover:bg-white/[0.07] hover:shadow-[0_22px_48px_-22px_rgba(25,118,210,0.65)] motion-reduce:transform-none"
+              className="group flex flex-col rounded-2xl border border-border bg-surface p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1976D2]/45 hover:bg-surface-elevated hover:shadow-[0_22px_48px_-22px_rgba(25,118,210,0.65)] motion-reduce:transform-none"
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#1976D2]/30 bg-[#1976D2]/15 text-[#9FC6FF]">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand-light">
                 <Icon name={card.icon} className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-display text-base font-bold text-white">
