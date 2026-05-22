@@ -178,6 +178,62 @@ export const homeHero = {
   ],
 } as const;
 
+/* Homepage "Reality check" section — calm, credible take on what weak online
+   presence costs a small business. No statistics, no fearmongering, no
+   guarantees. Cards use the unified surface system; one subtle warm eyebrow
+   badge is the only non-blue accent. CTAs reuse existing routes/anchors. */
+export const realityCheck = {
+  badge: "Reality check",
+  headline:
+    "Každý den bez dobré online prezentace může znamenat ztracené poptávky",
+  highlight:
+    "Zákazníci vás hledají, porovnávají a rozhodují se během pár vteřin.",
+  subheadline:
+    "Když web nepůsobí důvěryhodně, nejste dobře dohledatelní nebo se vám zákazník nemůže snadno ozvat, často odejde ke konkurenci. Tady jsou nejčastější místa, kde malé firmy přicházejí o příležitosti.",
+  cards: [
+    {
+      icon: "search",
+      badge: "Dohledatelnost",
+      title: "Nejste vidět tam, kde zákazník hledá",
+      text: "Bez základního lokálního SEO a jasně popsaných služeb vás lidé nemusí najít ani ve chvíli, kdy přesně hledají to, co nabízíte.",
+    },
+    {
+      icon: "shield",
+      badge: "Důvěra",
+      title: "Web nevzbudí důvěru během prvních vteřin",
+      text: "Zákazník si rychle udělá obrázek. Pokud web působí zastarale, nejasně nebo anonymně, často raději osloví někoho jiného.",
+    },
+    {
+      icon: "file-text",
+      badge: "Srozumitelnost",
+      title: "Zákazník nepochopí, co přesně nabízíte",
+      text: "Když jsou služby popsané obecně nebo složitě, návštěvník neví, jestli jste pro něj správná volba.",
+    },
+    {
+      icon: "phone",
+      badge: "Kontakt",
+      title: "Kontakt není dost jednoduchý",
+      text: "Na mobilu musí být jasné, kam kliknout, zavolat nebo napsat. Každý zbytečný krok snižuje šanci, že se zákazník ozve.",
+    },
+    {
+      icon: "globe",
+      badge: "SEO základ",
+      title: "Nemáte připravený základ pro Google",
+      text: "Nadpisy, struktura služeb, lokalita, technické nastavení a rychlost webu pomáhají tomu, aby vás zákazníci snáz našli.",
+    },
+    {
+      icon: "bot",
+      badge: "Automatizace",
+      title: "Poptávky a zprávy řešíte zbytečně ručně",
+      text: "Jednoduchý formulář, automatická odpověď nebo chytré předání informací vám může ušetřit čas a zrychlit reakci.",
+    },
+  ],
+  ctaMicrocopy:
+    "Nemusíte řešit celý marketing najednou. Začneme webem, který dává smysl, a podle potřeby přidáme SEO nebo automatizace.",
+  primaryCta: { label: "Chci zjistit, co mi chybí", href: "/konzultace" },
+  secondaryCta: { label: "Jak to celé funguje", href: "#jak-to-funguje" },
+} as const;
+
 export const services = {
   eyebrow: "Co děláme",
   title: "Co pro vás zařídíme",
