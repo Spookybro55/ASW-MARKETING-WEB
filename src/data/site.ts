@@ -141,14 +141,14 @@ export const seo = {
  * targets #jak-to-funguje (the process section).
  */
 export const homeHero = {
-  h1Lead: "Profesionální web pro nové zákazníky.",
+  h1Lead: "Váš systém pro nové zákazníky.",
   // Owner-approved delivery claim (2026-05-21). NOTE: "Online do 7 dnů" is a
   // public delivery-timeline promise — keep it only while it is a deadline
   // that can realistically be met (CLAUDE.md §9 cautions against unbacked
   // timelines). Soften/remove if it ever stops being safe.
   h1Accent: "Online do 7 dnů.",
   subheadline:
-    "Postavíme vám profesionální web, který jasně vysvětlí vaši nabídku, pomůže zákazníkům se ozvat a připraví základ pro lepší dohledatelnost.",
+    "Postavíme vám profesionální web, který jasně vysvětlí vaši nabídku, pomůže zákazníkům se ozvat a připraví základ pro SEO i další automatizace.",
   primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/konzultace" },
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-funguje" },
   trustMicrocopy: "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem",
