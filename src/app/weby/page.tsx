@@ -26,7 +26,7 @@ export const revalidate = 3600;
 export default function WebyPage() {
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="Webové stránky"

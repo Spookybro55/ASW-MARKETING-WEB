@@ -30,7 +30,7 @@ export default function LokalniSeoPage() {
   const p = lokalniSeoPage;
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="Lokální SEO"

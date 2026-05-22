@@ -50,7 +50,7 @@ export function HeroSection({
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[radial-gradient(60%_55%_at_50%_0%,rgba(25,118,210,0.18),transparent_70%),linear-gradient(180deg,#070B14,#05070D)] px-5 py-20 sm:px-8 md:py-28"
+      className="relative overflow-hidden bg-[radial-gradient(60%_55%_at_50%_0%,rgba(25,118,210,0.18),transparent_70%),linear-gradient(180deg,#070B14,#05070D)] px-5 pb-20 pt-28 sm:px-8 md:pb-28 md:pt-32"
     >
       <div
         className={`mx-auto grid w-full max-w-6xl items-center gap-12 ${

@@ -27,7 +27,7 @@ export default function AiAsistentPage() {
   const p = aiAsistentPage;
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="AI asistent"

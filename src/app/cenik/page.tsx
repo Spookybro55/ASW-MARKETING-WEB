@@ -28,7 +28,7 @@ export const revalidate = 3600;
 export default function CenikPage() {
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="Ceník"
