@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Header from "@/components/asw/Header";
 import Footer from "@/components/asw/Footer";
 import { HomeHero } from "@/components/asw/HomeHero";
-import { RealityCheck } from "@/components/asw/RealityCheck";
 import { PortfolioShowcase } from "@/components/asw/PortfolioShowcase";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { ServiceCard, ProcessStep, PricingCard } from "@/components/asw/cards";
@@ -47,10 +46,7 @@ export default function Home() {
         {/* 2–6. Dark hero: H1, subheadline, CTAs, trust, problem cards */}
         <HomeHero />
 
-        {/* 7. Reality check — what a weak online presence costs (calm framing) */}
-        <RealityCheck />
-
-        {/* 8. Portfolio device showcase — tilt-straighten on scroll */}
+        {/* 7. Portfolio device showcase — tilt-straighten on scroll */}
         <PortfolioShowcase />
 
         {/* 8. Services — "Co pro vás zařídíme" */}
