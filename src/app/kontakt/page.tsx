@@ -4,7 +4,7 @@ import Footer from "@/components/asw/Footer";
 import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { CtaSection } from "@/components/asw/CtaSection";
-import { Icon } from "@/components/asw/icons";
+import { Icon, CheckIcon } from "@/components/asw/icons";
 import { seo, kontaktPage, team, contact } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -86,8 +86,32 @@ export default function KontaktPage() {
           </div>
         </Section>
 
+        {/* S čím se na nás můžete obrátit */}
+        <Section id="s-cim-pomuzeme">
+          <SectionHeading
+            eyebrow={kontaktPage.topicsSection.eyebrow}
+            title={kontaktPage.topicsSection.title}
+          />
+          <ul
+            role="list"
+            className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2"
+          >
+            {kontaktPage.topicsSection.items.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4 shadow-md"
+              >
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                  <CheckIcon className="h-5 w-5" />
+                </span>
+                <span className="font-medium text-foreground">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
         {/* Obecný kontakt */}
-        <Section id="kontakt-info">
+        <Section tone="muted" id="kontakt-info">
           <div className="mx-auto max-w-xl rounded-2xl border border-border bg-surface p-8 text-center shadow-md">
             <p className="text-sm font-semibold uppercase tracking-wider text-brand-2">
               {kontaktPage.contactSection.eyebrow}

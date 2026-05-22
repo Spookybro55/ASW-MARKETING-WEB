@@ -34,7 +34,7 @@ export const team = [
   {
     initials: "TM",
     name: "Tomáš Maixner",
-    role: "Obchod a komunikace se zákazníky",
+    role: "Komunikace, poptávky a klientská domluva",
     phone: "+420 722 525 872",
     phoneHref: "tel:+420722525872",
     email: "t.maixner@autosmartweb.cz",
@@ -43,7 +43,7 @@ export const team = [
   {
     initials: "JB",
     name: "Jan Bezemek",
-    role: "Technické řešení, web a systém",
+    role: "Strategie, obchod a obsah webu",
     phone: "+420 773 466 699",
     phoneHref: "tel:+420773466699",
     email: "j.bezemek@autosmartweb.cz",
@@ -52,7 +52,7 @@ export const team = [
   {
     initials: "SF",
     name: "Sebastián Fridrich",
-    role: "Technické řešení a realizace",
+    role: "Web, technické řešení a vývoj",
     phone: "+420 601 557 018",
     phoneHref: "tel:+420601557018",
     email: "s.fridrich@autosmartweb.cz",
@@ -141,7 +141,7 @@ export const seo = {
  * targets #jak-to-funguje (the process section).
  */
 export const homeHero = {
-  h1Lead: "Váš systém pro nové zákazníky.",
+  h1Lead: "Profesionální web pro nové zákazníky.",
   // Owner-approved delivery claim (2026-05-21). NOTE: "Online do 7 dnů" is a
   // public delivery-timeline promise — keep it only while it is a deadline
   // that can realistically be met (CLAUDE.md §9 cautions against unbacked
@@ -347,6 +347,27 @@ export const pricing = {
       ctaUrl: "/konzultace?balicek=web-pro",
     },
   ],
+  comparison: {
+    title: "Srovnání balíčků",
+    rows: [
+      { label: "Cena", standard: "8 900 Kč", pro: "16 900 Kč" },
+      { label: "Typ webu", standard: "Jednostránkový web / landing page", pro: "Menší plnohodnotný web" },
+      { label: "Rozsah", standard: "Cca 5–7 sekcí na jedné stránce", pro: "Homepage + 4–6 stránek/sekcí" },
+      { label: "Texty", standard: "Základní úprava textů z podkladů", pro: "Propracovanější copy pro hlavní stránky" },
+      { label: "Služby", standard: "Stručný přehled 3–6 služeb", pro: "Detailnější popisy 4–8 služeb" },
+      { label: "Reference", standard: "Jednoduchý blok, pokud dodáte podklady", pro: "Samostatná sekce / stránka referencí" },
+      { label: "Ceník", standard: "Jednoduchý blok / cena od", pro: "Přehlednější orientační ceník" },
+      { label: "SEO", standard: "Základní technické SEO", pro: "Základní lokální SEO" },
+      { label: "Analytika", standard: "Volitelně", pro: "Základní měření hlavních kliků" },
+      { label: "Revize", standard: "2 kola úprav", pro: "2 kola úprav" },
+      { label: "Termín", standard: "Obvykle 3–5 prac. dní od dodání podkladů", pro: "Obvykle 5–10 prac. dní od dodání podkladů" },
+      { label: "Platba", standard: "Po schválení finální verze", pro: "Po schválení finální verze" },
+    ],
+  },
+  individualNote:
+    "Individuálně naceňujeme například tvorbu loga, focení a natáčení, blogové články, pokročilé SEO, linkbuilding, e-shop, rezervační systém, online platby, vícejazyčnost a napojení na externí systémy.",
+  seoNote:
+    "U SEO negarantujeme konkrétní pozice ve vyhledávání. Komunikujeme ho jako technické a lokální nastavení podle dobré praxe.",
 } as const;
 
 /* ── FAQ (homepage) ───────────────────────────────────────────────────────── */
@@ -558,6 +579,17 @@ export const kontaktPage = {
     title: "Lidé za AutoSmartWeby",
     lead: "U nás víte, s kým mluvíte. Ozvěte se komukoli z týmu podle toho, co potřebujete řešit.",
   },
+  topicsSection: {
+    eyebrow: "S čím pomůžeme",
+    title: "S čím se na nás můžete obrátit",
+    items: [
+      "Nový web",
+      "Úprava současného webu",
+      "Lokální SEO",
+      "AI asistent / jednoduchá automatizace",
+      "Nejsem si jistý, potřebuji poradit",
+    ],
+  },
   contactSection: {
     eyebrow: "Kontakt",
     title: "Obecný kontakt",
@@ -579,6 +611,7 @@ export const konzultacePage = {
     subheadline:
       "Napište nám pár informací a ozveme se vám s doporučením dalšího postupu.",
   },
+  trust: "Bez závazku · Jasná cena předem · Pomůžeme i bez hotových textů",
   services: [
     "Webové stránky",
     "Lokální SEO",

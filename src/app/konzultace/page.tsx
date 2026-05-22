@@ -34,6 +34,9 @@ export default function KonzultacePage() {
             title={konzultacePage.hero.headline}
             lead={konzultacePage.hero.subheadline}
           />
+          <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-fg-soft">
+            {konzultacePage.trust}
+          </p>
           <div className="mt-10 grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-start">
             {/* Form */}
             <Suspense

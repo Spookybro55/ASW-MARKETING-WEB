@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { konzultacePage } from "@/data/site";
@@ -37,12 +38,25 @@ export function ConsultationForm() {
     const data = new FormData(form);
     const firma = String(data.get("firma") ?? "").trim();
     const zprava = String(data.get("message") ?? "").trim();
+    const preferred = String(data.get("preferred") ?? "").trim();
+
+    // Preferred contact + firma are UI-only fields. The backend schema has no
+    // column for them, so fold them into the existing `message` string as
+    // leading meta lines — payload stays { name, email, phone, sector,
+    // message, _honey }, fully compatible with /api/contact.
+    const metaLines: string[] = [];
+    if (preferred) metaLines.push(`Preferovaný kontakt: ${preferred}`);
+    if (firma) metaLines.push(`Firma: ${firma}`);
+    const message = metaLines.length
+      ? `${metaLines.join("\n")}\n\n${zprava}`
+      : zprava;
+
     const payload = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
       sector: String(data.get("service") ?? ""),
-      message: firma ? `Firma: ${firma}\n\n${zprava}` : zprava,
+      message,
       _honey: String(data.get("_honey") ?? ""),
     };
 
@@ -123,7 +137,7 @@ export function ConsultationForm() {
           </label>
           <input id="kf-phone" name="phone" type="tel" autoComplete="tel" className={inputClass} />
         </div>
-        <div className="sm:col-span-2">
+        <div>
           <label htmlFor="kf-service" className="mb-1.5 block text-sm font-medium text-foreground">
             Co vás zajímá?
           </label>
@@ -141,6 +155,21 @@ export function ConsultationForm() {
             ))}
           </select>
         </div>
+        <div>
+          <label htmlFor="kf-preferred" className="mb-1.5 block text-sm font-medium text-foreground">
+            Jak vás máme nejlépe kontaktovat?
+          </label>
+          <select
+            id="kf-preferred"
+            name="preferred"
+            defaultValue="Je mi to jedno"
+            className={inputClass}
+          >
+            <option value="Telefon">Telefon</option>
+            <option value="E-mail">E-mail</option>
+            <option value="Je mi to jedno">Je mi to jedno</option>
+          </select>
+        </div>
         <div className="sm:col-span-2">
           <label htmlFor="kf-message" className="mb-1.5 block text-sm font-medium text-foreground">
             Zpráva *
@@ -151,7 +180,16 @@ export function ConsultationForm() {
 
       <label className="mt-4 flex items-start gap-2.5 text-sm text-fg-muted">
         <input type="checkbox" name="gdpr" required className="mt-1 h-4 w-4 shrink-0 accent-[#1976D2]" />
-        <span>{konzultacePage.gdpr}</span>
+        <span>
+          {konzultacePage.gdpr} Podrobnosti najdete v{" "}
+          <Link
+            href="/zasady-ochrany-osobnich-udaju"
+            className="text-brand-light underline underline-offset-2 hover:text-white"
+          >
+            zásadách ochrany osobních údajů
+          </Link>
+          .
+        </span>
       </label>
 
       {status === "error" && (

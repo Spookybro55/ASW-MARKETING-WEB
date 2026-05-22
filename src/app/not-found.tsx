@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Stránka nenalezena – Autosmartweby",
@@ -31,7 +32,7 @@ export default function NotFound() {
             Zpět na úvod
           </Link>
           <a
-            href="mailto:info@autosmartweb.cz?subject=Hlas%C3%AD%C5%A1%20chybnou%20stranku"
+            href={`mailto:${contact.email}?subject=Hlas%C3%AD%C5%A1%20chybnou%20stranku`}
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-white/20 text-white font-semibold hover:bg-white/5 transition"
           >
             Napsat e-mail
