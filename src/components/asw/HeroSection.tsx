@@ -50,8 +50,25 @@ export function HeroSection({
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[radial-gradient(60%_55%_at_50%_0%,rgba(25,118,210,0.18),transparent_70%),linear-gradient(180deg,#070B14,#05070D)] px-5 pb-14 pt-28 sm:px-8 md:pb-16 md:pt-32"
+      className="relative overflow-hidden bg-[#05070D] px-5 pb-14 pt-24 sm:px-8 md:pb-16 md:pt-24"
     >
+      {/* Background rhythm shared with HomeHero — same base #05070D, same
+          radial blue glows behind the H1 and at the bottom, faint dot grid
+          masked to the top, soft bottom vignette. Keeps inner pages in one
+          visual system with the homepage. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(46%_36%_at_50%_4%,rgba(25,118,210,0.32),transparent_70%),radial-gradient(36%_36%_at_10%_72%,rgba(13,71,161,0.18),transparent_70%),radial-gradient(48%_30%_at_50%_94%,rgba(25,118,210,0.22),transparent_72%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:30px_30px] [mask-image:radial-gradient(ellipse_at_50%_22%,black,transparent_70%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-black/40"
+      />
+
       <div
         className={`mx-auto grid w-full max-w-6xl items-center gap-12 ${
           media ? "md:grid-cols-2" : "max-w-3xl text-center"

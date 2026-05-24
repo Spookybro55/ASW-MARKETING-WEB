@@ -26,8 +26,8 @@ export const revalidate = 3600;
 export default function KonzultacePage() {
   return (
     <>
-      <Header />
-      <main id="main">
+      <Header variant="dark" />
+      <main id="main" className="pt-12 sm:pt-14 md:pt-16">
         <Section id="konzultace">
           <SectionHeading
             eyebrow="Konzultace zdarma"
