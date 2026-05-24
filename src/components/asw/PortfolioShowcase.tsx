@@ -65,9 +65,17 @@ export function PortfolioShowcase() {
   return (
     <section className="relative overflow-hidden bg-[#05070D] px-5 pb-16 pt-10 sm:px-8 md:pb-20 md:pt-12">
       <div ref={ref} className="mx-auto w-full max-w-[70rem] [perspective:1600px]">
-        <p className="mb-6 text-center text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
-          Ukázka webu, jaký pro vás postavíme
-        </p>
+        <div className="mx-auto mb-8 max-w-2xl text-center">
+          <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
+            Reálná podoba
+          </p>
+          <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-[2rem]">
+            Ukázka webu, jaký pro vás postavíme
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-white/60">
+            Ukázka vychází z reálné šablony oboru. Konkrétní web vždy upravujeme podle vaší firmy.
+          </p>
+        </div>
 
         <motion.div
           aria-hidden="true"

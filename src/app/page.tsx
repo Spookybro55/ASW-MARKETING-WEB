@@ -155,8 +155,8 @@ export default function Home() {
           <FaqJsonLd items={faq.items} />
         </Section>
 
-        {/* 14. Final CTA band */}
-        <section className="bg-[linear-gradient(135deg,#0D47A1_0%,#1E5FBF_100%)] px-5 py-16 sm:px-8 md:py-20">
+        {/* 14. Final CTA band — also serves as the /#kontakt anchor target */}
+        <section id="kontakt" className="bg-[linear-gradient(135deg,#0D47A1_0%,#1E5FBF_100%)] px-5 py-16 sm:px-8 md:py-20">
           <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
             <h2 className="font-display text-3xl font-bold leading-tight text-white sm:text-[2rem]">
               {finalCta.title}

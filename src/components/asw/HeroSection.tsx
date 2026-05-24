@@ -20,6 +20,8 @@ export function HeroSection({
   secondaryText,
   secondaryUrl,
   note,
+  pills,
+  wide = false,
   ctaLocation = "hero",
   media,
 }: {
@@ -32,6 +34,13 @@ export function HeroSection({
   secondaryText?: string;
   secondaryUrl?: string;
   note?: string;
+  /** Optional short list of concrete use-cases rendered as pill chips below
+      the CTA — used on service detail pages to clarify what the service is
+      in real terms (e.g. /automatizace). */
+  pills?: readonly string[];
+  /** When true, widens the hero container from max-w-6xl to max-w-7xl so
+      both columns (text + media) gain horizontal presence on big desktops. */
+  wide?: boolean;
   ctaLocation?: string;
   media?: ReactNode;
 }) {
@@ -70,9 +79,9 @@ export function HeroSection({
       />
 
       <div
-        className={`mx-auto grid w-full max-w-6xl items-center gap-12 ${
-          media ? "md:grid-cols-2" : "max-w-3xl text-center"
-        }`}
+        className={`mx-auto grid w-full items-center gap-12 ${
+          wide ? "max-w-7xl" : "max-w-6xl"
+        } ${media ? "md:grid-cols-2" : "max-w-3xl text-center"}`}
       >
         <div className={media ? "" : "mx-auto"}>
           {/* The page-category eyebrow pill ("Lokální SEO", "Webové stránky",
@@ -104,6 +113,23 @@ export function HeroSection({
               </Button>
             )}
           </div>
+          {pills && pills.length > 0 && (
+            <ul
+              role="list"
+              className={`mt-6 flex flex-wrap gap-2 ${
+                media ? "" : "justify-center"
+              }`}
+            >
+              {pills.map((pill) => (
+                <li
+                  key={pill}
+                  className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-sm font-medium text-fg-muted"
+                >
+                  {pill}
+                </li>
+              ))}
+            </ul>
+          )}
           {note && (
             <p className={`mt-5 text-sm text-fg-soft ${media ? "" : ""}`}>
               {note}

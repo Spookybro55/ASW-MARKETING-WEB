@@ -91,7 +91,7 @@ export function HomeHero() {
               </p>
               <a
                 href={card.ctaHref}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-white/60 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="mt-5 inline-flex items-center gap-1.5 self-start rounded-lg border border-[#1976D2]/30 bg-[#1976D2]/[0.08] px-3 py-1.5 text-sm font-semibold text-brand-light transition-colors duration-150 hover:border-[#1976D2]/55 hover:bg-[#1976D2]/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
                 data-cta-label="hero_problem"
                 data-cta-location="hero"
               >

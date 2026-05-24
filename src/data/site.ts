@@ -72,14 +72,17 @@ export const cta = {
   href: "/konzultace",
 } as const;
 
-/** Top navigation — matches the sitemap exactly (CLAUDE.md §2). */
+/** Top navigation — matches the sitemap (CLAUDE.md §2). AI asistent was
+    intentionally demoted from a top-level menu item (2026-05-24): it is now
+    represented through the broader "Automatizace" entry (homepage anchor),
+    while /ai-asistent stays accessible as a detail subpage of automation. */
 export const nav = {
   brand: contact.brandName,
   items: [
     { href: "/", label: "Domů" },
     { href: "/weby", label: "Weby" },
     { href: "/lokalni-seo", label: "Lokální SEO" },
-    { href: "/ai-asistent", label: "AI asistent" },
+    { href: "/automatizace", label: "Automatizace" },
     { href: "/cenik", label: "Ceník" },
     { href: "/kontakt", label: "Kontakt" },
   ],
@@ -89,9 +92,9 @@ export const nav = {
 /** Per-page SEO metadata (CLAUDE.md §9). */
 export const seo = {
   home: {
-    title: "AutoSmartWeby – moderní weby, lokální SEO a AI asistent",
+    title: "AutoSmartWeby – weby, lokální SEO a automatizace pro malé firmy",
     description:
-      "Moderní weby, lokální SEO a AI asistent pro malé a střední firmy v Česku. Buďte vidět, získejte více zákazníků a nepřicházejte o poptávky. Konzultace zdarma.",
+      "Profesionální weby, lokální SEO a praktické automatizace pro malé a střední firmy v Česku. Buďte vidět, získejte více zákazníků a nepřicházejte o poptávky. Konzultace zdarma.",
     path: "/",
   },
   weby: {
@@ -112,8 +115,14 @@ export const seo = {
       "Váš 24/7 virtuální recepční. AI asistent odpoví zákazníkům, zachytí poptávky a zmeškané hovory a ušetří vám čas. Vyzkoušejte demo nebo si domluvte konzultaci.",
     path: "/ai-asistent",
   },
+  automatizace: {
+    title: "Automatizace pro malé firmy | AutoSmartWeby",
+    description:
+      "Jednoduché automatizace pro malé firmy: automatické odpovědi, rezervace, zápis poptávek a AI asistent jako volitelný doplněk.",
+    path: "/automatizace",
+  },
   cenik: {
-    title: "Ceník webů, SEO a AI asistenta | AutoSmartWeby",
+    title: "Ceník webů, lokálního SEO a automatizací | AutoSmartWeby",
     description:
       "Přehledné balíčky Web Standard a Web Pro. Ceny od 8 900 Kč, vždy orientační a potvrzené předem. Web i lokální SEO podle vašich potřeb, externí náklady zvlášť.",
     path: "/cenik",
@@ -201,12 +210,12 @@ export const services = {
       linkUrl: "/lokalni-seo",
     },
     {
-      icon: "bot",
-      title: "AI asistent",
+      icon: "zap",
+      title: "Automatizace pro malé firmy",
       description:
-        "Volitelné rozšíření pro zachytávání poptávek, odpovědi na časté dotazy nebo rychlejší první kontakt.",
-      linkText: "Více o AI asistentovi",
-      linkUrl: "/ai-asistent",
+        "Jednoduché chytré procesy, které šetří čas — formuláře, automatické odpovědi, rezervace, zápis poptávky do tabulky nebo CRM. AI asistent jako volitelný doplněk.",
+      linkText: "Zjistit možnosti automatizace",
+      linkUrl: "/automatizace",
     },
   ],
 } as const;
@@ -232,7 +241,7 @@ export const benefits = {
   title: "Co tím získáte",
   items: [
     { icon: "users", title: "Více zákazníků online", description: "Web a SEO přivedou lidi, kteří vaši službu právě teď hledají." },
-    { icon: "clock", title: "Nepřetržitá dostupnost", description: "AI asistent zachytí poptávku i mimo pracovní dobu, o víkendu i v noci." },
+    { icon: "clock", title: "Nepřetržitá dostupnost", description: "Web a automatizace zachytí poptávku i mimo pracovní dobu, o víkendu i v noci." },
     { icon: "shield", title: "Klid v duši", description: "Jasná cena předem, srozumitelný proces a podpora po spuštění." },
     { icon: "zap", title: "Rychlé načítání", description: "Weby stavíme tak, aby byly svižné na mobilu i na pomalém připojení." },
     { icon: "map-pin", title: "Lokální zaměření", description: "Cílíme na zákazníky ve vašem městě a okolí, ne na celý internet." },
@@ -323,7 +332,7 @@ export const pricing = {
       ],
       isFeatured: false,
       ctaText: "Chci Web Standard",
-      ctaUrl: "/konzultace?balicek=web-standard",
+      ctaUrl: "/konzultace?produkt=web-standard",
     },
     {
       id: "pro",
@@ -344,7 +353,7 @@ export const pricing = {
       ],
       isFeatured: true,
       ctaText: "Chci Web Pro",
-      ctaUrl: "/konzultace?balicek=web-pro",
+      ctaUrl: "/konzultace?produkt=web-pro",
     },
   ],
   comparison: {
@@ -435,7 +444,10 @@ export const webyPage = {
     subheadline:
       "Moderní, rychlé a přehledné stránky, které působí důvěryhodně a usnadní zákazníkům se ozvat. Pomůžeme s texty i strukturou.",
     ctaText: cta.primary,
-    ctaUrl: cta.href,
+    // Default to the entry-level web package so the lead form pre-fills with
+    // something concrete; visitors can switch in the dropdown if they need
+    // Web Pro instead.
+    ctaUrl: `${cta.href}?produkt=web-standard`,
   },
   why: {
     eyebrow: "Proč investovat do webu",
@@ -471,7 +483,7 @@ export const lokalniSeoPage = {
     subheadline:
       "Pomůžeme zákazníkům ve vašem městě, aby vás našli první — v Google vyhledávání i v mapách.",
     ctaText: cta.primary,
-    ctaUrl: cta.href,
+    ctaUrl: `${cta.href}?produkt=lokalni-seo`,
   },
   problem: {
     eyebrow: "Problém",
@@ -524,7 +536,7 @@ export const aiAsistentPage = {
     subheadline:
       "AI asistent odpoví zákazníkům, zachytí poptávky a zmeškané hovory a ušetří vám čas — ve dne, v noci i o víkendu.",
     ctaText: cta.demo,
-    ctaUrl: cta.href,
+    ctaUrl: `${cta.href}?produkt=ai-asistent`,
   },
   explain: {
     eyebrow: "Co to je",
@@ -554,7 +566,135 @@ export const aiAsistentPage = {
     title: "AI asistenta nasadíme podle vašeho rozsahu",
     lead: "Rozsah i cenu vždy domluvíme předem podle toho, co potřebujete. Rádi vám asistenta ukážeme naživo.",
     ctaText: cta.demo,
-    ctaUrl: cta.href,
+    ctaUrl: `${cta.href}?produkt=ai-asistent`,
+  },
+} as const;
+
+/* /automatizace — service detail page (2026-05-24). Practical, ne-AI-hype.
+   AI asistent is mentioned only as one specific add-on, not the headline. */
+export const automatizacePage = {
+  hero: {
+    headline: "Automatizace pro malé firmy",
+    subheadline:
+      "Jednoduché chytré procesy, které šetří čas kolem poptávek, rezervací a odpovědí zákazníkům.",
+    ctaText: "Nezávazně probrat automatizaci",
+    ctaUrl: `${cta.href}?produkt=automatizace`,
+    pills: [
+      "Automatická odpověď",
+      "Rezervace termínu",
+      "Zápis poptávky do tabulky / CRM",
+    ],
+    /* Workflow panel rendered on the right side of the hero (md+). Each
+       step has an icon, a short label and a status hint — produktový dashboard
+       feel, ne neon-AI. */
+    workflow: {
+      label: "Typický průběh automatizace",
+      steps: [
+        { icon: "file-text", title: "Příchozí poptávka", hint: "z webu nebo formuláře" },
+        { icon: "check", title: "Automatická odpověď", hint: "okamžitě, 24/7" },
+        { icon: "users", title: "Kontakt uložen do tabulky / CRM", hint: "připravený k zavolání" },
+        { icon: "clock", title: "Připomenutí termínu", hint: "den před schůzkou" },
+      ],
+    },
+  },
+  when: {
+    eyebrow: "Kdy to dává smysl",
+    title: "Neautomatizujeme všechno, ale jen tam, kde to opravdu pomáhá",
+    compare: {
+      manual: {
+        title: "Nechte ručně",
+        caption: "Tam, kde je potřeba lidský úsudek a osobní přístup",
+        items: [
+          "Citlivé rozhodnutí",
+          "Osobní domluva se zákazníkem",
+          "Jednorázový neobvyklý dotaz",
+          "Věci, kde je potřeba lidský úsudek",
+        ],
+      },
+      auto: {
+        title: "Automatizujte",
+        caption: "Opakované úkoly, které zaberou čas a daly by se zjednodušit",
+        items: [
+          "Potvrzení přijetí poptávky",
+          "Rezervace termínu",
+          "Připomenutí zákazníkovi",
+          "Zápis kontaktu do tabulky nebo CRM",
+        ],
+      },
+    },
+  },
+  whatWeAutomate: {
+    eyebrow: "Co umíme automatizovat",
+    title: "Konkrétní věci, které dnes řešíte ručně",
+    items: [
+      {
+        icon: "file-text",
+        title: "Automatická odpověď na poptávku",
+        text: "Zákazník hned ví, že jeho zpráva dorazila a kdy se ozvete. Žádné napjaté čekání.",
+      },
+      {
+        icon: "users",
+        title: "Zápis poptávky do tabulky nebo CRM",
+        text: "Lead z formuláře se sám zapíše tam, kde ho máte přehledně po ruce — Google tabulka, Notion nebo váš CRM.",
+      },
+      {
+        icon: "calendar",
+        title: "Rezervace termínu",
+        text: "Zákazník si vybere volný čas z vašeho kalendáře. Bez nekonečného domlouvání e-mailem.",
+      },
+      {
+        icon: "clock",
+        title: "Připomenutí zákazníkovi",
+        text: "Automatické připomenutí termínu nebo nabídky. Méně zmeškaných schůzek a propadlých nabídek.",
+      },
+    ],
+    /* AI asistent intentionally pulled out of the main grid (variant B):
+       it's an optional add-on, not a peer automation. Rendered as a small
+       callout below the grid. */
+    aiCallout: {
+      icon: "bot",
+      title: "AI asistent jen tam, kde dává smysl",
+      text: "Pokud často odpovídáte na stejné dotazy, může AI asistent pomoci jako doplněk. Není to základ každé automatizace.",
+      linkLabel: "Více o AI asistentovi jako doplňku",
+      linkHref: "/ai-asistent",
+    },
+  },
+  notTech: {
+    eyebrow: "Náš přístup",
+    title: "Nezačínáme technologií",
+    lead:
+      "Nejdřív se podíváme, kde reálně ztrácíte čas. Když z toho vyjde jeden konkrétní úkol, který se opakuje každý týden, navrhneme jednoduchý postup. Žádné systémy, které musíte udržovat, žádné nástroje, ke kterým by vás nikdo nepustil.",
+  },
+  process: {
+    eyebrow: "Jak to probíhá",
+    title: "Tři kroky bez dramatu",
+    steps: [
+      {
+        stepNumber: 1,
+        title: "Řeknete nám, co se u vás opakuje",
+        description:
+          "Stačí pár vět nebo krátký hovor. Hledáme úkoly, které řešíte ručně každý týden.",
+      },
+      {
+        stepNumber: 2,
+        title: "Navrhneme jednoduchý postup",
+        description:
+          "Popíšeme, co se zautomatizuje, co zůstane na vás a kolik to zabere. Žádné velké projekty na měsíce.",
+      },
+      {
+        stepNumber: 3,
+        title: "Zapojíme automatizaci k webu nebo formuláři",
+        description:
+          "Napojíme na váš web, formulář nebo nástroj, který už používáte. Předáme přístupy a ukážeme, jak to funguje.",
+      },
+    ],
+  },
+  finalCta: {
+    title: "Pojďme se podívat, co u vás dává smysl zautomatizovat",
+    lead:
+      "Stačí krátce popsat, co řešíte ručně. Ozveme se vám a doporučíme, jestli má smysl něco automatizovat — a co naopak nechat ručně.",
+    ctaText: "Nezávazně probrat automatizaci",
+    ctaUrl: `${cta.href}?produkt=automatizace`,
   },
 } as const;
 
@@ -586,7 +726,7 @@ export const kontaktPage = {
       "Nový web",
       "Úprava současného webu",
       "Lokální SEO",
-      "AI asistent / jednoduchá automatizace",
+      "Automatizace pro malé firmy (formuláře, rezervace, AI asistent)",
       "Nejsem si jistý, potřebuji poradit",
     ],
   },
@@ -615,7 +755,8 @@ export const konzultacePage = {
   services: [
     "Webové stránky",
     "Lokální SEO",
-    "AI asistent",
+    "Automatizace pro malé firmy",
+    "AI asistent (doplněk)",
     "Nejsem si jistý, potřebuji poradit",
   ],
   reassurance: [
@@ -631,14 +772,14 @@ export const konzultacePage = {
 
 export const footer = {
   description:
-    "Pomáháme malým a středním firmám v Česku růst díky moderním webům, lokálnímu SEO a AI asistentovi.",
+    "Pomáháme malým a středním firmám v Česku růst díky moderním webům, lokálnímu SEO a praktickým automatizacím.",
   columns: [
     {
       title: "Služby",
       links: [
         { href: "/weby", label: "Webové stránky" },
         { href: "/lokalni-seo", label: "Lokální SEO" },
-        { href: "/ai-asistent", label: "AI asistent" },
+        { href: "/automatizace", label: "Automatizace" },
         { href: "/cenik", label: "Ceník" },
       ],
     },

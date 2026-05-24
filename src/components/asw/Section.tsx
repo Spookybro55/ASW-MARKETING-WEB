@@ -41,18 +41,30 @@ export function Section({
   tone = "default",
   id,
   className = "",
+  density = "default",
+  wide = false,
 }: {
   children: ReactNode;
   tone?: Tone;
   id?: string;
   className?: string;
+  /** Vertical rhythm. "compact" shrinks padding ~25–30% — used on detail
+      pages that need to feel denser without losing breathing room. */
+  density?: "default" | "compact";
+  /** When true, switches the inner container from max-w-6xl to max-w-7xl.
+      Used on detail pages that need more horizontal presence on wide
+      desktops (e.g. /automatizace). */
+  wide?: boolean;
 }) {
+  const pad =
+    density === "compact" ? "py-10 md:py-16" : "py-16 md:py-24";
+  const maxW = wide ? "max-w-7xl" : "max-w-6xl";
   return (
     <section
       id={id}
-      className={`${toneBg[tone]} py-16 px-5 sm:px-8 md:py-24 ${className}`}
+      className={`${toneBg[tone]} ${pad} px-5 sm:px-8 ${className}`}
     >
-      <div className="mx-auto w-full max-w-6xl">{children}</div>
+      <div className={`mx-auto w-full ${maxW}`}>{children}</div>
     </section>
   );
 }
