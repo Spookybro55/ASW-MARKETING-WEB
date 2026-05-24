@@ -75,11 +75,10 @@ export function HeroSection({
         }`}
       >
         <div className={media ? "" : "mx-auto"}>
-          {eyebrow && (
-            <p className="mb-4 inline-flex items-center rounded-full border border-[#1976D2]/30 bg-brand-soft px-3 py-1 text-sm font-semibold text-brand-light">
-              {eyebrow}
-            </p>
-          )}
+          {/* The page-category eyebrow pill ("Lokální SEO", "Webové stránky",
+              …) duplicated the active nav item and added visual noise above
+              the H1, so it's no longer rendered. The `eyebrow` prop stays in
+              the interface so existing callers don't break. */}
           <h1 className="font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl">
             {renderHeadline()}
           </h1>

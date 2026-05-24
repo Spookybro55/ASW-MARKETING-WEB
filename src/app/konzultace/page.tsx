@@ -29,8 +29,9 @@ export default function KonzultacePage() {
       <Header variant="dark" />
       <main id="main" className="pt-12 sm:pt-14 md:pt-16">
         <Section id="konzultace">
+          {/* "Konzultace zdarma" eyebrow removed — duplicated the page's own
+              CTA "Objednat konzultaci" right above the H1. */}
           <SectionHeading
-            eyebrow="Konzultace zdarma"
             title={konzultacePage.hero.headline}
             lead={konzultacePage.hero.subheadline}
           />
