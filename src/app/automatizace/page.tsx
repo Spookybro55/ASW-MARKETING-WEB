@@ -4,7 +4,7 @@ import Header from "@/components/asw/Header";
 import Footer from "@/components/asw/Footer";
 import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
-import { Button } from "@/components/asw/Button";
+import { CtaSection } from "@/components/asw/CtaSection";
 import { Icon, CheckIcon } from "@/components/asw/icons";
 import { seo, automatizacePage, contact } from "@/data/site";
 import { HeroWorkflowPanel } from "./_HeroWorkflowPanel";
@@ -204,30 +204,14 @@ export default function AutomatizacePage() {
           </ol>
         </Section>
 
-        {/* 5. Final CTA — dark elevated card */}
-        <section className="px-5 pb-20 pt-4 sm:px-8">
-          <div className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(135deg,#0A1430_0%,#0D2658_55%,#0A1430_100%)] px-6 py-12 text-center shadow-[0_30px_80px_-30px_rgba(13,71,161,0.55)] sm:px-10 sm:py-14">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(25,118,210,0.22),transparent_70%)]"
-            />
-            <h2 className="font-display text-3xl font-bold leading-tight text-white sm:text-[2rem]">
-              {p.finalCta.title}
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/80">
-              {p.finalCta.lead}
-            </p>
-            <div className="mt-8 flex justify-center">
-              <Button
-                href={p.finalCta.ctaUrl}
-                ctaLabel="cta_band"
-                ctaLocation="automatizace_final"
-              >
-                {p.finalCta.ctaText}
-              </Button>
-            </div>
-          </div>
-        </section>
+        {/* 5. Final CTA — sjednocený dark elevated panel přes <CtaSection>. */}
+        <CtaSection
+          title={p.finalCta.title}
+          lead={p.finalCta.lead}
+          ctaText={p.finalCta.ctaText}
+          ctaUrl={p.finalCta.ctaUrl}
+          ctaLocation="automatizace_final"
+        />
       </main>
       <Footer />
     </>

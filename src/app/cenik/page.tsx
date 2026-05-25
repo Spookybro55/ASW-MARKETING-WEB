@@ -153,6 +153,7 @@ export default function CenikPage() {
           lead="Napište nám pár vět o vaší firmě. Doporučíme rozsah a potvrdíme cenu předem."
           ctaText={cta.primary}
           ctaUrl={cta.href}
+          ctaLocation="cenik_final"
         />
       </main>
       <Footer />

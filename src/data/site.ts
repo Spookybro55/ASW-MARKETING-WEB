@@ -640,7 +640,10 @@ export const aiAsistentPage = {
   pricingTeaser: {
     title: "AI asistenta nasadíme podle vašeho rozsahu",
     lead: "Rozsah i cenu vždy domluvíme předem podle toho, co potřebujete. Rádi vám asistenta ukážeme naživo.",
-    ctaText: cta.demo,
+    // Sjednoceno na „probrat" formulaci (2026-05-25). Předchozí „Vyzkoušet
+    // demo" byl broken promise — žádné demo veřejně neexistuje. Po probrání
+    // s klientem ukážeme asistenta naživo, ale slib „demo" odebrán.
+    ctaText: "Nezávazně probrat AI asistenta",
     ctaUrl: `${cta.href}?produkt=ai-asistent`,
   },
 } as const;
@@ -822,7 +825,9 @@ export const kontaktPage = {
   cta: {
     title: "Chcete probrat konkrétní web?",
     text: "Objednejte si nezávaznou konzultaci — ozveme se s doporučením dalšího postupu.",
-    label: "Objednat konzultaci",
+    // Sjednoceno: na /kontakt už nemá CTA duplikovat header „Objednat
+    // konzultaci"; „Přejít" jasněji říká „pokračujte na formulář".
+    label: "Přejít na konzultaci",
     href: "/konzultace",
   },
 } as const;

@@ -8,7 +8,7 @@ import { Faq } from "@/components/asw/Faq";
 import { FaqJsonLd } from "@/components/asw/FaqJsonLd";
 import { CtaSection } from "@/components/asw/CtaSection";
 import { CheckIcon } from "@/components/asw/icons";
-import { seo, lokalniSeoPage, contact, cta } from "@/data/site";
+import { seo, lokalniSeoPage, contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: seo.lokalniSeo.title,
@@ -113,8 +113,9 @@ export default function LokalniSeoPage() {
         <CtaSection
           title="Chcete být ve svém okolí vidět?"
           lead="Ozvěte se nám. Projdeme váš obor a navrhneme, co dává smysl pro lepší lokální viditelnost."
-          ctaText={cta.primary}
-          ctaUrl={cta.href}
+          ctaText="Nezávazně probrat lokální SEO"
+          ctaUrl="/konzultace?produkt=lokalni-seo"
+          ctaLocation="lokalni_seo_final"
         />
       </main>
       <Footer />

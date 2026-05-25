@@ -5,7 +5,7 @@ import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { BenefitCard, ProcessStep, PricingCard } from "@/components/asw/cards";
 import { CtaSection } from "@/components/asw/CtaSection";
-import { seo, webyPage, process, pricing, contact, cta } from "@/data/site";
+import { seo, webyPage, process, pricing, contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: seo.weby.title,
@@ -121,8 +121,9 @@ export default function WebyPage() {
         <CtaSection
           title="Pojďme probrat váš web"
           lead="Řekněte nám pár vět o vaší firmě. Ozveme se a doporučíme rozsah i orientační cenu."
-          ctaText={cta.primary}
-          ctaUrl={cta.href}
+          ctaText="Nezávazně probrat web"
+          ctaUrl="/konzultace?produkt=web-standard"
+          ctaLocation="weby_final"
         />
       </main>
       <Footer />

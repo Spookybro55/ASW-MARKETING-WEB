@@ -74,6 +74,7 @@ export default function AiAsistentPage() {
           lead={p.pricingTeaser.lead}
           ctaText={p.pricingTeaser.ctaText}
           ctaUrl={p.pricingTeaser.ctaUrl}
+          ctaLocation="ai_asistent_final"
         />
       </main>
       <Footer />

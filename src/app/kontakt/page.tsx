@@ -183,6 +183,7 @@ export default function KontaktPage() {
           lead={kontaktPage.cta.text}
           ctaText={kontaktPage.cta.label}
           ctaUrl={kontaktPage.cta.href}
+          ctaLocation="kontakt_final"
         />
       </main>
       <Footer />
