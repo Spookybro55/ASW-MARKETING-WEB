@@ -38,6 +38,50 @@ export default function KontaktPage() {
           secondaryUrl={contact.phoneHref}
         />
 
+        {/* Above-fold quick contact — obecný e-mail i telefon viditelně
+            hned pod hero, formulářové CTA jako sekundární volba. */}
+        <Section id="rychly-kontakt" density="compact">
+          <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-surface p-6 text-center shadow-md sm:p-8">
+            <p className="font-display text-lg font-bold text-foreground">
+              {kontaktPage.quickContact.title}
+            </p>
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
+              <a
+                href={contact.emailHref}
+                className="inline-flex items-center gap-2.5 font-semibold text-foreground transition-colors hover:text-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                data-cta-label="kontakt_email"
+                data-cta-location="rychly-kontakt"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                  <Icon name="file-text" className="h-4 w-4" />
+                </span>
+                {contact.email}
+              </a>
+              <a
+                href={contact.phoneHref}
+                className="inline-flex items-center gap-2.5 font-semibold text-foreground transition-colors hover:text-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                data-cta-label="kontakt_phone"
+                data-cta-location="rychly-kontakt"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                  <Icon name="phone" className="h-4 w-4" />
+                </span>
+                {contact.phone}
+              </a>
+            </div>
+            <p className="mt-5 text-sm text-fg-muted">
+              <a
+                href={kontaktPage.quickContact.formCtaHref}
+                className="underline-offset-4 hover:text-brand-light hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                data-cta-label="kontakt_form"
+                data-cta-location="rychly-kontakt"
+              >
+                {kontaktPage.quickContact.formCtaLabel} →
+              </a>
+            </p>
+          </div>
+        </Section>
+
         {/* Proč AutoSmartWeby */}
         <Section id="proc">
           <SectionHeading eyebrow={kontaktPage.why.eyebrow} title={kontaktPage.why.title} />

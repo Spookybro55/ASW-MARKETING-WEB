@@ -70,6 +70,7 @@ export function HomeHero() {
         </div>
 
         <p className="mt-4 text-sm text-white/45">{homeHero.trustMicrocopy}</p>
+        <p className="mt-1 text-xs text-white/35">{homeHero.deliveryNote}</p>
 
         <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-white/45">
           <span>{homeHero.contactLine.prefix}</span>
@@ -122,16 +123,6 @@ export function HomeHero() {
             </li>
           ))}
         </ul>
-
-        {/* „Proč teď" — krátký trust argument hned pod problem cards. */}
-        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-5 text-left sm:px-7">
-          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
-            {homeHero.whyNow.eyebrow}
-          </p>
-          <p className="mt-2 text-[0.95rem] leading-relaxed text-white/70">
-            {homeHero.whyNow.text}
-          </p>
-        </div>
       </div>
 
     </section>

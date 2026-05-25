@@ -152,15 +152,22 @@ export const seo = {
 export const homeHero = {
   // Outcome-first headline (2026-05-25, audit D-02 P0-1/P0-2). Drops the
   // abstract „systém" framing — tradesmen hledají poptávky a důvěryhodnost,
-  // ne „systém". Accent line („Online do 7 dnů.") ponechán beze změny dle
-  // červeného pravidla: nereplikovat jinde, ale neměnit existující slib.
+  // ne „systém".
   h1Lead: "Web, který zákazníci najdou a pochopí.",
-  h1Accent: "Online do 7 dnů.",
+  // Bezpečnější forma slibu termínu (2026-05-25). „Online do 7 dnů." byl
+  // bezpodmínečný veřejný slib; nahrazeno „První verze obvykle do 7 dnů."
+  // — žádná garance, drží obchodní sílu, méně rizika při skluzu. Podmínka
+  // („běžný rozsah, dodané podklady") je vykreslená jako `deliveryNote`
+  // pod trust mikrocopy, ať hero accent zůstane krátký a čitelný.
+  h1Accent: "První verze obvykle do 7 dnů.",
+  // Outcome-led subheadline bez „automatizace" / „systému" / „AI" / techno
+  // termínů (audit D-02 žlutý bod přesunut do zelené iterace 2026-05-25).
   subheadline:
-    "Postavíme vám profesionální web, který jasně vysvětlí vaši nabídku, pomůže zákazníkům se ozvat a připraví základ pro SEO i další automatizace.",
+    "Postavíme vám přehledný web, který zákazníkům rychle vysvětlí, co děláte, proč vám mohou věřit a jak se vám ozvat.",
   primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/konzultace" },
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-funguje" },
   trustMicrocopy: "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem",
+  deliveryNote: "Termín platí u běžného rozsahu a dodaných podkladů.",
   // Sekundární kontaktní mikrocopy hned pod CTA (audit D-02 zelený bod #7).
   // Klikatelný e-mail i telefon. Drží se sekundární vůči hlavnímu CTA.
   contactLine: {
@@ -169,12 +176,6 @@ export const homeHero = {
     emailHref: contact.emailHref,
     phone: contact.phone,
     phoneHref: contact.phoneHref,
-  },
-  // Krátký „proč teď" argument (audit D-02 zelený bod #2). Žádné strašení,
-  // žádné sliby, jen lidsky vysvětlí, proč web řeší i firma s doporučeními.
-  whyNow: {
-    eyebrow: "Proč teď",
-    text: "I když většina zákazníků přijde přes doporučení, často si vás předem ověří online. Přehledný web pomůže vysvětlit, co děláte, proč vám věřit a jak se vám rychle ozvat.",
   },
   problemsLabel: "CO VÁS MOŽNÁ BRZDÍ?",
   problemCards: [
@@ -200,6 +201,38 @@ export const homeHero = {
       ctaHref: "#jak-to-funguje",
     },
   ],
+} as const;
+
+/* Samostatná „Proč teď" sekce mezi PortfolioShowcase a Services
+   (audit D-02 přesun 2026-05-25). Dříve krátký blok v hero — vytaženo ven,
+   ať hero zůstane vzdušné. Tón: lidský, žádné strašení, žádné statistiky.
+   Tři kompaktní body bez agresivního negativního framingu. */
+export const whyNow = {
+  eyebrow: "Proč teď",
+  title: "Web není jen vizitka. Často rozhoduje, komu zákazník zavolá.",
+  lead:
+    "I když většina zakázek přijde přes doporučení, zákazníci si firmu často ověří online. Přehledný web pomůže vysvětlit, co děláte, proč vám věřit a jak se vám ozvat.",
+  cards: [
+    {
+      icon: "search",
+      title: "Zákazník si vás ověří online",
+      text: "Když nic nenajde nebo web působí zastarale, může zvolit konkurenci.",
+    },
+    {
+      icon: "users",
+      title: "Doporučení často končí na webu",
+      text: "I doporučený zákazník si chce ověřit služby, fotky, kontakt a cenu.",
+    },
+    {
+      icon: "map-pin",
+      title: "Web otevírá cestu k dohledatelnosti",
+      text: "Bez přehledného webu se hůř buduje viditelnost v Googlu a mapách.",
+    },
+  ],
+  cta: {
+    label: "Nezávazně zjistit, co dává smysl",
+    href: "/konzultace",
+  },
 } as const;
 
 export const services = {
@@ -747,6 +780,14 @@ export const kontaktPage = {
     headline: "Poznejte AutoSmartWeby",
     subheadline:
       "Za každým webem stojí lidé, kteří chtějí, aby vaše firma byla vidět a získávala nové zákazníky.",
+  },
+  /* Above-fold kontaktní blok (audit D-02 zelený bod 2026-05-25). Email
+     i telefon viditelně v první obrazovce; CTA na formulář jako sekundární
+     volba, aby nepřebíjelo přímý kontakt. */
+  quickContact: {
+    title: "Chcete nám rovnou napsat nebo zavolat?",
+    formCtaLabel: "Raději vyplním krátký formulář",
+    formCtaHref: "/konzultace",
   },
   why: {
     eyebrow: "Proč AutoSmartWeby",

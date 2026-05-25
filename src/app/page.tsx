@@ -3,6 +3,7 @@ import Header from "@/components/asw/Header";
 import Footer from "@/components/asw/Footer";
 import { HomeHero } from "@/components/asw/HomeHero";
 import { PortfolioShowcase } from "@/components/asw/PortfolioShowcase";
+import { WhyNow } from "@/components/asw/WhyNow";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { ServiceCard, ProcessStep, PricingCard } from "@/components/asw/cards";
 import { Faq } from "@/components/asw/Faq";
@@ -48,6 +49,9 @@ export default function Home() {
 
         {/* 7. Portfolio device showcase — tilt-straighten on scroll */}
         <PortfolioShowcase />
+
+        {/* 7b. Proč teď — kompaktní argument pro odkladače */}
+        <WhyNow />
 
         {/* 8. Services — "Co pro vás zařídíme" */}
         <Section id="sluzby">
