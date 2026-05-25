@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Header from "@/components/asw/Header";
 import Footer from "@/components/asw/Footer";
-import { Section, SectionHeading } from "@/components/asw/Section";
+import { Section } from "@/components/asw/Section";
 import { ConsultationForm } from "@/components/asw/ConsultationForm";
 import { Icon, CheckIcon } from "@/components/asw/icons";
 import { seo, konzultacePage, contact } from "@/data/site";
@@ -29,12 +29,17 @@ export default function KonzultacePage() {
       <Header variant="dark" />
       <main id="main" className="pt-12 sm:pt-14 md:pt-16">
         <Section id="konzultace">
-          {/* "Konzultace zdarma" eyebrow removed — duplicated the page's own
-              CTA "Objednat konzultaci" right above the H1. */}
-          <SectionHeading
-            title={konzultacePage.hero.headline}
-            lead={konzultacePage.hero.subheadline}
-          />
+          {/* Real H1 (audit Phase A 2026-05-25). Dříve heading byl renderovaný
+              přes <SectionHeading> jako H2 — stránka neměla žádné H1, což byl
+              a11y/SEO problém. Inline H1 + lead drží stejný vizuální rytmus. */}
+          <div className="mx-auto max-w-2xl text-center">
+            <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-[2rem]">
+              {konzultacePage.hero.headline}
+            </h1>
+            <p className="mt-4 text-lg leading-relaxed text-fg-muted">
+              {konzultacePage.hero.subheadline}
+            </p>
+          </div>
           <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-fg-soft">
             {konzultacePage.trust}
           </p>

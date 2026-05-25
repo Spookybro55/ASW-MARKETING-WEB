@@ -68,7 +68,9 @@ export const cta = {
   nabidka: "Získat nabídku",
   vice: "Zjistit více",
   konzultaceZdarma: "Konzultace zdarma",
-  demo: "Vyzkoušet demo",
+  // `demo` label odebrán (audit Phase A 2026-05-25) — žádné veřejné demo
+  // neexistuje, slovo bylo broken promise. AI asistenta probíráme přes
+  // /konzultace.
   href: "/konzultace",
 } as const;
 
@@ -112,7 +114,7 @@ export const seo = {
   aiAsistent: {
     title: "AI asistent a virtuální recepční 24/7 | AutoSmartWeby",
     description:
-      "Váš 24/7 virtuální recepční. AI asistent odpoví zákazníkům, zachytí poptávky a zmeškané hovory a ušetří vám čas. Vyzkoušejte demo nebo si domluvte konzultaci.",
+      "Váš 24/7 virtuální recepční. AI asistent odpoví zákazníkům, zachytí poptávky a zmeškané hovory a ušetří vám čas. Nezávazně to probereme na konzultaci.",
     path: "/ai-asistent",
   },
   automatizace: {
@@ -166,8 +168,12 @@ export const homeHero = {
     "Postavíme vám přehledný web, který zákazníkům rychle vysvětlí, co děláte, proč vám mohou věřit a jak se vám ozvat.",
   primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/konzultace" },
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-funguje" },
-  trustMicrocopy: "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem",
-  deliveryNote: "Termín platí u běžného rozsahu a dodaných podkladů.",
+  // Audit Phase A 2026-05-25: trustMicrocopy + deliveryNote sloučeno do
+  // jednoho řádku — žádný samostatný disclaimer blok pod accentem. Podmínka
+  // „při dodání podkladů" zůstává inline, ať accent „První verze obvykle
+  // do 7 dnů." není bezpodmínečný slib.
+  trustMicrocopy:
+    "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem · První verze do 7 dnů při dodání podkladů",
   // Sekundární kontaktní mikrocopy hned pod CTA (audit D-02 zelený bod #7).
   // Klikatelný e-mail i telefon. Drží se sekundární vůči hlavnímu CTA.
   contactLine: {
@@ -406,19 +412,17 @@ export const pricing = {
   ],
   comparison: {
     title: "Srovnání balíčků",
+    // Audit Phase A 2026-05-25: 12 řádků → 6 klíčových odlišovacích.
+    // Detaily texty / služby / ceník / analytika / revize jsou už v cenových
+    // kartách a v „V ceně / Řeší se zvlášť" bloku — tabulka má sloužit jako
+    // rychlé porovnání rozhodovacích kritérií, ne kompletní spec sheet.
     rows: [
       { label: "Cena", standard: "8 900 Kč", pro: "16 900 Kč" },
       { label: "Typ webu", standard: "Jednostránkový web / landing page", pro: "Menší plnohodnotný web" },
       { label: "Rozsah", standard: "Cca 5–7 sekcí na jedné stránce", pro: "Homepage + 4–6 stránek/sekcí" },
-      { label: "Texty", standard: "Základní úprava textů z podkladů", pro: "Propracovanější copy pro hlavní stránky" },
-      { label: "Služby", standard: "Stručný přehled 3–6 služeb", pro: "Detailnější popisy 4–8 služeb" },
-      { label: "Reference", standard: "Jednoduchý blok, pokud dodáte podklady", pro: "Samostatná sekce / stránka referencí" },
-      { label: "Ceník", standard: "Jednoduchý blok / cena od", pro: "Přehlednější orientační ceník" },
       { label: "SEO", standard: "Základní technické SEO", pro: "Základní lokální SEO" },
-      { label: "Analytika", standard: "Volitelně", pro: "Základní měření hlavních kliků" },
-      { label: "Revize", standard: "2 kola úprav", pro: "2 kola úprav" },
+      { label: "Reference", standard: "Jednoduchý blok, pokud dodáte podklady", pro: "Samostatná sekce / stránka referencí" },
       { label: "Termín", standard: "Obvykle 3–5 prac. dní od dodání podkladů", pro: "Obvykle 5–10 prac. dní od dodání podkladů" },
-      { label: "Platba", standard: "Po schválení finální verze", pro: "Po schválení finální verze" },
     ],
   },
   individualNote:
@@ -610,7 +614,10 @@ export const aiAsistentPage = {
     headline: "Váš 24/7 virtuální recepční",
     subheadline:
       "AI asistent odpoví zákazníkům, zachytí poptávky a zmeškané hovory a ušetří vám čas — ve dne, v noci i o víkendu.",
-    ctaText: cta.demo,
+    // Audit Phase A 2026-05-25: „Vyzkoušet demo" (cta.demo) byl broken
+    // promise — veřejné demo neexistuje. Sjednoceno s pricingTeaser na
+    // „Nezávazně probrat AI asistenta". Žádná lež o demu.
+    ctaText: "Nezávazně probrat AI asistenta",
     ctaUrl: `${cta.href}?produkt=ai-asistent`,
   },
   explain: {

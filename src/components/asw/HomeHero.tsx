@@ -69,8 +69,9 @@ export function HomeHero() {
           </a>
         </div>
 
-        <p className="mt-4 text-sm text-white/45">{homeHero.trustMicrocopy}</p>
-        <p className="mt-1 text-xs text-white/35">{homeHero.deliveryNote}</p>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/45">
+          {homeHero.trustMicrocopy}
+        </p>
 
         <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-white/45">
           <span>{homeHero.contactLine.prefix}</span>

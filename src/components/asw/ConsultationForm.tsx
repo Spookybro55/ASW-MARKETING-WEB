@@ -175,10 +175,23 @@ export function ConsultationForm() {
           <Icon name="check" className="h-6 w-6" />
         </span>
         <h3 className="mt-4 font-display text-xl font-bold text-foreground">
-          Děkujeme, máme to!
+          Děkujeme, poptávku máme.
         </h3>
-        <p className="mt-2 text-fg-muted">
-          Ozveme se vám co nejdříve s doporučením dalšího postupu.
+        <p className="mt-3 text-fg-muted">
+          Ozve se vám Tomáš nebo Jan obvykle do 24 hodin. Podíváme se na váš
+          obor, doporučíme vhodný rozsah a domluvíme další krok — bez závazku.
+        </p>
+        <p className="mt-4 text-sm text-fg-soft">
+          Pokud to spěchá, zavolejte nám na{" "}
+          <a
+            href="tel:+420722525872"
+            className="font-semibold text-brand-light underline-offset-4 hover:text-brand hover:underline"
+            data-cta-label="success_phone"
+            data-cta-location="konzultace_success"
+          >
+            +420 722 525 872
+          </a>
+          .
         </p>
       </div>
     );
