@@ -120,6 +120,46 @@ export default function Home() {
               />
             ))}
           </div>
+
+          {/* Co je v ceně / Řeší se zvlášť — hned pod kartami, ať je hranice
+              balíčku jasná a netápe se, co bude stát navíc. */}
+          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-surface p-6 shadow-md sm:p-7">
+            <p className="text-center font-display text-base font-bold text-foreground">
+              {pricing.scope.title}
+            </p>
+            <div className="mt-5 grid gap-6 sm:grid-cols-2">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wider text-brand-light">
+                  {pricing.scope.included.title}
+                </p>
+                <ul role="list" className="mt-3 space-y-2 text-sm">
+                  {pricing.scope.included.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-fg-muted">
+                      <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-light" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wider text-fg-soft">
+                  {pricing.scope.separate.title}
+                </p>
+                <ul role="list" className="mt-3 space-y-2 text-sm">
+                  {pricing.scope.separate.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-fg-muted">
+                      <Icon name="arrow-right" className="mt-0.5 h-4 w-4 shrink-0 text-fg-soft" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <p className="mt-5 text-center text-xs text-fg-soft">
+              {pricing.scope.note}
+            </p>
+          </div>
+
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-fg-soft">
             {pricing.note}
           </p>
