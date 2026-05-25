@@ -150,17 +150,32 @@ export const seo = {
  * targets #jak-to-funguje (the process section).
  */
 export const homeHero = {
-  h1Lead: "Váš systém pro nové zákazníky.",
-  // Owner-approved delivery claim (2026-05-21). NOTE: "Online do 7 dnů" is a
-  // public delivery-timeline promise — keep it only while it is a deadline
-  // that can realistically be met (CLAUDE.md §9 cautions against unbacked
-  // timelines). Soften/remove if it ever stops being safe.
+  // Outcome-first headline (2026-05-25, audit D-02 P0-1/P0-2). Drops the
+  // abstract „systém" framing — tradesmen hledají poptávky a důvěryhodnost,
+  // ne „systém". Accent line („Online do 7 dnů.") ponechán beze změny dle
+  // červeného pravidla: nereplikovat jinde, ale neměnit existující slib.
+  h1Lead: "Web, který zákazníci najdou a pochopí.",
   h1Accent: "Online do 7 dnů.",
   subheadline:
     "Postavíme vám profesionální web, který jasně vysvětlí vaši nabídku, pomůže zákazníkům se ozvat a připraví základ pro SEO i další automatizace.",
   primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/konzultace" },
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-funguje" },
   trustMicrocopy: "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem",
+  // Sekundární kontaktní mikrocopy hned pod CTA (audit D-02 zelený bod #7).
+  // Klikatelný e-mail i telefon. Drží se sekundární vůči hlavnímu CTA.
+  contactLine: {
+    prefix: "Raději rovnou napsat?",
+    email: contact.email,
+    emailHref: contact.emailHref,
+    phone: contact.phone,
+    phoneHref: contact.phoneHref,
+  },
+  // Krátký „proč teď" argument (audit D-02 zelený bod #2). Žádné strašení,
+  // žádné sliby, jen lidsky vysvětlí, proč web řeší i firma s doporučeními.
+  whyNow: {
+    eyebrow: "Proč teď",
+    text: "I když většina zákazníků přijde přes doporučení, často si vás předem ověří online. Přehledný web pomůže vysvětlit, co děláte, proč vám věřit a jak se vám rychle ozvat.",
+  },
   problemsLabel: "CO VÁS MOŽNÁ BRZDÍ?",
   problemCards: [
     {
@@ -377,6 +392,33 @@ export const pricing = {
     "Individuálně naceňujeme například tvorbu loga, focení a natáčení, blogové články, pokročilé SEO, linkbuilding, e-shop, rezervační systém, online platby, vícejazyčnost a napojení na externí systémy.",
   seoNote:
     "U SEO negarantujeme konkrétní pozice ve vyhledávání. Komunikujeme ho jako technické a lokální nastavení podle dobré praxe.",
+  // „V ceně / Řeší se zvlášť" — pevný dvojsloupec hned pod kartami, ať
+  // zákazník hned vidí hranici balíčku a netápe, co bude stát navíc
+  // (audit D-02 zelený bod #5). Externí náklady ke kartám, ne až do FAQ.
+  scope: {
+    title: "Co je v ceně a co se řeší zvlášť",
+    included: {
+      title: "V ceně balíčku",
+      items: [
+        "Návrh struktury webu",
+        "Pomoc s texty z vašich podkladů",
+        "Responzivní vzhled na mobilu i desktopu",
+        "Kontaktní formulář, klikací telefon a e-mail",
+        "Základní technické SEO a spuštění",
+      ],
+    },
+    separate: {
+      title: "Řeší se zvlášť",
+      items: [
+        "Doména a hosting (provozní náklady)",
+        "Logo, focení nebo natáčení",
+        "E-shop a online platby",
+        "Pokročilé SEO a obsah na míru",
+        "Rezervační systém a automatizace",
+      ],
+    },
+    note: "Externí náklady jako doména a hosting jsou typicky pár set korun měsíčně. Vše vysvětlíme předem a nic neřešíme tajně.",
+  },
 } as const;
 
 /* ── FAQ (homepage) ───────────────────────────────────────────────────────── */

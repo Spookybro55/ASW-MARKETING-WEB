@@ -71,6 +71,27 @@ export function HomeHero() {
 
         <p className="mt-4 text-sm text-white/45">{homeHero.trustMicrocopy}</p>
 
+        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-white/45">
+          <span>{homeHero.contactLine.prefix}</span>
+          <a
+            href={homeHero.contactLine.emailHref}
+            className="font-medium text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            data-cta-label="hero_email"
+            data-cta-location="hero"
+          >
+            {homeHero.contactLine.email}
+          </a>
+          <span aria-hidden="true" className="text-white/30">·</span>
+          <a
+            href={homeHero.contactLine.phoneHref}
+            className="font-medium text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            data-cta-label="hero_phone"
+            data-cta-location="hero"
+          >
+            {homeHero.contactLine.phone}
+          </a>
+        </p>
+
         <p className="mt-6 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
           {homeHero.problemsLabel}
         </p>
@@ -91,7 +112,7 @@ export function HomeHero() {
               </p>
               <a
                 href={card.ctaHref}
-                className="mt-5 inline-flex items-center gap-1.5 self-start rounded-lg border border-[#1976D2]/30 bg-[#1976D2]/[0.08] px-3 py-1.5 text-sm font-semibold text-brand-light transition-colors duration-150 hover:border-[#1976D2]/55 hover:bg-[#1976D2]/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                className="mt-5 inline-flex items-center gap-1.5 self-start rounded-lg border border-[#1976D2]/40 bg-[#1976D2]/[0.10] px-3 py-1.5 text-sm font-semibold text-brand-light transition-colors duration-150 hover:border-[#1976D2]/60 hover:bg-[#1976D2]/20 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
                 data-cta-label="hero_problem"
                 data-cta-location="hero"
               >
@@ -101,6 +122,16 @@ export function HomeHero() {
             </li>
           ))}
         </ul>
+
+        {/* „Proč teď" — krátký trust argument hned pod problem cards. */}
+        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-5 text-left sm:px-7">
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
+            {homeHero.whyNow.eyebrow}
+          </p>
+          <p className="mt-2 text-[0.95rem] leading-relaxed text-white/70">
+            {homeHero.whyNow.text}
+          </p>
+        </div>
       </div>
 
     </section>
