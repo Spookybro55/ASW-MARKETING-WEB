@@ -66,14 +66,16 @@ export function PortfolioShowcase() {
     <section className="relative overflow-hidden bg-[#05070D] px-5 pb-16 pt-10 sm:px-8 md:pb-20 md:pt-12">
       <div ref={ref} className="mx-auto w-full max-w-[70rem] [perspective:1600px]">
         <div className="mx-auto mb-8 max-w-2xl text-center">
-          <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
-            Reálná podoba
-          </p>
+          <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#1976D2]/45 bg-[#1976D2]/15 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#9FC6FF]">
+            <Icon name="file-text" className="h-3.5 w-3.5" />
+            Ukázka výstupu
+          </span>
           <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-[2rem]">
             Ukázka webu, jaký pro vás postavíme
           </h2>
           <p className="mt-3 text-base leading-relaxed text-white/60">
-            Ukázka vychází z reálné šablony oboru. Konkrétní web vždy upravujeme podle vaší firmy.
+            Nejde o finální šablonu pro všechny. Ukazuje typ struktury a přehlednosti,
+            kterou stavíme pro malé firmy — pro vás vždy upravíme podle vašeho oboru a podkladů.
           </p>
         </div>
 
@@ -213,7 +215,7 @@ export function PortfolioShowcase() {
 
         <div className="mt-9 text-center">
           <Link
-            href="/konzultace"
+            href="/konzultace?produkt=web-standard"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#9FC6FF] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             data-cta-label="showcase"
             data-cta-location="hero_showcase"
