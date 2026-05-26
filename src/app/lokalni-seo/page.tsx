@@ -8,6 +8,7 @@ import { Faq } from "@/components/asw/Faq";
 import { FaqJsonLd } from "@/components/asw/FaqJsonLd";
 import { CtaSection } from "@/components/asw/CtaSection";
 import { CheckIcon } from "@/components/asw/icons";
+import { LocalSearchPanel } from "./_LocalSearchPanel";
 import { seo, lokalniSeoPage, contact } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -39,6 +40,24 @@ export default function LokalniSeoPage() {
           ctaText={p.hero.ctaText}
           ctaUrl={p.hero.ctaUrl}
         />
+
+        {/* Modelový místní vyhledávací panel — vizuální vysvětlení toho, jak
+            zákazník firmu najde. Custom UI, žádné Google logo, žádné metriky. */}
+        <Section id="modelovy-panel" density="compact">
+          <SectionHeading
+            eyebrow={p.localPanel.eyebrow}
+            title={p.localPanel.title}
+            lead={p.localPanel.lead}
+            tone="dark"
+          />
+          <LocalSearchPanel
+            searchQuery={p.localPanel.searchQuery}
+            companyCard={p.localPanel.companyCard}
+            nearbyPins={p.localPanel.nearbyPins}
+            checklist={p.localPanel.checklist}
+            measureNote={p.localPanel.measureNote}
+          />
+        </Section>
 
         {/* Problem */}
         <Section id="problem">

@@ -539,10 +539,55 @@ export const webyPage = {
     ],
   },
   portfolio: {
-    eyebrow: "Ukázky",
-    title: "Jak může web vypadat pro váš obor",
-    lead: "Ukázky vycházejí z reálných oborových šablon. Každý web upravujeme podle konkrétního zadání.",
+    eyebrow: "Modelové ukázky",
+    title: "Jak může vypadat web pro vaši firmu",
+    lead: "Nejde o reálné klientské realizace, ale o ukázky struktury a přehlednosti, kterou pro malé firmy stavíme.",
     note: "Vlastní web připravíme i pro obor, který tu není — strukturu a copy přizpůsobíme po krátkém hovoru.",
+    items: [
+      {
+        kind: "Řemeslník",
+        brandName: "Novák Instalatér",
+        domain: "novak-instalater.cz",
+        cardTitle: "Web pro řemeslníka",
+        cardDescription:
+          "Služby, lokalita, rychlý kontakt a přehled toho, s čím pomůžete.",
+        heroTitle: "Instalatérské práce Praha",
+        heroLead: "Voda, topení, havárie. Reagujeme i ve večerních hodinách.",
+        services: ["Voda", "Topení", "Kanalizace", "Havárie 24/7"],
+        contactLabel: "Zavolat technika",
+        location: "Praha a okolí",
+      },
+      {
+        kind: "Lokální služba",
+        brandName: "Studio Lípa",
+        domain: "studio-lipa.cz",
+        cardTitle: "Web pro lokální službu",
+        cardDescription:
+          "Důvěryhodná prezentace, ceník, fotky práce a jednoduchá cesta k objednání.",
+        heroTitle: "Kosmetika a masáže Brno",
+        heroLead: "Pečlivá péče o pleť a tělo v centru Brna. Online rezervace.",
+        services: ["Pleť", "Masáže", "Depilace", "Online rezervace"],
+        contactLabel: "Rezervovat termín",
+        location: "Brno-střed",
+      },
+      {
+        kind: "Menší firma",
+        brandName: "Auto Centrum Vrba",
+        domain: "autocentrum-vrba.cz",
+        cardTitle: "Web pro menší firmu",
+        cardDescription:
+          "Více prostoru pro služby, reference, realizace a lokální dohledatelnost.",
+        heroTitle: "Servis vozidel Olomouc",
+        heroLead: "Servis, pneu, STK. Plánujte termín přes web nebo telefon.",
+        services: ["Servis", "Pneuservis", "STK", "Klimatizace"],
+        contactLabel: "Domluvit termín",
+        location: "Olomouc · Šumperk",
+      },
+    ],
+    cta: {
+      label: "Chci podobný web",
+      href: "/konzultace?produkt=web-standard",
+    },
   },
   benefits: {
     eyebrow: "Co web umí",
@@ -563,6 +608,37 @@ export const lokalniSeoPage = {
       "Pomůžeme zákazníkům ve vašem městě, aby vás našli první — v Google vyhledávání i v mapách.",
     ctaText: cta.primary,
     ctaUrl: `${cta.href}?produkt=lokalni-seo`,
+  },
+  /* Modelový vyhledávací panel (audit Phase B 2026-05-25). Custom UI
+     inspirovaný map + místní firemní profil — NE kopie Google UI, NE
+     logo Google. Žádné konkrétní metriky/procenta — vágní popis toho,
+     co měříme. Renderováno přes izolovaný client komponent _LocalSearchPanel. */
+  localPanel: {
+    eyebrow: "Modelová ukázka",
+    title:
+      "Lokální SEO není magie. Jde o to, aby vás zákazník našel ve správný moment.",
+    lead:
+      "Pomůžeme dát dohromady web, místní profil a základní signály tak, aby zákazník rychle pochopil, kde působíte a jak se vám ozvat.",
+    searchQuery: "instalatér Praha 4",
+    companyCard: {
+      label: "Vaše firma",
+      name: "Vaše firma",
+      ratingLabel: "★★★★★",
+      ratingNote: "Recenze z reálných zákazníků",
+      hours: "Pondělí–pátek · 8:00–18:00",
+      phone: "+420 ___ ___ ___",
+      web: "vaše-firma.cz",
+      area: "Praha 4 a okolí",
+    },
+    nearbyPins: 5,
+    checklist: [
+      "Místní firemní profil",
+      "Lokální klíčová slova",
+      "Kontakty a služby na webu",
+      "Měření kliků a volání",
+    ],
+    measureNote:
+      "Sledujeme kliky, telefonáty a vyhledávací dotazy — žádné garantované pozice ve výsledcích.",
   },
   problem: {
     eyebrow: "Problém",
@@ -624,6 +700,39 @@ export const aiAsistentPage = {
     eyebrow: "Co to je",
     title: "Jako recepční, který nikdy nespí",
     lead: "AI asistent funguje na webu i u telefonu. Odpovídá na časté dotazy, zapíše poptávku a dá vám vědět, když někdo volal mimo pracovní dobu — abyste nepřišli o zákazníka.",
+  },
+  /* Modelová ukázka konverzace (audit Phase B 2026-05-25). NE live demo,
+     NE skutečná konverzace s reálným zákazníkem. Slouží jen jako vizuální
+     ilustrace situace „zákazník píše po pracovní době". Render přes
+     izolovaný _ConversationDemo client component. */
+  conversation: {
+    eyebrow: "Modelová ukázka",
+    title: "Jak může AI asistent pomoci po pracovní době",
+    lead:
+      "Nejde o živé demo, ale o modelovou ukázku situace, kdy zákazník potřebuje rychlou odpověď a vy zrovna nemůžete reagovat.",
+    timestamp: "Pondělí · 21:14",
+    messages: [
+      {
+        from: "customer",
+        text: "Dobrý den, máte tento týden volný termín?",
+      },
+      {
+        from: "assistant",
+        text:
+          "Dobrý den, ověřím základní informace a předám poptávku týmu. O jakou službu máte zájem?",
+      },
+      {
+        from: "customer",
+        text: "Potřebuji servis a ideálně co nejdřív.",
+      },
+      {
+        from: "assistant",
+        text:
+          "Rozumím. Zapíšu kontakt, preferovaný termín a předám vše člověku, který se vám ozve.",
+      },
+    ],
+    note:
+      "AI asistent nenahrazuje osobní domluvu. Pomáhá zachytit základní dotazy, předat kontakt a neztratit poptávku.",
   },
   useCases: {
     eyebrow: "Pro koho",

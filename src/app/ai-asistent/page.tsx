@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { BenefitCard } from "@/components/asw/cards";
 import { CtaSection } from "@/components/asw/CtaSection";
+import { ConversationDemo } from "./_ConversationDemo";
 import { seo, aiAsistentPage, contact } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -45,6 +46,23 @@ export default function AiAsistentPage() {
             eyebrow={p.explain.eyebrow}
             title={p.explain.title}
             lead={p.explain.lead}
+          />
+        </Section>
+
+        {/* Modelová konverzace — vizuální vysvětlení, jak asistent zachytí
+            poptávku po pracovní době. NE live demo, NE skutečná zákaznická
+            data. Animace izolovaná v client komponentě. */}
+        <Section tone="muted" id="modelova-ukazka" density="compact">
+          <SectionHeading
+            eyebrow={p.conversation.eyebrow}
+            title={p.conversation.title}
+            lead={p.conversation.lead}
+            tone="dark"
+          />
+          <ConversationDemo
+            timestamp={p.conversation.timestamp}
+            messages={p.conversation.messages}
+            note={p.conversation.note}
           />
         </Section>
 

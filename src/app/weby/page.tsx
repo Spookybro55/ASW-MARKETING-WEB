@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { BenefitCard, ProcessStep, PricingCard } from "@/components/asw/cards";
 import { CtaSection } from "@/components/asw/CtaSection";
+import { WebsiteShowcase } from "./_WebsiteShowcase";
 import { seo, webyPage, process, pricing, contact } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -56,14 +57,20 @@ export default function WebyPage() {
           </div>
         </Section>
 
-        {/* Portfolio placeholder */}
+        {/* Modelové ukázky webů — 3 browser-frame mockupy s „Modelová ukázka"
+            pillem. Žádné reálné klientské reference. Animace v izolované
+            client komponentě, stránka zůstává server component. */}
         <Section tone="muted" id="ukazky">
           <SectionHeading
             eyebrow={webyPage.portfolio.eyebrow}
             title={webyPage.portfolio.title}
             lead={webyPage.portfolio.lead}
           />
-          <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-fg-soft">
+          <WebsiteShowcase
+            items={webyPage.portfolio.items}
+            cta={webyPage.portfolio.cta}
+          />
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-fg-soft">
             {webyPage.portfolio.note}
           </p>
         </Section>
