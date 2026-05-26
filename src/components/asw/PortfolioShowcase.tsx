@@ -102,8 +102,9 @@ export function PortfolioShowcase() {
                 </span>
               </div>
 
-              {/* MBM Elektrotechnik marketing preview */}
-              <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1A33] via-[#08142A] to-[#05070D] px-5 pb-6 pt-4 sm:px-8">
+              {/* MBM Elektrotechnik marketing preview — mobile compact pass
+                  2026-05-26: paddingy a vnitřní rytmus výrazně menší pod sm. */}
+              <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1A33] via-[#08142A] to-[#05070D] px-4 pb-4 pt-3 sm:px-8 sm:pb-6 sm:pt-4">
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(143,190,247,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(143,190,247,0.06)_1px,transparent_1px)] [background-size:34px_34px] [mask-image:radial-gradient(ellipse_at_72%_45%,black,transparent_75%)]" />
                 <div className="pointer-events-none absolute -right-10 top-4 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(25,118,210,0.4),transparent_70%)] blur-2xl" />
 
@@ -127,22 +128,24 @@ export function PortfolioShowcase() {
                 </div>
 
                 {/* hero: two columns */}
-                <div className="relative mt-7 grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr]">
+                <div className="relative mt-4 grid items-center gap-6 sm:mt-7 md:grid-cols-[1.05fr_0.95fr]">
                   <div>
                     <span className="inline-flex items-center gap-1 rounded-full border border-[#1976D2]/40 bg-[#1976D2]/15 px-2.5 py-0.5 text-[10px] font-semibold text-[#9FC6FF]">
                       <Icon name="map-pin" className="h-3 w-3" /> Praha a okolí
                     </span>
-                    <h3 className="mt-3 font-display text-2xl font-extrabold leading-tight text-white sm:text-[1.8rem]">
+                    {/* mobile-only: H3 zmenšený na text-lg (~18px), žeby
+                        nepřebíjel vnější H2 stránky a uvolnil vertikální prostor. */}
+                    <h3 className="mt-2 font-display text-lg font-extrabold leading-tight text-white sm:mt-3 sm:text-[1.8rem]">
                       Elektroinstalace pro domy, byty i firmy
                     </h3>
-                    <p className="mt-2 max-w-md text-[11px] leading-relaxed text-white/60">
+                    <p className="mt-1.5 max-w-md text-[11px] leading-relaxed text-white/60 sm:mt-2">
                       Silnoproud, slaboproud, montáže a servis elektroinstalací s jasnou domluvou.
                     </p>
-                    <div className="mt-4 flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center gap-1 rounded-lg bg-[#1976D2] px-3.5 py-2 text-[11px] font-semibold text-white shadow-[0_8px_20px_-6px_rgba(25,118,210,0.7)]">
+                    <div className="mt-3 flex flex-wrap items-center gap-2 sm:mt-4">
+                      <span className="inline-flex items-center gap-1 rounded-lg bg-[#1976D2] px-3 py-1.5 text-[10px] font-semibold text-white shadow-[0_8px_20px_-6px_rgba(25,118,210,0.7)] sm:px-3.5 sm:py-2 sm:text-[11px]">
                         <Icon name="arrow-right" className="h-3 w-3" /> Nezávazně poptat
                       </span>
-                      <span className="inline-flex items-center gap-1 rounded-lg border border-white/25 px-3.5 py-2 text-[11px] font-semibold text-white">
+                      <span className="inline-flex items-center gap-1 rounded-lg border border-white/25 px-3 py-1.5 text-[10px] font-semibold text-white sm:px-3.5 sm:py-2 sm:text-[11px]">
                         <Icon name="phone" className="h-3 w-3" /> Zavolat technika
                       </span>
                     </div>
@@ -179,25 +182,29 @@ export function PortfolioShowcase() {
                   </div>
                 </div>
 
-                {/* service strip */}
-                <div className="relative mt-7 grid grid-cols-3 gap-2.5">
-                  {services.map((s) => (
+                {/* service strip — mobile: 2 columns + 3rd chip hidden;
+                    sm+: původní 3-sloupcová grid se všemi chipy. */}
+                <div className="relative mt-4 grid grid-cols-2 gap-2 sm:mt-7 sm:grid-cols-3 sm:gap-2.5">
+                  {services.map((s, i) => (
                     <div
                       key={s.title}
-                      className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.05] px-3 py-2.5 backdrop-blur-sm"
+                      className={`${i === 2 ? "hidden sm:flex" : "flex"} items-center gap-2 rounded-lg border border-white/10 bg-white/[0.05] px-2.5 py-2 backdrop-blur-sm sm:px-3 sm:py-2.5`}
                     >
-                      <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#1976D2]/20 text-[#9FC6FF]">
-                        <Icon name={s.icon} className="h-4 w-4" />
+                      <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#1976D2]/20 text-[#9FC6FF] sm:h-7 sm:w-7">
+                        <Icon name={s.icon} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       </span>
-                      <span className="text-[11px] font-semibold text-white">{s.title}</span>
+                      <span className="text-[10px] font-semibold text-white sm:text-[11px]">{s.title}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* trust strip */}
-                <div className="relative mt-5 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-white/8 pt-4 text-[10px] font-medium text-white/55">
-                  {trust.map((t) => (
-                    <span key={t} className="inline-flex items-center gap-1">
+                {/* trust strip — mobile zobrazuje jen 2 body, 3. od sm+. */}
+                <div className="relative mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-white/8 pt-3 text-[10px] font-medium text-white/55 sm:mt-5 sm:pt-4">
+                  {trust.map((t, i) => (
+                    <span
+                      key={t}
+                      className={`${i === 2 ? "hidden sm:inline-flex" : "inline-flex"} items-center gap-1`}
+                    >
                       <Icon name="check" className="h-3 w-3 text-[#9FC6FF]" /> {t}
                     </span>
                   ))}
@@ -213,10 +220,13 @@ export function PortfolioShowcase() {
           </div>
         </motion.div>
 
-        <div className="mt-9 text-center">
+        {/* CTA — mobile compact pass 2026-05-26: na mobilu solid brand button
+            (větší klikací plocha, blíž k mockupu); od sm+ původní jemný text
+            link. Spacing pod mockupem na mobilu zkrácený, ať CTA neuteče. */}
+        <div className="mt-5 text-center sm:mt-9">
           <Link
             href="/konzultace?produkt=web-standard"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#9FC6FF] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_-12px_rgba(13,71,161,0.7)] transition-colors hover:bg-brand-hover sm:bg-transparent sm:px-0 sm:py-0 sm:text-[#9FC6FF] sm:shadow-none sm:hover:bg-transparent sm:hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             data-cta-label="showcase"
             data-cta-location="hero_showcase"
           >
@@ -229,7 +239,7 @@ export function PortfolioShowcase() {
             „Ukázka výstupu" badge sám o sobě může uniknout přehledem; krátký
             text explicitně říká, že portfolio reálných realizací doplníme
             po souhlasu klientů. */}
-        <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-white/40">
+        <p className="mx-auto mt-4 max-w-2xl text-center text-xs leading-relaxed text-white/40 sm:mt-6">
           Ukázky jsou modelové a slouží k vysvětlení struktury a stylu.
           Reálné realizace budeme doplňovat po souhlasu klientů.
         </p>
