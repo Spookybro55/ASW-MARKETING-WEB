@@ -224,6 +224,15 @@ export function PortfolioShowcase() {
             <Icon name="arrow-right" className="h-4 w-4" />
           </Link>
         </div>
+
+        {/* Férová mikrokopie pod ukázkou (audit Phase C 2026-05-26).
+            „Ukázka výstupu" badge sám o sobě může uniknout přehledem; krátký
+            text explicitně říká, že portfolio reálných realizací doplníme
+            po souhlasu klientů. */}
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-white/40">
+          Ukázky jsou modelové a slouží k vysvětlení struktury a stylu.
+          Reálné realizace budeme doplňovat po souhlasu klientů.
+        </p>
       </div>
     </section>
   );

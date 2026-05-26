@@ -168,12 +168,13 @@ export const homeHero = {
     "Postavíme vám přehledný web, který zákazníkům rychle vysvětlí, co děláte, proč vám mohou věřit a jak se vám ozvat.",
   primaryCta: { label: "Chci nezávazně zjistit cenu", href: "/konzultace" },
   secondaryCta: { label: "Podívat se, jak to funguje", href: "#jak-to-funguje" },
-  // Audit Phase A 2026-05-25: trustMicrocopy + deliveryNote sloučeno do
-  // jednoho řádku — žádný samostatný disclaimer blok pod accentem. Podmínka
-  // „při dodání podkladů" zůstává inline, ať accent „První verze obvykle
-  // do 7 dnů." není bezpodmínečný slib.
+  // Audit Phase C 2026-05-26: nahrazen poslední bullet „První verze do 7 dnů…"
+  // (termín už říká hero accent) za dva ověřitelné trust signály — soft owner­
+  // ship („Vlastnictví a přístupy řešíme předem" — bezpečnější než tvrdé „Web
+  // je váš") a „Česká firma s IČO" (verifikuje footer IČO 24571831). Drží 4
+  // bullety, nepřeplácává hero.
   trustMicrocopy:
-    "Web obvykle od 8 900 Kč · Pomůžeme s texty · Jasná cena předem · První verze do 7 dnů při dodání podkladů",
+    "Web obvykle od 8 900 Kč · Pomůžeme s texty · Vlastnictví a přístupy řešíme předem · Česká firma s IČO",
   // Sekundární kontaktní mikrocopy hned pod CTA (audit D-02 zelený bod #7).
   // Klikatelný e-mail i telefon. Drží se sekundární vůči hlavnímu CTA.
   contactLine: {
@@ -543,6 +544,11 @@ export const webyPage = {
     title: "Jak může vypadat web pro vaši firmu",
     lead: "Nejde o reálné klientské realizace, ale o ukázky struktury a přehlednosti, kterou pro malé firmy stavíme.",
     note: "Vlastní web připravíme i pro obor, který tu není — strukturu a copy přizpůsobíme po krátkém hovoru.",
+    // Audit Phase C 2026-05-26: férová mikrokopie pod sekcí — bez ní by
+    // pillové označení mohlo přejít přehledem; explicitní vysvětlení, proč
+    // jsou ukázky modelové a kdy budou doplněny reálné.
+    fairUseDisclaimer:
+      "Ukázky jsou modelové a slouží k vysvětlení struktury a stylu. Reálné realizace budeme doplňovat po souhlasu klientů.",
     items: [
       {
         kind: "Řemeslník",
@@ -893,18 +899,22 @@ export const automatizacePage = {
 } as const;
 
 /* /kontakt — trust / "who's behind it" page (NOT the lead form; that's
-   /konzultace). Builds trust and shows the real people (see `team`). */
+   /konzultace). Builds trust and shows the real people (see `team`).
+   Audit Phase C 2026-05-26: H1 a úvod přeladěné na přímě kontaktní
+   formulace („Kontaktujte…"), region viditelně v quick contact bloku. */
 export const kontaktPage = {
   hero: {
-    headline: "Poznejte AutoSmartWeby",
+    headline: "Kontaktujte AutoSmartWeby",
     subheadline:
-      "Za každým webem stojí lidé, kteří chtějí, aby vaše firma byla vidět a získávala nové zákazníky.",
+      "Napište nám nebo zavolejte. Řeknete nám, co potřebujete, a doporučíme další krok — bez závazku.",
   },
-  /* Above-fold kontaktní blok (audit D-02 zelený bod 2026-05-25). Email
-     i telefon viditelně v první obrazovce; CTA na formulář jako sekundární
+  /* Above-fold kontaktní blok (audit D-02 zelený bod 2026-05-25, rozšířeno
+     o region v Phase C 2026-05-26). Email i telefon viditelně v první
+     obrazovce, region jako třetí řádek; CTA na formulář jako sekundární
      volba, aby nepřebíjelo přímý kontakt. */
   quickContact: {
     title: "Chcete nám rovnou napsat nebo zavolat?",
+    region: contact.region,
     formCtaLabel: "Raději vyplním krátký formulář",
     formCtaHref: "/konzultace",
   },
@@ -948,7 +958,10 @@ export const kontaktPage = {
   },
 } as const;
 
-/* /konzultace — primary conversion page (the lead/consultation form). */
+/* /konzultace — primary conversion page (the lead/consultation form).
+   Audit Phase C 2026-05-26: konkrétnější reassurance bullety
+   (vč. „Žádný newsletter ani marketing bez souhlasu"), nový blok
+   „Co se stane po odeslání" pro snížení nejistoty před submitem. */
 export const konzultacePage = {
   hero: {
     headline: "Objednat nezávaznou konzultaci",
@@ -964,11 +977,20 @@ export const konzultacePage = {
     "Nejsem si jistý, potřebuji poradit",
   ],
   reassurance: [
-    "Konzultace je nezávazná.",
-    "Ozveme se co nejdříve.",
-    "Doporučíme vhodné řešení podle situace.",
-    "Cenu a rozsah si potvrdíme předem.",
+    "Poptávka je nezávazná.",
+    "Ozveme se obvykle do 24 hodin.",
+    "Doporučíme vhodný rozsah podle situace.",
+    "Cenu a další krok potvrdíme předem.",
+    "Žádný newsletter ani marketing bez souhlasu.",
   ],
+  whatHappensAfter: {
+    title: "Co se stane po odeslání?",
+    steps: [
+      "Podíváme se, o co máte zájem.",
+      "Ozveme se vám zvoleným způsobem kontaktu.",
+      "Doporučíme, jestli dává smysl Web Standard, Web Pro nebo jiný postup.",
+    ],
+  },
   gdpr: "Souhlasím se zpracováním osobních údajů pro vyřízení mé poptávky. Žádný marketing, žádný newsletter.",
 } as const;
 

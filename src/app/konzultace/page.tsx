@@ -55,7 +55,10 @@ export default function KonzultacePage() {
               <ConsultationForm />
             </Suspense>
 
-            {/* Reassurance + direct contact */}
+            {/* Reassurance + „Co se stane po odeslání" + direct contact.
+                Audit Phase C 2026-05-26: explicitní 3-krokový blok snižuje
+                nejistotu před submitem („podíváme se → ozveme se → doporučíme"),
+                bez zásahu do formuláře/validace/prefill. */}
             <div>
               <ul role="list" className="space-y-3">
                 {konzultacePage.reassurance.map((r) => (
@@ -67,6 +70,25 @@ export default function KonzultacePage() {
               </ul>
 
               <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-md">
+                <p className="text-sm font-semibold text-foreground">
+                  {konzultacePage.whatHappensAfter.title}
+                </p>
+                <ol role="list" className="mt-4 space-y-3 text-sm">
+                  {konzultacePage.whatHappensAfter.steps.map((step, i) => (
+                    <li
+                      key={step}
+                      className="flex items-start gap-3 text-fg-muted"
+                    >
+                      <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft font-display text-xs font-bold text-brand-light">
+                        {i + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div className="mt-6 rounded-2xl border border-border bg-surface p-6 shadow-md">
                 <p className="text-sm font-semibold text-foreground">
                   Raději rovnou napsat nebo zavolat?
                 </p>

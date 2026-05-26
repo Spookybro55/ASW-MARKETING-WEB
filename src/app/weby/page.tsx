@@ -73,6 +73,9 @@ export default function WebyPage() {
           <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-fg-soft">
             {webyPage.portfolio.note}
           </p>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-fg-soft/80">
+            {webyPage.portfolio.fairUseDisclaimer}
+          </p>
         </Section>
 
         {/* Process */}

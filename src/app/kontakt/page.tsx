@@ -69,6 +69,10 @@ export default function KontaktPage() {
                 {contact.phone}
               </a>
             </div>
+            <p className="mt-4 inline-flex items-center justify-center gap-2 text-sm text-fg-soft">
+              <Icon name="map-pin" className="h-4 w-4 text-brand-2" />
+              {kontaktPage.quickContact.region}
+            </p>
             <p className="mt-5 text-sm text-fg-muted">
               <a
                 href={kontaktPage.quickContact.formCtaHref}
