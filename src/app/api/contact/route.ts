@@ -207,7 +207,9 @@ export async function POST(request: Request) {
   const lines: string[] = [`Jméno: ${name}`, `E-mail: ${email}`];
   if (phone) lines.push(`Telefon: ${phone}`);
   if (sector) lines.push(`Co zajímá: ${sector}`);
-  if (product) lines.push(`Produkt z URL: ${product}`);
+  // Phase D 2026-05-26: label sjednoceno s formulářovou otázkou
+  // („O co máte zájem?") — interní e-mail teď čte stejně jako odesilatel formulář.
+  if (product) lines.push(`O co má zájem: ${product}`);
   if (preferredContact) lines.push(`Preferovaný kontakt: ${preferredContact}`);
   if (preferredTime) lines.push(`Preferovaný čas: ${preferredTime}`);
   lines.push(
