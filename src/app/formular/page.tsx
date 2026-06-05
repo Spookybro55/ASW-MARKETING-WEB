@@ -28,48 +28,52 @@ const trustItems = [
 export default function FormularPage() {
   return (
     <>
-      <Header />
+      {/* Stejná floating dark navigace jako na ostatních veřejných stránkách
+          (homepage, /weby, /kontakt…) — konzistentní header napříč webem. */}
+      <Header variant="dark" />
       <main id="main">
-        {/* Hero / úvod */}
-        <Section density="compact">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-2">
-              Podklady k webu
-            </p>
-            <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-              Podklady pro váš nový web
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-fg-muted">
-              Vyplňte prosím informace, které nám pomůžou připravit web rychleji
-              a přesněji. Nemusíte nic psát marketingově — stačí jednoduše
-              vlastními slovy. Pokud něco nevíte, napište „nevím“ nebo pole
-              přeskočte, pokud není povinné.
-            </p>
-          </div>
+        {/* Hero / úvod. pt-24 clearance pod floating header (mirror HeroSection). */}
+        <section className="relative px-5 pt-24 pb-6 sm:px-8 md:pt-28">
+          <div className="mx-auto w-full max-w-6xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-2">
+                Podklady k webu
+              </p>
+              <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
+                Podklady pro váš nový web
+              </h1>
+              <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-fg-muted">
+                Vyplňte prosím informace, které nám pomůžou připravit web
+                rychleji a přesněji. Nemusíte nic psát marketingově — stačí
+                jednoduše vlastními slovy. Pokud něco nevíte, napište „nevím“
+                nebo pole přeskočte, pokud není povinné.
+              </p>
+            </div>
 
-          {/* Trust box */}
-          <ul
-            role="list"
-            className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {trustItems.map((item) => (
-              <li
-                key={item.text}
-                className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4 shadow-sm"
-              >
-                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
-                  <Icon name={item.icon} className="h-5 w-5" />
-                </span>
-                <span className="text-sm font-medium text-foreground">
-                  {item.text}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Section>
+            {/* Trust box */}
+            <ul
+              role="list"
+              className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4"
+            >
+              {trustItems.map((item) => (
+                <li
+                  key={item.text}
+                  className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4 shadow-sm"
+                >
+                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                    <Icon name={item.icon} className="h-5 w-5" />
+                  </span>
+                  <span className="text-sm font-medium text-foreground">
+                    {item.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
         {/* Formulář */}
-        <Section density="compact" className="pt-0">
+        <Section density="compact">
           <FormularForm />
         </Section>
       </main>
