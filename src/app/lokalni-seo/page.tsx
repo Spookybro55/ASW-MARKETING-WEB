@@ -8,7 +8,8 @@ import { Faq } from "@/components/asw/Faq";
 import { FaqJsonLd } from "@/components/asw/FaqJsonLd";
 import { CtaSection } from "@/components/asw/CtaSection";
 import { CheckIcon } from "@/components/asw/icons";
-import { seo, lokalniSeoPage, contact, cta } from "@/data/site";
+import { LocalSearchPanel } from "./_LocalSearchPanel";
+import { seo, lokalniSeoPage, contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: seo.lokalniSeo.title,
@@ -30,7 +31,7 @@ export default function LokalniSeoPage() {
   const p = lokalniSeoPage;
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="Lokální SEO"
@@ -39,6 +40,24 @@ export default function LokalniSeoPage() {
           ctaText={p.hero.ctaText}
           ctaUrl={p.hero.ctaUrl}
         />
+
+        {/* Modelový místní vyhledávací panel — vizuální vysvětlení toho, jak
+            zákazník firmu najde. Custom UI, žádné Google logo, žádné metriky. */}
+        <Section id="modelovy-panel" density="compact">
+          <SectionHeading
+            eyebrow={p.localPanel.eyebrow}
+            title={p.localPanel.title}
+            lead={p.localPanel.lead}
+            tone="dark"
+          />
+          <LocalSearchPanel
+            searchQuery={p.localPanel.searchQuery}
+            companyCard={p.localPanel.companyCard}
+            nearbyPins={p.localPanel.nearbyPins}
+            checklist={p.localPanel.checklist}
+            measureNote={p.localPanel.measureNote}
+          />
+        </Section>
 
         {/* Problem */}
         <Section id="problem">
@@ -113,8 +132,9 @@ export default function LokalniSeoPage() {
         <CtaSection
           title="Chcete být ve svém okolí vidět?"
           lead="Ozvěte se nám. Projdeme váš obor a navrhneme, co dává smysl pro lepší lokální viditelnost."
-          ctaText={cta.primary}
-          ctaUrl={cta.href}
+          ctaText="Nezávazně probrat lokální SEO"
+          ctaUrl="/konzultace?produkt=lokalni-seo"
+          ctaLocation="lokalni_seo_final"
         />
       </main>
       <Footer />

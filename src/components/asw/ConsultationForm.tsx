@@ -1,28 +1,88 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { requiresPhone } from "@/lib/contactPolicy";
 import { konzultacePage } from "@/data/site";
 import { Icon } from "./icons";
 
 /*
  * Consultation / lead form for /konzultace. Posts to the existing hardened
  * /api/contact (POST only, server-side validation, honeypot, rate limit).
- * Fields: jméno, firma, e-mail, telefon, služba (select), zpráva + required
- * GDPR consent checkbox. Maps to the API as { name, email, phone, sector
- * (=service), message (firma prepended) }. Dark premium styling.
+ *
+ * Supported query params (URL `?produkt=...`, fallback to legacy `?balicek=...`):
+ *   web-standard | web-pro       → "Web Standard" / "Web Pro"
+ *   lokalni-seo                  → "Lokální SEO"
+ *   automatizace                 → "Automatizace pro malé firmy"
+ *   ai-asistent                  → "AI asistent jako doplněk"
+ * missing / unknown              → "Ještě nevím, potřebuji poradit"
+ *
+ * The product is editable by the user via a single full-width `<select>` at
+ * the top of the form (no banner). When the user leaves it on the default
+ * "Ještě nevím..." we omit `product` from the API payload so the e-mail
+ * subject doesn't get a noisy bracket.
+ *
+ * Fields posted to /api/contact:
+ *   { name, email, phone, message, product, preferredContact,
+ *     preferredTime, _honey }
  */
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
   "w-full rounded-xl border border-border bg-bg-soft px-4 py-2.5 text-foreground placeholder:text-fg-soft focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--brand-2)] focus-visible:border-[#1976D2]";
 
+const DEFAULT_PRODUCT_LABEL = "Ještě nevím, potřebuji poradit";
+
+/** Order = order shown in the select. Default sits last. */
+const PRODUCT_OPTIONS = [
+  "Web Standard",
+  "Web Pro",
+  "Lokální SEO",
+  "Automatizace pro malé firmy",
+  "AI asistent jako doplněk",
+  DEFAULT_PRODUCT_LABEL,
+] as const;
+
+/** URL slug → option label. Anything not here falls back to the default. */
+const PRODUCT_SLUG_TO_LABEL: Record<string, string> = {
+  "web-standard": "Web Standard",
+  "web-pro": "Web Pro",
+  "lokalni-seo": "Lokální SEO",
+  automatizace: "Automatizace pro malé firmy",
+  "ai-asistent": "AI asistent jako doplněk",
+};
+
+/* Preferred contact options. Value === label by design: the value is what
+   travels to /api/contact (which validates as a plain string) and what
+   appears in the internal e-mail as "Preferovaný kontakt: <value>", so a
+   human-readable Czech label is what we want both client- and server-side. */
+const CONTACT_METHODS = [
+  { value: "Hovor", label: "Hovor" },
+  { value: "SMS", label: "SMS" },
+  { value: "WhatsApp", label: "WhatsApp" },
+  { value: "E-mail", label: "E-mail" },
+] as const;
+
+const CALL_TIMES: { value: string; label: string }[] = [
+  { value: "", label: "Nezáleží, ozvěte se mi kdykoli (nepovinné)" },
+  { value: "Všední den dopoledne", label: "Všední den dopoledne" },
+  { value: "Všední den odpoledne", label: "Všední den odpoledne" },
+  { value: "Všední den večer", label: "Všední den večer" },
+  { value: "Víkend", label: "Víkend" },
+  { value: "Kdykoli", label: "Kdykoli mi to vyhovuje" },
+  { value: "Nevolat, jen psát", label: "Raději nevolejte, napište mi" },
+];
+
 export function ConsultationForm() {
   const params = useSearchParams();
-  const balicek = params.get("balicek");
-  const defaultService =
-    balicek === "web-standard" || balicek === "web-pro" ? "Webové stránky" : "";
+  // Accept both `?produkt=` (new canonical) and `?balicek=` (legacy URLs that
+  // may still be cached/bookmarked). Unknown / missing → default label.
+  const rawSlug = (params.get("produkt") ?? params.get("balicek") ?? "")
+    .toLowerCase();
+  const defaultProduct =
+    PRODUCT_SLUG_TO_LABEL[rawSlug] ?? DEFAULT_PRODUCT_LABEL;
 
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
@@ -37,12 +97,45 @@ export function ConsultationForm() {
     const data = new FormData(form);
     const firma = String(data.get("firma") ?? "").trim();
     const zprava = String(data.get("message") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const preferredContact = String(data.get("preferredContact") ?? "").trim();
+    const selectedProduct = String(data.get("product") ?? "").trim();
+    // Omit `product` from the payload when the user left it on the default
+    // — the e-mail subject and the "Produkt:" line stay clean.
+    const productForApi =
+      selectedProduct && selectedProduct !== DEFAULT_PRODUCT_LABEL
+        ? selectedProduct
+        : "";
+
+    // Conditional phone requirement: Hovor / SMS / WhatsApp need a number.
+    // Mirror of the server-side check in /api/contact (single source of
+    // truth lives in src/lib/contactPolicy.ts).
+    if (requiresPhone(preferredContact) && !phone) {
+      setError(
+        "Pro kontakt přes hovor, SMS nebo WhatsApp prosím vyplňte telefonní číslo.",
+      );
+      trackEvent({
+        name: "contact_form_error",
+        params: { form_location: "konzultace", error_type: "validation" },
+      });
+      setStatus("error");
+      return;
+    }
+
+    // Firma is UI-only (no backend column), fold it into the message body so
+    // it doesn't get lost. product / preferredContact / preferredTime get
+    // their own structured fields in /api/contact and DO NOT need to be
+    // duplicated into the message.
+    const message = firma ? `Firma: ${firma}\n\n${zprava}` : zprava;
+
     const payload = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
-      phone: String(data.get("phone") ?? ""),
-      sector: String(data.get("service") ?? ""),
-      message: firma ? `Firma: ${firma}\n\n${zprava}` : zprava,
+      phone,
+      product: productForApi,
+      preferredContact,
+      preferredTime: String(data.get("preferredTime") ?? ""),
+      message,
       _honey: String(data.get("_honey") ?? ""),
     };
 
@@ -59,7 +152,13 @@ export function ConsultationForm() {
         setStatus("error");
         return;
       }
-      trackEvent({ name: "contact_form_submit", params: { form_location: "konzultace" } });
+      trackEvent({
+        name: "contact_form_submit",
+        params: {
+          form_location: "konzultace",
+          product: productForApi || "unspecified",
+        },
+      });
       setStatus("success");
       form.reset();
     } catch {
@@ -76,10 +175,23 @@ export function ConsultationForm() {
           <Icon name="check" className="h-6 w-6" />
         </span>
         <h3 className="mt-4 font-display text-xl font-bold text-foreground">
-          Děkujeme, máme to!
+          Děkujeme, poptávku máme.
         </h3>
-        <p className="mt-2 text-fg-muted">
-          Ozveme se vám co nejdříve s doporučením dalšího postupu.
+        <p className="mt-3 text-fg-muted">
+          Ozve se vám Tomáš nebo Jan obvykle do 24 hodin. Podíváme se na váš
+          obor, doporučíme vhodný rozsah a domluvíme další krok — bez závazku.
+        </p>
+        <p className="mt-4 text-sm text-fg-soft">
+          Pokud to spěchá, zavolejte nám na{" "}
+          <a
+            href="tel:+420722525872"
+            className="font-semibold text-brand-light underline-offset-4 hover:text-brand hover:underline"
+            data-cta-label="success_phone"
+            data-cta-location="konzultace_success"
+          >
+            +420 722 525 872
+          </a>
+          .
         </p>
       </div>
     );
@@ -91,11 +203,39 @@ export function ConsultationForm() {
       noValidate
       className="rounded-2xl border border-border bg-surface p-6 shadow-md sm:p-8"
     >
+      {/* Honeypot: hidden field, bots fill, real users never see it */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
         <label>
           Nevyplňujte
           <input type="text" name="_honey" tabIndex={-1} autoComplete="off" />
         </label>
+      </div>
+
+      {/* Product — single full-width select at the top. Pre-filled by ?produkt=
+          but always editable; replaces the previous read-only banner. */}
+      <div className="mb-4">
+        <label
+          htmlFor="kf-product"
+          className="mb-1.5 block text-sm font-medium text-foreground"
+        >
+          O co máte zájem?
+        </label>
+        <select
+          id="kf-product"
+          name="product"
+          defaultValue={defaultProduct}
+          aria-describedby="kf-product-hint"
+          className={inputClass}
+        >
+          {PRODUCT_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
+        </select>
+        <p id="kf-product-hint" className="mt-1.5 text-xs text-fg-soft">
+          Volbu můžete změnit podle toho, co chcete nezávazně probrat.
+        </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -121,22 +261,49 @@ export function ConsultationForm() {
           <label htmlFor="kf-phone" className="mb-1.5 block text-sm font-medium text-foreground">
             Telefon
           </label>
-          <input id="kf-phone" name="phone" type="tel" autoComplete="tel" className={inputClass} />
+          <input
+            id="kf-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            aria-describedby="kf-phone-hint"
+            className={inputClass}
+          />
+          <p id="kf-phone-hint" className="mt-1.5 text-xs text-fg-soft">
+            Telefon je potřeba, pokud chcete odpověď hovorem, SMS nebo přes WhatsApp.
+          </p>
         </div>
-        <div className="sm:col-span-2">
-          <label htmlFor="kf-service" className="mb-1.5 block text-sm font-medium text-foreground">
-            Co vás zajímá?
+        <div>
+          <label htmlFor="kf-preferred" className="mb-1.5 block text-sm font-medium text-foreground">
+            Jak vám máme odpovědět?
           </label>
           <select
-            id="kf-service"
-            name="service"
-            defaultValue={defaultService}
+            id="kf-preferred"
+            name="preferredContact"
+            defaultValue="E-mail"
+            required
             className={inputClass}
           >
-            <option value="">Vyberte službu (nepovinné)</option>
-            {konzultacePage.services.map((s) => (
-              <option key={s} value={s}>
-                {s}
+            {CONTACT_METHODS.map((m) => (
+              <option key={m.value} value={m.value}>
+                {m.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="kf-time" className="mb-1.5 block text-sm font-medium text-foreground">
+            Kdy se vám nejlépe ozvat?
+          </label>
+          <select
+            id="kf-time"
+            name="preferredTime"
+            defaultValue=""
+            className={inputClass}
+          >
+            {CALL_TIMES.map((t) => (
+              <option key={t.label} value={t.value}>
+                {t.label}
               </option>
             ))}
           </select>
@@ -151,7 +318,16 @@ export function ConsultationForm() {
 
       <label className="mt-4 flex items-start gap-2.5 text-sm text-fg-muted">
         <input type="checkbox" name="gdpr" required className="mt-1 h-4 w-4 shrink-0 accent-[#1976D2]" />
-        <span>{konzultacePage.gdpr}</span>
+        <span>
+          {konzultacePage.gdpr} Podrobnosti najdete v{" "}
+          <Link
+            href="/zasady-ochrany-osobnich-udaju"
+            className="text-brand-light underline underline-offset-2 hover:text-white"
+          >
+            zásadách ochrany osobních údajů
+          </Link>
+          .
+        </span>
       </label>
 
       {status === "error" && (

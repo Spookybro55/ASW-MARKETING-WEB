@@ -4,7 +4,7 @@ import Footer from "@/components/asw/Footer";
 import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { CtaSection } from "@/components/asw/CtaSection";
-import { Icon } from "@/components/asw/icons";
+import { Icon, CheckIcon } from "@/components/asw/icons";
 import { seo, kontaktPage, team, contact } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export const revalidate = 3600;
 export default function KontaktPage() {
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="Kontakt"
@@ -37,6 +37,54 @@ export default function KontaktPage() {
           secondaryText={`Zavolat ${contact.phone}`}
           secondaryUrl={contact.phoneHref}
         />
+
+        {/* Above-fold quick contact — obecný e-mail i telefon viditelně
+            hned pod hero, formulářové CTA jako sekundární volba. */}
+        <Section id="rychly-kontakt" density="compact">
+          <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-surface p-6 text-center shadow-md sm:p-8">
+            <p className="font-display text-lg font-bold text-foreground">
+              {kontaktPage.quickContact.title}
+            </p>
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
+              <a
+                href={contact.emailHref}
+                className="inline-flex items-center gap-2.5 font-semibold text-foreground transition-colors hover:text-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                data-cta-label="kontakt_email"
+                data-cta-location="rychly-kontakt"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                  <Icon name="file-text" className="h-4 w-4" />
+                </span>
+                {contact.email}
+              </a>
+              <a
+                href={contact.phoneHref}
+                className="inline-flex items-center gap-2.5 font-semibold text-foreground transition-colors hover:text-brand-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                data-cta-label="kontakt_phone"
+                data-cta-location="rychly-kontakt"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                  <Icon name="phone" className="h-4 w-4" />
+                </span>
+                {contact.phone}
+              </a>
+            </div>
+            <p className="mt-4 inline-flex items-center justify-center gap-2 text-sm text-fg-soft">
+              <Icon name="map-pin" className="h-4 w-4 text-brand-2" />
+              {kontaktPage.quickContact.region}
+            </p>
+            <p className="mt-5 text-sm text-fg-muted">
+              <a
+                href={kontaktPage.quickContact.formCtaHref}
+                className="underline-offset-4 hover:text-brand-light hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
+                data-cta-label="kontakt_form"
+                data-cta-location="rychly-kontakt"
+              >
+                {kontaktPage.quickContact.formCtaLabel} →
+              </a>
+            </p>
+          </div>
+        </Section>
 
         {/* Proč AutoSmartWeby */}
         <Section id="proc">
@@ -86,8 +134,32 @@ export default function KontaktPage() {
           </div>
         </Section>
 
+        {/* S čím se na nás můžete obrátit */}
+        <Section id="s-cim-pomuzeme">
+          <SectionHeading
+            eyebrow={kontaktPage.topicsSection.eyebrow}
+            title={kontaktPage.topicsSection.title}
+          />
+          <ul
+            role="list"
+            className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2"
+          >
+            {kontaktPage.topicsSection.items.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4 shadow-md"
+              >
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+                  <CheckIcon className="h-5 w-5" />
+                </span>
+                <span className="font-medium text-foreground">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
         {/* Obecný kontakt */}
-        <Section id="kontakt-info">
+        <Section tone="muted" id="kontakt-info">
           <div className="mx-auto max-w-xl rounded-2xl border border-border bg-surface p-8 text-center shadow-md">
             <p className="text-sm font-semibold uppercase tracking-wider text-brand-2">
               {kontaktPage.contactSection.eyebrow}
@@ -115,6 +187,7 @@ export default function KontaktPage() {
           lead={kontaktPage.cta.text}
           ctaText={kontaktPage.cta.label}
           ctaUrl={kontaktPage.cta.href}
+          ctaLocation="kontakt_final"
         />
       </main>
       <Footer />

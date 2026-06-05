@@ -76,9 +76,9 @@ export default function Header({
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-sm font-medium transition-colors ${
+                  className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                     active
-                      ? "text-white"
+                      ? "bg-white/10 text-white ring-1 ring-inset ring-white/15"
                       : "text-white/65 hover:text-white"
                   }`}
                 >
@@ -149,7 +149,9 @@ export default function Header({
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={`whitespace-nowrap rounded-lg px-3 py-2 text-[0.95rem] font-medium transition-colors ${
-                  active ? "text-white" : "text-white/65 hover:text-white"
+                  active
+                    ? "bg-white/10 text-white ring-1 ring-inset ring-white/15"
+                    : "text-white/65 hover:text-white"
                 }`}
               >
                 {item.label}

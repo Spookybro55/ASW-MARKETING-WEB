@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { requiresPhone } from "@/lib/contactPolicy";
 
 /*
  * Contact API — hardened in Commit 8a.
@@ -45,6 +46,9 @@ const LIMITS = {
   email: 254,
   phone: 30,
   sector: 120,
+  product: 120,
+  preferredContact: 30,
+  preferredTime: 60,
   message: 5000,
 } as const;
 
@@ -125,6 +129,9 @@ export async function POST(request: Request) {
   // Optional structured fields (new payload). Missing on old payload.
   const phone = asTrimmedString(body.phone);
   const sector = asTrimmedString(body.sector);
+  const product = asTrimmedString(body.product);
+  const preferredContact = asTrimmedString(body.preferredContact);
+  const preferredTime = asTrimmedString(body.preferredTime);
   const email = emailRaw.toLowerCase();
 
   // Length validation
@@ -133,6 +140,9 @@ export async function POST(request: Request) {
     email.length > LIMITS.email ||
     phone.length > LIMITS.phone ||
     sector.length > LIMITS.sector ||
+    product.length > LIMITS.product ||
+    preferredContact.length > LIMITS.preferredContact ||
+    preferredTime.length > LIMITS.preferredTime ||
     message.length > LIMITS.message
   ) {
     console.warn("contact: oversize field rejected");
@@ -150,7 +160,10 @@ export async function POST(request: Request) {
     CTRL_SINGLE_LINE.test(name) ||
     CTRL_SINGLE_LINE.test(email) ||
     CTRL_SINGLE_LINE.test(phone) ||
-    CTRL_SINGLE_LINE.test(sector)
+    CTRL_SINGLE_LINE.test(sector) ||
+    CTRL_SINGLE_LINE.test(product) ||
+    CTRL_SINGLE_LINE.test(preferredContact) ||
+    CTRL_SINGLE_LINE.test(preferredTime)
   ) {
     console.warn("contact: control char in single-line field rejected");
     return jsonError("Neplatný formát polí.", 400);
@@ -158,6 +171,16 @@ export async function POST(request: Request) {
   if (CTRL_MESSAGE.test(message)) {
     console.warn("contact: control char in message rejected");
     return jsonError("Zpráva obsahuje nepovolené znaky.", 400);
+  }
+
+  // Conditional phone requirement: Hovor / SMS / WhatsApp need a number.
+  // Mirror of the client-side check (single source of truth in
+  // src/lib/contactPolicy.ts).
+  if (requiresPhone(preferredContact) && !phone) {
+    return jsonError(
+      "Pro zvolený způsob kontaktu prosím vyplňte telefonní číslo.",
+      400,
+    );
   }
 
   // Rate limit by IP (best-effort; see header comment).
@@ -183,7 +206,12 @@ export async function POST(request: Request) {
 
   const lines: string[] = [`Jméno: ${name}`, `E-mail: ${email}`];
   if (phone) lines.push(`Telefon: ${phone}`);
-  if (sector) lines.push(`Obor: ${sector}`);
+  if (sector) lines.push(`Co zajímá: ${sector}`);
+  // Phase D 2026-05-26: label sjednoceno s formulářovou otázkou
+  // („O co máte zájem?") — interní e-mail teď čte stejně jako odesilatel formulář.
+  if (product) lines.push(`O co má zájem: ${product}`);
+  if (preferredContact) lines.push(`Preferovaný kontakt: ${preferredContact}`);
+  if (preferredTime) lines.push(`Preferovaný čas: ${preferredTime}`);
   lines.push(
     "",
     "Zpráva:",
@@ -198,7 +226,9 @@ export async function POST(request: Request) {
     from: fromAddress,
     to: toAddress,
     replyTo: email,
-    subject: `Nová poptávka z Autosmartweby.cz — ${name}`,
+    subject: product
+      ? `Nová poptávka [${product}] — ${name}`
+      : `Nová poptávka z Autosmartweby.cz — ${name}`,
     text: lines.join("\n"),
   });
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import Link from "next/link";
 import {
   CONSENT_ESSENTIAL,
   CONSENT_GRANTED,
@@ -12,17 +13,19 @@ import {
 } from "@/lib/consent";
 
 /**
- * Fair cookie banner. Both choices are equally prominent (primary brand
- * button for accept, outlined secondary for reject) — no dark patterns.
+ * Compact cookie consent strip pinned to the bottom of the viewport
+ * (audit Phase A 2026-05-25). Dříve to byl floating white card přes fold;
+ * předchozí design zakrýval kritická CTA. Teď je to thin dark strip
+ * s border-top, ~60–80 px na desktopu, full-width.
  *
- * Layout: fixed bottom strip, max width, page remains usable behind it.
+ * Layout:
+ *  - desktop: text vlevo, 3 buttony vpravo (Povolit / Pouze nezbytné / Nastavení)
+ *  - mobile:  text nahoře, buttons stacked horizontally pod ním
  *
- * Hydration model: server snapshot is null (no localStorage on the server),
- * which matches the first client render during hydration. Once React picks
- * up the real client snapshot, returning visitors who already chose are
- * unmounted; new visitors see the banner. Worst case is a one-frame flash
- * of the banner for consented returning visitors — acceptable trade-off
- * for a no-FOUC-script implementation.
+ * Hydration: server snapshot null → first client render skryté pro konsentující
+ * návštěvníky. Worst-case 1 frame flash. „Nastavení" link vede na privacy page,
+ * kde má návštěvník popis cookie politiky a může změnit volbu ve footeru
+ * (CookieSettingsLink).
  */
 export default function ConsentBanner() {
   const consent = useSyncExternalStore(
@@ -41,60 +44,34 @@ export default function ConsentBanner() {
     <div
       role="region"
       aria-label="Souhlas s cookies"
-      style={{
-        position: "fixed",
-        left: "1rem",
-        right: "1rem",
-        bottom: "1rem",
-        zIndex: 90,
-        maxWidth: "44rem",
-        margin: "0 auto",
-        background: "#ffffff",
-        color: "var(--fg)",
-        border: "1px solid var(--border-strong)",
-        borderRadius: "var(--radius)",
-        boxShadow: "var(--shadow-md)",
-        padding: "1.1rem 1.25rem",
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.85rem",
-      }}
+      className="fixed inset-x-0 bottom-0 z-[90] border-t border-white/10 bg-[#0B1322]/95 px-4 py-3 backdrop-blur-md sm:px-6"
     >
-      <p style={{ margin: 0, fontSize: "0.95rem", lineHeight: 1.5 }}>
-        Používáme cookies a podobné technologie pro fungování webu. Analytiku
-        zapneme jen s vaším souhlasem, abychom věděli, co na webu zlepšit.{" "}
-        <a
-          href="/zasady-ochrany-osobnich-udaju"
-          style={{
-            color: "var(--brand)",
-            textDecoration: "underline",
-            textUnderlineOffset: "0.2em",
-          }}
-        >
-          Více v zásadách ochrany osobních údajů.
-        </a>
-      </p>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.6rem",
-        }}
-      >
-        <button
-          type="button"
-          onClick={() => choose(CONSENT_GRANTED)}
-          className="btn btn-primary btn-sm"
-        >
-          Povolit analytiku
-        </button>
-        <button
-          type="button"
-          onClick={() => choose(CONSENT_ESSENTIAL)}
-          className="btn btn-secondary btn-sm"
-        >
-          Jen nezbytné
-        </button>
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <p className="text-sm leading-relaxed text-white/75">
+          Používáme cookies pro správné fungování webu a měření návštěvnosti.
+        </p>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => choose(CONSENT_GRANTED)}
+            className="inline-flex items-center justify-center rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
+          >
+            Povolit
+          </button>
+          <button
+            type="button"
+            onClick={() => choose(CONSENT_ESSENTIAL)}
+            className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-white/35 hover:bg-white/[0.08] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Pouze nezbytné
+          </button>
+          <Link
+            href="/zasady-ochrany-osobnich-udaju"
+            className="inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium text-white/65 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Nastavení
+          </Link>
+        </div>
       </div>
     </div>
   );

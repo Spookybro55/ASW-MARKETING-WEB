@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { BenefitCard } from "@/components/asw/cards";
 import { CtaSection } from "@/components/asw/CtaSection";
+import { ConversationDemo } from "./_ConversationDemo";
 import { seo, aiAsistentPage, contact } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function AiAsistentPage() {
   const p = aiAsistentPage;
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="AI asistent"
@@ -36,7 +37,7 @@ export default function AiAsistentPage() {
           ctaText={p.hero.ctaText}
           ctaUrl={p.hero.ctaUrl}
           secondaryText="Objednat konzultaci"
-          secondaryUrl="/konzultace"
+          secondaryUrl="/konzultace?produkt=ai-asistent"
         />
 
         {/* Explanation */}
@@ -45,6 +46,23 @@ export default function AiAsistentPage() {
             eyebrow={p.explain.eyebrow}
             title={p.explain.title}
             lead={p.explain.lead}
+          />
+        </Section>
+
+        {/* Modelová konverzace — vizuální vysvětlení, jak asistent zachytí
+            poptávku po pracovní době. NE live demo, NE skutečná zákaznická
+            data. Animace izolovaná v client komponentě. */}
+        <Section tone="muted" id="modelova-ukazka" density="compact">
+          <SectionHeading
+            eyebrow={p.conversation.eyebrow}
+            title={p.conversation.title}
+            lead={p.conversation.lead}
+            tone="dark"
+          />
+          <ConversationDemo
+            timestamp={p.conversation.timestamp}
+            messages={p.conversation.messages}
+            note={p.conversation.note}
           />
         </Section>
 
@@ -74,6 +92,7 @@ export default function AiAsistentPage() {
           lead={p.pricingTeaser.lead}
           ctaText={p.pricingTeaser.ctaText}
           ctaUrl={p.pricingTeaser.ctaUrl}
+          ctaLocation="ai_asistent_final"
         />
       </main>
       <Footer />

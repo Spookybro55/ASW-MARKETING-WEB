@@ -26,8 +26,11 @@
   --bg-muted: #0A1020;    /* subtle muted section (barely lighter than --bg) */
   --bg-card: #111827;     /* card surface */
   --bg-inverse: #03050A;  /* footer — deepest, must not compete with CTA */
-  --surface: #111827;     /* primary card surface */
-  --surface-elevated: #161E2E;
+  /* Card surface — unified translucent neutral (matches the homepage problem
+     cards). Composited over the dark page it reads as a soft neutral dark, not
+     a navy/blue-gray block, so every card across the site belongs to one system. */
+  --surface: rgba(255, 255, 255, 0.045); /* primary card surface */
+  --surface-elevated: rgba(255, 255, 255, 0.08); /* hover / raised card surface */
   --surface-glass: rgba(255, 255, 255, 0.05);
 
   /* Text — light on dark */
@@ -37,7 +40,7 @@
   --fg-inverse: #05070D;  /* text on a light/blue fill (e.g. white button) */
 
   /* Borders — translucent white on dark (subtle; cards use 0.08) */
-  --border: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.10);
   --border-strong: rgba(255, 255, 255, 0.14);
   --border-blue: rgba(25, 118, 210, 0.35);
 

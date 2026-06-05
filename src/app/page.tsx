@@ -3,11 +3,12 @@ import Header from "@/components/asw/Header";
 import Footer from "@/components/asw/Footer";
 import { HomeHero } from "@/components/asw/HomeHero";
 import { PortfolioShowcase } from "@/components/asw/PortfolioShowcase";
+import { WhyNow } from "@/components/asw/WhyNow";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { ServiceCard, ProcessStep, PricingCard } from "@/components/asw/cards";
 import { Faq } from "@/components/asw/Faq";
 import { FaqJsonLd } from "@/components/asw/FaqJsonLd";
-import { Button } from "@/components/asw/Button";
+import { CtaSection } from "@/components/asw/CtaSection";
 import { Icon, CheckIcon } from "@/components/asw/icons";
 import {
   seo,
@@ -48,6 +49,9 @@ export default function Home() {
 
         {/* 7. Portfolio device showcase — tilt-straighten on scroll */}
         <PortfolioShowcase />
+
+        {/* 7b. Proč teď — kompaktní argument pro odkladače */}
+        <WhyNow />
 
         {/* 8. Services — "Co pro vás zařídíme" */}
         <Section id="sluzby">
@@ -120,6 +124,46 @@ export default function Home() {
               />
             ))}
           </div>
+
+          {/* Co je v ceně / Řeší se zvlášť — hned pod kartami, ať je hranice
+              balíčku jasná a netápe se, co bude stát navíc. */}
+          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-surface p-6 shadow-md sm:p-7">
+            <p className="text-center font-display text-base font-bold text-foreground">
+              {pricing.scope.title}
+            </p>
+            <div className="mt-5 grid gap-6 sm:grid-cols-2">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wider text-brand-light">
+                  {pricing.scope.included.title}
+                </p>
+                <ul role="list" className="mt-3 space-y-2 text-sm">
+                  {pricing.scope.included.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-fg-muted">
+                      <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-light" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wider text-fg-soft">
+                  {pricing.scope.separate.title}
+                </p>
+                <ul role="list" className="mt-3 space-y-2 text-sm">
+                  {pricing.scope.separate.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-fg-muted">
+                      <Icon name="arrow-right" className="mt-0.5 h-4 w-4 shrink-0 text-fg-soft" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <p className="mt-5 text-center text-xs text-fg-soft">
+              {pricing.scope.note}
+            </p>
+          </div>
+
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-fg-soft">
             {pricing.note}
           </p>
@@ -155,36 +199,17 @@ export default function Home() {
           <FaqJsonLd items={faq.items} />
         </Section>
 
-        {/* 14. Final CTA band */}
-        <section className="bg-[linear-gradient(135deg,#0D47A1_0%,#1E5FBF_100%)] px-5 py-16 sm:px-8 md:py-20">
-          <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-            <h2 className="font-display text-3xl font-bold leading-tight text-white sm:text-[2rem]">
-              {finalCta.title}
-            </h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">
-              {finalCta.text}
-            </p>
-            <div className="mt-8">
-              <Button
-                href={finalCta.ctaHref}
-                variant="secondary"
-                ctaLabel="final_cta"
-                ctaLocation="final_cta"
-                className="border-white/70 hover:border-white"
-              >
-                {finalCta.ctaLabel}
-              </Button>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/80">
-              <a href={contact.phoneHref} className="font-medium hover:text-white">
-                {contact.phone}
-              </a>
-              <a href={contact.emailHref} className="font-medium hover:text-white">
-                {contact.email}
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* 14. Final CTA band — sjednocený dark elevated panel. `#kontakt`
+            anchor zachován (linky z headeru a fragment URL na něj cílily). */}
+        <div id="kontakt">
+          <CtaSection
+            title={finalCta.title}
+            lead={finalCta.text}
+            ctaText={finalCta.ctaLabel}
+            ctaUrl={finalCta.ctaHref}
+            ctaLocation="final_cta"
+          />
+        </div>
       </main>
       <Footer />
     </>

@@ -69,7 +69,30 @@ export function HomeHero() {
           </a>
         </div>
 
-        <p className="mt-4 text-sm text-white/45">{homeHero.trustMicrocopy}</p>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/45">
+          {homeHero.trustMicrocopy}
+        </p>
+
+        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-white/45">
+          <span>{homeHero.contactLine.prefix}</span>
+          <a
+            href={homeHero.contactLine.emailHref}
+            className="font-medium text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            data-cta-label="hero_email"
+            data-cta-location="hero"
+          >
+            {homeHero.contactLine.email}
+          </a>
+          <span aria-hidden="true" className="text-white/30">·</span>
+          <a
+            href={homeHero.contactLine.phoneHref}
+            className="font-medium text-white/70 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            data-cta-label="hero_phone"
+            data-cta-location="hero"
+          >
+            {homeHero.contactLine.phone}
+          </a>
+        </p>
 
         <p className="mt-6 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
           {homeHero.problemsLabel}
@@ -78,9 +101,9 @@ export function HomeHero() {
           {homeHero.problemCards.map((card) => (
             <li
               key={card.title}
-              className="group flex flex-col rounded-2xl border border-white/12 bg-white/[0.045] p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1976D2]/45 hover:bg-white/[0.07] hover:shadow-[0_22px_48px_-22px_rgba(25,118,210,0.65)] motion-reduce:transform-none"
+              className="group flex flex-col rounded-2xl border border-border bg-surface p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#1976D2]/45 hover:bg-surface-elevated hover:shadow-[0_22px_48px_-22px_rgba(25,118,210,0.65)] motion-reduce:transform-none"
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#1976D2]/30 bg-[#1976D2]/15 text-[#9FC6FF]">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand-light">
                 <Icon name={card.icon} className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-display text-base font-bold text-white">
@@ -91,7 +114,7 @@ export function HomeHero() {
               </p>
               <a
                 href={card.ctaHref}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-white/60 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="mt-5 inline-flex items-center gap-1.5 self-start rounded-lg border border-[#1976D2]/40 bg-[#1976D2]/[0.10] px-3 py-1.5 text-sm font-semibold text-brand-light transition-colors duration-150 hover:border-[#1976D2]/60 hover:bg-[#1976D2]/20 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-2)]"
                 data-cta-label="hero_problem"
                 data-cta-location="hero"
               >

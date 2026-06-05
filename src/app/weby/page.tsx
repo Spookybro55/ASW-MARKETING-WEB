@@ -5,7 +5,8 @@ import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { BenefitCard, ProcessStep, PricingCard } from "@/components/asw/cards";
 import { CtaSection } from "@/components/asw/CtaSection";
-import { seo, webyPage, process, pricing, contact, cta } from "@/data/site";
+import { WebsiteShowcase } from "./_WebsiteShowcase";
+import { seo, webyPage, process, pricing, contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: seo.weby.title,
@@ -26,7 +27,7 @@ export const revalidate = 3600;
 export default function WebyPage() {
   return (
     <>
-      <Header />
+      <Header variant="dark" />
       <main id="main">
         <HeroSection
           eyebrow="Webové stránky"
@@ -56,15 +57,24 @@ export default function WebyPage() {
           </div>
         </Section>
 
-        {/* Portfolio placeholder */}
+        {/* Modelové ukázky webů — 3 browser-frame mockupy s „Modelová ukázka"
+            pillem. Žádné reálné klientské reference. Animace v izolované
+            client komponentě, stránka zůstává server component. */}
         <Section tone="muted" id="ukazky">
           <SectionHeading
             eyebrow={webyPage.portfolio.eyebrow}
             title={webyPage.portfolio.title}
             lead={webyPage.portfolio.lead}
           />
-          <p className="mx-auto mt-6 max-w-2xl text-center text-sm text-fg-soft">
+          <WebsiteShowcase
+            items={webyPage.portfolio.items}
+            cta={webyPage.portfolio.cta}
+          />
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-fg-soft">
             {webyPage.portfolio.note}
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-fg-soft/80">
+            {webyPage.portfolio.fairUseDisclaimer}
           </p>
         </Section>
 
@@ -121,8 +131,9 @@ export default function WebyPage() {
         <CtaSection
           title="Pojďme probrat váš web"
           lead="Řekněte nám pár vět o vaší firmě. Ozveme se a doporučíme rozsah i orientační cenu."
-          ctaText={cta.primary}
-          ctaUrl={cta.href}
+          ctaText="Nezávazně probrat web"
+          ctaUrl="/konzultace?produkt=web-standard"
+          ctaLocation="weby_final"
         />
       </main>
       <Footer />
