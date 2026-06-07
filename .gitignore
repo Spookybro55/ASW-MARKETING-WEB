@@ -67,3 +67,6 @@ next-env.d.ts
 
 # lokalni zaloha CLAUDE.md (negitovat)
 /CLAUDE.backup.md
+
+# zdrojove originaly fotek tymu — do repa jdou jen optimalizovane v public/team/
+/Photos/
