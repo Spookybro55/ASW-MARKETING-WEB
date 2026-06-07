@@ -29,36 +29,62 @@ export const contact = {
 } as const;
 
 /* Team — real people behind AutoSmartWeb, shown on the /kontakt trust page.
-   Centralized so contact details live in one place (no hardcoded copies). */
-export const team = [
-  {
-    initials: "TM",
+   Centralized so contact details live in one place (no hardcoded copies).
+   Split into `lead` (Tomáš — first contact, the visual dominant of the section)
+   and `tech` (Jan + Sebastián — the realisation team). Photos live in
+   public/team/ (optimised studio portraits on a dark background). */
+export const team = {
+  lead: {
+    slug: "tomas",
     name: "Tomáš Maixner",
-    role: "Komunikace, poptávky a klientská domluva",
+    cardHeading: "Nejdřív se ozve Tomáš",
+    role: "První kontakt a domluva projektu",
+    bio: "Tomáš s vámi projde, co má nový web řešit, jaké služby chcete ukázat a co už máte připravené. Pomůže vám zorientovat se v ceně, rozsahu i dalším kroku — bez technických řečí a zbytečného tlaku.",
+    photo: "/team/tomas.jpg",
+    alt: "Tomáš Maixner z AutoSmartWeby",
+    initials: "TM",
     phone: "+420 722 525 872",
     phoneHref: "tel:+420722525872",
     email: "t.maixner@autosmartweb.cz",
     emailHref: "mailto:t.maixner@autosmartweb.cz",
+    badges: [
+      "Vysvětlí postup",
+      "Pomůže s podklady",
+      "Domluví rozsah",
+      "Bez zbytečného tlaku",
+    ],
+    ctaLabel: "Domluvit se s Tomášem",
+    ctaHref: "mailto:t.maixner@autosmartweb.cz",
   },
-  {
-    initials: "JB",
-    name: "Jan Bezemek",
-    role: "Strategie, obchod a obsah webu",
-    phone: "+420 773 466 699",
-    phoneHref: "tel:+420773466699",
-    email: "j.bezemek@autosmartweb.cz",
-    emailHref: "mailto:j.bezemek@autosmartweb.cz",
-  },
-  {
-    initials: "SF",
-    name: "Sebastián Fridrich",
-    role: "Web, technické řešení a vývoj",
-    phone: "+420 601 557 018",
-    phoneHref: "tel:+420601557018",
-    email: "s.fridrich@autosmartweb.cz",
-    emailHref: "mailto:s.fridrich@autosmartweb.cz",
-  },
-] as const;
+  tech: [
+    {
+      slug: "jan",
+      name: "Jan Bezemek",
+      role: "Návrh webu, struktura a technická realizace",
+      bio: "Jan řeší, jak web poskládat, aby zákazník rychle pochopil vaše služby a mohl se jednoduše ozvat. Stará se o strukturu stránky, obsahové bloky, formuláře a praktickou funkčnost webu.",
+      photo: "/team/jan.jpg",
+      alt: "Jan Bezemek z AutoSmartWeby",
+      initials: "JB",
+      phone: "+420 773 466 699",
+      phoneHref: "tel:+420773466699",
+      email: "j.bezemek@autosmartweb.cz",
+      emailHref: "mailto:j.bezemek@autosmartweb.cz",
+    },
+    {
+      slug: "sebastian",
+      name: "Sebastián Fridrich",
+      role: "Vývoj, technické řešení a spuštění",
+      bio: "Sebastián se stará o technickou část realizace — responzivitu, napojení formulářů, výkon, funkčnost a spuštění webu na doméně.",
+      photo: "/team/sebastian.jpg",
+      alt: "Sebastián Fridrich z AutoSmartWeby",
+      initials: "SF",
+      phone: "+420 601 557 018",
+      phoneHref: "tel:+420601557018",
+      email: "s.fridrich@autosmartweb.cz",
+      emailHref: "mailto:s.fridrich@autosmartweb.cz",
+    },
+  ],
+} as const;
 
 /** Primary + alternate CTA labels (CLAUDE.md §4). */
 export const cta = {
@@ -927,9 +953,13 @@ export const kontaktPage = {
     ],
   },
   teamSection: {
-    eyebrow: "Kdo za tím stojí",
-    title: "Lidé za AutoSmartWeby",
-    lead: "U nás víte, s kým mluvíte. Ozvěte se komukoli z týmu podle toho, co potřebujete řešit.",
+    eyebrow: "Kdo se vám ozve",
+    title: "S kým budete řešit nový web",
+    intro:
+      "U nás víte, s kým mluvíte. První domluvu s vámi řeší Tomáš — zeptá se na služby, cíle a podklady, vysvětlí postup a pohlídá, aby bylo od začátku jasné, co dostanete. O návrh, technické řešení a spuštění se potom stará náš technický tým.",
+    techHeading: "Pak se do toho pustí technický tým",
+    techText:
+      "Jakmile máme jasno v cíli webu, připravíme strukturu, obsahové bloky, formuláře a technické řešení. Hlídáme, aby web dobře vypadal, fungoval na mobilu a zákazník se mohl snadno ozvat.",
   },
   topicsSection: {
     eyebrow: "S čím pomůžeme",

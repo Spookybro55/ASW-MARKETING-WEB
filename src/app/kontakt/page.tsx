@@ -4,8 +4,9 @@ import Footer from "@/components/asw/Footer";
 import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { CtaSection } from "@/components/asw/CtaSection";
+import { PeopleSection } from "@/components/asw/PeopleSection";
 import { Icon, CheckIcon } from "@/components/asw/icons";
-import { seo, kontaktPage, team, contact } from "@/data/site";
+import { seo, kontaktPage, contact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: seo.kontakt.title,
@@ -98,41 +99,8 @@ export default function KontaktPage() {
           </div>
         </Section>
 
-        {/* Kdo za tím stojí — team cards */}
-        <Section tone="muted" id="tym">
-          <SectionHeading
-            eyebrow={kontaktPage.teamSection.eyebrow}
-            title={kontaktPage.teamSection.title}
-            lead={kontaktPage.teamSection.lead}
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {team.map((m) => (
-              <div
-                key={m.email}
-                className="flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-md"
-              >
-                {/* avatar placeholder (initials) — ready to swap for a photo */}
-                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-soft font-display text-lg font-bold text-brand-light ring-1 ring-inset ring-white/10">
-                  {m.initials}
-                </span>
-                <h3 className="mt-4 font-display text-lg font-bold text-foreground">
-                  {m.name}
-                </h3>
-                <p className="mt-1 text-sm text-fg-soft">{m.role}</p>
-                <div className="mt-4 space-y-2 text-sm">
-                  <a href={m.phoneHref} className="flex items-center gap-2.5 text-foreground hover:text-brand-light">
-                    <Icon name="phone" className="h-4 w-4 text-brand-light" />
-                    {m.phone}
-                  </a>
-                  <a href={m.emailHref} className="flex items-center gap-2.5 text-foreground hover:text-brand-light">
-                    <Icon name="file-text" className="h-4 w-4 text-brand-light" />
-                    {m.email}
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
+        {/* Kdo se vám ozve — Tomáš (dominant) + technický tým */}
+        <PeopleSection />
 
         {/* S čím se na nás můžete obrátit */}
         <Section id="s-cim-pomuzeme">
