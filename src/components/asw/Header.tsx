@@ -37,7 +37,7 @@ export default function Header({
     >
       <Image src="/logo-mark.svg" alt="" width={29} height={29} priority />
       <span className="text-[1.05rem] uppercase tracking-tight">
-        AUTO<span className="text-brand-2">SMART</span>WEB
+        AUTO<span className="text-brand-light">SMART</span>WEB
       </span>
     </Link>
   );

@@ -27,13 +27,13 @@ export default function Footer() {
                 aria-hidden="true"
               />
               <span className="uppercase tracking-tight">
-                AUTO<span className="text-brand-2">SMART</span>WEB
+                AUTO<span className="text-brand-light">SMART</span>WEB
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/65">
               {footer.description}
             </p>
-            <p className="mt-5 text-xs leading-relaxed text-white/45">
+            <p className="mt-5 text-xs leading-relaxed text-white/60">
               {contact.legalName} · IČO {contact.ico}
               <br />
               {contact.address.street}, {contact.address.zip}{" "}
@@ -84,7 +84,7 @@ export default function Footer() {
                   {contact.email}
                 </a>
               </li>
-              <li className="text-white/45">{contact.region}</li>
+              <li className="text-white/60">{contact.region}</li>
             </ul>
           </div>
         </div>

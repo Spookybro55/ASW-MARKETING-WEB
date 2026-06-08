@@ -41,6 +41,9 @@ export default function CenikPage() {
 
         {/* Pricing cards */}
         <Section id="balicky">
+          {/* sr-only heading keeps a sequential H1→H2→H3 order (cards use H3)
+              without adding a visible section title above the pricing grid. */}
+          <h2 className="sr-only">Balíčky a ceny</h2>
           <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
             {pricing.packages.map((p) => (
               <PricingCard
