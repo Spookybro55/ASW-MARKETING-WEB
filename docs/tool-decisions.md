@@ -1,5 +1,52 @@
 # Tool decisions for Autosmartweby
 
+## Mandatory AI/design workflow (rozhodnutí projektu)
+
+Povinný řetězec pro veškerou UI práci:
+
+1. **Claude Code** — primary development workflow.
+2. **Motion / Framer Motion** — Framer Motion používáme přes aktuální balík `motion`
+   a importy `motion/react`. Starý balík `framer-motion` nepřidávat. Animace
+   respektují `useReducedMotion`.
+3. **`impeccable`** — mandatory UI/UX quality skill. For all visual/UI work, use the
+   impeccable skill as the mandatory UI/UX quality layer.
+4. **21st.dev Magic MCP** — UI component generation / inspiration (user-env API key,
+   nikdy v repu — viz `docs/mcp-ui-workflow.local.md`).
+5. **Chrome DevTools MCP** — keyless browser debug: console, network, performance.
+6. **Playwright screenshot loop** — visual QA (1440 / 768 / 390).
+
+> Claude nesmí dělat UI změny pouze podle textového dojmu. U významných UI změn
+> minimálně screenshot workflow; u runtime/performance/browser problému i Chrome
+> DevTools MCP.
+
+## Tvrdá rozhodnutí (decision records)
+
+Aby se nemusela stejná debata vést pokaždé znovu (2026-06-08):
+
+### Produkční implementace
+**Rozhodnutí:** Claude Code je hlavní nástroj pro implementaci.
+**Důvod:** pracuje nad reálným repem, umí malé commity, testy, QA a MCP workflow.
+
+### UI generování
+**Rozhodnutí:** v0 je povolené pro scaffolding UI.
+**Limit:** výstup z v0 **nikdy** nejde rovnou do produkce — vždy refaktor, sjednocení
+s design systémem (ASW tokeny, žádné hardcoded barvy) a screenshot QA.
+
+### Full-site generátory
+**Rozhodnutí:** Lovable, Bolt, Framer AI **nejsou** produkční nástroje pro finální
+klientské weby. **Povoleno:** moodboard, rychlý prototyp, inspirace, klientská ukázka.
+**Zakázáno:** dodat jako finální web bez přepsání do našeho stacku.
+
+### Frontend stack
+**Aktuální projekt:** Next.js (+ Tailwind + shadcn/ui + Vercel) — **zůstává**.
+**Budoucí jednoduché klientské weby:** Astro vyhodnotit jako odlehčený default starter.
+**Pravidlo:** existující Next.js projekt **nemigrovat** jen kvůli teoretické
+optimalizaci. Astro řešit až u samostatného client-starteru po stabilizaci hlavního webu.
+
+### QA
+**Rozhodnutí:** Playwright MCP + Chrome DevTools MCP jsou **povinný QA základ** pro
+vizuální a výkonovou kontrolu. Lighthouse + axe/Pa11y na launch-level práci.
+
 ## Use as core
 
 ### Claude Code

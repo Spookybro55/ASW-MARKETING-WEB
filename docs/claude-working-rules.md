@@ -5,6 +5,29 @@
 > produktových vrstev). Tento soubor je doplňkový anglický výtah pravidel pro
 > brand, copy, design a QA. Při konfliktu vyhrává root `CLAUDE.md`.
 
+## Claude Code workflow (povinný)
+
+Claude Code vždy pracuje v malých, reviewovatelných krocích:
+
+1. **Audit** aktuálního stavu (struktura, existující komponenty, tokeny, patterny).
+2. **Návrh změn** (co a proč; u významných změn nejdřív diff/návrh).
+3. **Implementace** v co nejmenším nutném rozsahu.
+4. **lint / typecheck / build** podle rozsahu změny.
+5. **Screenshot QA** po každé větší UI změně (1440 / 768 / 390) — viz
+   `docs/runbooks/screenshot-qa-runbook.md`.
+6. **Report**: změněné soubory, co/proč, jaké testy proběhly, co zůstává rizikové, další krok.
+
+## Zakázáno
+
+- Nevytvářet velké refaktory bez explicitního souhlasu.
+- Neměnit stack bez aktualizace `docs/tool-decisions.md` (např. Next.js → Astro).
+- Nemigrovat existující Next.js projekt jen kvůli teoretické optimalizaci.
+- Nepřidávat dependency bez jasného obchodního důvodu.
+- Nepřidávat animace jen kvůli efektu (vždy `useReducedMotion`).
+- Nevymýšlet reference, recenze, roky praxe, počty klientů ani garance.
+- Nepřebírat v0 / Lovable / Bolt / Framer výstup do produkce bez refaktoru.
+- Nepushovat UI změny bez QA screenshotů.
+
 ## Project identity
 
 Autosmartweby builds professional, trustworthy and affordable websites for Czech small businesses, freelancers, craftsmen, local services and small companies.
@@ -100,7 +123,9 @@ Before considering UI work done:
 
 Use these files for deeper context:
 
-- `docs/ai-web-production-playbook.md`
+- `docs/runbooks/ai-web-production-runbook.md` (hlavní runbook výroby webů)
+- `docs/runbooks/screenshot-qa-runbook.md` (vizuální QA loop)
+- `docs/runbooks/launch-qa-checklist.md` (kontrola před nasazením)
 - `docs/design-qa-workflow.md`
 - `docs/tool-decisions.md`
 - `docs/autosmartweby-positioning-rules.md`

@@ -1,8 +1,20 @@
 # Design QA workflow
 
+> Pravidla a „co kontrolovat". Konkrétní kroky a příkazy (dev server, Playwright,
+> screenshot skripty, reportování) jsou v `docs/runbooks/screenshot-qa-runbook.md`.
+> Launch kontrola: `docs/runbooks/launch-qa-checklist.md`.
+
 ## Goal
 
 Claude Code must not only generate code. It must visually verify the result and iterate until the website looks professional on real breakpoints.
+
+## Mandatory rule
+
+Claude must not change UI based on a textual impression only. For any significant UI
+change Claude must run at least the screenshot workflow below; if the problem is
+runtime / performance / browser-related, Claude must also use the **Chrome DevTools
+MCP**. UI/UX quality work goes through the **`impeccable`** skill. Animations use
+**Motion** (`motion` / `motion/react`) and must respect `useReducedMotion`.
 
 ## Required visual QA
 
@@ -29,7 +41,12 @@ Check at least:
 ## Preferred tools
 
 - Playwright MCP for browser screenshots and interaction testing.
-- Chrome DevTools MCP for console, network and performance debugging.
+- Chrome DevTools MCP for console, network and performance debugging. Use it for:
+  - console debugging (runtime errors, warnings),
+  - inspecting network requests,
+  - performance profiling,
+  - groundwork for a Lighthouse / performance audit,
+  - reproducing runtime errors in the browser.
 - Lighthouse for launch-level performance, SEO, accessibility and best practices.
 - axe-core or equivalent for accessibility checks.
 
