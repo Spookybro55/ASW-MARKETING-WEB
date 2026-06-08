@@ -43,11 +43,17 @@ export default function KonzultacePage() {
           <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-fg-soft">
             {konzultacePage.trust}
           </p>
+          {/* sr-only H2 keeps a sequential H1→H2→(footer H3) order without
+              adding a visible heading above the form. */}
+          <h2 className="sr-only">Nezávazný poptávkový formulář</h2>
           <div className="mt-10 grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-start">
             {/* Form */}
             <Suspense
               fallback={
-                <div className="rounded-2xl border border-border bg-surface p-8 text-fg-muted shadow-md">
+                /* min-h reserves ~the rendered form height (≈1080px 1-col mobile,
+                   ≈800px 2-col ≥sm) so the form swap on hydration doesn't shift
+                   layout — fixes the mobile CLS measured in QA. */
+                <div className="flex min-h-[1080px] items-center justify-center rounded-2xl border border-border bg-surface p-8 text-fg-muted shadow-md sm:min-h-[800px]">
                   Načítám formulář…
                 </div>
               }

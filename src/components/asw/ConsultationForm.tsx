@@ -107,6 +107,21 @@ export function ConsultationForm() {
         ? selectedProduct
         : "";
 
+    // GDPR consent is mandatory. The form uses `noValidate` (custom error UI),
+    // so the checkbox's `required` attribute is NOT enforced by the browser —
+    // we must check it here. An unchecked checkbox is absent from FormData.
+    if (!data.get("gdpr")) {
+      setError(
+        "Bez souhlasu se zpracováním osobních údajů nemůžeme poptávku odeslat.",
+      );
+      trackEvent({
+        name: "contact_form_error",
+        params: { form_location: "konzultace", error_type: "validation" },
+      });
+      setStatus("error");
+      return;
+    }
+
     // Conditional phone requirement: Hovor / SMS / WhatsApp need a number.
     // Mirror of the server-side check in /api/contact (single source of
     // truth lives in src/lib/contactPolicy.ts).
@@ -136,6 +151,7 @@ export function ConsultationForm() {
       preferredContact,
       preferredTime: String(data.get("preferredTime") ?? ""),
       message,
+      gdpr: true,
       _honey: String(data.get("_honey") ?? ""),
     };
 

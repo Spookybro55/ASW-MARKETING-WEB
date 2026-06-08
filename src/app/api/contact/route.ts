@@ -26,6 +26,9 @@ import { requiresPhone } from "@/lib/contactPolicy";
  *   - Plain-text email body assembled server-side; no HTML interpolation
  *     of user input anywhere.
  *
+ * GDPR consent (`gdpr: true`) is required on every accepted submission
+ * (defence in depth; the client also blocks unchecked consent).
+ *
  * Backward-compatible payload:
  *   - Old payload: { name, email, message, _honey } — message may already
  *     contain "Obor: ..." / "Telefon: ..." prepended client-side. Accepted
@@ -124,6 +127,15 @@ export async function POST(request: Request) {
 
   if (!name || !emailRaw || !message) {
     return jsonError("Vyplňte prosím všechna povinná pole.", 400);
+  }
+
+  // GDPR consent is mandatory — defence in depth so consent isn't enforced
+  // client-side only. The live caller (ConsultationForm) sends `gdpr: true`.
+  if (body.gdpr !== true) {
+    return jsonError(
+      "Bez souhlasu se zpracováním osobních údajů nelze poptávku odeslat.",
+      400,
+    );
   }
 
   // Optional structured fields (new payload). Missing on old payload.
