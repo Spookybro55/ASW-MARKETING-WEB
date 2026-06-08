@@ -23,7 +23,7 @@ export default function Footer() {
                 src="/logo-mark.svg"
                 alt=""
                 width={26}
-                height={27}
+                height={26}
                 aria-hidden="true"
               />
               <span className="uppercase tracking-tight">

@@ -35,7 +35,7 @@ export default function Header({
       }`}
       aria-label={`${nav.brand} — domů`}
     >
-      <Image src="/logo-mark.svg" alt="" width={29} height={30} priority />
+      <Image src="/logo-mark.svg" alt="" width={29} height={29} priority />
       <span className="text-[1.05rem] uppercase tracking-tight">
         AUTO<span className="text-brand-2">SMART</span>WEB
       </span>
