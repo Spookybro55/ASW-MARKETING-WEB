@@ -50,6 +50,7 @@ export default function CenikPage() {
                 key={p.id}
                 planName={p.planName}
                 price={p.price}
+                priceNote={p.priceNote}
                 tagline={p.tagline}
                 features={p.features}
                 isFeatured={p.isFeatured}

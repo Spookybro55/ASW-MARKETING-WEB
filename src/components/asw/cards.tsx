@@ -119,6 +119,7 @@ export function TestimonialCard({
 export function PricingCard({
   planName,
   price,
+  priceNote,
   tagline,
   features,
   isFeatured,
@@ -128,6 +129,9 @@ export function PricingCard({
 }: {
   planName: string;
   price: string;
+  /** Small, less-prominent line under the price (e.g. "Včetně prvního roku
+      provozu."). Optional — cards without it render unchanged. */
+  priceNote?: string;
   tagline?: string;
   features: readonly string[];
   isFeatured?: boolean;
@@ -155,6 +159,9 @@ export function PricingCard({
       <p className="mt-4 font-display text-2xl font-extrabold text-brand-light">
         {price}
       </p>
+      {priceNote && (
+        <p className="mt-1.5 text-sm text-fg-muted">{priceNote}</p>
+      )}
       <ul role="list" className="mt-6 flex-1 space-y-3">
         {features.map((f) => (
           <li key={f} className="flex items-start gap-2.5 text-[0.95rem] text-fg-muted">

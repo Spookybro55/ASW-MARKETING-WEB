@@ -152,7 +152,7 @@ export const seo = {
   cenik: {
     title: "Ceník webů, lokálního SEO a automatizací | AutoSmartWeby",
     description:
-      "Přehledné balíčky Web Standard a Web Pro. Ceny od 8 900 Kč, vždy orientační a potvrzené předem. Web i lokální SEO podle vašich potřeb, externí náklady zvlášť.",
+      "Přehledné balíčky Web Standard a Web Pro včetně prvního roku provozu webu. Ceny platí pro běžný rozsah a potvrdíme je předem. Bez skrytých poplatků, doplňky zvlášť.",
     path: "/cenik",
   },
   kontakt: {
@@ -200,7 +200,7 @@ export const homeHero = {
   // je váš") a „Česká firma s IČO" (verifikuje footer IČO 24571831). Drží 4
   // bullety, nepřeplácává hero.
   trustMicrocopy:
-    "Web obvykle od 8 900 Kč · Pomůžeme s texty · Vlastnictví a přístupy řešíme předem · Česká firma s IČO",
+    "Od 11 800 Kč včetně prvního roku provozu · Pomůžeme s texty · Vlastnictví a přístupy řešíme předem · Česká firma s IČO",
   // Sekundární kontaktní mikrocopy hned pod CTA (audit D-02 zelený bod #7).
   // Klikatelný e-mail i telefon. Drží se sekundární vůči hlavnímu CTA.
   contactLine: {
@@ -381,10 +381,13 @@ export const proof = {
 /* ── Pricing (preview on home, full on /cenik) ────────────────────────────── */
 
 /*
- * Pricing — newer source of truth (owner correction 2026-05-21):
- * Web Standard 8 900 Kč, Web Pro 16 900 Kč (Doporučená volba), CTA
- * "Nezávazně poptat web". External costs (domain, hosting, paid tools,
- * custom integrations) are handled separately and explained up front.
+ * Pricing — newer source of truth (owner correction 2026-06-09):
+ * Headline prices bundle the first year of provoz (domain + hosting):
+ * Web Standard 11 800 Kč (web 8 900 + provoz 2 900), Web Pro 20 800 Kč
+ * (web 16 900 + provoz 3 900, Doporučená volba). The 8 900 / 16 900 split
+ * lives ONLY in the FAQ breakdown, never on the cards. After year one the
+ * provoz renews at real cost, explained up front — no hidden fee. Paid
+ * add-ons (logo, e-shop, advanced SEO, …) are priced separately.
  * The older Start 9 990 / Business 19 990 / Premium framing is deprecated
  * and must NOT be used as the main pricing.
  */
@@ -392,24 +395,24 @@ export const pricing = {
   eyebrow: "Ceník",
   title: "Jasná cena předem, žádné překvapení",
   lead: "Vyberte si podle rozsahu. Finální cenu i rozsah vždy potvrdíme předem.",
-  note: "Cena platí pro běžný rozsah podle balíčku. Externí náklady jako doména, hosting, placené nástroje nebo individuální napojení se řeší zvlášť.",
+  note: "Cena platí pro běžný rozsah podle balíčku. První rok provozu webu je v ceně. Po roce se provoz obnovuje podle skutečných nákladů, které vám vždy řekneme předem. Doplňky jako logo, focení, pokročilé SEO, e-shop, rezervační systém, online platby, vícejazyčnost nebo napojení na externí systémy se naceňují samostatně podle rozsahu.",
   packages: [
     {
       id: "standard",
       planName: "Web Standard",
       badge: "Nejrychlejší start",
-      price: "8 900 Kč",
+      price: "11 800 Kč",
+      priceNote: "Včetně prvního roku provozu.",
       tagline:
         "Jednostránkový profesionální web pro živnostníka nebo menší firmu, která chce rychle působit důvěryhodně a získávat poptávky.",
       features: [
         "Jednostránkový web / landing page",
-        "Cca 5–7 přehledných sekcí",
-        "Úprava textů z dodaných podkladů",
-        "Přehled 3–6 hlavních služeb",
-        "Kontaktní formulář, klikací telefon a e-mail",
+        "5–7 přehledných sekcí",
+        "Pomoc se strukturou a texty",
+        "Kontaktní formulář, telefon a e-mail",
         "Responzivní vzhled",
-        "Základní technické SEO",
-        "2 kola úprav v ceně",
+        "Základní SEO a spuštění",
+        "První rok provozu v ceně",
       ],
       isFeatured: false,
       ctaText: "Chci Web Standard",
@@ -419,18 +422,18 @@ export const pricing = {
       id: "pro",
       planName: "Web Pro",
       badge: "Doporučená volba",
-      price: "16 900 Kč",
+      price: "20 800 Kč",
+      priceNote: "Včetně prvního roku provozu.",
       tagline:
         "Menší plnohodnotný web pro firmu, která potřebuje více prostoru pro služby, reference, ceník a lokální důvěryhodnost.",
       features: [
-        "Homepage + 4–6 základních stránek nebo sekcí",
-        "Propracovanější copy pro hlavní obsah",
-        "Detailnější popisy 4–8 služeb",
-        "Reference / realizace jako samostatná sekce nebo stránka",
-        "Přehlednější orientační ceník",
-        "Základní lokální SEO",
-        "Základní analytika a měření hlavních kliků",
-        "2 kola úprav v ceně",
+        "Homepage + 4–6 stránek nebo sekcí",
+        "Detailnější prezentace služeb",
+        "Reference, realizace nebo ceník",
+        "Lokální SEO základ",
+        "Měření návštěv a hlavních kliků",
+        "2 kola úprav",
+        "První rok provozu v ceně",
       ],
       isFeatured: true,
       ctaText: "Chci Web Pro",
@@ -444,7 +447,7 @@ export const pricing = {
     // kartách a v „V ceně / Řeší se zvlášť" bloku — tabulka má sloužit jako
     // rychlé porovnání rozhodovacích kritérií, ne kompletní spec sheet.
     rows: [
-      { label: "Cena", standard: "8 900 Kč", pro: "16 900 Kč" },
+      { label: "Cena", standard: "11 800 Kč", pro: "20 800 Kč" },
       { label: "Typ webu", standard: "Jednostránkový web / landing page", pro: "Menší plnohodnotný web" },
       { label: "Rozsah", standard: "Cca 5–7 sekcí na jedné stránce", pro: "Homepage + 4–6 stránek/sekcí" },
       { label: "SEO", standard: "Základní technické SEO", pro: "Základní lokální SEO" },
@@ -469,19 +472,21 @@ export const pricing = {
         "Responzivní vzhled na mobilu i desktopu",
         "Kontaktní formulář, klikací telefon a e-mail",
         "Základní technické SEO a spuštění",
+        "První rok provozu webu",
       ],
     },
     separate: {
       title: "Řeší se zvlášť",
       items: [
-        "Doména a hosting (provozní náklady)",
         "Logo, focení nebo natáčení",
         "E-shop a online platby",
         "Pokročilé SEO a obsah na míru",
         "Rezervační systém a automatizace",
+        "Vícejazyčnost nebo individuální napojení",
+        "Další úpravy nad rámec domluveného rozsahu",
       ],
     },
-    note: "Externí náklady jako doména a hosting jsou typicky pár set korun měsíčně. Vše vysvětlíme předem a nic neřešíme tajně.",
+    note: "První rok provozu je v ceně. Provozem myslíme doménu a hosting — tedy adresu webu a místo, kde web běží. Po roce vám provozní náklady řekneme předem, bez skrytých poplatků.",
   },
 } as const;
 
@@ -494,7 +499,19 @@ export const faq = {
   items: [
     {
       q: "Kolik web stojí?",
-      a: "Web Standard začíná na 8 900 Kč, Web Pro na 16 900 Kč. Ceny jsou orientační — přesný rozsah i cenu potvrdíme předem po krátké konzultaci. Externí náklady jako doména a hosting se řeší zvlášť a vždy je vysvětlíme.",
+      a: "Web Standard stojí 11 800 Kč a Web Pro 20 800 Kč, vždy včetně prvního roku provozu webu. Ceny platí pro běžný rozsah podle balíčku — přesný rozsah i cenu potvrdíme předem po krátké konzultaci.",
+    },
+    {
+      q: "Co přesně je v ceně?",
+      a: "Cena zahrnuje samotnou tvorbu webu i první rok provozu. U Web Standard je v ceně web za 8 900 Kč a provoz na první rok za 2 900 Kč. U Web Pro je v ceně web za 16 900 Kč a provoz na první rok za 3 900 Kč. Provozem myslíme doménu a hosting — tedy adresu webu a místo, kde web běží. Díky tomu nemusíte na začátku nic technického řešit zvlášť.",
+    },
+    {
+      q: "Co se platí po prvním roce?",
+      a: "Po prvním roce se řeší obnovení domény a hostingu podle skutečných provozních nákladů. Vždy vám je řekneme předem. Neúčtujeme žádný povinný měsíční paušál za nás, pokud se nedomluvíme na další péči nebo rozšíření webu.",
+    },
+    {
+      q: "Jak probíhá platba?",
+      a: "Po odsouhlasení nabídky platíte zálohu, která nám rezervuje kapacitu a termín. Doplatek platíte až po schválení hotového webu.",
     },
     {
       q: "Co když nemám texty?",
@@ -511,10 +528,6 @@ export const faq = {
     {
       q: "Budu web vlastnit?",
       a: "Ano. Doménu, obsah i přístupy máte vy. Předem si vyjasníme, kdo co spravuje, takže po spuštění nejste na nikom závislí.",
-    },
-    {
-      q: "Musím platit měsíční paušál?",
-      a: "Ne automaticky. Provozní náklady (doména, hosting) jsou typicky pár set korun měsíčně a vysvětlíme je předem. Žádný povinný paušál za nás neplatíte.",
     },
     {
       q: "Děláte i SEO?",
