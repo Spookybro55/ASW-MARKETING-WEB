@@ -57,9 +57,11 @@ export function PortfolioShowcase() {
   const glowOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.6]);
 
   const animate = isDesktop && !reduce;
+  // Mobile (< sm) presents a flat phone-like frame, so no 3D tilt there.
+  // Desktop (incl. reduced-motion) keeps the laptop's static perspective tilt.
   const deviceStyle = animate
     ? { rotateX, scale, y: lift, transformStyle: "preserve-3d" as const }
-    : { rotateX: 18, transformStyle: "preserve-3d" as const };
+    : { rotateX: isDesktop ? 18 : 0, transformStyle: "preserve-3d" as const };
   const glowStyle = animate ? { opacity: glowOpacity } : { opacity: 0.5 };
 
   return (
@@ -91,8 +93,11 @@ export function PortfolioShowcase() {
           />
 
           {/* ── Screen / lid (dark bezel) ─────────────────────────────── */}
-          <div className="mx-auto w-[95%] rounded-[0.9rem] border border-white/10 bg-[#0b0f17] p-1.5 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)] sm:p-2">
-            <div className="overflow-hidden rounded-[0.6rem] border border-white/8">
+          {/* Mobile (< sm): narrower, deeply-rounded phone-like frame so the
+              showcase reads as a phone, not a stretched laptop. sm+: original
+              wide laptop bezel restored. */}
+          <div className="mx-auto w-[80%] max-w-[19rem] rounded-[2rem] border border-white/10 bg-[#0b0f17] p-2 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)] sm:w-[95%] sm:max-w-none sm:rounded-[0.9rem] sm:p-2">
+            <div className="overflow-hidden rounded-[1.6rem] border border-white/8 sm:rounded-[0.6rem]">
               {/* slim top bar with "ukázka webu" */}
               <div className="flex items-center gap-2 bg-[#0B1220] px-4 py-2">
                 <span className="h-2 w-2 rounded-full bg-white/15" />
@@ -214,7 +219,9 @@ export function PortfolioShowcase() {
           </div>
 
           {/* ── Hinge + base deck (slightly wider than the screen) ─────── */}
-          <div className="relative mx-auto -mt-px h-3.5 w-full rounded-b-2xl bg-gradient-to-b from-[#2a3340] to-[#0b0f17] shadow-[0_28px_44px_-18px_rgba(0,0,0,0.85)] [clip-path:polygon(2%_0,98%_0,100%_100%,0_100%)]">
+          {/* Hidden on mobile: the laptop base is what made the phone-width
+              frame look like a stretched/deformed notebook. sm+ only. */}
+          <div className="relative mx-auto -mt-px hidden h-3.5 w-full rounded-b-2xl bg-gradient-to-b from-[#2a3340] to-[#0b0f17] shadow-[0_28px_44px_-18px_rgba(0,0,0,0.85)] [clip-path:polygon(2%_0,98%_0,100%_100%,0_100%)] sm:block">
             {/* hinge notch */}
             <span className="absolute left-1/2 top-0 h-1 w-[16%] -translate-x-1/2 rounded-b-md bg-black/50" />
           </div>
