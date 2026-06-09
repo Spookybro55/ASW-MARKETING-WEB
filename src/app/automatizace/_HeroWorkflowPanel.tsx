@@ -111,7 +111,7 @@ export function HeroWorkflowPanel({
             <div className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-2.5">
               <div className="min-w-0">
                 <p className="truncate text-[0.95rem] font-semibold text-white">
-                  <span className="mr-1.5 inline-block text-[0.7rem] font-bold text-white/40">
+                  <span className="mr-1.5 inline-block text-[0.7rem] font-bold text-white/60">
                     0{i + 1}
                   </span>
                   {step.title}
