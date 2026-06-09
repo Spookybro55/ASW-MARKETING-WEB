@@ -132,9 +132,14 @@ export function WebsiteShowcase({ items, cta }: Props) {
                     <Icon name="map-pin" className="h-2.5 w-2.5" />
                     {item.location}
                   </span>
-                  <h4 className="mt-2 font-display text-[15px] font-extrabold leading-tight text-white">
+                  {/* Simulated website content inside the mockup frame — not a
+                      heading of the /weby document. Rendered as <p> (was <h4>)
+                      so it stays out of the page heading tree; the H2→H4 jump
+                      was the only heading-order a11y fail. Same classes → no
+                      visual change (Tailwind preflight resets heading styles). */}
+                  <p className="mt-2 font-display text-[15px] font-extrabold leading-tight text-white">
                     {item.heroTitle}
-                  </h4>
+                  </p>
                   <p className="mt-1.5 text-[10.5px] leading-relaxed text-white/55">
                     {item.heroLead}
                   </p>
