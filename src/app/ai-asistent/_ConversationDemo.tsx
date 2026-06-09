@@ -63,7 +63,7 @@ export function ConversationDemo({ timestamp, messages, note }: Props) {
               <p className="text-[0.85rem] font-semibold text-white">
                 AI asistent
               </p>
-              <p className="text-[0.7rem] text-white/45">{timestamp}</p>
+              <p className="text-[0.7rem] text-white/60">{timestamp}</p>
             </div>
           </div>
           <span className="inline-flex items-center gap-1 rounded-full border border-[#1976D2]/45 bg-[#1976D2]/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#9FC6FF]">
@@ -94,7 +94,7 @@ export function ConversationDemo({ timestamp, messages, note }: Props) {
                     className={`text-[0.65rem] font-semibold uppercase tracking-[0.12em] ${
                       isAssistant
                         ? "text-brand-light"
-                        : "text-white/45 text-right"
+                        : "text-white/60 text-right"
                     }`}
                   >
                     {isAssistant ? "AI asistent" : "Zákazník"}
@@ -130,7 +130,7 @@ export function ConversationDemo({ timestamp, messages, note }: Props) {
               <Icon name="arrow-right" className="h-4 w-4" />
             </span>
           </div>
-          <p className="mt-2 text-center text-[0.7rem] uppercase tracking-[0.14em] text-white/35">
+          <p className="mt-2 text-center text-[0.7rem] uppercase tracking-[0.14em] text-white/60">
             Ukázka není interaktivní
           </p>
         </div>
