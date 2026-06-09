@@ -262,7 +262,7 @@ export function LocalSearchPanel({
         variants={slideRight}
         className="rounded-2xl border border-white/10 bg-[#0B1322] p-5 shadow-[0_28px_60px_-30px_rgba(13,71,161,0.45)] sm:p-6"
       >
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-2">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-light">
           Místní profil
         </p>
         <h3 className="mt-2 font-display text-lg font-bold text-white">
@@ -272,7 +272,7 @@ export function LocalSearchPanel({
           <span aria-hidden="true" className="text-[#FFD37E]">
             {companyCard.ratingLabel}
           </span>
-          <span className="text-white/45">{companyCard.ratingNote}</span>
+          <span className="text-white/60">{companyCard.ratingNote}</span>
         </div>
 
         <ul role="list" className="mt-5 space-y-3 text-sm">
@@ -308,7 +308,7 @@ export function LocalSearchPanel({
         variants={fadeUp}
         className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6 md:col-span-2"
       >
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-2">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-light">
           Z čeho to skládáme
         </p>
         <motion.ul
@@ -327,7 +327,7 @@ export function LocalSearchPanel({
             </motion.li>
           ))}
         </motion.ul>
-        <p className="mt-5 text-xs leading-relaxed text-white/45">
+        <p className="mt-5 text-xs leading-relaxed text-white/60">
           {measureNote}
         </p>
       </motion.div>
