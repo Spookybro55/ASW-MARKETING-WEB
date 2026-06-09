@@ -490,9 +490,9 @@ export const pricing = {
     note: "První rok provozu je v ceně. Provozem myslíme doménu a hosting — tedy adresu webu a místo, kde web běží. Po roce vám provozní náklady řekneme předem, bez skrytých poplatků.",
   },
   // Doplňkový box pod hlavními balíčky — NE třetí plnohodnotný balíček.
-  // Zachycuje složitější poptávky (e-shop, CRM, napojení) bez naceňování,
-  // s CTA na konzultaci. Slug individualni-reseni ve formuláři bezpečně
-  // spadne na default produkt (žádná tvrdá vazba na select).
+  // Zachycuje složitější poptávky (e-shop, CRM, napojení) bez naceňování.
+  // CTA vede na čistou /konzultace (formulář nemá produkt pro individuální
+  // řešení, proto bez ?produkt= slugu — návštěvník zvolí téma sám).
   individual: {
     title: "Potřebujete něco složitějšího?",
     text: "E-shop, katalog produktů, CRM, interní systém nebo napojení na další nástroje řešíme individuálně podle rozsahu.",
@@ -505,7 +505,7 @@ export const pricing = {
       "Návrh rozsahu po úvodní konzultaci",
     ],
     ctaText: "Probrat řešení na míru",
-    ctaUrl: "/konzultace?produkt=individualni-reseni",
+    ctaUrl: "/konzultace",
   },
 } as const;
 
