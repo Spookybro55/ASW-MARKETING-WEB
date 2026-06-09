@@ -36,7 +36,7 @@ export default function FormularPage() {
         <section className="relative px-5 pt-24 pb-6 sm:px-8 md:pt-28">
           <div className="mx-auto w-full max-w-6xl">
             <div className="mx-auto max-w-3xl text-center">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-2">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-brand-light">
                 Podklady k webu
               </p>
               <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">

@@ -242,7 +242,7 @@ export default function FormularForm() {
           aria-label="Přehled sekcí formuláře"
           className="sticky top-24 rounded-2xl border border-border bg-surface p-5 shadow-sm"
         >
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-2">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-light">
             Sekce formuláře
           </p>
           <ol className="space-y-1.5 text-sm">
