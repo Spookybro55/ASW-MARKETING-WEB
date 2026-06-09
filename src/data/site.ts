@@ -313,6 +313,7 @@ export const whatYouGet = {
     "Responzivní vzhled",
     "Kontaktní formulář",
     "Základní SEO",
+    "Napojení domény a základní měření návštěvnosti",
     "Jasné předání a spuštění",
   ],
 } as const;
@@ -488,6 +489,24 @@ export const pricing = {
     },
     note: "První rok provozu je v ceně. Provozem myslíme doménu a hosting — tedy adresu webu a místo, kde web běží. Po roce vám provozní náklady řekneme předem, bez skrytých poplatků.",
   },
+  // Doplňkový box pod hlavními balíčky — NE třetí plnohodnotný balíček.
+  // Zachycuje složitější poptávky (e-shop, CRM, napojení) bez naceňování,
+  // s CTA na konzultaci. Slug individualni-reseni ve formuláři bezpečně
+  // spadne na default produkt (žádná tvrdá vazba na select).
+  individual: {
+    title: "Potřebujete něco složitějšího?",
+    text: "E-shop, katalog produktů, CRM, interní systém nebo napojení na další nástroje řešíme individuálně podle rozsahu.",
+    items: [
+      "E-shop nebo katalog produktů",
+      "Web s pokročilejší strukturou",
+      "CRM nebo interní systém na míru",
+      "Automatizace procesů a poptávek",
+      "Napojení na externí nástroje",
+      "Návrh rozsahu po úvodní konzultaci",
+    ],
+    ctaText: "Probrat řešení na míru",
+    ctaUrl: "/konzultace?produkt=individualni-reseni",
+  },
 } as const;
 
 /* ── FAQ (homepage) ───────────────────────────────────────────────────────── */
@@ -512,6 +531,10 @@ export const faq = {
     {
       q: "Jak probíhá platba?",
       a: "Po odsouhlasení nabídky platíte zálohu, která nám rezervuje kapacitu a termín. Doplatek platíte až po schválení hotového webu.",
+    },
+    {
+      q: "Dokážete se o web starat i po spuštění?",
+      a: "Ano. Po předání se můžeme domluvit na drobných úpravách, správě obsahu, technických změnách nebo dalším rozvoji webu. Vždy vám předem řekneme rozsah i cenu.",
     },
     {
       q: "Co když nemám texty?",
@@ -587,7 +610,7 @@ export const webyPage = {
     // pillové označení mohlo přejít přehledem; explicitní vysvětlení, proč
     // jsou ukázky modelové a kdy budou doplněny reálné.
     fairUseDisclaimer:
-      "Ukázky jsou modelové a slouží k vysvětlení struktury a stylu. Reálné realizace budeme doplňovat po souhlasu klientů.",
+      "Ukázky nejsou finální šablony. Ukazují typ struktury, přehlednosti a úrovně zpracování, kterou pro malé firmy stavíme. Vzhled, obsah i sekce vždy upravujeme podle oboru, podkladů a cíle webu. Reálné realizace doplníme po souhlasu klientů.",
     items: [
       {
         kind: "Řemeslník",
@@ -703,7 +726,7 @@ export const lokalniSeoPage = {
   results: {
     eyebrow: "Výsledky",
     title: "Na čem záleží",
-    note: "Negarantujeme konkrétní pozice. Slibujeme web, který je technicky připravený, dohledatelný a rychle načítaný.",
+    note: "Férově: negarantujeme první místo ve vyhledávání. Dáváme do pořádku základy, aby vás zákazníci snáze našli, pochopili, co nabízíte, a mohli se vám ozvat.",
     tiles: [
       { metric: "Lepší viditelnost", label: "v lokálním vyhledávání a mapách" },
       { metric: "Více poptávek", label: "od lidí z vašeho okolí" },

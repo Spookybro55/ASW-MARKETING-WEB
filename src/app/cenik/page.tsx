@@ -4,6 +4,7 @@ import Footer from "@/components/asw/Footer";
 import { HeroSection } from "@/components/asw/HeroSection";
 import { Section, SectionHeading } from "@/components/asw/Section";
 import { PricingCard } from "@/components/asw/cards";
+import { Button } from "@/components/asw/Button";
 import { Faq } from "@/components/asw/Faq";
 import { FaqJsonLd } from "@/components/asw/FaqJsonLd";
 import { CtaSection } from "@/components/asw/CtaSection";
@@ -103,6 +104,40 @@ export default function CenikPage() {
           <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-fg-soft">
             {pricing.note}
           </p>
+
+          {/* Individuální řešení — menší doplňkový box pod hlavními balíčky.
+              NE třetí plnohodnotný balíček: zachytí složitější poptávky a vede
+              na konzultaci, aby ceník zůstal jednoduchý a rozhodovací. */}
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-border bg-surface p-6 shadow-md sm:p-7">
+            <h3 className="font-display text-lg font-bold text-foreground">
+              {pricing.individual.title}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+              {pricing.individual.text}
+            </p>
+            <ul role="list" className="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+              {pricing.individual.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2.5 text-sm text-fg-muted"
+                >
+                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-light" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6">
+              <Button
+                href={pricing.individual.ctaUrl}
+                variant="secondary"
+                size="md"
+                ctaLabel="pricing_individual"
+                ctaLocation="cenik_individual"
+              >
+                {pricing.individual.ctaText}
+              </Button>
+            </div>
+          </div>
         </Section>
 
         {/* Comparison table */}

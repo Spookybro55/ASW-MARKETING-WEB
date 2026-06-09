@@ -107,9 +107,15 @@ export default function LokalniSeoPage() {
               </div>
             ))}
           </div>
-          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-fg-soft">
-            {p.results.note}
-          </p>
+          {/* Férové no-guarantee sdělení — zviditelněné do decentního trust
+              boxu (feedback patch), ať nepůsobí jako schovaná drobná poznámka.
+              Žádná garance výsledků; tón zůstává praktický. */}
+          <div className="mx-auto mt-8 flex max-w-2xl items-start gap-3 rounded-2xl border border-border bg-surface px-5 py-4 shadow-md">
+            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand-light">
+              <CheckIcon className="h-4 w-4" />
+            </span>
+            <p className="text-sm leading-relaxed text-fg-muted">{p.results.note}</p>
+          </div>
         </Section>
 
         {/* Process */}
