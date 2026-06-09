@@ -239,7 +239,7 @@ export function PortfolioShowcase() {
             „Ukázka výstupu" badge sám o sobě může uniknout přehledem; krátký
             text explicitně říká, že portfolio reálných realizací doplníme
             po souhlasu klientů. */}
-        <p className="mx-auto mt-4 max-w-2xl text-center text-xs leading-relaxed text-white/40 sm:mt-6">
+        <p className="mx-auto mt-4 max-w-2xl text-center text-xs leading-relaxed text-white/60 sm:mt-6">
           Ukázky jsou modelové a slouží k vysvětlení struktury a stylu.
           Reálné realizace budeme doplňovat po souhlasu klientů.
         </p>

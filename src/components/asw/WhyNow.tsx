@@ -21,7 +21,7 @@ export function WhyNow() {
       />
 
       <div className="mx-auto max-w-5xl text-center">
-        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-light">
           {whyNow.eyebrow}
         </p>
         <h2 className="mx-auto mt-3 max-w-3xl font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-[2rem]">

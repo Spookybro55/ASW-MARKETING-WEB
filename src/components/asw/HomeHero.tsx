@@ -69,11 +69,11 @@ export function HomeHero() {
           </a>
         </div>
 
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/45">
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/60">
           {homeHero.trustMicrocopy}
         </p>
 
-        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-white/45">
+        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-white/60">
           <span>{homeHero.contactLine.prefix}</span>
           <a
             href={homeHero.contactLine.emailHref}
@@ -94,9 +94,12 @@ export function HomeHero() {
           </a>
         </p>
 
-        <p className="mt-6 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-2">
+        <p className="mt-6 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-light">
           {homeHero.problemsLabel}
         </p>
+        {/* sr-only H2 gives the hero problem cards a sectioning heading so the
+            order stays H1 → H2 → H3 (the cards are H3); no visual change. */}
+        <h2 className="sr-only">Co vás možná brzdí</h2>
         <ul role="list" className="mt-4 grid w-full max-w-5xl gap-4 sm:grid-cols-3">
           {homeHero.problemCards.map((card) => (
             <li
