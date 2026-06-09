@@ -5,7 +5,8 @@ import { HomeHero } from "@/components/asw/HomeHero";
 import { PortfolioShowcase } from "@/components/asw/PortfolioShowcase";
 import { WhyNow } from "@/components/asw/WhyNow";
 import { Section, SectionHeading } from "@/components/asw/Section";
-import { ServiceCard, ProcessStep, PricingCard } from "@/components/asw/cards";
+import { ServiceCard, ProcessStep } from "@/components/asw/cards";
+import { Button } from "@/components/asw/Button";
 import { Faq } from "@/components/asw/Faq";
 import { FaqJsonLd } from "@/components/asw/FaqJsonLd";
 import { CtaSection } from "@/components/asw/CtaSection";
@@ -20,6 +21,7 @@ import {
   faq,
   finalCta,
   contact,
+  cta,
 } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -102,72 +104,28 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 11. Pricing */}
+        {/* 11. Ceník teaser — detailní ceny a balíčky žijí jen na /cenik.
+            Homepage se neopakuje s pricingem; drží jen krátkou konverzní
+            cestu na ceník nebo rovnou na nezávaznou poptávku. */}
         <Section tone="muted" id="cenik">
           <SectionHeading
             eyebrow={pricing.eyebrow}
-            title={pricing.title}
-            lead={pricing.lead}
+            title="Chcete znát cenu?"
+            lead="Podívejte se na přehledný ceník nebo nám rovnou napište."
           />
-          <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
-            {pricing.packages.map((p) => (
-              <PricingCard
-                key={p.id}
-                planName={p.planName}
-                price={p.price}
-                priceNote={p.priceNote}
-                tagline={p.tagline}
-                features={p.features}
-                isFeatured={p.isFeatured}
-                badge={p.badge}
-                ctaText={p.ctaText}
-                ctaUrl={p.ctaUrl}
-              />
-            ))}
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button href="/cenik" ctaLabel="pricing_teaser" ctaLocation="home_cenik">
+              Zobrazit ceník
+            </Button>
+            <Button
+              href={cta.href}
+              variant="secondary"
+              ctaLabel="pricing_teaser_poptat"
+              ctaLocation="home_cenik"
+            >
+              {cta.poptatWeb}
+            </Button>
           </div>
-
-          {/* Co je v ceně / Řeší se zvlášť — hned pod kartami, ať je hranice
-              balíčku jasná a netápe se, co bude stát navíc. */}
-          <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-surface p-6 shadow-md sm:p-7">
-            <p className="text-center font-display text-base font-bold text-foreground">
-              {pricing.scope.title}
-            </p>
-            <div className="mt-5 grid gap-6 sm:grid-cols-2">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-wider text-brand-light">
-                  {pricing.scope.included.title}
-                </p>
-                <ul role="list" className="mt-3 space-y-2 text-sm">
-                  {pricing.scope.included.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-fg-muted">
-                      <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-light" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-wider text-fg-soft">
-                  {pricing.scope.separate.title}
-                </p>
-                <ul role="list" className="mt-3 space-y-2 text-sm">
-                  {pricing.scope.separate.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-fg-muted">
-                      <Icon name="arrow-right" className="mt-0.5 h-4 w-4 shrink-0 text-fg-soft" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <p className="mt-5 text-center text-xs text-fg-soft">
-              {pricing.scope.note}
-            </p>
-          </div>
-
-          <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-fg-soft">
-            {pricing.note}
-          </p>
         </Section>
 
         {/* 12. Trust / proof (launch-safe) */}
