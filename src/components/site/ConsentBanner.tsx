@@ -2,6 +2,8 @@
 
 import { useSyncExternalStore } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { isPreviewPath } from "@/lib/preview-routes";
 import {
   CONSENT_ESSENTIAL,
   CONSENT_GRANTED,
@@ -28,12 +30,15 @@ import {
  * (CookieSettingsLink).
  */
 export default function ConsentBanner() {
+  const pathname = usePathname();
   const consent = useSyncExternalStore(
     subscribeConsent,
     getConsentSnapshot,
     getConsentServerSnapshot,
   );
 
+  // Klientské preview routy nezobrazují cookie lištu AutoSmartweby.
+  if (isPreviewPath(pathname)) return null;
   if (consent !== null) return null;
 
   function choose(value: ConsentValue) {

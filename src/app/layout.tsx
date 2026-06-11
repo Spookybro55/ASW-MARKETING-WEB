@@ -4,7 +4,7 @@ import AnalyticsEvents from "@/components/AnalyticsEvents";
 import EngagementSignals from "@/components/EngagementSignals";
 import AnalyticsGate from "@/components/site/AnalyticsGate";
 import ConsentBanner from "@/components/site/ConsentBanner";
-import { contact } from "@/data/site";
+import OrganizationJsonLd from "@/components/site/OrganizationJsonLd";
 import "./globals.css";
 
 // Source-of-truth spec (2026-05-21): Montserrat = headings/display,
@@ -75,8 +75,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Normalized E.164-style number for schema.org telephone (no spaces).
-  const telephone = contact.phone.replace(/\s+/g, "");
   return (
     <html
       lang="cs-CZ"
@@ -89,55 +87,7 @@ export default function RootLayout({
         >
           Přeskočit na obsah
         </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Organization",
-                  "@id": "https://autosmartweb.cz/#organization",
-                  name: "Autosmartweby",
-                  legalName: contact.legalName,
-                  url: "https://autosmartweb.cz",
-                  logo: "https://autosmartweb.cz/icon-512x512.png",
-                  email: contact.email,
-                  telephone,
-                  sameAs: [],
-                },
-                {
-                  "@type": "LocalBusiness",
-                  "@id": "https://autosmartweb.cz/#localbusiness",
-                  name: `Autosmartweby (${contact.legalName})`,
-                  url: "https://autosmartweb.cz",
-                  telephone,
-                  email: contact.email,
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: contact.address.street,
-                    addressLocality: contact.address.city,
-                    postalCode: contact.address.zip,
-                    addressCountry: "CZ",
-                  },
-                  parentOrganization: {
-                    "@id": "https://autosmartweb.cz/#organization",
-                  },
-                },
-                {
-                  "@type": "WebSite",
-                  "@id": "https://autosmartweb.cz/#website",
-                  url: "https://autosmartweb.cz",
-                  name: "Autosmartweby",
-                  inLanguage: "cs-CZ",
-                  publisher: {
-                    "@id": "https://autosmartweb.cz/#organization",
-                  },
-                },
-              ],
-            }),
-          }}
-        />
+        <OrganizationJsonLd />
         <AnalyticsEvents />
         <EngagementSignals />
         {children}

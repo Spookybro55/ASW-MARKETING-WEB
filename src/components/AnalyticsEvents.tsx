@@ -2,9 +2,13 @@
 
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { isPreviewPath } from "@/lib/preview-routes";
 
 export default function AnalyticsEvents() {
   useEffect(() => {
+    // Klientské preview routy nezapojují analytiku AutoSmartweby.
+    if (isPreviewPath(window.location.pathname)) return;
+
     function handleClick(e: MouseEvent) {
       const anchor = (e.target as HTMLElement).closest("a, button");
       if (!anchor) return;

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { isPreviewPath } from "@/lib/preview-routes";
 
 /**
  * Tracks engagement signals — scroll depth + section view.
@@ -21,6 +22,9 @@ import { trackEvent } from "@/lib/analytics";
 export default function EngagementSignals() {
   useEffect(() => {
     const path = window.location.pathname;
+
+    // Klientské preview routy nezapojují analytiku AutoSmartweby.
+    if (isPreviewPath(path)) return;
 
     // ── scroll_depth ──────────────────────────────────────────────
     const fired = new Set<25 | 50 | 75 | 100>();
