@@ -128,17 +128,18 @@ const CARD_BG = [
 ];
 
 /* Výrobní limity. Číselné hodnoty jsou zadané klientem a NEMĚNÍ se.
-   Údaje, které zatím nemáme potvrzené, jsou označené `TODO:` a v UI se
-   vykreslí ztlumeně (viz render tabulky) — slouží jako jasný signál
-   „doplnit se zákazníkem", ne jako tvrzení. */
+   INTERNÍ TODO (klientovi neukazovat — doplnit reálná čísla, až je dodá):
+     - MIN. PRŮMĚR ZAKRUŽENÍ: konkrétní hodnota neznámá → klientsky neutrální
+       formulace „upřesníme podle materiálu a profilu".
+     - MAX. DÉLKA: konkrétní délka neznámá → „ověříme podle výkresu". */
 const TECH_ROWS = [
   ["VÁLEC", "cca Ø 1500 mm / šíře 2000 mm / síla 8 mm"],
   ["PROFILY", "cca 140–160 H / HE"],
   ["ÚHELNÍK", "100 × 100 mm"],
   ["KULATINA", "cca 60 mm"],
   ["PÁSOVINA", "120 × 20 mm"],
-  ["MIN. PRŮMĚR ZAKRUŽENÍ", "TODO: potvrdit se zákazníkem"],
-  ["MAX. DÉLKA / ŠÍŘE", "šíře cca 2000 mm; délka TODO: potvrdit"],
+  ["MIN. PRŮMĚR ZAKRUŽENÍ", "upřesníme podle materiálu a profilu"],
+  ["MAX. DÉLKA / ŠÍŘE", "šíře cca 2000 mm; délku ověříme podle výkresu"],
   ["TL. MATERIÁLU", "max. 8 mm dle materiálu (ocel / nerez / hliník)"],
   ["MATERIÁLY", "konstrukční ocel, nerezová ocel, hliník"],
   ["VSTUPY / PODKLADY", "výkres, PDF, DXF, DWG (nebo rozměry a popis)"],
@@ -190,7 +191,7 @@ const REASONS = [
 const FAQ: { q: string; a: string }[] = [
   {
     q: "Jaký nejmenší a největší průměr umíte zakružit?",
-    a: "Největší průměr u válce je cca Ø 1500 mm. Nejmenší průměr závisí na materiálu a profilu — ověříme podle výkresu. (TODO: minimální průměr potvrdit se zákazníkem.)",
+    a: "Největší průměr u válce je cca Ø 1500 mm. Nejmenší průměr upřesníme podle materiálu a profilu — ověříme podle výkresu a požadovaného rozměru.",
   },
   {
     q: "Umíte pracovat s nerezem i hliníkem?",
@@ -226,51 +227,57 @@ const FAQ: { q: string; a: string }[] = [
   },
 ];
 
-/* Galerie „Naše dílna / Ukázky výroby" — reálné B2B fotky obou větví výroby:
-   technická kovovýroba (válcovačka, zakroužené profily, stroje) i stavební
-   kovovýroba (venkovní schodiště, zábradlí, ocelové konstrukce, nerez).
+/* Galerie „Naše dílna / Ukázky výroby" — reálné B2B fotky rozdělené do dvou
+   pojmenovaných větví, aby byla hierarchie hned čitelná: hlavní TECHNICKÁ
+   výroba první, doplňková KONSTRUKCE a montáže druhá.
    ŽÁDNÝ soubor se neopakuje s proof pásem ani s kartami služeb (každá fotka
-   je na stránce právě jednou). Vyloučené: dekorativní kované brány a fotky
-   s nepořádkem. Lazy-load přes next/image. */
-const GALLERY: { src: string; alt: string }[] = [
-  // — technická kovovýroba (hlavní positioning, vždy v čele galerie) —
-  // Pozn. k překryvům: svářeč ZDE záměrně NENÍ (zůstává jen na TIG kartě,
-  // aby se neopakoval poblíž). Jediný překryv je nerezový kužel (hero proof
-  // + galerie) — schváleno klientem a obě výskyty jsou daleko od sebe.
-  // Dva záběry zakružovačky (zakruzovacka = celek, stroj = detail) jsou
-  // v řadě nesousední (pozice 1 a 4).
+   je na stránce právě jednou; jediný překryv je nerezový kužel — hero proof
+   + galerie, schváleno, daleko od sebe). Vyloučené: dekorativní kované brány
+   a fotky s nepořádkem. Lazy-load přes next/image. */
+const GALLERY_GROUPS: { label: string; items: { src: string; alt: string }[] }[] = [
   {
-    src: "/clients/kovovyrobasvoboda/zakruzovacka.jpg",
-    alt: "Zakružovačka profilů s ovládacím panelem v dílně",
+    label: "Technická výroba",
+    items: [
+      // svářeč ZDE záměrně není (zůstává na TIG kartě); zakruzovacka (celek)
+      // a stroj (detail) jsou v řadě nesousední (pozice 1 a 4).
+      {
+        src: "/clients/kovovyrobasvoboda/zakruzovacka.jpg",
+        alt: "Zakružovačka profilů s ovládacím panelem v dílně",
+      },
+      {
+        src: "/clients/kovovyrobasvoboda/oblouk.jpg",
+        alt: "Ocelový profil zakroužený do přesného oblouku",
+      },
+      {
+        src: "/clients/kovovyrobasvoboda/cones.jpg",
+        alt: "Nerezový kužel — atypický tvar vyrobený podle výkresu",
+      },
+      {
+        src: "/clients/kovovyrobasvoboda/stroj.jpg",
+        alt: "Detail zakružovačky profilů — profil stočený do spirály",
+      },
+    ],
   },
   {
-    src: "/clients/kovovyrobasvoboda/oblouk.jpg",
-    alt: "Ocelový profil zakroužený do přesného oblouku",
-  },
-  {
-    src: "/clients/kovovyrobasvoboda/cones.jpg",
-    alt: "Nerezový kužel — atypický tvar vyrobený podle výkresu",
-  },
-  {
-    src: "/clients/kovovyrobasvoboda/stroj.jpg",
-    alt: "Detail zakružovačky profilů — profil stočený do spirály",
-  },
-  // — stavební kovovýroba (doplňková větev, až za technickými) —
-  {
-    src: "/clients/kovovyrobasvoboda/schodiste-venkovni.jpg",
-    alt: "Pozinkované venkovní schodiště se zábradlím u rodinného domu",
-  },
-  {
-    src: "/clients/kovovyrobasvoboda/konstrukce.jpg",
-    alt: "Venkovní ocelová konstrukce se schodištěm u budovy",
-  },
-  {
-    src: "/clients/kovovyrobasvoboda/zabradli-nerez.jpg",
-    alt: "Moderní nerezové zábradlí s vodorovnými výplněmi",
-  },
-  {
-    src: "/clients/kovovyrobasvoboda/zabradli-interier.jpg",
-    alt: "Moderní interiérové ocelové zábradlí u schodiště",
+    label: "Konstrukce a montáže",
+    items: [
+      {
+        src: "/clients/kovovyrobasvoboda/schodiste-venkovni.jpg",
+        alt: "Pozinkované venkovní schodiště se zábradlím u rodinného domu",
+      },
+      {
+        src: "/clients/kovovyrobasvoboda/konstrukce.jpg",
+        alt: "Venkovní ocelová konstrukce se schodištěm u budovy",
+      },
+      {
+        src: "/clients/kovovyrobasvoboda/zabradli-nerez.jpg",
+        alt: "Moderní nerezové zábradlí s vodorovnými výplněmi",
+      },
+      {
+        src: "/clients/kovovyrobasvoboda/zabradli-interier.jpg",
+        alt: "Moderní interiérové ocelové zábradlí u schodiště",
+      },
+    ],
   },
 ];
 
@@ -906,9 +913,10 @@ export default function KovovyrobaSvobodaPage() {
       <header className="sticky top-0 z-50 border-b border-[#17140F]/15 bg-[#F4EEE2]/95 backdrop-blur">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 py-3 sm:px-10">
           <a href="#top" className="flex items-center gap-3 leading-none">
+            {/* alt="" — dekorativní: ve stejném odkazu je textový název firmy. */}
             <Image
               src="/clients/kovovyrobasvoboda/logo-mark.webp"
-              alt="Kovovýroba Svoboda — logo"
+              alt=""
               width={131}
               height={151}
               priority
@@ -960,12 +968,12 @@ export default function KovovyrobaSvobodaPage() {
           <div className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-5 px-6 pb-8 pt-7 sm:px-10 lg:grid-cols-[37fr_47fr_16fr] lg:gap-x-2 lg:pb-7 lg:pt-9">
             {/* left — text */}
             <div>
-              <span className="kv-up inline-flex items-center gap-2 font-[family-name:var(--font-montserrat)] text-xs font-bold uppercase tracking-[0.18em] text-[#C9560B]">
+              <span className="kv-up inline-flex items-center gap-2 font-[family-name:var(--font-montserrat)] text-xs font-bold uppercase tracking-[0.18em] text-[#B0480A]">
                 <span className="h-px w-7 bg-[#E2640F]" />
                 Kovovýroba s praxí od roku 1992
               </span>
 
-              <h1 className="kv-up mt-3 font-[family-name:var(--font-montserrat)] text-[3rem] font-black uppercase leading-[0.84] tracking-[-0.02em] sm:text-7xl lg:text-[4.9rem]" style={{ animationDelay: "70ms" }}>
+              <h1 className="kv-up mt-3 font-[family-name:var(--font-montserrat)] text-[3rem] font-black uppercase leading-[1.08] tracking-[-0.02em] sm:text-7xl lg:text-[4.9rem]" style={{ animationDelay: "70ms" }}>
                 Zakružování
                 <br />
                 plechů
@@ -1057,7 +1065,7 @@ export default function KovovyrobaSvobodaPage() {
         >
           <div className="mx-auto grid max-w-[1440px] items-center gap-5 px-6 py-7 sm:px-10 lg:grid-cols-[auto_1fr] lg:gap-8 lg:py-8">
             <div className="lg:max-w-[220px]">
-              <span className="inline-flex items-center gap-2 font-[family-name:var(--font-montserrat)] text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9560B]">
+              <span className="inline-flex items-center gap-2 font-[family-name:var(--font-montserrat)] text-[11px] font-bold uppercase tracking-[0.2em] text-[#B0480A]">
                 <span className="h-px w-6 bg-[#E2640F]" />
                 Reálná výroba
               </span>
@@ -1107,7 +1115,7 @@ export default function KovovyrobaSvobodaPage() {
           <div className="mx-auto max-w-[1440px] px-6 py-10 sm:px-10 lg:py-12">
             <div className="mb-7 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
               <div>
-                <span className="font-[family-name:var(--font-montserrat)] text-xs font-black uppercase tracking-[0.18em] text-[#E2640F]">
+                <span className="font-[family-name:var(--font-montserrat)] text-xs font-black uppercase tracking-[0.18em] text-[#B0480A]">
                   Co pro vás
                 </span>
                 <h2 className="mt-1 font-[family-name:var(--font-montserrat)] text-4xl font-black uppercase leading-[0.9] tracking-tight sm:text-5xl">
@@ -1191,14 +1199,14 @@ export default function KovovyrobaSvobodaPage() {
               <span className="relative font-[family-name:var(--font-montserrat)] text-[11px] font-bold uppercase tracking-[0.25em] text-[#E2640F]">
                 Naše výroba
               </span>
-              <h2 className="relative mt-6 font-[family-name:var(--font-montserrat)] text-5xl font-black uppercase leading-[0.92] tracking-tight">
-                Přesnost.
+              <h2 className="relative mt-6 font-[family-name:var(--font-montserrat)] text-5xl font-black uppercase leading-[0.98] tracking-tight">
+                Zakružujeme.
                 <br />
-                Zkušenosti.
+                Svařujeme.
                 <br />
-                Kvalita.
+                Vyrábíme
                 <br />
-                <span className="text-[#E2640F]">To je naše výroba.</span>
+                <span className="text-[#E2640F]">podle výkresu.</span>
               </h2>
               <p className="relative mt-6 text-sm text-white/65">
                 Stáčení a svařování s praxí od roku 1992.
@@ -1214,28 +1222,17 @@ export default function KovovyrobaSvobodaPage() {
                 <Icon name="blueprint" className="h-5 w-5 text-[#E2640F]" />
               </div>
               <dl className="grid grid-cols-1 gap-px bg-[#17140F]/12 sm:grid-cols-2">
-                {TECH_ROWS.map(([k, v]) => {
-                  // Nepotvrzené hodnoty (TODO:) vykreslíme ztlumeně a italic —
-                  // čitelný interní signál „doplnit", ne tvrzení směrem ven.
-                  const isTodo = v.includes("TODO");
-                  return (
-                    <div key={k} className="flex items-start gap-3 bg-[#FBF8F1] px-6 py-[1.1rem]">
-                      <span
-                        className={`mt-[6px] h-2 w-2 shrink-0 ${isTodo ? "bg-[#C0B7A6]" : "bg-[#E2640F]"}`}
-                      />
-                      <div>
-                        <dt className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-wider text-[#17140F]">
-                          {k}
-                        </dt>
-                        <dd
-                          className={`mt-0.5 text-[13.5px] leading-snug ${isTodo ? "italic text-[#9a9282]" : "text-[#5C564C]"}`}
-                        >
-                          {v}
-                        </dd>
-                      </div>
+                {TECH_ROWS.map(([k, v]) => (
+                  <div key={k} className="flex items-start gap-3 bg-[#FBF8F1] px-6 py-[1.1rem]">
+                    <span className="mt-[6px] h-2 w-2 shrink-0 bg-[#E2640F]" />
+                    <div>
+                      <dt className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-wider text-[#17140F]">
+                        {k}
+                      </dt>
+                      <dd className="mt-0.5 text-[13.5px] leading-snug text-[#5C564C]">{v}</dd>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </dl>
             </div>
           </div>
@@ -1261,7 +1258,7 @@ export default function KovovyrobaSvobodaPage() {
           <div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-10 lg:py-14">
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
               <div className="flex items-end gap-4">
-                <span className="font-[family-name:var(--font-montserrat)] text-sm font-black text-[#E2640F]">
+                <span className="font-[family-name:var(--font-montserrat)] text-sm font-black text-[#B0480A]">
                   02
                 </span>
                 <h2 className="font-[family-name:var(--font-montserrat)] text-3xl font-black uppercase leading-[0.95] tracking-tight sm:text-4xl">
@@ -1270,34 +1267,42 @@ export default function KovovyrobaSvobodaPage() {
                   ukázky výroby
                 </h2>
               </div>
-              <p className="max-w-sm text-sm leading-snug text-[#5C564C]">
-                Reálné zakázky — především technická kovovýroba (zakružování,
-                profily, kužely, TIG svařování), doplňkově i stavební kovové
-                konstrukce (schodiště, zábradlí).
-              </p>
             </div>
 
-            {/* 4 sloupce na desktopu → 1. řada technické fotky, 2. řada
-                stavební (vizuálně drží technickou kovovýrobu v čele). */}
-            <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {GALLERY.map((g) => (
-                <li
-                  key={g.src}
-                  className="group relative aspect-[4/3] overflow-hidden bg-[#16130d]"
-                >
-                  <Image
-                    src={g.src}
-                    alt={g.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                  />
-                  {/* jemné spodní ztmavení — drží jednotný tmavý ořez galerie */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
-                </li>
+            {/* Dvě pojmenované větve: hlavní „Technická výroba" první,
+                doplňková „Konstrukce a montáže" druhá — hierarchie je hned
+                čitelná. Na desktopu každá větev = jedna řada 4 fotek. */}
+            <div className="space-y-7">
+              {GALLERY_GROUPS.map((group) => (
+                <div key={group.label}>
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="h-px w-6 bg-[#B0480A]" />
+                    <h3 className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-[0.18em] text-[#B0480A]">
+                      {group.label}
+                    </h3>
+                  </div>
+                  <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+                    {group.items.map((g) => (
+                      <li
+                        key={g.src}
+                        className="group relative aspect-[4/3] overflow-hidden bg-[#16130d]"
+                      >
+                        <Image
+                          src={g.src}
+                          alt={g.alt}
+                          fill
+                          loading="lazy"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                        />
+                        {/* jemné spodní ztmavení — drží jednotný tmavý ořez galerie */}
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </section>
 
@@ -1305,7 +1310,7 @@ export default function KovovyrobaSvobodaPage() {
         <section id="postup" className="border-t border-[#17140F]/10">
           <div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-10 lg:py-14">
             <div className="mb-10 flex items-end gap-4">
-              <span className="font-[family-name:var(--font-montserrat)] text-sm font-black text-[#E2640F]">
+              <span className="font-[family-name:var(--font-montserrat)] text-sm font-black text-[#B0480A]">
                 03
               </span>
               <h2 className="font-[family-name:var(--font-montserrat)] text-3xl font-black uppercase leading-[0.95] tracking-tight sm:text-4xl">
@@ -1409,10 +1414,11 @@ export default function KovovyrobaSvobodaPage() {
               </ul>
             </div>
 
-            {/* orange contact panel */}
+            {/* orange contact panel — telefon nahoře a výrazně, střed vyplněn
+                praktickým „Co poslat k nacenění" (pomáhá tech. nákupčímu). */}
             <div
               id="kontakt"
-              className="relative flex flex-col justify-between overflow-hidden bg-[#E2640F] p-8 text-white"
+              className="relative flex flex-col gap-6 overflow-hidden bg-[#E2640F] p-8 text-white"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-20"
@@ -1428,48 +1434,59 @@ export default function KovovyrobaSvobodaPage() {
                   <br />
                   poptávku
                 </h2>
-                <p className="mt-4 text-sm text-white/90">
-                  Ozveme se vám co nejdříve. Pošlete výkres nebo nám popište,
-                  co potřebujete zakružit či svařit.
+                <p className="mt-4 text-sm leading-relaxed text-white/90">
+                  Pošlete výkres nebo popište, co potřebujete zakružit či svařit
+                  — ozveme se vám co nejdříve.
                 </p>
               </div>
 
-              {/* co poptat — vyplní panel a drží industriální charakter */}
-              <ul className="relative my-6 space-y-2.5 border-y border-white/25 py-5">
-                {["Zakružování plechů a profilů", "Atypické tvary a kužely", "TIG svařování nerezu i hliníku"].map(
-                  (t) => (
+              {/* telefon výrazně + kontakt (vysoko v panelu) */}
+              <div className="relative">
+                <a
+                  href={PHONE_HREF}
+                  className="flex items-center gap-3 border-y-2 border-white/30 py-3 font-[family-name:var(--font-montserrat)] text-2xl font-black tracking-wide hover:underline"
+                >
+                  <Icon name="phone" className="h-6 w-6 shrink-0" />
+                  +420 602 972 415
+                </a>
+                <ul className="mt-3 space-y-2">
+                  <li>
+                    <a
+                      href={MAIL_HREF}
+                      className="flex items-center gap-3 text-sm font-semibold hover:underline"
+                    >
+                      <Icon name="mail" className="h-5 w-5 shrink-0" />
+                      info@kovovyrobasvoboda.cz
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-3 text-sm text-white/85">
+                    <Icon name="clock" className="h-5 w-5 shrink-0" />
+                    Po telefonické dohodě
+                  </li>
+                </ul>
+              </div>
+
+              {/* Co poslat k nacenění — vyplní střed a pomůže nákupčímu */}
+              <div className="relative border-t border-white/25 pt-5">
+                <h3 className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-[0.18em] text-white">
+                  Co poslat k nacenění
+                </h3>
+                <ul className="mt-3 grid grid-cols-1 gap-2">
+                  {[
+                    "Výkres nebo náčrt",
+                    "Materiál (ocel / nerez / hliník)",
+                    "Rozměry",
+                    "Počet kusů",
+                    "Požadovaný termín",
+                    "PDF / DXF / DWG, pokud je k dispozici",
+                  ].map((t) => (
                     <li key={t} className="flex items-center gap-2.5 text-sm font-semibold">
                       <Icon name="check" className="h-4 w-4 shrink-0 text-white" />
                       {t}
                     </li>
-                  ),
-                )}
-              </ul>
-
-              <ul className="relative space-y-3">
-                <li>
-                  <a
-                    href={PHONE_HREF}
-                    className="flex items-center gap-3 font-[family-name:var(--font-montserrat)] text-lg font-black tracking-wide hover:underline"
-                  >
-                    <Icon name="phone" className="h-5 w-5" />
-                    +420 602 972 415
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={MAIL_HREF}
-                    className="flex items-center gap-3 text-sm font-semibold hover:underline"
-                  >
-                    <Icon name="mail" className="h-5 w-5" />
-                    info@kovovyrobasvoboda.cz
-                  </a>
-                </li>
-                <li className="flex items-center gap-3 text-sm text-white/85">
-                  <Icon name="clock" className="h-5 w-5" />
-                  Po telefonické dohodě
-                </li>
-              </ul>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             {/* Technický poptávkový formulář (náhled – bez backendu).
@@ -1537,7 +1554,7 @@ export default function KovovyrobaSvobodaPage() {
                   </p>
                   <p>
                     PDF, DXF nebo DWG na{" "}
-                    <a href={MAIL_HREF} className="font-semibold text-[#C9560B] underline">
+                    <a href={MAIL_HREF} className="font-semibold text-[#B0480A] underline">
                       info@kovovyrobasvoboda.cz
                     </a>
                     . Výkres není podmínka — stačí rozměry a popis.
@@ -1579,9 +1596,10 @@ export default function KovovyrobaSvobodaPage() {
             {/* Kovová značka (čte se na tmavém pozadí) + textový wordmark
                 (světlý — vlastní logo má tmavý nápis, který by na tmavém
                 footeru nebyl čitelný). */}
+            {/* alt="" — dekorativní: hned vedle je textová identifikace firmy. */}
             <Image
               src="/clients/kovovyrobasvoboda/logo-mark.webp"
-              alt="Kovovýroba Svoboda — logo"
+              alt=""
               width={131}
               height={151}
               className="mb-4 h-14 w-auto"
