@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 /**
  * /kovovyrobasvoboda — statický klientský preview web (Kovovýroba Svoboda).
@@ -15,16 +16,27 @@ import type { Metadata } from "next";
  */
 
 const previewTitle =
-  "Kovovýroba Svoboda — zakružování plechů a profilů";
+  "Kovovýroba Svoboda — zakružování plechů a profilů, TIG svařování";
 const previewDescription =
-  "Stáčení plechů, profilů a atypických tvarů a TIG svařování nerezu i hliníku pro Jablonec nad Nisou, Liberec a Turnov. Od roku 1992.";
+  "Zakružování plechů a profilů podle výkresu, atypické tvary, kužely a TIG svařování nerezu i hliníku. Kusová i opakovaná výroba pro Jablonec nad Nisou, Liberec a Turnov. Praxe od roku 1992.";
 
 export const metadata: Metadata = {
   // Title/description cílí na klienta (Kovovýroba Svoboda), ne AutoSmartweby.
-  title: `${previewTitle} | Náhled`,
+  // SEO-ready copy; stránka ale zůstává noindex (preview) — indexace se
+  // zapne až při přechodu na vlastní doménu (rozhodnutí klienta).
+  title: previewTitle,
   description: previewDescription,
   // Klientský náhled — držet mimo indexy vyhledávačů (preview zůstává noindex).
   robots: { index: false, follow: false, nocache: true },
+  // Vlastní favicon klienta (kovová „S" značka) pro záložku prohlížeče —
+  // přebíjí globální AutoSmartweby ikonu na této preview routě.
+  icons: {
+    icon: [
+      { url: "/clients/kovovyrobasvoboda/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/clients/kovovyrobasvoboda/favicon.ico",
+    apple: "/clients/kovovyrobasvoboda/favicon-180.png",
+  },
   // Open Graph pro klientský web. Sdílení odkazu ukáže firmu klienta, ne ASW.
   // (Stránka je noindex; OG je tu pro korektní náhled při interním sdílení.)
   openGraph: {
@@ -47,6 +59,7 @@ export const metadata: Metadata = {
 const NAV = [
   { label: "SLUŽBY", href: "#sluzby" },
   { label: "MOŽNOSTI", href: "#moznosti" },
+  { label: "UKÁZKY", href: "#dilna" },
   { label: "POSTUP", href: "#postup" },
   { label: "FAQ", href: "#faq" },
   { label: "KONTAKT", href: "#kontakt" },
@@ -87,6 +100,13 @@ const SERVICES = [
     title: "ZAKÁZKY PODLE VÝKRESU",
     text: "Výroba přesně podle výkresu nebo dodaného zadání.",
   },
+  // Doplňková (vedlejší) větev — stavební kovovýroba. Záměrně až poslední,
+  // aby hlavní B2B positioning zůstal technická kovovýroba.
+  {
+    icon: "stairs",
+    title: "SCHODIŠTĚ, ZÁBRADLÍ A KONSTRUKCE",
+    text: "Doplňkově i venkovní schodiště, zábradlí a menší ocelové konstrukce.",
+  },
 ] as const;
 
 /* Per-karta „fake photo" metalické pozadí — vrstvené gradienty simulující
@@ -103,17 +123,27 @@ const CARD_BG = [
   "radial-gradient(60% 48% at 70% 112%, rgba(255,150,46,0.75), transparent 58%), radial-gradient(40% 32% at 70% 110%, rgba(255,224,170,0.6), transparent 60%), radial-gradient(130% 100% at 18% -6%, rgba(160,170,184,0.30), transparent 48%), linear-gradient(160deg, #2c251c 0%, #120f08 60%, #1e1812 100%)",
   // zakázky podle výkresu — blueprint mřížka + jemný lesk
   "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.07) 47%, transparent 58%), repeating-linear-gradient(0deg, rgba(141,155,171,0.10) 0 1px, transparent 1px 20px), repeating-linear-gradient(90deg, rgba(141,155,171,0.10) 0 1px, transparent 1px 20px), radial-gradient(120% 100% at 50% -8%, rgba(150,164,180,0.26), transparent 52%), linear-gradient(160deg, #26241e 0%, #0f0e0a 60%, #1b1813 100%)",
+  // schodiště / zábradlí / konstrukce — svislý ocelový brushed + lesk
+  "linear-gradient(105deg, transparent 28%, rgba(255,255,255,0.10) 46%, transparent 58%), radial-gradient(130% 100% at 30% -6%, rgba(168,176,188,0.32), transparent 50%), repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 9px), radial-gradient(110% 100% at 50% 130%, rgba(0,0,0,0.55), transparent 60%), linear-gradient(158deg, #2a2620 0%, #110f09 60%, #1c1812 100%)",
 ];
 
+/* Výrobní limity. Číselné hodnoty jsou zadané klientem a NEMĚNÍ se.
+   Údaje, které zatím nemáme potvrzené, jsou označené `TODO:` a v UI se
+   vykreslí ztlumeně (viz render tabulky) — slouží jako jasný signál
+   „doplnit se zákazníkem", ne jako tvrzení. */
 const TECH_ROWS = [
   ["VÁLEC", "cca Ø 1500 mm / šíře 2000 mm / síla 8 mm"],
   ["PROFILY", "cca 140–160 H / HE"],
   ["ÚHELNÍK", "100 × 100 mm"],
   ["KULATINA", "cca 60 mm"],
   ["PÁSOVINA", "120 × 20 mm"],
+  ["MIN. PRŮMĚR ZAKRUŽENÍ", "TODO: potvrdit se zákazníkem"],
+  ["MAX. DÉLKA / ŠÍŘE", "šíře cca 2000 mm; délka TODO: potvrdit"],
+  ["TL. MATERIÁLU", "max. 8 mm dle materiálu (ocel / nerez / hliník)"],
+  ["MATERIÁLY", "konstrukční ocel, nerezová ocel, hliník"],
+  ["VSTUPY / PODKLADY", "výkres, PDF, DXF, DWG (nebo rozměry a popis)"],
+  ["VÝROBA", "kusová i opakovaná (série)"],
   ["TRUBKY", "neprovádíme"],
-  ["MATERIÁLY", "nerezová ocel, hliník, konstrukční ocel"],
-  ["TL. MATERIÁLU", "max. 8 mm dle materiálu"],
 ];
 
 const TABLE_TRUST = [
@@ -124,10 +154,26 @@ const TABLE_TRUST = [
 ];
 
 const STEPS = [
-  { n: "1", title: "KONTAKTUJTE NÁS", text: "Zavolejte nebo pošlete poptávku se zadáním." },
-  { n: "2", title: "OVĚŘÍME MOŽNOSTI", text: "Prověříme výkres, materiál a termín." },
-  { n: "3", title: "VYROBÍME", text: "Zakroužíme, svaříme a zkontrolujeme kvalitu." },
-  { n: "4", title: "DODÁME", text: "Domluvený termín a způsob předání." },
+  {
+    n: "1",
+    title: "POŠLETE VÝKRES NEBO POPTÁVKU",
+    text: "Telefonicky, e-mailem, PDF / DXF / DWG. Výkres není podmínka — stačí rozměry a popis.",
+  },
+  {
+    n: "2",
+    title: "NACENĚNÍ A TERMÍN",
+    text: "Ověříme materiál, rozměry, technologii a domluvíme termín.",
+  },
+  {
+    n: "3",
+    title: "VÝROBA",
+    text: "Zakružování, příprava dílů a TIG svařování podle zadání.",
+  },
+  {
+    n: "4",
+    title: "PŘEDÁNÍ NEBO DOPRAVA",
+    text: "Osobní odběr, předání nebo domluvená doprava.",
+  },
 ];
 
 const REASONS = [
@@ -139,13 +185,93 @@ const REASONS = [
   { strong: "REGIONÁLNĚ PRO", rest: "Jablonec nad Nisou, Liberec a Turnov" },
 ];
 
-const FAQ = [
-  "Jak rychle je možné zakázku dodat?",
-  "Jak se určuje cena?",
-  "Jaké podklady potřebujete?",
-  "Jaké materiály svařujete?",
-  "Děláte zakružování trubek?",
-  "V jakých lokalitách působíte?",
+/* Technické FAQ pro nákupčího — věcně, krátce, bez marketingových frází.
+   Renderuje se jako nativní <details> accordion (bez JS, plně přístupné). */
+const FAQ: { q: string; a: string }[] = [
+  {
+    q: "Jaký nejmenší a největší průměr umíte zakružit?",
+    a: "Největší průměr u válce je cca Ø 1500 mm. Nejmenší průměr závisí na materiálu a profilu — ověříme podle výkresu. (TODO: minimální průměr potvrdit se zákazníkem.)",
+  },
+  {
+    q: "Umíte pracovat s nerezem i hliníkem?",
+    a: "Ano. Zakružujeme i svařujeme nerezovou ocel, hliník a konstrukční ocel.",
+  },
+  {
+    q: "Děláte kusovou výrobu i série?",
+    a: "Ano, vyrábíme kusově i v opakovaných sériích podle zadání.",
+  },
+  {
+    q: "Můžu poslat výkres v DXF nebo DWG?",
+    a: "Ano. Přijímáme výkres, PDF, DXF i DWG. Pokud výkres nemáte, stačí rozměry a popis dílu.",
+  },
+  {
+    q: "Jak rychle naceníte poptávku?",
+    a: "Ozveme se co nejdříve po telefonické nebo e-mailové domluvě. Přesný termín potvrdíme podle materiálu, rozměru a vytížení výroby.",
+  },
+  {
+    q: "Děláte i TIG svařování?",
+    a: "Ano, TIG svařování nerezu i hliníku — samostatně i jako součást zakázky.",
+  },
+  {
+    q: "Umíte vyrobit díl přesně podle výkresu?",
+    a: "Ano. Vyrábíme přesně podle dodaného výkresu nebo zadání, včetně atypických tvarů a kuželů.",
+  },
+  {
+    q: "Umíte vyrobit i jednoduché stavební konstrukce?",
+    a: "Ano, jako doplněk k hlavní technické kovovýrobě. Zvládneme venkovní schodiště, zábradlí a menší ocelové konstrukce; těžištěm naší výroby ale zůstává zakružování plechů a profilů, atypické tvary a TIG svařování.",
+  },
+  {
+    q: "Odkud jste a kam dodáváte?",
+    a: "Sídlíme v Jablonci nad Nisou. Běžně pracujeme pro Liberec, Turnov a okolí; doprava nebo osobní předání po domluvě.",
+  },
+];
+
+/* Galerie „Naše dílna / Ukázky výroby" — reálné B2B fotky obou větví výroby:
+   technická kovovýroba (válcovačka, zakroužené profily, stroje) i stavební
+   kovovýroba (venkovní schodiště, zábradlí, ocelové konstrukce, nerez).
+   ŽÁDNÝ soubor se neopakuje s proof pásem ani s kartami služeb (každá fotka
+   je na stránce právě jednou). Vyloučené: dekorativní kované brány a fotky
+   s nepořádkem. Lazy-load přes next/image. */
+const GALLERY: { src: string; alt: string }[] = [
+  // — technická kovovýroba (hlavní positioning, vždy v čele galerie) —
+  // Pozn. k překryvům: svářeč ZDE záměrně NENÍ (zůstává jen na TIG kartě,
+  // aby se neopakoval poblíž). Jediný překryv je nerezový kužel (hero proof
+  // + galerie) — schváleno klientem a obě výskyty jsou daleko od sebe.
+  // Dva záběry zakružovačky (zakruzovacka = celek, stroj = detail) jsou
+  // v řadě nesousední (pozice 1 a 4).
+  {
+    src: "/clients/kovovyrobasvoboda/zakruzovacka.jpg",
+    alt: "Zakružovačka profilů s ovládacím panelem v dílně",
+  },
+  {
+    src: "/clients/kovovyrobasvoboda/oblouk.jpg",
+    alt: "Ocelový profil zakroužený do přesného oblouku",
+  },
+  {
+    src: "/clients/kovovyrobasvoboda/cones.jpg",
+    alt: "Nerezový kužel — atypický tvar vyrobený podle výkresu",
+  },
+  {
+    src: "/clients/kovovyrobasvoboda/stroj.jpg",
+    alt: "Detail zakružovačky profilů — profil stočený do spirály",
+  },
+  // — stavební kovovýroba (doplňková větev, až za technickými) —
+  {
+    src: "/clients/kovovyrobasvoboda/schodiste-venkovni.jpg",
+    alt: "Pozinkované venkovní schodiště se zábradlím u rodinného domu",
+  },
+  {
+    src: "/clients/kovovyrobasvoboda/konstrukce.jpg",
+    alt: "Venkovní ocelová konstrukce se schodištěm u budovy",
+  },
+  {
+    src: "/clients/kovovyrobasvoboda/zabradli-nerez.jpg",
+    alt: "Moderní nerezové zábradlí s vodorovnými výplněmi",
+  },
+  {
+    src: "/clients/kovovyrobasvoboda/zabradli-interier.jpg",
+    alt: "Moderní interiérové ocelové zábradlí u schodiště",
+  },
 ];
 
 /* ── Inline SVG ikony (oranžová čárová kresba) ── */
@@ -197,6 +323,13 @@ function Icon({ name, className = "" }: { name: string; className?: string }) {
           <path d="M40 24l3-1M40 30l3 1M37 20l2-3" />
         </svg>
       );
+    case "stairs": // schodiště + zábradlí
+      return (
+        <svg {...common}>
+          <path d="M8 40h8v-8h8v-8h8v-8h8" />
+          <path d="M8 18v22M16 24v8M24 18v6M32 13v3" />
+        </svg>
+      );
     case "blueprint": // výkres
       return (
         <svg {...common}>
@@ -236,28 +369,6 @@ function Icon({ name, className = "" }: { name: string; className?: string }) {
     default:
       return null;
   }
-}
-
-/* Logo značka — oranžová geometrická hexagonální značka (stylizovaný
-   zakružený plech / kovová „květina"), podle reference. */
-function LogoMark({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 48 48"
-      className={className}
-      fill="none"
-      stroke="#E2640F"
-      strokeWidth={2}
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      aria-hidden
-    >
-      <polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" />
-      <path d="M24 11c-5.5 4.5-8.5 8.8-8.5 13 0 4.3 3.4 7.7 8.5 8.8 5.1-1.1 8.5-4.5 8.5-8.8 0-4.2-3-8.5-8.5-13Z" />
-      <path d="M24 19.5v15.5" />
-      <path d="M15.8 19.5c2.3 3.3 5 5 8.2 5s5.9-1.7 8.2-5" />
-    </svg>
-  );
 }
 
 /* Sdílené SVG defs (gradienty, clip, filtry) — renderované jednou v rootu.
@@ -716,15 +827,30 @@ const MAIL_HREF = "mailto:info@kovovyrobasvoboda.cz";
    závislosti na konfiguraci (remotePatterns/domén).
    ══════════════════════════════════════════════════════════════════════ */
 type AssetPath = string | null;
-type ServiceAssetKey = "rolling" | "profiles" | "cones" | "welding" | "blueprint";
+type ServiceAssetKey =
+  | "rolling"
+  | "profiles"
+  | "cones"
+  | "welding"
+  | "construction"
+  | "blueprint";
 
+/* Asset mapa karet. KAŽDÁ fotka je na stránce jen jednou — proto se kartové
+   fotky NEpřekrývají s proof pásem (válcovačka + jednotlivý nerez kužel) ani
+   s galerií. Karta „kužely" proto ukazuje velké kužely na valníku, ne tentýž
+   kužel jako proof. */
 const VISUAL_ASSETS: { hero: AssetPath; services: Record<ServiceAssetKey, AssetPath> } = {
+  // Hero zůstává čistý procedurální SVG render (rozhodnutí klienta) — reálný
+  // proof je hned pod hero (HeroProofStrip) a v sekci „Naše dílna".
   hero: null,
   services: {
-    rolling: null,
-    profiles: null,
-    cones: null,
-    welding: null,
+    rolling: "/clients/kovovyrobasvoboda/rolling.jpg", // paleta zakroužených válců
+    profiles: "/clients/kovovyrobasvoboda/profiles.jpg", // prstenec U160 Ø1260
+    cones: "/clients/kovovyrobasvoboda/kuzely-valnik.jpg", // dva velké nerez kužely
+    welding: "/clients/kovovyrobasvoboda/welding.jpg", // svářeč u válce (TIG)
+    construction: "/clients/kovovyrobasvoboda/schodiste.jpg", // venkovní schodiště
+    // „Zakázky podle výkresu" — bez čisté fotky výkresu ponecháváme SVG
+    // blueprint motiv (přesnější než dosadit náhodný díl).
     blueprint: null,
   },
 };
@@ -735,6 +861,7 @@ const CARD_ICON_TO_ASSET: Record<string, ServiceAssetKey> = {
   profile: "profiles",
   cone: "cones",
   weld: "welding",
+  stairs: "construction",
   blueprint: "blueprint",
 };
 
@@ -748,10 +875,14 @@ const KV_ANIM_CSS = `
 .kv-up { opacity: 0; animation: kvUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
 .kv-in { opacity: 0; animation: kvIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
 .kv-drift { animation: kvDrift 9s ease-in-out infinite; }
+/* FAQ accordion: „+" se otočením o 45° změní na „×" při otevření. */
+.kv-faq-plus { display: inline-block; line-height: 1; transition: transform 0.2s ease; }
+.kv-faq[open] .kv-faq-plus { transform: rotate(45deg); }
+.kv-faq > summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .kv-up, .kv-in { animation: none !important; opacity: 1 !important; transform: none !important; }
   .kv-drift { animation: none !important; }
-  .kv-card, .kv-card * { transition: none !important; }
+  .kv-card, .kv-card *, .kv-faq-plus { transition: none !important; }
 }
 `;
 
@@ -768,13 +899,21 @@ export default function KovovyrobaSvobodaPage() {
         backgroundSize: "26px 26px, 100% 100%",
       }}
     >
+      <KovoJsonLd />
       <MetalDefs />
       <style dangerouslySetInnerHTML={{ __html: KV_ANIM_CSS }} />
       {/* ── Header ── */}
       <header className="sticky top-0 z-50 border-b border-[#17140F]/15 bg-[#F4EEE2]/95 backdrop-blur">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-6 py-3 sm:px-10">
           <a href="#top" className="flex items-center gap-3 leading-none">
-            <LogoMark className="h-14 w-14 shrink-0" />
+            <Image
+              src="/clients/kovovyrobasvoboda/logo-mark.webp"
+              alt="Kovovýroba Svoboda — logo"
+              width={131}
+              height={151}
+              priority
+              className="h-14 w-auto shrink-0"
+            />
             <span className="font-[family-name:var(--font-montserrat)]">
               <span className="block text-[12px] font-bold uppercase tracking-[0.2em] text-[#17140F]">
                 Kovovýroba
@@ -871,18 +1010,21 @@ export default function KovovyrobaSvobodaPage() {
               </div>
             </div>
 
-            {/* center — dominantní kovový vizuál (zvětšený, posunutý k textu).
-               ASSET SWAP: až bude HERO_ASSET, vykreslí se <img> místo SVG. */}
-            <div className="kv-in relative lg:-ml-8 lg:mr-0" style={{ animationDelay: "150ms" }}>
+            {/* center — dominantní kovový vizuál. Drží se ve svém sloupci
+               (žádný negativní margin do textu), aby kovové motivy nekolidovaly
+               s headline. ASSET SWAP: až bude HERO_ASSET, vykreslí se <img>. */}
+            <div className="kv-in relative lg:mr-0" style={{ animationDelay: "150ms" }}>
               {VISUAL_ASSETS.hero ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={VISUAL_ASSETS.hero}
                   alt="Kovové výrobky — zakružený plech, profily, trubka a kužel"
-                  className="h-auto w-full origin-center lg:scale-[1.2]"
+                  width={720}
+                  height={520}
+                  priority
+                  className="h-auto w-full origin-center lg:scale-[1.05]"
                 />
               ) : (
-                <HeroMetalVisual className="h-auto w-full origin-center lg:scale-[1.2]" />
+                <HeroMetalVisual className="h-auto w-full origin-center lg:scale-[1.05]" />
               )}
             </div>
 
@@ -906,35 +1048,99 @@ export default function KovovyrobaSvobodaPage() {
           </div>
         </section>
 
+        {/* ── Hero proof pás — reálné fotky hned pod hero ──
+            Vyvažuje procedurální hero render důkazem skutečné dílny
+            (válcovačka + svářeč). Tmavé ořezy, oranžový akcent, drží téma. */}
+        <section
+          aria-label="Reálné fotky z výroby"
+          className="border-b border-[#17140F]/10 bg-[#EFE6D3]"
+        >
+          <div className="mx-auto grid max-w-[1440px] items-center gap-5 px-6 py-7 sm:px-10 lg:grid-cols-[auto_1fr] lg:gap-8 lg:py-8">
+            <div className="lg:max-w-[220px]">
+              <span className="inline-flex items-center gap-2 font-[family-name:var(--font-montserrat)] text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9560B]">
+                <span className="h-px w-6 bg-[#E2640F]" />
+                Reálná výroba
+              </span>
+              <p className="mt-2 font-[family-name:var(--font-montserrat)] text-lg font-black uppercase leading-[0.95] tracking-tight text-[#17140F]">
+                Ne vizualizace —<br />naše dílna
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {[
+                {
+                  src: "/clients/kovovyrobasvoboda/valcovacka.jpg",
+                  alt: "Zakružovačka plechů s velkým zakrouženým válcem v dílně Kovovýroby Svoboda",
+                  caption: "Zakružování plechů",
+                },
+                {
+                  src: "/clients/kovovyrobasvoboda/cones.jpg",
+                  alt: "Hotový nerezový kužel vyrobený na míru podle výkresu",
+                  caption: "Kužely a atypické tvary",
+                },
+              ].map((p) => (
+                <figure
+                  key={p.src}
+                  className="group relative aspect-[4/3] overflow-hidden bg-[#16130d]"
+                >
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 40vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                  <figcaption className="absolute bottom-0 left-0 flex items-center gap-2 p-3.5">
+                    <span className="h-2 w-2 shrink-0 bg-[#E2640F]" />
+                    <span className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-wide text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+                      {p.caption}
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── Co pro vás vyrobíme ── */}
         <section id="sluzby" className="bg-[#EFE8DA]/50">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-stretch gap-4 px-6 py-10 sm:grid-cols-2 sm:px-10 md:grid-cols-3 lg:grid-cols-[0.58fr_repeat(5,1fr)] lg:gap-3.5 lg:py-12">
-            <div className="flex flex-col justify-center pr-0 sm:col-span-2 md:col-span-3 lg:col-span-1">
-              <span className="font-[family-name:var(--font-montserrat)] text-xs font-black uppercase tracking-[0.18em] text-[#E2640F]">
-                Co pro vás
-              </span>
-              <h2 className="mt-1 font-[family-name:var(--font-montserrat)] text-4xl font-black uppercase leading-[0.9] tracking-tight sm:text-5xl">
-                Vyrobíme
-              </h2>
+          <div className="mx-auto max-w-[1440px] px-6 py-10 sm:px-10 lg:py-12">
+            <div className="mb-7 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+              <div>
+                <span className="font-[family-name:var(--font-montserrat)] text-xs font-black uppercase tracking-[0.18em] text-[#E2640F]">
+                  Co pro vás
+                </span>
+                <h2 className="mt-1 font-[family-name:var(--font-montserrat)] text-4xl font-black uppercase leading-[0.9] tracking-tight sm:text-5xl">
+                  Vyrobíme
+                </h2>
+              </div>
+              <p className="max-w-md text-sm leading-snug text-[#5C564C]">
+                Hlavní zaměření je technická kovovýroba pro firmy — zakružování
+                plechů a profilů, kužely a TIG svařování. Doplňkově vyrábíme
+                i stavební kovové konstrukce.
+              </p>
             </div>
 
-            {SERVICES.map((card, i) => (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-3.5">
+              {SERVICES.map((card, i) => (
               <article
                 key={card.title}
                 className="kv-card group relative flex min-h-[280px] flex-col justify-end overflow-hidden bg-[#16130d] text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_-14px_rgba(0,0,0,0.7)]"
               >
-                {/* tmavá báze + produktový motiv. ASSET SWAP: až bude
-                    SERVICE_CARD_ASSETS[card.icon], vykreslí se <img> místo SVG. */}
+                {/* tmavá báze + produktový motiv. Když je v asset mapě reálná
+                    fotka, vykreslí se přes next/image (auto WebP/AVIF, lazy);
+                    jinak fallback na procedurální SVG (CardMotif). */}
                 <div
                   className="pointer-events-none absolute inset-0"
                   style={{ backgroundImage: CARD_BG[i] }}
                 />
                 {VISUAL_ASSETS.services[CARD_ICON_TO_ASSET[card.icon]] ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={VISUAL_ASSETS.services[CARD_ICON_TO_ASSET[card.icon]] as string}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    alt={`${card.title} — Kovovýroba Svoboda`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 ) : (
                   <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-[1.04]">
@@ -961,7 +1167,8 @@ export default function KovovyrobaSvobodaPage() {
                   </p>
                 </div>
               </article>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
@@ -1007,17 +1214,28 @@ export default function KovovyrobaSvobodaPage() {
                 <Icon name="blueprint" className="h-5 w-5 text-[#E2640F]" />
               </div>
               <dl className="grid grid-cols-1 gap-px bg-[#17140F]/12 sm:grid-cols-2">
-                {TECH_ROWS.map(([k, v]) => (
-                  <div key={k} className="flex items-start gap-3 bg-[#FBF8F1] px-6 py-[1.1rem]">
-                    <span className="mt-[6px] h-2 w-2 shrink-0 bg-[#E2640F]" />
-                    <div>
-                      <dt className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-wider text-[#17140F]">
-                        {k}
-                      </dt>
-                      <dd className="mt-0.5 text-[13.5px] leading-snug text-[#5C564C]">{v}</dd>
+                {TECH_ROWS.map(([k, v]) => {
+                  // Nepotvrzené hodnoty (TODO:) vykreslíme ztlumeně a italic —
+                  // čitelný interní signál „doplnit", ne tvrzení směrem ven.
+                  const isTodo = v.includes("TODO");
+                  return (
+                    <div key={k} className="flex items-start gap-3 bg-[#FBF8F1] px-6 py-[1.1rem]">
+                      <span
+                        className={`mt-[6px] h-2 w-2 shrink-0 ${isTodo ? "bg-[#C0B7A6]" : "bg-[#E2640F]"}`}
+                      />
+                      <div>
+                        <dt className="font-[family-name:var(--font-montserrat)] text-[12px] font-black uppercase tracking-wider text-[#17140F]">
+                          {k}
+                        </dt>
+                        <dd
+                          className={`mt-0.5 text-[13.5px] leading-snug ${isTodo ? "italic text-[#9a9282]" : "text-[#5C564C]"}`}
+                        >
+                          {v}
+                        </dd>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </dl>
             </div>
           </div>
@@ -1038,12 +1256,57 @@ export default function KovovyrobaSvobodaPage() {
           </div>
         </section>
 
+        {/* ── Naše dílna / Ukázky výroby ── */}
+        <section id="dilna" className="border-t border-[#17140F]/10 bg-[#EFE8DA]/50">
+          <div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-10 lg:py-14">
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+              <div className="flex items-end gap-4">
+                <span className="font-[family-name:var(--font-montserrat)] text-sm font-black text-[#E2640F]">
+                  02
+                </span>
+                <h2 className="font-[family-name:var(--font-montserrat)] text-3xl font-black uppercase leading-[0.95] tracking-tight sm:text-4xl">
+                  Naše dílna
+                  <br />
+                  ukázky výroby
+                </h2>
+              </div>
+              <p className="max-w-sm text-sm leading-snug text-[#5C564C]">
+                Reálné zakázky — především technická kovovýroba (zakružování,
+                profily, kužely, TIG svařování), doplňkově i stavební kovové
+                konstrukce (schodiště, zábradlí).
+              </p>
+            </div>
+
+            {/* 4 sloupce na desktopu → 1. řada technické fotky, 2. řada
+                stavební (vizuálně drží technickou kovovýrobu v čele). */}
+            <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {GALLERY.map((g) => (
+                <li
+                  key={g.src}
+                  className="group relative aspect-[4/3] overflow-hidden bg-[#16130d]"
+                >
+                  <Image
+                    src={g.src}
+                    alt={g.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                  {/* jemné spodní ztmavení — drží jednotný tmavý ořez galerie */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         {/* ── Jak probíhá spolupráce ── */}
         <section id="postup" className="border-t border-[#17140F]/10">
           <div className="mx-auto max-w-[1440px] px-6 py-12 sm:px-10 lg:py-14">
             <div className="mb-10 flex items-end gap-4">
               <span className="font-[family-name:var(--font-montserrat)] text-sm font-black text-[#E2640F]">
-                02
+                03
               </span>
               <h2 className="font-[family-name:var(--font-montserrat)] text-3xl font-black uppercase leading-[0.95] tracking-tight sm:text-4xl">
                 Jak probíhá
@@ -1086,7 +1349,7 @@ export default function KovovyrobaSvobodaPage() {
           <div className="relative mx-auto grid max-w-[1440px] gap-10 px-6 py-12 sm:px-10 lg:grid-cols-[0.8fr_1.2fr] lg:py-14">
             <div>
               <span className="font-[family-name:var(--font-montserrat)] text-[11px] font-bold uppercase tracking-[0.25em] text-[#E2640F]">
-                03
+                04
               </span>
               <h2 className="mt-4 font-[family-name:var(--font-montserrat)] text-3xl font-black uppercase leading-[0.95] tracking-tight sm:text-4xl">
                 Proč se obrátit
@@ -1119,20 +1382,28 @@ export default function KovovyrobaSvobodaPage() {
               <h2 className="mb-6 font-[family-name:var(--font-montserrat)] text-2xl font-black uppercase tracking-tight">
                 FAQ
               </h2>
+              {/* Nativní <details> accordion — bez JS, plně přístupný
+                  (klávesnice, screen reader). „+" se přepne na „–" přes
+                  [open] selektor v KV_ANIM_CSS. */}
               <ul className="divide-y divide-[#17140F]/12 border-y border-[#17140F]/12">
-                {FAQ.map((q) => (
-                  <li key={q}>
-                    <div className="flex items-center justify-between gap-4 py-4">
-                      <span className="font-[family-name:var(--font-montserrat)] text-sm font-bold text-[#17140F]">
-                        {q}
-                      </span>
-                      <span
-                        aria-hidden
-                        className="flex h-6 w-6 shrink-0 items-center justify-center border border-[#17140F]/25 text-[#E2640F]"
-                      >
-                        +
-                      </span>
-                    </div>
+                {FAQ.map((item) => (
+                  <li key={item.q}>
+                    <details className="kv-faq group">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4">
+                        <span className="font-[family-name:var(--font-montserrat)] text-sm font-bold text-[#17140F]">
+                          {item.q}
+                        </span>
+                        <span
+                          aria-hidden
+                          className="flex h-6 w-6 shrink-0 items-center justify-center border border-[#17140F]/25 text-[#E2640F] transition-colors group-open:border-[#E2640F] group-open:bg-[#E2640F] group-open:text-white"
+                        >
+                          <span className="kv-faq-plus">+</span>
+                        </span>
+                      </summary>
+                      <p className="pb-4 pr-10 text-[13.5px] leading-relaxed text-[#5C564C]">
+                        {item.a}
+                      </p>
+                    </details>
                   </li>
                 ))}
               </ul>
@@ -1201,27 +1472,52 @@ export default function KovovyrobaSvobodaPage() {
               </ul>
             </div>
 
-            {/* form (statický náhled – bez backendu) */}
+            {/* Technický poptávkový formulář (náhled – bez backendu).
+                TODO(backend): napojit odeslání. Plán: Tally → Make.com →
+                vlastní endpoint / e-mail. Zatím je tlačítko type="button"
+                a žádná data se neodesílají. Upload výkresu ZÁMĚRNĚ není
+                (chybí storage) — místo něj výzva poslat výkres e-mailem. */}
             <form
               className="flex flex-col gap-3.5 border border-[#17140F]/15 bg-[#FBF8F1] p-7"
-              aria-label="Poptávkový formulář (náhled)"
+              aria-label="Technická poptávka (náhled)"
             >
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-                <Field label="Jméno" name="jmeno" type="text" autoComplete="name" />
+                <Field label="Jméno / firma" name="jmeno" type="text" autoComplete="organization" />
                 <Field label="Telefon" name="telefon" type="tel" autoComplete="tel" />
               </div>
               <Field label="E-mail" name="email" type="email" autoComplete="email" />
-              <Field
-                label="Co potřebujete zakružit nebo svařit?"
-                name="poptavka"
-                type="text"
-              />
+              <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                <SelectField
+                  label="Materiál"
+                  name="material"
+                  options={[
+                    "Nevím / poradíte",
+                    "Konstrukční ocel",
+                    "Nerezová ocel",
+                    "Hliník",
+                    "Jiný",
+                  ]}
+                />
+                <SelectField
+                  label="Množství"
+                  name="mnozstvi"
+                  options={["Kusová výroba", "Malá série", "Větší série"]}
+                />
+              </div>
+              <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                <Field
+                  label="Co zakružit / svařit?"
+                  name="poptavka"
+                  type="text"
+                />
+                <Field label="Požadovaný termín" name="termin" type="text" />
+              </div>
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="zprava"
                   className="font-[family-name:var(--font-montserrat)] text-xs font-bold uppercase tracking-wider text-[#17140F]/70"
                 >
-                  Zpráva / popis zakázky
+                  Popis zakázky / rozměry
                 </label>
                 <textarea
                   id="zprava"
@@ -1230,6 +1526,33 @@ export default function KovovyrobaSvobodaPage() {
                   className="resize-none border border-[#17140F]/20 bg-white px-3 py-2.5 text-sm text-[#17140F] outline-none focus:border-[#E2640F]"
                 />
               </div>
+
+              {/* Výkres — bez reálného uploadu (chybí storage). Jen výzva
+                  poslat e-mailem + zaškrtnutí, že výkres zákazník dodá. */}
+              <div className="flex items-start gap-2.5 border border-dashed border-[#17140F]/25 bg-[#F4EEE2] px-3.5 py-3">
+                <Icon name="blueprint" className="mt-0.5 h-5 w-5 shrink-0 text-[#E2640F]" />
+                <div className="text-[12px] leading-relaxed text-[#5C564C]">
+                  <p className="font-semibold text-[#17140F]">
+                    Máte výkres? Pošlete ho e-mailem.
+                  </p>
+                  <p>
+                    PDF, DXF nebo DWG na{" "}
+                    <a href={MAIL_HREF} className="font-semibold text-[#C9560B] underline">
+                      info@kovovyrobasvoboda.cz
+                    </a>
+                    . Výkres není podmínka — stačí rozměry a popis.
+                  </p>
+                  <label className="mt-2 flex cursor-pointer items-center gap-2 font-medium text-[#17140F]">
+                    <input
+                      type="checkbox"
+                      name="vykres_emailem"
+                      className="h-4 w-4 accent-[#E2640F]"
+                    />
+                    Výkres pošlu e-mailem
+                  </label>
+                </div>
+              </div>
+
               <button
                 type="button"
                 className="mt-1 inline-flex items-center justify-center gap-2 bg-[#17140F] px-6 py-4 font-[family-name:var(--font-montserrat)] text-sm font-black uppercase tracking-widest text-white transition-colors hover:bg-[#E2640F]"
@@ -1253,6 +1576,16 @@ export default function KovovyrobaSvobodaPage() {
       <footer className="bg-[#17140F] text-white">
         <div className="mx-auto grid max-w-[1440px] gap-10 px-6 py-14 sm:px-10 md:grid-cols-3">
           <div>
+            {/* Kovová značka (čte se na tmavém pozadí) + textový wordmark
+                (světlý — vlastní logo má tmavý nápis, který by na tmavém
+                footeru nebyl čitelný). */}
+            <Image
+              src="/clients/kovovyrobasvoboda/logo-mark.webp"
+              alt="Kovovýroba Svoboda — logo"
+              width={131}
+              height={151}
+              className="mb-4 h-14 w-auto"
+            />
             <div className="font-[family-name:var(--font-montserrat)] leading-none">
               <span className="block text-xl font-black uppercase tracking-tight">
                 Kovovýroba
@@ -1313,7 +1646,7 @@ export default function KovovyrobaSvobodaPage() {
         <div className="border-t border-white/10">
           <div className="mx-auto max-w-[1440px] px-6 py-5 sm:px-10">
             <p className="text-xs text-white/45">
-              © 2024 Kovovýroba Svoboda. Všechna práva vyhrazena.
+              © 2026 Kovovýroba Svoboda. Všechna práva vyhrazena.
             </p>
           </div>
         </div>
@@ -1349,6 +1682,91 @@ function Field({
         autoComplete={autoComplete}
         className="border border-[#17140F]/20 bg-white px-3 py-2.5 text-sm text-[#17140F] outline-none focus:border-[#E2640F]"
       />
+    </div>
+  );
+}
+
+/* LocalBusiness strukturovaná data (JSON-LD) pro Kovovýrobu Svoboda.
+   Pouze OVĚŘENÉ údaje (z footeru / zadání klienta): NAP, IČO, oblast
+   působnosti, rok založení. Nic se nevymýšlí.
+
+   POZN.: Stránka je zatím `robots: noindex` (klientský preview), takže tato
+   data Google reálně nezaindexuje — jsou připravená pro chvíli, kdy web
+   půjde na vlastní doménu kovovyrobasvoboda.cz a indexace se zapne.
+   `url` proto míří na cílovou doménu uvedenou ve footeru. */
+function KovoJsonLd() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Kovovýroba Svoboda",
+    description:
+      "Zakružování plechů a profilů podle výkresu, atypické tvary a kužely, TIG svařování nerezu i hliníku. Kusová i opakovaná výroba.",
+    url: "https://www.kovovyrobasvoboda.cz",
+    telephone: "+420602972415",
+    email: "info@kovovyrobasvoboda.cz",
+    foundingDate: "1992",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Rychnovská 262",
+      addressLocality: "Jablonec nad Nisou",
+      postalCode: "46801",
+      addressCountry: "CZ",
+    },
+    identifier: { "@type": "PropertyValue", propertyID: "IČO", value: "44533268" },
+    areaServed: [
+      { "@type": "City", name: "Jablonec nad Nisou" },
+      { "@type": "City", name: "Liberec" },
+      { "@type": "City", name: "Turnov" },
+    ],
+    knowsAbout: [
+      "Zakružování plechů",
+      "Zakružování profilů",
+      "Atypické tvary a kužely",
+      "TIG svařování nerezu a hliníku",
+      "Výroba podle výkresu",
+    ],
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+/* Pomocný select formuláře — stejný vizuál jako Field. */
+function SelectField({
+  label,
+  name,
+  options,
+}: {
+  label: string;
+  name: string;
+  options: string[];
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label
+        htmlFor={name}
+        className="font-[family-name:var(--font-montserrat)] text-xs font-bold uppercase tracking-wider text-[#17140F]/70"
+      >
+        {label}
+      </label>
+      <select
+        id={name}
+        name={name}
+        defaultValue=""
+        className="border border-[#17140F]/20 bg-white px-3 py-2.5 text-sm text-[#17140F] outline-none focus:border-[#E2640F]"
+      >
+        <option value="" disabled>
+          Vyberte…
+        </option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

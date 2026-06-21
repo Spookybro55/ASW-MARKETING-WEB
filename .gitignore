@@ -22,6 +22,10 @@
 # that should ship live in design-reference/ with explicit naming)
 /screenshots/
 
+# raw client photo dropbox (originals; only optimized copies under
+# public/clients/** are committed)
+/Temp/
+
 # next.js
 /.next/
 /out/
