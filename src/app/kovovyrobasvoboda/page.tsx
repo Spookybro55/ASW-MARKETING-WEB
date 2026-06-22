@@ -946,7 +946,7 @@ export default function KovovyrobaSvobodaPage() {
           <div className="mx-auto grid max-w-[1440px] gap-6 px-6 py-10 sm:px-10 lg:grid-cols-[38fr_62fr] lg:py-12">
             {/* dark statement card — větší, metalická, s kovovým motivem */}
             <div
-              className="relative flex min-h-[380px] flex-col justify-between overflow-hidden bg-[#17140F] p-9 text-white"
+              className="relative flex min-h-[380px] flex-col justify-between overflow-hidden bg-[#17140F] p-7 text-white sm:p-9"
               style={{
                 backgroundImage:
                   "radial-gradient(130% 90% at 20% 0%, rgba(150,160,175,0.22), transparent 55%), repeating-linear-gradient(118deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 9px), linear-gradient(155deg, #232019 0%, #100e09 60%, #1a160f 100%)",
@@ -960,7 +960,7 @@ export default function KovovyrobaSvobodaPage() {
               <span className="relative font-[family-name:var(--font-montserrat)] text-[11px] font-bold uppercase tracking-[0.25em] text-[#E2640F]">
                 Naše výroba
               </span>
-              <h2 className="relative mt-6 font-[family-name:var(--font-montserrat)] text-5xl font-black uppercase leading-[0.98] tracking-tight">
+              <h2 className="relative mt-6 max-w-full break-words font-[family-name:var(--font-montserrat)] text-[clamp(1.6rem,8vw,3rem)] font-black uppercase leading-[0.98] tracking-tight">
                 Zakružujeme.
                 <br />
                 Svařujeme.
